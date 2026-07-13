@@ -1,0 +1,205 @@
+entity_kind,variant,canonical
+client,travelers,Travelers Group
+client,travelers companies inc,Travelers Group
+client,travelers companies inc.,Travelers Group
+client,travelers companies,Travelers Group
+client,travelers group,Travelers Group
+client,trv,Travelers Group
+client,allstate,Allstate
+client,allstate corp,Allstate
+client,allstate corp.,Allstate
+client,allstate ins group,Allstate
+client,allstate insurance,Allstate
+client,hartford,Hartford
+client,hartford financial services,Hartford
+client,the hartford,Hartford
+client,hanover,Hanover Insurance Group
+client,hanover insurance group inc,Hanover Insurance Group
+client,hanover insurance group inc.,Hanover Insurance Group
+client,hanover insurance group,Hanover Insurance Group
+client,liberty mutual,Liberty Mutual
+client,liberty mutual ins cos,Liberty Mutual
+client,liberty mutual group,Liberty Mutual
+client,liberty mutual insurance,Liberty Mutual
+client,nationwide,Nationwide
+client,nationwide mutual group,Nationwide
+client,nationwide insurance,Nationwide
+client,nationwide group,Nationwide
+client,aig,AIG
+client,american international group,AIG
+client,zurich,Zurich
+client,zurich na,Zurich
+client,zurich insurance group,Zurich
+client,zurich insurance,Zurich
+client,aon,AON
+client,aon (netherlands),AON
+client,iah australia,IAG Australia
+client,iag australia,IAG Australia
+client,iag nz,IAG NZ
+client,iag,IAG
+client,qbe,QBE
+client,qbe insurance group ltd,QBE
+client,qbe insurance group ltd.,QBE
+client,qbe insurance,QBE
+client,aviva,Aviva
+client,aviva uk,Aviva
+client,amtrust,AmTrust
+client,amtrust financial services,AmTrust
+client,mapfre,MAPFRE
+client,hiscox us,Hiscox US
+client,hiscox uk,Hiscox UK
+client,hiscox uk (5 fte’s),Hiscox UK
+client,hiscox,Hiscox
+client,usaa,USAA
+client,usaa group,USAA
+client,state farm,State Farm
+client,state farm group,State Farm
+client,state farm mutual automobile ins.,State Farm
+client,state farm mutual automobile ins,State Farm
+client,progressive,Progressive
+client,progressive corp.,Progressive
+client,progressive corp,Progressive
+client,progressive ins group,Progressive
+client,chubb,Chubb
+client,chubb ina group,Chubb
+client,berkshire hathaway,Berkshire Hathaway
+client,berkshire hathaway ins,Berkshire Hathaway
+client,cna,CNA
+client,cna ins cos,CNA
+client,c-n-a,CNA
+client,c na,CNA
+client,swiss re,Swiss Re
+client,swiss re ltd.,Swiss Re
+client,swiss re ltd,Swiss Re
+client,genworth,Genworth
+client,genworth financial inc,Genworth
+client,genworth financial inc.,Genworth
+client,suncorp,Suncorp
+client,sun corp,Suncorp
+client,marsh,Marsh
+client,marsh broker,Marsh
+client,mmc,MMC
+client,one call care management,One Call Care Management
+client,one call care management (occm),One Call Care Management
+client,occm,One Call Care Management
+client,utica national insurance group,Utica National Insurance Group
+client,tryg,TRYG
+client,tryg (nordics),TRYG
+client,optum,Optum
+client,rsa,RSA Group UK
+client,rsa group uk,RSA Group UK
+client,bupa uk,BUPA UK
+client,bupa,BUPA UK
+client,aspen,Aspen
+client,root insurance,Root Insurance
+client,root,Root Insurance
+client,axa,AXA
+client,axa xl,AXA
+client,xl catlin,AXA
+client,axa xl (xl catlin),AXA
+client,ing group,ING Group
+client,ing,ING Group
+client,assurant,Assurant
+client,everest,Everest
+client,everest insurance,Everest
+client,american modern,American Modern
+client,kemper,Kemper
+client,mitchell insurance,Mitchell Insurance
+client,ccc information services,CCC Information Services
+client,canopious,Canopius
+client,canopius,Canopius
+client,prudential,Prudential
+client,unum,Unum
+client,transamerica,Transamerica
+client,lincoln,Lincoln Financial
+client,lincoln financial,Lincoln Financial
+client,aflac,Aflac
+client,primerica,Primerica
+client,trustage,Trustage
+client,pacific life,Pacific Life
+client,prosperity,Prosperity Life
+client,global atlantic,Global Atlantic
+client,fortitude re,Fortitude Re
+client,nyl,NYL
+client,new york life,NYL
+client,equitable,Equitable
+client,metlife,MetLife
+client,mercer,Mercer
+client,guardian,Guardian Life
+client,guardian life insurance co,Guardian Life
+client,guardian life,Guardian Life
+client,principal,Principal Financial
+client,manulife,Manulife
+client,manulife data services inc.,Manulife
+client,manulife data services inc,Manulife
+client,sun life,Sun Life
+client,sun life of canada,Sun Life
+client,aia philamlife,AIA Philamlife
+client,fwd insurance,FWD Insurance
+client,fwd,FWD Insurance
+client,inlife,InLife
+client,insular life,InLife
+client,inlife (aka insular life),InLife
+client,axa philippines,AXA Philippines
+competitor,cts,Cognizant
+competitor,cognizant,Cognizant
+competitor,cognizant technology solutions,Cognizant
+competitor,tcs,TCS
+competitor,tata consultancy services,TCS
+competitor,wns,WNS
+competitor,genpact,Genpact
+competitor,sutherland,Sutherland
+competitor,accenture,Accenture
+competitor,capgemini,Capgemini
+competitor,dxc,DXC Technology
+competitor,dxc technology,DXC Technology
+competitor,infosys,Infosys
+competitor,wipro,Wipro
+competitor,ntt,NTT Data
+competitor,ntt data,NTT Data
+competitor,mphasis,Mphasis
+competitor,ibm,IBM
+competitor,ey,EY
+competitor,ernst & young,EY
+competitor,deloitte,Deloitte
+competitor,kpmg,KPMG
+competitor,pwc,PwC
+competitor,mckinsey,McKinsey
+competitor,teleperformance,Teleperformance
+competitor,foundever,Foundever
+competitor,sitel,Foundever
+competitor,qualfon,Qualfon
+competitor,verisk,Verisk
+competitor,vertafore,Vertafore
+competitor,insurity,Insurity
+competitor,medata,Medata
+competitor,zinnia,Zinnia
+competitor,se2,SE2
+competitor,coforge,Coforge
+competitor,resourcepro,ResourcePro
+competitor,resource pro,ResourcePro
+competitor,quantiphi,Quantiphi
+competitor,tiger analytics,Tiger Analytics
+competitor,virtusa,Virtusa
+competitor,xceedance,Xceedance
+competitor,workday,Workday
+competitor,adp,ADP
+competitor,ukg,UKG
+competitor,five9,Five9
+competitor,verint,Verint
+competitor,mendix,Mendix
+competitor,congruent,Congruent
+competitor,indra,Indra
+competitor,cgi,CGI
+competitor,interactions,Interactions
+competitor,lynx,LYNX
+competitor,microsoft,Microsoft
+competitor,google,Google
+competitor,atos,Atos
+competitor,oliverwyman,Oliver Wyman
+competitor,oliver wyman,Oliver Wyman
+competitor,assurant gcc,Assurant GCC
+competitor,corvel,Corvel
+competitor,ivans,Ivans
+competitor,ushur,USHUR
+competitor,captive,Captive

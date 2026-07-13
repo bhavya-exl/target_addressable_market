@@ -1,0 +1,335 @@
+solution_num,offering,module,outcomes,metrics,buying_center,client_appetite,market_appetite,existing_capability_in_market,exl_capabilities_area,exl_capability_lmh,details,source_file,source_sheet,source_row,file_vintage,captured_date,ingestion_date
+1,"FNOL ""As a Service""",1. Omni Channel Intake - provides a channel agnostic claim reporting solution for customers (broker and insured),"-Reduce claim costs - ALAE and ULAE
+-Streamline and simplify the process
+-Improve accuracy of assignment
+-Provide early warning flags for fraud, litigation etc. reducing indemnity and legal cost
+-Improve customer experience
+
+-Simplify pricing - price per FNOL - allows for surge capacity and flexibility transferring burden to supplier
+","TAT Non Voice - 95% assigned within 2 hours (most stringent)
+
+AHT - not always measured.  HIG Measures and standard is 4.30.  (Typical AHT across commercial lines is 10 - 20min)
+
+Quality - 88% - 95% DPU and DPO (typical is 90 - 95% DPU)
+
+%Reassignments
+Complaint Ratio
+
+Voice ASA - 70 - 80 % answered within 20 - 25 sec industry might reflect higher)
+
+Abandonment Rate - 2%-7%
+","Chief Claim Officer
+","Allstate, 
+Assurant
+CNA
+Hanover
+HIG
+Liberty Mutual",High,"More research needed here
+No one has tied the whole solution together.  
+
+We are creating a one stop shop with the ability to provide data loops",Operational,High,Moderate footprint in FNOL both voice and non-voice across personal and commercial insurance,F1,P&C Solutions List,10,2020-08-03,2020-08-03,2026-05-27
+1,"FNOL ""As a Service""","2. Automated Entry FNOL capability (Thin Human/Heavy Digital)- provides front end capability to ingest all types of FNOL documents across all  lines of business (Commercial and Personal) from all channels (except Voice).    App needs to extract data/content and auto populate carrier claim systems (Guidewire, Duck Creek etc..) ",,,,,,,,,,F1,P&C Solutions List,11,2020-08-03,2020-08-03,2026-05-27
+1,"FNOL ""As a Service""","3. Voice Center of Excellence (COE) - provides insured/broker with the ability to report claims via phone in a workflow enabled call flow using dynamic scripts, triage and adjuster assignment. Claims Inquiry and Provider Help lines may also be part of the module.",,,,,,,Platform,Medium,"EXL's platforms services team does have an FNOL platform with the right components
+We also have the ability to partner with companies like Sapiens which would increase speed to market",F1,P&C Solutions List,12,2020-08-03,2020-08-03,2026-05-27
+1,"FNOL ""As a Service""",4. Acknowledgement Notice with Claim number - provides immediate notice to insured and broker that the claim has been received and a claim number assigned,,,,,,,,,,F1,P&C Solutions List,13,2020-08-03,2020-08-03,2026-05-27
+1,"FNOL ""As a Service""","5. Reports and Dashboards - provides ability to capture and report real time on TAT, Volume by LOB, Volume by Channel, Quality etc..)",,,,,,,Analytics,High,EXL has experience in several analytics interventions applied for existing BPO as well as consulting/Analytics clients,F1,P&C Solutions List,14,2020-08-03,2020-08-03,2026-05-27
+1,"FNOL ""As a Service""","6. Predictive Analytics - Early Indicator Flags (Fraud, Litigation, Recovery, Total Loss) - provides early indicator flags for accurate assignment, investigation cues and improved cycle time",,,,,,,,,,F1,P&C Solutions List,15,2020-08-03,2020-08-03,2026-05-27
+1,"FNOL ""As a Service""",7. Cloud Hosted - provides ability to host data in the Carrier IT environment thereby protecting security and data privacy,,,,,,,Digital,Medium,"While EXL does have RPA capability, we do lack a robust functioning Extraction capability/partner
+ML/NLP processing will need to be built for FNOL to enable STP",F1,P&C Solutions List,16,2020-08-03,2020-08-03,2026-05-27
+1,"FNOL ""As a Service""","8.Conversational IVR to reduce FNOL Call AHT, route calls better, answer basic claim inquiry calls",,,,,,,,,,F1,P&C Solutions List,17,2020-08-03,2020-08-03,2026-05-27
+1,"FNOL ""As a Service""","9. Speech Analytics - Fraud propensity, Customer Experience analytics, call flow/script optimization",,,,,,,,,,F1,P&C Solutions List,18,2020-08-03,2020-08-03,2026-05-27
+2,Claim Payment as a Service,"1. Content Extraction
+Intelligent data extraction from bills/invoices sent via paper/email/fax to enable automated entry and into payment systems","-Cost reduction
+-Enhanced customer experience
+-Improved Cost of Technology
+
+Pricing Models:
+Payments-as-a-Service vendors typically charge per transaction. The amount per transaction may change based on the number of transactions processed. Transactional charges vary based on the type of transaction. Charges are typically made for transactions such as those below. Vendors may have additional fees beyond those listed.
+-Printing and mailing a paper check
+-ACH fund transfer
+ACH credit reversal
+Issuing and initially funding a prepaid card
+ Reloading a prepaid card
+OFAC and death record search
+Handling the 1099 process
+Stop Payment
+Void & Reissue
+Printing and mailing a document (typically per page charge)
+Escheated payment charge
+Issuing and funding a virtual card
+Multiparty payment (e.g. mortgagee payments or add 'l payees)
+Total loss payments (these require additional signatures and processing)",,"Chief Claim Officer
+Chief Financial Officer
+Chief Procurement Officer","AIG
+Allstate
+Assurant
+CNA
+Hanover
+HIG
+Liberty Mutual
+ZNA
+AXIS
+Everest","High
+
+All Analysts are talking about this.  
+
+It is a main topic at Claim events and is one of the biggest pain points right now.  
+
+COVID is disrupting current practices due to the inability to have people work in office",See Celent report for a preliminary list of Suppliers. It is certainly not exhaustive,Operational,High,Process payments for vendors/ AP for a number of clients. Select insurance clients where we are responsible for payment disbursement ,F1,P&C Solutions List,19,2020-08-03,2020-08-03,2026-05-27
+2,Claim Payment as a Service,"2. Payee Portal
+Payee portal: A payee portal allows the payee to easily handle their payment processes online. Those intended for an individual usually allow the payee to set up their payment preference, add or manage accounts for payment deposits, and view real time status of payments. Businesses may have the additional capability of submitting their W-2 information, setting up bulk payments, and handling payment reconciliation online.",,,,,,,Platform,Low,"We don’t have any platform, potential partnership with Payment platform 
+Integration with Claims platform 
+Hyperwallet/ https://www.oneincsystems.com/digital-payments-platform/claims-payments ",F1,P&C Solutions List,20,2020-08-03,2020-08-03,2026-05-27
+2,Claim Payment as a Service,"3.Transactional Servicing Features:
+Payment Methods
+Payment Transactions
+EOB Remittance
+Payee Types
+Workflow
+Party Types
+Fraud Management & Controls
+",,,,,,,,,,F1,P&C Solutions List,21,2020-08-03,2020-08-03,2026-05-27
+2,Claim Payment as a Service,,,,,,,,Analytics,High,"High capability, established models and algorithms exist for other areas such as healthcare and L&A. Potential to replicate ",F1,P&C Solutions List,22,2020-08-03,2020-08-03,2026-05-27
+2,Claim Payment as a Service,"4. Customer Service 
+Payment-as-a-Service providers typically provide the frontline customer service to the payee, answering questions about the timing or amount of the payment, processing individual transactions such as stop payments, or providing support for changing payment preferences or accounts.",,,,,,,,,,F1,P&C Solutions List,23,2020-08-03,2020-08-03,2026-05-27
+2,Claim Payment as a Service,"5. Administrative Support and Services
+-Account Funding - Some vendors can use the insurers’ own bank accounts. Others set up a jointly held trust account where the payments are prefunded by the insurer until remitted to the payee.
+-Escheatment - PaaS providers can handle the escheatment processes for each state as needed. They take on the payee notification and they turn over the funds to the state according to each state’s processes.
+-Marketing Services - Most PaaS providers include some support for marketing. Some support insurer-branded cards. Some include assistance in developing marketing programs for you to drive demand for paper-free payments. Some support marketing messages within the payee portal.
+-Reporting Tools
+-Reporting Data - real time data or regular data files that aggregate data across all the payment channels for easy reconciliation.
+-Reconciliation Tools - The process of matching up payment transactions in your accounting system becomes more complex when multiple payment methods are used.
+-Administrative Portal - The portal provides the insurer with access to data and administrative tools. Typical features include:
+• Access to scheduled reports or ad hoc reporting tools.
+• Reconciliation tools and/or the ability to export reconciliation files.
+• Administrative access to add insurer users and manage their permissions.
+• Search by claim number, named insured, named payee, date of payment, and other dimensions.
+• Manage and view real time status of each payment
+• Tools to take specific actions on specific payments, such as stop payment or void/reissue.
+• Tools that make it easy to add marketing and/or cross-selling messages on the portal.
+-Payment Integrity",,,,,,,Digital,Medium,No solution exists today. This needs to be conceptualized end to end without a wrapper ,F1,P&C Solutions List,24,2020-08-03,2020-08-03,2026-05-27
+3,Optimizing Medical and Disability Management,"1. Medical Case Management Platform
+AI Powered platform to manage medical case assignment, co-ordinate appointments (Physicians, Diagnostics etc.) and order services (Therapy, testing, Medical Supplies, transportation etc.)","-Reduce medical spend
+-Reduce overpayments, penalties and interest
+-Reduce Return to Work days and ultimate indemnity spend
+-Reduce claim leakage leveraging analytics models like fraud propensity, litigation propensity, return to work potential
+-Improve policyholder/Injured worker experience and customer satisfaction
+- Improve experience mods
+- Lower premiums","Penalties - <2% of indemnity spend
+
+Quality - 98%
+
+TBD","Chief Claim Officer
+Chief Medical Officer
+Chief Financial Officer
+","CNA
+HIG
+LM
+ZNA",High,"There are several companies that specialize in healthcare management and medical management services.  
+
+Requires research and analysis across the spectrum of services since it is rare to find one vendor who can do everything
+
+",Operational,High,Respectable footprint in Medical management processes across India and Philippines,F1,P&C Solutions List,26,2020-08-03,2020-08-03,2026-05-27
+3,Optimizing Medical and Disability Management,"2. Automated Entry Medical Record and Bill Management capability (Thin Human/Heavy Digital)
+Provides front end capability to ingest all medical records and bills from all channels.  App needs to ingest data, extract data/content, auto populate carrier systems and feed data to Bill Review platforms, Bill Payment systems and Medical Summarization tools.",,,,,,,Platform,Low,"EXL's has MedConnect platform for summarization.
+EXL does not have a Bill Review or UR platform so needs to rely on carrier access or partnering with a supplier
+EXL does not have a Peer Review or PPO network",F1,P&C Solutions List,27,2020-08-03,2020-08-03,2026-05-27
+3,Optimizing Medical and Disability Management,"3. MedConnection for Medical Record Summarization
+Leverage Ell's platform to intake, tag, catalogue and summarize medical records to create a comprehensive medical summary for adjusters and attorneys",,,,,,,,,,F1,P&C Solutions List,28,2020-08-03,2020-08-03,2026-05-27
+3,Optimizing Medical and Disability Management,"4. End to End Utilization Review
+Leverage EXL's USRN & PHRN capability & experience to handle end to end utilization review for licensed and unlicensed UR tasks",,,,,,,,,,F1,P&C Solutions List,29,2020-08-03,2020-08-03,2026-05-27
+3,Optimizing Medical and Disability Management,"5. Medical Bill Review Capability/Platform
+Bill review platform integrated with claim systems populated with all ICD-9 codes, treatment protocols, benchmarks etc.…",,,,,,,Analytics,High,"We have all the capabilities needed here and it seems carriers will need to/want to leverage outside firms to augment their own capacity.  Need for speed
+Explore Analytics deeply - huge need with Covid related claims on the rise
+
+We believe the analytics component could be brought to market quickly while other pieces will take much longer (i.e.; platforms, networks)",F1,P&C Solutions List,30,2020-08-03,2020-08-03,2026-05-27
+3,Optimizing Medical and Disability Management,"8. Predictive Analytics Models
+RTW Modeling (prediction of MO, LT, Catastrophic Injuries and RTW/MMI days)
+Severity Modeling
+Nurse Triage (Nurse Intervention Success, Nurse Performance)
+Litigation Propensity
+Indemnity Spend Analytics
+RX Analytics (target high risk meds which harm RTW efforts - guide appropriate utilization)
+PPO Outcomes (Inside Network/Outside Network)
+Physician Peer Review Performance
+Fraud Analytics
+WFH Injury Models
+Vendor Outcome Models
+Early Intervention/Chronic Pain Analysis
+AI Tools to identify potentially difficult or complex claims and prioritize them for early intervention; especially during Covid",,,,,,,,,,F1,P&C Solutions List,31,2020-08-03,2020-08-03,2026-05-27
+3,Optimizing Medical and Disability Management,"9. STP Modeling and Automation (Medical Only Claims)
+Model the appropriate threshold for STP of medical only claims and process without human touch. ",,,,,,,Digital,Medium,"While EXL does have RPA capability, we do lack a robust functioning Extraction capability/partner",F1,P&C Solutions List,32,2020-08-03,2020-08-03,2026-05-27
+3,Optimizing Medical and Disability Management,"10. Payment Integrity
+Leverage payment integrity identification and collection capabilities in HC and/or SCIO to recover leakage in medical payments.",,,,,,,,,,F1,P&C Solutions List,33,2020-08-03,2020-08-03,2026-05-27
+3,Optimizing Medical and Disability Management,"11. Subrogation
+Leverage subrogation capabilities to highlight claims with high Subro potential early in the case and pursue accordingly. ",,,,,,,,,,F1,P&C Solutions List,34,2020-08-03,2020-08-03,2026-05-27
+4,New Business Processing As a Service,"1. Submission to Quote - Enable already redesigned New Business Model office with analytics and digital solution to further improve Speed to Market and reduce cost
+- Data Extraction from Commercial Acord and supplementary submission documents ;direct Ingestion from broker platforms
+- Integrating Data Models like Submission Prioritization Models, Risk Selection and  Broker performance dashboards
+- Account & Policy Setup (D & O)
+- UW File prep for prioritized submission for quick underwriting decision: Leverage EXL ExpressSurvey to reduce time spent by Underwriter Technician for File Prep
+- Risk evaluation/selection","1. Improving speed to market
+(WHY)
+- Inability to gain business insights driven by analytics
+- Inability to process omni channel intake
+- Lack of digital solutions
+- High degree of missing information resulting in back and forth
+- Risk selection and submission prioritization
+- Multiple touches across the organization resulting slower turn around
+
+2. Reducing cost of quote generation
+(WHY)
+-  Multiple touches across the shared service and underwriting organization to present a quote
+- Need to digitize the process
+- Prioritize what to quote versus quoting everything
+
+3. Prioritizing and writing profitable business
+
+4. Increasing Quote to Bind Ratio
+(WHY)
+- Improve broker and customer experience
+- Approval rates by broker
+- Broker/Agency benchmarking - which broker is more suitable
+- Commissions management",,Chief Operating Officer /  Chief Underwriting Officer,"Feedback received from clients to be updated here - AIG, Allstate, Assurant, CNA, Hanover, HIG, Liberty Mutual, ZNA, Axis, Everest",High,Are there any existing similar products in the market? Details.,Operational,High,Significant footprint in New Business across commercial insurance,F1,P&C Solutions List,36,2020-08-03,2020-08-03,2026-05-27
+4,New Business Processing As a Service,"2. Rating
+- Automated data entry for quote creation
+- Identify segments/risk profiles to increase quick rating  (Quick Rate Process)",,,,,,,Platform,Low,Pending,F1,P&C Solutions List,37,2020-08-03,2020-08-03,2026-05-27
+4,New Business Processing As a Service,"3. Issuance
+- Automated issuance
+- Automated communication for binders
+- Binder generation, DEC package",,,,,,,,,,F1,P&C Solutions List,38,2020-08-03,2020-08-03,2026-05-27
+4,New Business Processing As a Service,"4. Analytics Insights and Reporting 
+- Provides ability to capture and report real time on TAT, Volume by LOB, Volume by Channel, Quality etc. 
+- Provide ability to predict quote conversion rate etc.",,,,,,,Analytics,High,EXL has experience in several analytics interventions applied for existing BPO as well as consulting/Analytics clients,F1,P&C Solutions List,39,2020-08-03,2020-08-03,2026-05-27
+4,New Business Processing As a Service,,,,,,,,Digital,Medium,"While EXL does have RPA capability, we do lack a robust functioning Extraction capability/partner",F1,P&C Solutions List,41,2020-08-03,2020-08-03,2026-05-27
+5,Endorsement  E2E Solution,"1. End to End Endorsement Processing - 
+Digital Endorsement Solution services end-to-end value chain of endorsement, right from intake of requests to issuance of policies without any human intervention  
+- Straight through processing of simple endorsement request(s)
+ - Ability to ingest data from any channel
+- Data Intelligence to improve self service functionality 
+- Ability to prioritize basis customer VOC
+- Early identification of missing information
+","1. Reducing cost of endorsements
+- Reducing preventable (Non value add) endorsements
+2. Improved Broker experience (NPS Score improvement)
+
+3. Reportable data and ability to gain business insights from the data",,Chief Operating Officer,"ZNA - High
+CNA - High",High,Module already in the works and considerable progress made on it,Operational,High,Significant footprint in endorsement FSA across commercial insurance,F1,P&C Solutions List,45,2020-08-03,2020-08-03,2026-05-27
+5,Endorsement  E2E Solution,"2. Exception Handling
+Process endorsements manually for exception cases leveraging experienced insurance workforce",,,,,,,Platform,Low,No existing solution,F1,P&C Solutions List,46,2020-08-03,2020-08-03,2026-05-27
+5,Endorsement  E2E Solution,"3. Reporting and Analytics
+- Ability to report on endorsement volumes
+- Provide business insights into core reasons for endorsements to enable addressing the root causes
+- Identify broker behavior issues
+- Reducing endorsement volume through repeat request reduction, upstream optimization
+- Send Proactive alert(s) and communication for endorsement (as an example)",,,,,,,Analytics,High,EXL has experience in several analytics interventions applied for existing BPO as well as consulting/Analytics clients,F1,P&C Solutions List,47,2020-08-03,2020-08-03,2026-05-27
+5,Endorsement  E2E Solution,,,,,,,,Digital,High,EXL's content extract capability combined with RPA solutions,F1,P&C Solutions List,48,2020-08-03,2020-08-03,2026-05-27
+6,Broker Intake Engine,"1. Direct Ingestion from broker platforms (4 top platforms - AON, Marsh, Willis and Lockton)
+- Comparative Rater
+- Ability for brokers to send the requests to ""EXL Broker Services"" - Federation model
+- Standardize intake for insurers","1. Reduction in administration overhead
+2. Better customer experience
+3. Faster Quote to customer",,Broker - Chief Operating Office,TBD,TBD,,Operational,Low,No existing experience - AON experience can be the blue print,F1,P&C Solutions List,50,2020-08-03,2020-08-03,2026-05-27
+6,Broker Intake Engine,2. Data Extraction Module - Data intake from multiple sources,,,,,,,Analytics,Low,,F1,P&C Solutions List,56,2020-08-03,2020-08-03,2026-05-27
+6,Broker Intake Engine,"3. Value Add Services
+- Pre-identification of missing information
+- Risk propensity model
+- Lead prioritization
+- Commission forecast",,,,,,,Digital,Low,EXL's content extract capability combined with RPA solutions,F1,P&C Solutions List,57,2020-08-03,2020-08-03,2026-05-27
+7,Intelligent Collections ,"Core Collections Activities:
+
+1. ANALYTICS LED RISK PRIORITIZATION & FORECASTING
+Dynamic risk scoring based on industry level macro variables, historical account performance and external factors as applicable
+Dynamic risk scoring based on industry level macro variables, historical account performance and external factors as applicable:
+Automated prioritization of activities based on customer type, collection, risk, balance and location
+Standardized dispute resolution with standard routing, escalation and approval processes
+Data from banks, external remittance data, electronic data from customers, or any other supporting data used to improve auto-match% and better cash forecasting
+
+
+2. AUTOMATED COMMUNICATIONS & CHASERS
+Automated reminders pre due date based on inherent risk; Automated chasers post due date based on ageing
+
+3. REAL TIME CASH APPLICATION
+Real-time Cash Application integrated with collections, dispute resolution and self-service portal
+
+
+4. COMPREHENSIVE DATA REPORTS AND DASHBOARDS
+Stringent Credit Risk Management - automated credit reviews and customer score cards
+Reporting engine – Collections Dashboard, AR aging report, On Account and Misapplied Cash
+
+Other Receivables Areas:
+
+1. Analytics driven Post Billing activities: Run AR reports from the system (by product / broker / location) and run Analytics engines to determine likelihood of default for more targeted focus. Enhance outreach and connect with Insured / broker by confirm in invoice receipt by the right contact at the client / broker and share any information required. 
+
+2. Intelligent pro-active dispute resolution and automated reminder Pre-Due: Identify cases with high propensity for disputes and escalate and help resolve disputes (revisions/credit/other). Automated reminders at various stages and confirmation of the scheduled payment date (Promise to Pay)
+
+3. Intelligent Reporting and Tracking: Consistently and proactively move the invoice to the payments stages,  effectively collect and proactively escalate, send Overdue statement if payment not received as per “Promise to Pay”, loop in brokers and account managers (as needed) in collections email
+
+4. Dispute Resolution: Create and follow dynamic follow escalation matrix to resolve the dispute with client / broker, create processes for quick and efficient dispute resolution, Intelligent solution to capture  resolutions and post resolution, confirm schedule payment date on disputed invoices
+
+5. Reporting - Create Single Versions of Truth: Optimize system reports as “version of truth” for all collections reporting and follow-up; Report, track and benchmark DSO, Overdue AR, disputes, bad-debts and other KPI’s; Quantify the $’s to be collected on a time scale
+
+6. Additional Value Add: Create customized ‘risk’ segments leveraging multiple criterion like balance/tenure, likelihood-to-pay, tenure, time to payment  and other models. Assign these collections risk scores and portfolio risk ranking to prioritize collections and minimize loss. Proactive feedback loop for credit team to better manage credit risk. Leverage customer intel across product lines (behavior patterns, terms, contracts, shutouts, etc.) to give clients better understanding of customer shifts","Better Cash Management - Focused Collections and Customer Service Effort on cases with very high probability of default to improve DSOs
+
+Improved speed of dispute resolution & billing rectification - better customer outcomes
+
+Better staffing & planning of Receivables Management operations
+
+Better capture of customer behavior & industry behavior data at billing / dispute and collections stage for better front end deaccessioning
+
+Improved UW Deaccessioning","Daily Sales Outstanding
+Collectability Rate
+Installment Plans
+Promise to Pay","Chief Financial Officer
+Chief of Recoveries",TBD,High - since most Insurers are talking about the fact that receivables have either already been impacted or will be impacted due to market conditions,There are specialized collections firms as well as typical outsourcers who cater to this market.,Operational,High,EXL has significant expertise in collections across all product types and LOBs,F1,P&C Solutions List,59,2020-08-03,2020-08-03,2026-05-27
+7,Intelligent Collections ,,,,,,,,Analytics,High,EXL Analytics has done several stand alone analytics projects as well as analytics projects which embedded are embedded within operations,F1,P&C Solutions List,60,2020-08-03,2020-08-03,2026-05-27
+7,Intelligent Collections ,,,,,,,,Digital,Medium,Our expertise in this area is somewhat limited - we do have automated reminders etc. but most of them are low tech ,F1,P&C Solutions List,61,2020-08-03,2020-08-03,2026-05-27
+8,Audit Analytics ,"EXL will help Insurers by implementing automated techniques to identify trends, exceptions, errors, or indications of potential fraud by comparing and analyzing data and files according to the criteria established by the auditor. EXL's key service offerings:
+'- Setting  up an Audit Analytics COE (Center Of Excellence)
+- Audit Analytics opportunity identification
+- Design of Analytics Strategy and Pilot Program
+- Audit Analytics assessment – Current  State Assessment & Future State Design
+- Dashboard/Custom report development
+- Audit Bot Development and Maintenance (Tester Bots, Data Extraction Bots, Recon Bots etc.)","- Increased risk coverage
+- Insight in real time/ right time 
+- Effective risk mitigation
+- Efficiency gains",,Chief Audit Executive,,"High - this is one of the focus areas for most insurance companies, where they are trying to have strategy and category management in-house while most of the support services are outsourced","Apart from key big players, such as ACN, our competition includes niche/ boutique firms such as GEP",Digital,Medium,"This is one of the emerging capabilities for us, with inclusion of Assurant and some good work done at CNA along with couple of current opportunities that we are chasing",F1,P&C Solutions List,62,2020-08-03,2020-08-03,2026-05-27
+9,Process Risk Assessment ,"As part of this offering EXL proposes to perform a health-check of business processes to identify high risk areas, assess new & increased risks, and develop actions to address business critical priorities.
+
+'COE based delivery structure:
+- Process, risk, controls and organizational taxonomy
+- Process flows, risks, controls
+- Risk and Controls Matrix
+- Review testing methodology and guidelines 
+- Develop Test Scripts for key controls
+- Perform test-of-one 
+- Evaluate design effectiveness of key control(s)
+- Report on the status of controls tested, its effectiveness and open gaps 
+
+Key levers to be used for desired outcome are as follows:
+Automation / Robotics : Advanced automation and robotics interventions directed at select SOX  compliance tasks and underlying processes 
+
+Analytics & Reporting : Insightful and granular analysis of data to identify high risk areas and detect potential exceptions early 
+
+Leading Practices : Implement risk based testing methodologies and work-paper documentation standards for increased external audit reliance 
+
+Dual-Shore : Large pool of SOX auditors, data scientists and automation SMEs both onshore and offshore 
+","~35-40% reduction in cost of compliance 
+
+Increased assurance through automated testing of entire population as opposed to sample testing
+
+Early identification of deficiencies for remediation prior to year end 
+
+Standardized controls testing documentation resulting in increased external audit reliance 
+
+Reduced manual effort – automation of select SOX compliance activities and underlying processes
+",,"Chief Financial Officer, Chief Risk Officer, Controller, Chief Audit Executive",,,"- CoE model (40+ offshore resources supporting, NYL, Liberty, CNA, Pru, FGL etc.
+- Customized Analytics/ reporting to monitor SoX/ Ops risk testing program",,High,"We have strong capabilities with multiple large projects successfully delivered with greater audit assurance, deeper insight while reducing 35-40% of  compliance cost",F1,P&C Solutions List,63,2020-08-03,2020-08-03,2026-05-27
+10,Finance Automation,"RPA is a key driver being discussed with most clients to drive efficiency and plan capacity. EXL will implement Robotics and Intelligent Automation solutions for core Finance processes such as Balance Sheet Reconciliations and Manual Journal Entries and transactional Finance processes such as Account payables and receivables, to help clients drive better outcomes.","1. Operational Resiliency - automated processed provide natural BCP in cases where FTEs are unable to continue delivery due to circumstances
+2. Cost Efficiency: Given that the cost of operating a BOT is a fraction of a human FTE - automation can help drive significant cost efficiencies across the board 
+4. Better process management 
+5. Improved customer experience",,"Chief Financial Official
+Chief Digital Officer",Medium,High,,,,,F1,P&C Solutions List,64,2020-08-03,2020-08-03,2026-05-27
+11,Transformation Roadmap for Finance Function,"EXL will conduct Finance functions diagnostic to identify process transformation and expense management opportunities, estimate benefits, build a business case, and develop an implementation roadmap. ","1. Optimal end-state vision for the Finance organization 
+2. Detailed business case with projected benefits and cost / risks
+3. Prioritized implementations road-map",,Chief Financial Official,Medium,Medium,,,,,F1,P&C Solutions List,65,2020-08-03,2020-08-03,2026-05-27

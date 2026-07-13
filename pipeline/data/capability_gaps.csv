@@ -1,0 +1,211 @@
+area,solution,solution_id,component,feature,exl_capability,exl_capability_scale_1_5,challenges,gap_description,partner_insurtech,partner_tpa,partner_other,source_file,source_sheet,source_row,file_vintage,captured_date,ingestion_date
+Claim,FNOL-as-a- Service,FNOL,Omni Channel Intake,Provides a channel agnostic claim reporting solution for customers (broker and insured),Medium,3,"-Brokers and Insureds want the choice of reporting channels (Mobile, Web, Email, Fax, Phone) and expect a carrier to provide them with all options 
+-Carriers and customers desire FNOL set up (claim # assignment) and adjuster assignment as quickly as possible in order to ensure timely investigation, evaluation reserving and resolution.  Anything more than 4 hours is often perceived as too long leading to adverse impacts on the claim and the customer experience.   
+-An FNOL contains a number of data points which are important to capture quickly and accurately so they can be immediately used to predict claim outcomes, properly reserve, report losses to underwriting, price risks and manage aggregate loss costs. 
+-Significant effort and cost is needed to convert unstructured, semi-structured and structured documents, embedded files, notes, ACORD forms, scans, images etc...) to useable formats.
+-Customers often complain of insufficient transparency into the claim assignment process.  They do not receive timely notification of the claim number nor the adjuster ID leading to unnecessary phone calls and emails and ultimately poor customer satisfaction.  .  
+-Customers and regulators require data privacy and security for all PHI, PII information shared when reporting a loss.  
+","Capability exists.  
+1. Full scale multi-channel implementation has not been done with any client to date 
+2. Mobile interface and reporting does not exist today",Y,,,F1,Capability Gap Assessment -Ver2,3,2020-08-03,2020-08-03,2026-05-27
+Claim,FNOL-as-a- Service,FNOL,Automated Entry FNOL capability (Thin Human/Heavy Digital),"Provides front end capability to ingest all types of FNOL documents across all  lines of business (Commercial and Personal) from all channels (except Voice). 
+App needs to extract data/content and auto populate carrier claim systems (Guidewire, Duck Creek etc..)",Low,2,,"1. Robust and functioning extraction capability
+2. A functioning bolt on FNOL interface that could work with various Claims platforms like Guidewire and DuckCreek",Y,,Y,F1,Capability Gap Assessment -Ver2,4,2020-08-03,2020-08-03,2026-05-27
+Claim,FNOL-as-a- Service,FNOL,Voice Center of Excellence (COE),"Provides insured/broker with the ability to report claims via phone in a workflow enabled call flow using dynamic scripts, triage and adjuster assignment. 
+Claims Inquiry and Provider Help lines may also be part of the module.",Medium,3,,"Offshore Voice FNOL capability exists with entry into client platforms.  Gap:  
+1. Front end (Cloud Based) Dynamically scripted FNOL tool to capture loss information to reduce AHT and improve CX
+2. No onshore competitive capability",Y,Y,Y,F1,Capability Gap Assessment -Ver2,5,2020-08-03,2020-08-03,2026-05-27
+Claim,FNOL-as-a- Service,FNOL,Acknowledgement Notice Automation,Provides immediate notice to insured and broker that the claim has been received and a claim number assigned,High,5,,None,,,,F1,Capability Gap Assessment -Ver2,6,2020-08-03,2020-08-03,2026-05-27
+Claim,FNOL-as-a- Service,FNOL,Reports and Dashboards,"Provides ability to capture and report real time on TAT, Volume by LOB, Volume by Channel, Quality etc..)",High,5,,None,,,,F1,Capability Gap Assessment -Ver2,7,2020-08-03,2020-08-03,2026-05-27
+Claim,FNOL-as-a- Service,FNOL,Predictive Analytics,"Provides early indicator flags (Fraud, Litigation, Recovery, Total Loss) to improve assignment, investigation cues, improved cycle time, decision support",High,4,,"Capability exists.
+1. Predictive Analytics have not been applied at FNOL but have been applied further downstream.  Decision whether to build or buy and which parts to build.",Y,,,F1,Capability Gap Assessment -Ver2,8,2020-08-03,2020-08-03,2026-05-27
+Claim,FNOL-as-a- Service,FNOL,Cloud Hosted,Provides ability to host data in the cloud while protecting security and data privacy,Medium,3,,-EXL needs a partner with experience in client/customer sensitive data hosting on cloud compliant with regulations (AWS),,,Y,F1,Capability Gap Assessment -Ver2,9,2020-08-03,2020-08-03,2026-05-27
+Claim,FNOL-as-a- Service,FNOL,Conversational IVR,"Provides for reduced FNOL Call AHT, improved call routing abilit to answer basic claim inquiry calls",High,5,,None,,,,F1,Capability Gap Assessment -Ver2,10,2020-08-03,2020-08-03,2026-05-27
+Claim,FNOL-as-a- Service,FNOL,Speech Analytics,"Fraud propensity, Customer Experience analytics, call flow/script optimization",High,4,,We already have a partnership with Verint?,,,,F1,Capability Gap Assessment -Ver2,11,2020-08-03,2020-08-03,2026-05-27
+Claim,Payment-as-a Service,PaaS,"Content Extraction
+",Intelligent data extraction from bills/invoices sent via paper/email/fax to enable automated entry and into payment systems,Low,2,"-Insurers make a significant number of claims payments annually. It’s an expensive process — not just in terms of the physical costs of printing, paper, and postage, but human beings are needed to answer questions, manage accounting, and oversee reconciliation. It’s a very non-strategic backroom process.
+'-Today’s claimants expect fast, transparent claims payments with the ability to choose the payment mechanism — including newer mechanisms such as Venmo or Zelle. 
+'-Vendor recipients want a method that makes it simple and efficient for them to process and reconcile as well. -Claims payment recipients expect much more flexibility in how their payment is handled and transparency in the process history. 
+-Individuals expect to be able to choose how they want to receive their money — whether by check, debit card, ACH, Venmo, or other mechanisms. 
+-Businesses don’t want to be overwhelmed with multiple payments on individual transactions; they want taxes and liens to be handled appropriately; and they also want self-service capabilities to track and reconcile payments.
+-An increasing number of insurers are questioning the overall costs of handling payments. Rather than modifying their software systems in order to provide new capabilities, they’re deciding to outsource the entire process.","1. Robust and functioning extraction capability
+2. A functioning bolt on interface that could work with various systems",Y,,Y,F1,Capability Gap Assessment -Ver2,12,2020-08-03,2020-08-03,2026-05-27
+Claim,Payment-as-a Service,PaaS,Payee Portal,"A payee portal allows the payee to easily handle their payment processes online. Those intended for an individual usually allow the payee to set up their payment preference, add or manage accounts for payment deposits, and view real time status of payments. ",Low,2,,"1. EXL does not have a portal, tool, platform or bolt on solution today that could work with client ERP and claim systems",Y,,Y,F1,Capability Gap Assessment -Ver2,13,2020-08-03,2020-08-03,2026-05-27
+Claim,Payment-as-a Service,PaaS,"Transactional Servicing Features
+
+","Provides automated Payment Methods, Payment Transactions, EOB Remittance, Payee Types,Workflow,Party Types, Fraud Management & Controls",Medium,3,,"The people capabilityt to execute these transactions exists today and there are automated features which do exist
+1.  A holistic, integrated solution with payment processing vendors (E.g. VISA) does not exist",Y,,Y,F1,Capability Gap Assessment -Ver2,14,2020-08-03,2020-08-03,2026-05-27
+Claim,Payment-as-a Service,PaaS,"Customer Service 
+","Payment-as-a-Service providers typically provide the frontline customer service to the payee, answering questions about the timing or amount of the payment, processing individual transactions such as stop payments, or providing support for changing payment preferences or accounts.",High,5,,None,,,,F1,Capability Gap Assessment -Ver2,15,2020-08-03,2020-08-03,2026-05-27
+Claim,Payment-as-a Service,PaaS,Administrative Support and Services,"The solution needs to provide for a number of administrative services.
+'-Account Funding - Some vendors can use the insurers’ own bank accounts. 
+-Escheatment - PaaS providers can handle the escheatmnet processes for each state as needed.  
+-Marketing Services - MostPaaS providers include some support for marketing (insurer branded cards, drive demand for paper-free payments, marketing messages within payee portal)
+-Reporting Data - real time data or regular data files that aggregate data across all payment channels for easy reconciliation
+-Reconciliation Tools
+-Administrative Portal - provides the insurer with access to data and admin tools (access to scheduled reports, recon tools, admin access to add insurer users and manage permissions, search, manage and view real time status of each payment, stop pay/voids/reissue
+-Payment Integrity",Medium,3,,"The people capabilityt to execute these transactions exists today and there are automated features which do exist
+1.  An Admin portal does not exist",Y,,Y,F1,Capability Gap Assessment -Ver2,16,2020-08-03,2020-08-03,2026-05-27
+Claim,"Digitally Transforming Workers’ Compensation Claims 
+Optimizing Medical and Disability Management",DT_WC,"Medical Case Management Platform
+","AI Powered platform to manage medical case assignment, co-ordinate appointments (Physicians, Diagnostics etc.) and order services (Therapy, testing, Medical Supplies, transportation etc.)",Low,2,"-The economic slowdown over the last several years has put pressure on both growth and profitability. There has been a significant shift in the split between medical costs and indemnity costs on a claim.  
+-Variations and inconsistencies in state WC laws and reporting requirements increase cost and decrease efficiency.  
+-Carriers need to create holistic treatment and medical management programs to deal effectively with the physical, emotional and psychological aspects of pain.
+-Opportunity to reduce claim lifecycle and expedite claim payments - medical and indemnity
+-Opportunity to manage return to work more effectively and reduce claim cost
+-Opportunity to reduce medical payment fraud, waste and abuse
+-Opportunity to reduce penalties as this continues to be a pain point for most WC insurers.
+-Opportunity to improve communication between the injured worker, employer and carrier 
+-Opportunity to improve/optimize cost management and disability management programs using data and analytics
+-Reduce costs associated with UR and Medical Bill Review programs
+-Streamline and digitize ingestion and intake of medical documents and bills
+
+Potential Covid Impacts on WC
+- There could be an increase in the # of compensable claims arising in frontline, Covid related situations.  However, this could be offset by a decrease in WC claims due to the increased # of employees WFH
+- Carriers may see a decrease in the # of PT sessions that are deemed to be not immediately critical (likely only a short term effect)
+- In economic downturns, workers may forgo filing claims for minor injuries to maintain active employment leading to a temporary downward pressure on claim frequency
+-Will medical costs go up as Covid related injuries require extensive medical/hospital care?
+-Will death claims see an increase?
+-What happens to nurse case management?
+- IME's may be delayed along with other types of medical care
+- Will claims, therefore, stay open longer and thereby increase indemnity and medical costs
+- Court systems have been closed - and will continue to be closed - creating backlogs and delays - will this also cause claims to be open longer and therefore drive up costs?
+-Tighter investigations in Covid cases are required to prevent fraud and prove compensability
+-Leverage telemedicine as a way to injured workers' to keep appointments while social distancing (not allowed in all states but there has been some easing of restrictions)
+- So far, actuarial estimates about the potential cost of Covid have been all over the map
+- 2 of the largest rating agencies aren't even guessing how much covid-19 might cost in permanent disability benefits - despite evidence that the virus causes long lasting ill health effects
+- State governors and regulators are changing WC laws on the fly - it is continually evolving - making it difficult for a carrier to predict loss severity, reserve adequacy, rates etc.","-Platform or bolt-on solution that could work with multiple client and medical provider systems for case management, appointment co-ordination and ordering services",Y,,Y,F1,Capability Gap Assessment -Ver2,17,2020-08-03,2020-08-03,2026-05-27
+Claim,"Digitally Transforming Workers’ Compensation Claims 
+Optimizing Medical and Disability Management",DT_WC,Automated Entry Medical Record and Bill Management capability (Thin Human/Heavy Digital). ,"Provides front end capability to ingest all medical records and bills from all channels.  App needs to ingest data, extract data/content, auto populate carrier systems and feed data to Bill Review platforms, Bill Payment systems and Medical Summarization tools.",Low,2,,"1. Robust and functioning extraction capability
+2. A functioning bolt on FNOL interface that could work with various Claims platforms like Guidewire and DuckCreek",Y,,Y,F1,Capability Gap Assessment -Ver2,18,2020-08-03,2020-08-03,2026-05-27
+Claim,"Digitally Transforming Workers’ Compensation Claims 
+Optimizing Medical and Disability Management",DT_WC,"Medical Record Summarization
+","Leverage EXLs MedConnection tool to intake, tag, catalogue and summarize medical records and create a comprehensive medical summary for adjusters and attorneys",High,5,,None,,,,F1,Capability Gap Assessment -Ver2,19,2020-08-03,2020-08-03,2026-05-27
+Claim,"Digitally Transforming Workers’ Compensation Claims 
+Optimizing Medical and Disability Management",DT_WC,"End to End Utilization Review
+","Provide full service Utilization Review capability beyond existing USRN & PHRN capability 
+Typically need a Physician Peer Review network",Medium,3,,"Nurse expertise in UR exists at EXL if able to work in client UR platforms and tools and leverage benchmarks and state guidelines
+1. Gap is in having our own UR platform/tool/licenses (ie; Strata, Mitchell)
+2.  Lack of access to Physician Peer Review Network",,Y,Y,F1,Capability Gap Assessment -Ver2,20,2020-08-03,2020-08-03,2026-05-27
+Claim,"Digitally Transforming Workers’ Compensation Claims 
+Optimizing Medical and Disability Management",DT_WC,"Medical Bill Review Capability/Platform
+","Bill review platform integrated with claim systems populated with all ICD-9 codes, treatment protocols, benchmarks etc.…
+Access to PPO Networks",Low,2,,"-MBR capability exists if able to work in client platform. 1. Gap is lack of MBR platform with PPO netwworks, RX programs, benchmarks ",,Y,Y,F1,Capability Gap Assessment -Ver2,21,2020-08-03,2020-08-03,2026-05-27
+Claim,"Digitally Transforming Workers’ Compensation Claims 
+Optimizing Medical and Disability Management",DT_WC,"Predictive Analytics Models
+","RTW Modeling (prediction of MO, LT, Catastrophic Injuries and RTW/MMI days), Severity Modeling, Nurse Triage (Nurse Intervention Success, Nurse Performance), Litigation Propensity, Indemnity Spend Analytics, RX Analytics (target high risk meds which harm RTW efforts - guide appropriate utilization), PPO Outcomes (Inside Network/Outside Network), Physician Peer Reivew Performance, Fraud Analytics, WFH Injury Models, Vendor Outcome Models, Early Intervention/Chronic Pain Analysis, AI Tools to identify potentially difficult or complex claims",High,5,,-NA,,,,F1,Capability Gap Assessment -Ver2,22,2020-08-03,2020-08-03,2026-05-27
+Claim,"Digitally Transforming Workers’ Compensation Claims 
+Optimizing Medical and Disability Management",DT_WC,"STP Modeling and Automation (Medical Only Claims)
+ ",Model the appropriate threshold for STP of medical only claims and process without human touch.,Medium,3,,STP capability does not exist,Y,,Y,F1,Capability Gap Assessment -Ver2,23,2020-08-03,2020-08-03,2026-05-27
+Claim,"Digitally Transforming Workers’ Compensation Claims 
+Optimizing Medical and Disability Management",DT_WC,"Payment Integrity
+",Leverage payment integrity identification and collection capabilities in HC and/or SCIO to recover leakage in medical payments.,High,5,,None,,,,F1,Capability Gap Assessment -Ver2,24,2020-08-03,2020-08-03,2026-05-27
+Claim,"Digitally Transforming Workers’ Compensation Claims 
+Optimizing Medical and Disability Management",DT_WC,"Subrogation
+",Leverage subrogation capabilities to highlight claims with high subro potential early in the case and pursue accordingly. ,High,5,,None,,,,F1,Capability Gap Assessment -Ver2,25,2020-08-03,2020-08-03,2026-05-27
+UW,New Business Processing-as-a-Service,NB_PaaS,"Submission to Quote
+-",Enable already redesigned New Business Model office with analytics and digital solution to further improve Speed to Market and reduce cost,High,4,"1. Improving speed to market - It takes 48-72 hours to share a quote
+2. Reducing Cost of Quote Generation - Multiple touches across the shared service and underwriting organization to present a quote
+3. Prioritizing and writing profitable business
+4. Increasing Quote to Bind Ratio
+The above issues are largely driven by:
+a) Limited availability of proven digital capabilities that can cater to non standard and complex market segments
+b) Limited integration of  Analytics models in New Business risk selection and application prioritization workflow
+c) Heavy reliance on Underwriter's experience and change management issues
+d) Limited use of upfront data enrichment techniques
+e) Data entry heavy transactions","1.  Data extraction from Acord, email and supplementary documents
+2.  APIs to communicate with top 5 agency systems
+3. Digital packet with a summary of losses, risk exposure basis social-media research, financial performance summary, Aerial imagery etc.",Y,,,F1,Capability Gap Assessment -Ver2,26,2020-08-03,2020-08-03,2026-05-27
+UW,New Business Processing-as-a-Service,NB_PaaS,"Rating
+","Automated data entry for quote creation
+Identify segments/risk profiles to increase quick rating (Quick Rate Process)",Low,2,,"1. Data Augmentation through use of third party dataset/secondary data source
+2. Integration modules that work with top 2 policy admin systems",Y,,,F1,Capability Gap Assessment -Ver2,27,2020-08-03,2020-08-03,2026-05-27
+UW,New Business Processing-as-a-Service,NB_PaaS,"Issuance
+","Automated Issuance
+Automated communication for binders
+Binder generatino, DEC package",High,4,,,,,,F1,Capability Gap Assessment -Ver2,28,2020-08-03,2020-08-03,2026-05-27
+UW,New Business Processing-as-a-Service,NB_PaaS,"Analytics Insights and Reporting 
+","Provides ability to capture and report real time on TAT, Volume by LOB, Volume by Channel, Quality etc..)
+Provide ability to predict quote conversion rate etc.",Medium,3,,"While EXL has a deep analytics expertise but there are no ready to deploy solutions for submission prioritization, risk assessment and selection etc",Y,,,F1,Capability Gap Assessment -Ver2,29,2020-08-03,2020-08-03,2026-05-27
+UW,Endorsements End to End Solution,E_E2E,"End to End Endorsement Processing
+","Digital Endorsement solutin services end to end value chain from intake of requests to issuance of policies without human intervention.
+- Straight Through Processing of simple endorsement requests
+-ability to ingest data from any channel
+-Early identification of missing information
+-Data intelligence to improve self service functionality
+-Ability to prioritize based on VOC",High,4,"Endorsements requests for various market segment are inconsistent and not standard hindering the ability to get a good understanding of endorsement volumes, types etc. and adding complexity to processing. Insurers are looking to reduce unwanted endorsements
+1.Unstructured & Unstandardized Requests resulting in inability to get business insights into types of endorsements and reasons driving the endorsements (quality, broker behavior etc.)
+2. Need to support omni channels for endorsements
+3. Need to centralize endorsement processing across various market segments
+4. Lower adoption of Brokers to self service portals
+","1.  Data extraction from Acord, email and supplementary documents",Y,,,F1,Capability Gap Assessment -Ver2,30,2020-08-03,2020-08-03,2026-05-27
+UW,Endorsements End to End Solution,E_E2E,"Exception Handling
+",Process endorsements manually for exception cases leveraging experienced insurance workforce,Low,2,,,,,,F1,Capability Gap Assessment -Ver2,31,2020-08-03,2020-08-03,2026-05-27
+UW,Endorsements End to End Solution,E_E2E,Reporting and Analytics,"-Ability to report on endorsement volumes 
+-Provide business insights into core reasons for endorsements to enable addresing the root causes
+-Identify broker behavior issues
+Reduce endorsement volume through repeat request reduction, upstream optimization
+-Send proactive alerts and communication for endorsement (as an example)",Medium,3,,,,,,F1,Capability Gap Assessment -Ver2,32,2020-08-03,2020-08-03,2026-05-27
+UW,Broker Intake Engine,BIE,Data Ingestion from Broker Platforms,"- Comparative Rater
+- Ability for brokers to send the requests to ""EXL Broker Services"" - Federation model
+- Standardize intake for insurers",Low,2,"Multiple submission
+Delayed quote generation time
+Adminsitration overhead due to non standard requests to insurers","1. No existing expereince - AON expereince can be the blue print
+2. A commercial insurance exchange that connects customers, agents, and carriers to match the right quote in record time",Y,,,F1,Capability Gap Assessment -Ver2,33,2020-08-03,2020-08-03,2026-05-27
+UW,Broker Intake Engine,BIE,Data Extraction Module,-Data intake from mutiple sources,Low,2,,"3.  Data extraction from Acord, email and supplementary documents",Y,,,F1,Capability Gap Assessment -Ver2,34,2020-08-03,2020-08-03,2026-05-27
+UW,Broker Intake Engine,BIE,Value Add Services,"- Pre-identificaiton of missing information
+- Risk propensity model
+- Lead prioritization
+- Commission forecast",Low,2,,"While EXL has a deep analytics expertise but there are no ready to deploy solutions for submission prioritization, risk assessment and selection etc",Y,,,F1,Capability Gap Assessment -Ver2,35,2020-08-03,2020-08-03,2026-05-27
+F & A,Intelligent Collections,Int_Col,"Analytics Led Risk Prioritization & Forecasting
+","-Dynamic risk scoring based on industry level macro variables, historical account performance and external factors as applicable
+-Automated prioritization of activities based on customer type, collection, risk, balance and location
+-Standardized dispute resolution with standard routing, escalation and approval processes
+-Data from banks, external remittance data, electronic data from customers, or any other supporting data used to improve auto-match% and better cash forecasting",High,4,"Analytics driven Human + Digital Collections: As the lockdowns impact household income and company revenues insurers are either startting to see or anticipating the following: 
+
+1. Higher Expected Default: Adverse impact across customer industries – adversely impacting company’s cash position
+
+2. Erratic pandemic behavior: Overestimated risk scores, impacted UW decisioning and lower forecasting accuracy
+
+3. Non-standardized highly manual processes: Need to design experience with focus on the right outcomes
+
+EXL will help insurers get more cash in faster by using specialized analytics, automated communications and leveraging specialized targeted collections strategies, in addition to quicker matching and resolution of cash balances. 
+",Low capability in off-the shelf digital solutions,,,,F1,Capability Gap Assessment -Ver2,36,2020-08-03,2020-08-03,2026-05-27
+F & A,Intelligent Collections,Int_Col,Automated Comunications &  Chasers,'-Automated reminders pre due date based on inherent risk; Automated chasers post due date based on ageing,Low,2,,,,,,F1,Capability Gap Assessment -Ver2,37,2020-08-03,2020-08-03,2026-05-27
+F & A,Intelligent Collections,Int_Col,Real Time Cash Application ,"Real time cash application integrated with collections, dispute resolution and self service portal",Medium,3,,,,,,F1,Capability Gap Assessment -Ver2,38,2020-08-03,2020-08-03,2026-05-27
+F & A,Intelligent Collections,Int_Col,Comprehansive Data Reports and Dashboards,"-Stringent Credit Risk Management - automated credit reviews and customer score cards
+'Reporting engine – Collections Dashboard, AR aging report, On Account and Misapplied Cash",High,4,,,,,,F1,Capability Gap Assessment -Ver2,39,2020-08-03,2020-08-03,2026-05-27
+F & A,Intelligent Collections,Int_Col,Other Receivables Areas,Analytics driven Post Billing activities: Run AR reports from the system (by product / broker / location) and run Analytics engines to determine likelyhood of default for more targeted focus. Enhance outreach and connect with Insured / broker by confirm inginvoice receipt by the right contact at the client / broker and share any information required. ,High,4,,,,,,F1,Capability Gap Assessment -Ver2,40,2020-08-03,2020-08-03,2026-05-27
+F & A,Intelligent Collections,Int_Col,Other Receivables Areas,Intelligent pro-active dispute resolution and automated reminder Pre-Due: Idenitfy cases with high propensity for disputes and escalate and help resolve disputes (revisions/credit/other). Automated reminders at various stages and confirmation of the scheduled payment date (Promise to Pay),High,4,,,,,,F1,Capability Gap Assessment -Ver2,41,2020-08-03,2020-08-03,2026-05-27
+F & A,Intelligent Collections,Int_Col,Other Receivables Areas,"Intelligent Reporting and Tracking: Consistently and proactively move the invoice to the payments stages,  effectively collect and proactively escalate, send Overdue statement if payment not received as per “Promise to Pay”, loop in brokers and account managers (as needed) in collections email",High,4,,,,,,F1,Capability Gap Assessment -Ver2,42,2020-08-03,2020-08-03,2026-05-27
+F & A,Intelligent Collections,Int_Col,Other Receivables Areas,"Dispute Resolution: Create and follow dynamic follow escalation matrix to resolve the dispute with client / broker, create processes for quick and efficient dispute resolution, Intelligent solution to capture  resolutions and post resolution, confirm schedule payment date on disputed invoices",High,4,,,,,,F1,Capability Gap Assessment -Ver2,43,2020-08-03,2020-08-03,2026-05-27
+F & A,Intelligent Collections,Int_Col,Other Receivables Areas,"Reporting - Create Single Versions of Truth: Optimize system reports as “version of truth” for all collections reporting and follow-up; Report, track and benchmark DSO, Overdue AR, disputes, bad-debts and other KPI’s; Quantify the $’s to be collected on a time scale",High,4,,,,,,F1,Capability Gap Assessment -Ver2,44,2020-08-03,2020-08-03,2026-05-27
+F & A,Intelligent Collections,Int_Col,Other Receivables Areas,"Additional Value Add: Create customized ‘risk’ segments leveraging multiple criterion like balance/tenure, likelihood-to-pay, tenure, time to payment  and other models. Assign these collections risk scores and portfolio risk ranking to prioritize collections and minimize loss. Proactive feedback loop for credit team to better manage credit risk. Leverage customer intel across product lines (behavior patterns, terms, contracts, shutouts, etc.) to give clients better understanding of customer shifts",High,4,,,,,,F1,Capability Gap Assessment -Ver2,45,2020-08-03,2020-08-03,2026-05-27
+F & A,Audit Analytics,Audit_ATC,Audit Analytics Center of Excellence (COE),"- Audit Analytics opportunity identification
+- Design of Analytics Strategy and Pilot Program
+- Audit Analytics assessment – Current  State Assessment & Future State Design",Medium,3,Remote working has increased the possibility of financial impact to Insurers due to malicious acts and inadvertent errors. ,Low capability in off-the shelf digital solutions,,,,F1,Capability Gap Assessment -Ver2,46,2020-08-03,2020-08-03,2026-05-27
+F & A,Audit Analytics,Audit_ATC,Audit Bot Development and Maintenance,"Tester Bots, Data Extraction Bots, Recon Cots etc.",Medium,3,,,,,,F1,Capability Gap Assessment -Ver2,48,2020-08-03,2020-08-03,2026-05-27
+F & A,Process Risk Assessment,PRA,COE Delivery Structure ,"As part of this offering EXL proposes to perform a health-check of - Process, risk, controls and organizational taxonomy
+- Process flows, risks, controls
+- Risk and Controls Matrix
+- Review testing methodology and guidelines 
+- Develop Test Scripts for key controls
+- Perform test-of-one 
+- Evaluate design effectiveness of key control(s)
+- Report on the status of controls tested, its effectiveness and open gaps ",High,4,"- Incomplete and inaccurate system data
+- Spikes in the level of effort
+- Inconsistent controls and testing documentation
+- Regular surprises, especially at year-end
+- Issue Management
+   - Lack of early warning mechanism
+   - Late identification of exceptions
+   - Little time left to remediate at year end
+- Testing not aligned to evolving risks
+- Challenging project management – a lot of key stakeholders
+'-",,,,,F1,Capability Gap Assessment -Ver2,49,2020-08-03,2020-08-03,2026-05-27
+F & A,Process Risk Assessment,PRA,Automation/Robotics,-Advanced automation and robotics interventions directed at select SOX  compliance tasks and underlying processes ,High,4,,,,,,F1,Capability Gap Assessment -Ver2,50,2020-08-03,2020-08-03,2026-05-27
+F & A,Process Risk Assessment,PRA,Analytics & Reporting,-Insightful and granular analysis of data to identify high risk areas and detect potential exceptions early ,High,4,,,,,,F1,Capability Gap Assessment -Ver2,51,2020-08-03,2020-08-03,2026-05-27
+F & A,Process Risk Assessment,PRA,Leading Practices,-Implement risk based testing methodologies and work-paper documentation standards for increased external audit reliance,High,4,,,,,,F1,Capability Gap Assessment -Ver2,52,2020-08-03,2020-08-03,2026-05-27
+F & A,Process Risk Assessment,PRA,Dual Shore,"-Large pool of SOX auditors, data scientists and automation SMEs both onshore and offshore ",High,4,,,,,,F1,Capability Gap Assessment -Ver2,53,2020-08-03,2020-08-03,2026-05-27
+F & A,Finance Automation,Fin_Auto,RPA,"RPA is a key driver being discussed with most clients to drive efficiency and plan capacity. EXL will implement Robotics and Intelligent Automation solutions for core Finance processes such as Balance Sheet Reconciliations and Manual Journal Entries and transactional Finance processes such as Account payables and receivables, to help clients drive better outcomes.",HIgh,4,-Lockdowns have led to an accelaration in the speed of automation being implemented across clients to drive operations resiliency and improve efficiency. Clients are looking at partners to come up with ready and implementable solutions for automation.,,,,,F1,Capability Gap Assessment -Ver2,54,2020-08-03,2020-08-03,2026-05-27
+F & A,Transformation Roadmap for Finance Function,TrRFF,Finance Blueprint,"EXL will conduct Finance functions diagnostic to identify process transformation and expense management opportunities, estimate benefits, build a business case, and develop an implementation roadmap. ",High,4,-Cost and efficiency pressures are driving most CFOs to urgently look to assess their functions and develop end-to-end transformation and cost reduction solutions.,,,,,F1,Capability Gap Assessment -Ver2,55,2020-08-03,2020-08-03,2026-05-27

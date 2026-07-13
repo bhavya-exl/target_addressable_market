@@ -1,0 +1,137 @@
+client_canonical,competitor_canonical,num_engagements,total_ftes_estimated,revenue_usd_m_estimated,functions_covered,renewal_windows,comments_concat,current_status_concat,f4_segments_supported,f4_research_notes,owner,friction_signals,source_refs,file_vintages_touched,ingestion_date
+AON,Genpact,5,490.0,,UW,,Underwriting Support CSU; Underwriting Support Invoicing; Underwriting Support DPU; Underwriting Support Policy Admin; Underwriting Support Policy Admin,"Xtrakto led automated entry, consultng work in EMEA, $10M automated entry pipeline established. Multiple deal ideas of at least $50M TCV presented",,,Roopak,,F5/Competitor Analysis/R46; F5/Competitor Analysis/R47; F5/Competitor Analysis/R48; F5/Competitor Analysis/R49; F5/Competitor Analysis/R50,2021-02-21,2026-05-27
+Allstate,Accenture,1,300.0,,,,,,,,,,F4/P&C Clientwise/R5,2024-06-01,2026-05-27
+Allstate,Captive,1,5000.0,,,,,,,,,,F4/P&C Clientwise/R3,2024-06-01,2026-05-27
+Allstate,EY,1,,,,,,,,,,,F4/P&C Clientwise/R8,2024-06-01,2026-05-27
+Allstate,Foundever,1,300.0,,,,,,,,,,F4/P&C Clientwise/R6,2024-06-01,2026-05-27
+Allstate,Genpact,2,,,,,,,,,,,F5/Competitor Analysis/R33; F5/Competitor Analysis/R37,2021-02-21,2026-05-27
+Allstate,Infosys,1,,,,,,,Technology Contractors,,,,F4/P&C Clientwise/R9,2024-06-01,2026-05-27
+Allstate,Qualfon,1,,,,,,,,,,,F4/P&C Clientwise/R7,2024-06-01,2026-05-27
+Allstate,WNS,1,300.0,,,,,,,,,,F4/P&C Clientwise/R4,2024-06-01,2026-05-27
+AmTrust,WNS,1,,,,,,,,,,,F5/Competitor Analysis/R66,2021-02-21,2026-05-27
+American Modern,Cognizant,1,,,,,,,Supports other Munich Re entities,,,,F4/P&C Clientwise/R52,2024-06-01,2026-05-27
+American Modern,TCS,1,,,,,,,Supports other Munich Re entities,,,,F4/P&C Clientwise/R50,2024-06-01,2026-05-27
+American Modern,WNS,1,,,,,,,"WNS F&A , IT,UW services supports other Munich Re entities",,,,F4/P&C Clientwise/R51,2024-06-01,2026-05-27
+Aspen,Genpact,1,,,,,,,,,,,F5/Competitor Analysis/R38,2021-02-21,2026-05-27
+Assurant,Assurant GCC,1,,,,,,,,,,,F4/P&C Clientwise/R45,2024-06-01,2026-05-27
+Assurant,Capgemini,1,,,,,,,,,,,F4/P&C Clientwise/R44,2024-06-01,2026-05-27
+Assurant,TCS,1,,,,,,,,"Policy Administration & Back‑Office Processing (Direct Evidence)
+Billing, Payments, Collections & Financial Operations (Direct Evidence)",,,F4/P&C Clientwise/R43,2024-06-01,2026-05-27
+Aviva,TCS,1,,,,,,Project Coral!!!,,,,,F5/Competitor Analysis/R60,2021-02-21,2026-05-27
+Aviva,WNS,1,,,,,"$640 MM TCV BPO Insurance Services
+Other ITO (Hosting, Email, Security, Disaster Recovery), F&A, Insurance Services, Analytics,",Project Coral,,,,,F5/Competitor Analysis/R74,2021-02-21,2026-05-27
+CNA,Accenture,1,,,,,,,,"Product & Pricing - ML-driven forecasting models for pricing and risk
+Underwriting - Accelerated ML models, analytics foundation, AI-enabled decisions
+Policy Administration - Automation and improved workflows
+Claims - Faster insights for claims assessment & decision support
+Risk Management - Stronger data infrastructure and advanced predictive analytics
+Enterprise Operations / IT - Modern cloud-en",,,F4/P&C Clientwise/R11,2024-06-01,2026-05-27
+CNA,Atos,1,,,,,,,,"Product & Pricing - Indirectly enabled through modernized IT and analytics-ready cloud infrastructure
+Distribution (Agents/Brokers) - Digital workplace, cloud-first systems improving broker & agent user experience
+Underwriting - Hybrid cloud modernization improves availability of data & systems underwriting relies on
+Policy Administration - Mainframe modernization & legacy app migration streamline",,,F4/P&C Clientwise/R13,2024-06-01,2026-05-27
+CNA,Google,1,,,,,,,,,,,F4/P&C Clientwise/R14,2024-06-01,2026-05-27
+CNA,Microsoft,1,,,,,,,,,,,F4/P&C Clientwise/R16,2024-06-01,2026-05-27
+CNA,Quantiphi,1,,,,,,,,,,,F4/P&C Clientwise/R12,2024-06-01,2026-05-27
+CNA,ResourcePro,1,,,,,,,,,,,F4/P&C Clientwise/R10,2024-06-01,2026-05-27
+CNA,Workday,1,,,,,,,,"Financial Management & Reporting (Core to Policy, Claims, and Underwriting Operations)
+Operational Efficiency & IT Modernization (Supporting all value‑chain stages)
+Accounting Automation (Supports Policy, Claims & Reinsurance Accounting)
+Planning, Forecasting & Financial Modeling (Enterprise‑level P&C planning)
+Supplier Management & Procurement (Supports claims vendors, IT suppliers, third‑party a",,,F4/P&C Clientwise/R15,2024-06-01,2026-05-27
+Everest,Deloitte,1,,2.5,,,,,,,,,F4/P&C Clientwise/R47,2024-06-01,2026-05-27
+Everest,EY,1,,2.5,,,,,,Insurance IT Services PEAK Matrix® assessments,,,F4/P&C Clientwise/R48,2024-06-01,2026-05-27
+Everest,Infosys,1,,6.0,,,,,,,,,F4/P&C Clientwise/R46,2024-06-01,2026-05-27
+Everest,Vertafore,1,,1.2,,,,,,,,,F4/P&C Clientwise/R49,2024-06-01,2026-05-27
+Genworth,Genpact,2,300.0,,"CLAIMS, UW",,Underwriting Support POlicy Admin; Claims,,,,,,F5/Competitor Analysis/R44; F5/Competitor Analysis/R45,2021-02-21,2026-05-27
+Hanover Insurance Group,Capgemini,1,,8.0,,,,,,,,,F4/P&C Clientwise/R26,2024-06-01,2026-05-27
+Hanover Insurance Group,Cognizant,1,,,"CLAIMS, PLATFORM",,System Integrator for Guidewire and RPA service provider,Bad RPA experience with EXL,,,,,F5/Competitor Analysis/R23,2021-02-21,2026-05-27
+Hanover Insurance Group,Corvel,1,,,CLAIMS,,Medical Bill Review (WC Claims) - now being rolled off,Part of expanded scope that Saju has identified and is in his Q1 OKR,,,Saju,,F5/Competitor Analysis/R5,2021-02-21,2026-05-27
+Hanover Insurance Group,EY,1,,,,,,,,,,,F4/P&C Clientwise/R28,2024-06-01,2026-05-27
+Hanover Insurance Group,Insurity,1,,,"UW, PLATFORM",,Insurity Platform for UW processes,,,,,,F5/Competitor Analysis/R52,2021-02-21,2026-05-27
+Hanover Insurance Group,Ivans,1,800.0,,,,,,,"Commercial lines submission & distribution automation
+Digital Connectivity Across the Policy Lifecycle (Marketing → Quoting → Servicing → Renewals)
+Policy, Claims, Billing & Commission Data Connectivity (Ivans Network)",,,F4/P&C Clientwise/R30,2024-06-01,2026-05-27
+Hanover Insurance Group,Medata,1,,,CLAIMS,,Medical Bill Review (WC Claims),,,,,,F5/Competitor Analysis/R53,2021-02-21,2026-05-27
+Hanover Insurance Group,NTT Data,2,24.0,24.0,"CLAIMS, UW, PREMIUM_AUDIT, F&A, PLATFORM",,Technology Infra and Maintenance,,,,,,F5/Competitor Analysis/R54; F4/P&C Clientwise/R25,"2021-02-21,2024-06-01",2026-05-27
+Hanover Insurance Group,TBD,1,,,"UW, PLATFORM",,New System Integrator for insurity to be announced,,,,,,F5/Competitor Analysis/R56,2021-02-21,2026-05-27
+Hanover Insurance Group,TCS,1,,1.2,,,,,,,,,F4/P&C Clientwise/R29,2024-06-01,2026-05-27
+Hanover Insurance Group,Vertafore,1,,6.0,,,,,,"Commercial lines digital quoting and submission connectivity through Commercial Submissions
+Enterprise‑grade licensing, compliance, and adjuster‑management services through Sircon",,,F4/P&C Clientwise/R27,2024-06-01,2026-05-27
+Hanover Insurance Group,Xceedance,1,100.0,,,,,,,,,,F4/P&C Clientwise/R31,2024-06-01,2026-05-27
+Hartford,Cognizant,6,690.0,10.0,"CLAIMS, UW, F&A",,They manage end to end work right from new business to claims settlement; Group Benefit claim; Consumer EDM; FinOps,,,,,,F5/Competitor Analysis/R18; F5/Competitor Analysis/R19; F5/Competitor Analysis/R20; F5/Competitor Analysis/R21; F5/Competitor Analysis/R32; F4/P&C Clientwise/R32,"2021-02-21,2024-06-01",2026-05-27
+Hartford,Tiger Analytics,1,150.0,,,,,,,,,,F4/P&C Clientwise/R33,2024-06-01,2026-05-27
+Kemper,Accenture,1,80.0,,,,,,F&A Ops,"Claims Intake & Processing, Claims Adjudication, Claims Payment & Leakage Control, Claims Technology Modernization",,,F4/P&C Clientwise/R53,2024-06-01,2026-05-27
+Kemper,Capgemini,1,,,,,,,Tech & Consulting,"Claims Management Transformation (via Guidewire Claim Center)
+Policy Administration & Customer Experience Transformation
+IT Consulting & Application Development Support Within the Kemper Ecosystem",,,F4/P&C Clientwise/R54,2024-06-01,2026-05-27
+Liberty Mutual,Cognizant,3,365.0,65.0,"CLAIMS, UW",,"Clinical Operations - Bill review and Utilization review; Policy Admin - Endorsement, Policy Servicing , underwriting",Not an immediate opportunity. CTS is preferred for this due to UR paltform and licensing access; We have started pitching with Xtrakto,"Tech Ops, Domain Ops AI, Analytics, Data Mgmt., Clinical Services, Utilization Mgmt.","Modernizing policy, pricing, and underwriting systems
+Cloud migration of core insurance apps
+Faster quoting through backend modernization
+Enhanced availability for distribution systems
+Enhanced underwriting workflows and risk evaluation
+Modernization of core policy systems
+Simplified architecture & better user experience
+Claims platform modernization
+Cloud-native architecture improves claims speed",Nikhil,,F5/Competitor Analysis/R6; F5/Competitor Analysis/R7; F4/P&C Clientwise/R36,"2021-02-21,2024-06-01",2026-05-27
+Liberty Mutual,Genpact,2,35.0,35.0,,,,,"Tech Ops, Digital Ops,_x000B_Analytics, AI, Data Mgmt.","Rapid cloud migration of policy, pricing, and underwriting applications
+Retired legacy data centers and improved scalability
+Enhanced quote processing and speed‑to‑market
+Modernized underwriting support applications
+Improved underwriting accuracy with better system reliability
+Application modernization driving smoother policy lifecycle management
+Simplified IT architecture for improved performance",,,F5/Competitor Analysis/R34; F4/P&C Clientwise/R34,"2021-02-21,2024-06-01",2026-05-27
+Liberty Mutual,TCS,1,40.0,40.0,,,,,"Tech Ops, Digital Ops, HRO, _x000B_Analytics, AI, Data Mgmt.","Enterprise-wide digital transformation services across the P&C value chain
+Digital-first tools to elevate distribution and sales experiences
+AI‑driven RiskTech and underwriting acceleration
+Modernizes policy systems, reduces technical debt, and increases agility
+End‑to‑end P&C claims management solutions
+Enterprise-grade AI, ML, and data‑engineering support",,,F4/P&C Clientwise/R35,2024-06-01,2026-05-27
+Liberty Mutual,Teleperformance,1,15.0,15.0,,,,,Contact Centers & Voice Ops,"Customer Service & Policyholder Support (Documented Interaction)
+Claims‑Related Customer Support (Sector Capability & LM Interaction)
+Omnichannel CX & Contact Center Operations",,,F4/P&C Clientwise/R37,2024-06-01,2026-05-27
+MAPFRE,CGI,1,,2.0,,,,,,"Legacy system modernization & platform engineering
+Digital‑ready product architecture
+Modern policy and quoting systems
+Technology modernization for underwriting
+Policy Admin - Full core system replacement (Guidewire + Duck Creek)
+Improved claims systems performance
+Cloud migration of commercial lines (Phase 2)
+IT & Application Managed Services (Long-Term Partnership)",,,F4/P&C Clientwise/R40,2024-06-01,2026-05-27
+MAPFRE,Cognizant,1,,3.0,,,,,,,,,F4/P&C Clientwise/R38,2024-06-01,2026-05-27
+MAPFRE,Indra,1,,2.5,,,,,,,,,F4/P&C Clientwise/R39,2024-06-01,2026-05-27
+MAPFRE,Interactions,1,75.0,0.75,,,,,,,,,F4/P&C Clientwise/R41,2024-06-01,2026-05-27
+MAPFRE,LYNX,1,75.0,0.75,,,,,,"Third‑party claims management provider - FNOL, 24/7 Claim Intake, Clain triage & routing
+Auto Glass Network Management (MAPFRE’s Preferred Glass Network)
+Auto Glass Claims Processing & Billing
+Customer Experience Support (Call Center Services)",,,F4/P&C Clientwise/R42,2024-06-01,2026-05-27
+Marsh,WNS,2,,,,,,Xtrakto pitches have been made. Several discussions in progress; Xtrakto pitches have been made. Several discussions in progress,,,Wayne Reed,,F5/Competitor Analysis/R72; F5/Competitor Analysis/R76,2021-02-21,2026-05-27
+Nationwide,Accenture,1,,,,,,,Consulting,,,,F4/P&C Clientwise/R19,2024-06-01,2026-05-27
+Nationwide,Cognizant,3,200.0,,UW,,"Policy Admin - Endorsement, Policy Servicing , underwriting",,UW support & service,"Product & Pricing - No publicly documented involvement
+Distribution / Sales - Indirect support via streamlined ops
+Underwriting - No direct underwriting functions reported
+Policy Administration - Back-office processing, documentation handling
+Claims (Support Functions) - Administrative support that enhances claims workflow efficiency
+Billing & Payments - Supported through general back-office BPO f",,,F5/Competitor Analysis/R15; F5/Competitor Analysis/R28; F4/P&C Clientwise/R17,"2021-02-21,2024-06-01",2026-05-27
+Nationwide,EY,1,,,,,,,Consulting,,,,F4/P&C Clientwise/R20,2024-06-01,2026-05-27
+Nationwide,McKinsey,1,,,,,,,Consulting on Claims Field Service Model,,,,F4/P&C Clientwise/R18,2024-06-01,2026-05-27
+Progressive,TCS,1,,,,,,,,,,,F5/Competitor Analysis/R58,2021-02-21,2026-05-27
+QBE,WNS,1,,,,,BPO / Analytics - $40 MM TCV,,,,,,F5/Competitor Analysis/R67,2021-02-21,2026-05-27
+State Farm,TCS,1,,,,,,Exploring GTM partnership with EY,,,Sean Allen,,F5/Competitor Analysis/R57,2021-02-21,2026-05-27
+Suncorp,WNS,1,,,,,,,,,,,F5/Competitor Analysis/R73,2021-02-21,2026-05-27
+Swiss Re,Genpact,2,350.0,,UW,,Undewritng Support Policy Admin; Policy Maintenance,Sean Allen and Mohit Tandon pursuing this,,,Sean Allen,,F5/Competitor Analysis/R42; F5/Competitor Analysis/R43,2021-02-21,2026-05-27
+Travelers Group,Cognizant,5,1000.0,,"CLAIMS, UW, F&A",< 6 Months,"Personal Insurance, Commercial Insurnace - From new business to claims settlement; Bill Review and Utilization Review; Policy Admin- Endorsement, Policy Servicing , underwriting; Group Benefit Claims; Contact Center - Direct billing, Agency calls, provider call, 3rd party calls, financial calls",Champion Challenger concept in discussion. Rohit has met Mojgan. Subsequent follow-ups in progress. Sharing capability material as next step,,,Saju,champion challenger,F5/Competitor Analysis/R8; F5/Competitor Analysis/R9; F5/Competitor Analysis/R10; F5/Competitor Analysis/R11; F5/Competitor Analysis/R12,2021-02-21,2026-05-27
+Travelers Group,Genpact,3,210.0,,"CLAIMS, UW, F&A",,Policy Maintenance; Claims; Invoicing,Champion Challenger being discussed. TRV is terminating with WNS,,,Saju,"champion challenger,terminating",F5/Competitor Analysis/R39; F5/Competitor Analysis/R40; F5/Competitor Analysis/R41,2021-02-21,2026-05-27
+Travelers Group,WNS,1,,,,,,As above - TRV has given notice to WNS. We are exploring champion challenger…part of Q1 OKR,,,Saju,"champion challenger,given notice,exploring champion",F5/Competitor Analysis/R65,2021-02-21,2026-05-27
+Zurich,Capgemini,1,,,,,,,Technology & IT partner​,,,,F4/P&C Clientwise/R22,2024-06-01,2026-05-27
+Zurich,Cognizant,3,100.0,,CLAIMS,,Medical Bill Review - Medwise,CTS remains preferred due to MBR platform and licensing access,Technology partner,,,,F5/Competitor Analysis/R22; F5/Competitor Analysis/R27; F4/P&C Clientwise/R24,"2021-02-21,2024-06-01",2026-05-27
+Zurich,Genpact,1,,,,,,,"Claims, Finance, Global procurement support​","Product Development - Data-driven insights, actuarial analytics
+Marketing & Distribution - Sales enablement operations, broker/MGA support [genpact.com]
+Underwriting - AI‑enhanced underwriting ops, submission triage, risk scoring
+Policy Administration - Issuance, endorsements, renewals, servicing optimization
+Claims Management - FNOL, claims data processing, subrogation & fraud analytics [genpact.",,,F4/P&C Clientwise/R21,2024-06-01,2026-05-27
+Zurich,Mphasis,1,70.0,1.0,,,,,Underwriting support partner​,"Distribution/CX - Front2Back™ digital journeys; broker/agent portals; middleware
+Underwriting - Data ingestion, triage, AI risk scoring; Mphasis–Sixfold AI UW acceleration
+Policy admin - Wynsure PAS (quote‑bind‑endorse‑renew); core modernization & AMS
+Claims - FNOL, cognitive document processing (DeepInsights™), severity/subro analytics, STP
+Reinsurance/Specialty - Bordereaux & treaty ops; Lloyd’s",,,F4/P&C Clientwise/R23,2024-06-01,2026-05-27

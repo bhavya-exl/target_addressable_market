@@ -19,9 +19,11 @@ import os, csv, warnings
 from collections import Counter, defaultdict
 warnings.filterwarnings('ignore')
 
-BASE = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/excel_data"
-DATA_DIR = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/data"
-AUDIT = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/COVERAGE_AUDIT.md"
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[2]                      # repo root (code/pipeline/<script>.py)
+BASE = str(REPO / "input_data" / "corpus")
+DATA_DIR = str(REPO / "produced_data" / "pipeline" / "data")
+AUDIT = str(REPO / "produced_data" / "pipeline" / "COVERAGE_AUDIT.md")
 
 FILES = {
     "F1": "20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",

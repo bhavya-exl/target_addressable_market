@@ -29,8 +29,10 @@ from exl_taxonomy import (
     FUNCTION_TO_PRODUCTS, EXL_PRODUCTS, retention_headroom,
 )
 
-DATA = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/data"
-OUT  = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/WHITESPACE_MAP.xlsx"
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[2]                      # repo root (code/pipeline/<script>.py)
+DATA = str(REPO / "produced_data" / "pipeline" / "data")
+OUT  = str(REPO / "produced_data" / "pipeline" / "WHITESPACE_MAP.xlsx")
 
 # ============ Load ============
 profiles = pd.read_csv(f"{DATA}/client_profiles.csv")
@@ -272,7 +274,7 @@ ws.title = "README"
 readme_content = [
     ("White-Space Opportunity Map", "title"),
     ("", "blank"),
-    ("Generated from the consolidated TAM pipeline. Re-generate with: python3 pipeline/whitespace.py", "para"),
+    ("Generated from the consolidated TAM pipeline. Re-generate with: python3 code/pipeline/whitespace.py", "para"),
     ("", "blank"),
     ("How to read this file", "section"),
     ("", "blank"),

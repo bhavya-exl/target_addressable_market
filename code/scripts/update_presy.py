@@ -18,7 +18,11 @@ Original preserved at V1_Presy_backup.pptx
 from pptx import Presentation
 from pptx.util import Pt
 
-p = Presentation("V1_Presy.pptx")
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[2]                      # repo root (code/scripts/<script>.py)
+DECK = str(REPO / "demo" / "V1_Presy.pptx")
+
+p = Presentation(DECK)
 
 
 def set_title(slide, text):
@@ -147,11 +151,11 @@ if table:
     # Replace each cell in existing rows
     new_files = [
         ("File", "What you'd see when you open it"),
-        ("pipeline/leads/01_travelers_group.md",
+        ("produced_data/pipeline/leads/01_travelers_group.md",
          "Travelers sales brief — 89.3/100, score breakdown, 17 triggers cited to source rows, EXL anchor products (XTRAKTO.AI + EXELIA.AI + NerveHub + Paymentor) with outcome metrics, CxO map, pitch hook, risks, next 3 steps."),
-        ("pipeline/WHITESPACE_MAP.xlsx",
+        ("produced_data/pipeline/WHITESPACE_MAP.xlsx",
          "7-sheet workbook — Master Heatmap with EXL's 5-area P&C taxonomy, Partnering Matrix benchmarks sorted by headroom, White Space Ranking, Capability Gaps."),
-        ("pipeline/LEADS_DIGEST.md",
+        ("produced_data/pipeline/LEADS_DIGEST.md",
          "Top 10 ranked accounts with click-through links to each polished brief."),
         ("pipeline/COVERAGE_AUDIT.md",
          "PASS verdict — every source row reconciled, 100% datetime coverage on all 1,076 output rows."),
@@ -302,12 +306,12 @@ for idx in new_order:
 
 # ============ SAVE ============
 
-p.save("V1_Presy.pptx")
+p.save(DECK)
 print("Saved updated V1_Presy.pptx")
 print("Original backed up at V1_Presy_backup.pptx")
 print()
 print("Final slide order:")
-final = Presentation("V1_Presy.pptx")
+final = Presentation(DECK)
 for i, slide in enumerate(final.slides, 1):
     title = ""
     for shape in slide.shapes:

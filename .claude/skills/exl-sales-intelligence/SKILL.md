@@ -1,11 +1,11 @@
 ---
 name: exl-sales-intelligence
-description: EXL competitive intelligence and sales lead engine for the insurance Total Addressable Market (TAM) corpus. Use when the user asks about EXL accounts, sales leads, competitor footprints at insurers, white-space or market opportunities, an account brief, what triggers fired for an account, or wants to refresh the pipeline. Commands (one entrypoint): list_accounts (ranked list of all 236 client accounts), account NAME (full sales brief for one client with EXL product recommendations, outcome metrics, and source citations), top N (top N leads), triggers NAME (signals firing for an account), whitespace (strategic heatmap and Partnering Matrix benchmarks), refresh (re-run the full pipeline). Output is source-cited to the 5 internal EXL spreadsheets in TAM/excel_data/, uses EXL product vocabulary (XTRAKTO.AI, EXELIA.AI, NerveHub, Subrosource, Paymentor, Digital Finance Suite, Customer 360, LifePRO, MedConnection, Engage, Assist, DIVA), and references the Addressable Market Tracker deck taxonomy.
+description: EXL competitive intelligence and sales lead engine for the insurance Total Addressable Market (TAM) corpus. Use when the user asks about EXL accounts, sales leads, competitor footprints at insurers, white-space or market opportunities, an account brief, what triggers fired for an account, or wants to refresh the pipeline. Commands (one entrypoint): list_accounts (ranked list of all 236 client accounts), account NAME (full sales brief for one client with EXL product recommendations, outcome metrics, and source citations), top N (top N leads), triggers NAME (signals firing for an account), whitespace (strategic heatmap and Partnering Matrix benchmarks), refresh (re-run the full pipeline). Output is source-cited to the 5 internal EXL spreadsheets in input_data/corpus/, uses EXL product vocabulary (XTRAKTO.AI, EXELIA.AI, NerveHub, Subrosource, Paymentor, Digital Finance Suite, Customer 360, LifePRO, MedConnection, Engage, Assist, DIVA), and references the Addressable Market Tracker deck taxonomy.
 ---
 
 # exl-sales-intelligence — EXL Sales Lead Engine
 
-One-stop skill for querying the consolidated competitive-intelligence pipeline built from EXL's internal TAM corpus (5 spreadsheets in `TAM/excel_data/`).
+One-stop skill for querying the consolidated competitive-intelligence pipeline built from EXL's internal TAM corpus (5 spreadsheets in `input_data/corpus/`).
 
 ## When to invoke this skill
 
@@ -42,7 +42,7 @@ Available commands:
 | `account <name>` | Print the full sales brief for one account. Fuzzy match on name (e.g. `account travelers` matches "Travelers Group"). If multiple matches, lists candidates |
 | `top [N]` | Print top N leads (default 10) — rank, score, confidence, trigger count, top recommended EXL products |
 | `triggers <name>` | List every trigger that fired for an account, with evidence text and source-row citations |
-| `whitespace` | Print the Partnering Matrix retention benchmarks + top-20 white-space accounts. The richer view is in `pipeline/WHITESPACE_MAP.xlsx` |
+| `whitespace` | Print the Partnering Matrix retention benchmarks + top-20 white-space accounts. The richer view is in `produced_data/pipeline/WHITESPACE_MAP.xlsx` |
 | `refresh` | Re-run the full 7-stage pipeline (ingest → audit → profiles → triggers → score → synthesize → whitespace). Use after source spreadsheets are updated |
 
 ## Invocation pattern
@@ -66,13 +66,13 @@ Every output the skill produces is:
 - External data (SEC EDGAR, earnings calls, AM Best, news) — V2 work
 - Interactive Q&A on the lead briefs (the script outputs static text)
 - Visualizations beyond the Excel heatmap (no embedded charts)
-- Score-weight tuning UI — weights are in `pipeline/score.py` constants
+- Score-weight tuning UI — weights are in `code/pipeline/score.py` constants
 
 ## Related files
 
-- Pipeline scripts: `pipeline/{ingest,audit,profiles,triggers,score,synthesize,whitespace}.py`
-- Single-source taxonomy: `pipeline/exl_taxonomy.py`
-- Lead briefs (one per top-20 account): `pipeline/leads/*.md`
-- Source-row reconciliation: `pipeline/COVERAGE_AUDIT.md`
-- Strategic heatmap: `pipeline/WHITESPACE_MAP.xlsx` (7 sheets)
+- Pipeline scripts: `code/pipeline/{ingest,audit,profiles,triggers,score,synthesize,whitespace}.py`
+- Single-source taxonomy: `code/pipeline/exl_taxonomy.py`
+- Lead briefs (one per top-20 account): `produced_data/pipeline/leads/*.md`
+- Source-row reconciliation: `produced_data/pipeline/COVERAGE_AUDIT.md`
+- Strategic heatmap: `produced_data/pipeline/WHITESPACE_MAP.xlsx` (7 sheets)
 - Project memory: `~/.claude/projects/.../memory/` (auto-loaded)

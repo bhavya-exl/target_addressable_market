@@ -3,8 +3,10 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from urllib.parse import quote
 import os
 
-BASE = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/excel_data"
-OUT = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/excel_data_inventory.xlsx"
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[2]                      # repo root (code/scripts/<script>.py)
+BASE = str(REPO / "input_data" / "corpus")
+OUT = str(REPO / "produced_data" / "excel_data_inventory.xlsx")
 
 FILES = {
     "F1": "20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",

@@ -6,7 +6,9 @@ from docx.enum.table import WD_ALIGN_VERTICAL, WD_TABLE_ALIGNMENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-OUT = "Travelers_Lead_Brief.docx"
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[2]                      # repo root (code/scripts/<script>.py)
+OUT = str(REPO / "produced_data" / "travelers" / "Travelers_Lead_Brief.docx")
 
 # EXL brand palette
 NAVY = RGBColor(0x0B, 0x2C, 0x4E)

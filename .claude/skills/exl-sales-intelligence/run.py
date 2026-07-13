@@ -14,8 +14,9 @@ import sys, os, subprocess, time
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent              # .claude/skills/exl-sales-intelligence/
-TAM_ROOT   = SCRIPT_DIR.parent.parent.parent              # TAM/
-PIPELINE   = TAM_ROOT / "pipeline"
+TAM_ROOT   = SCRIPT_DIR.parent.parent.parent              # repo root
+PIPELINE_CODE = TAM_ROOT / "code" / "pipeline"            # stage scripts (for refresh)
+PIPELINE   = TAM_ROOT / "produced_data" / "pipeline"      # produced pipeline outputs
 DATA       = PIPELINE / "data"
 LEADS      = PIPELINE / "leads"
 
@@ -204,7 +205,7 @@ def cmd_refresh(args):
     print(f"Refreshing pipeline ({len(stages)} stages)…")
     t0 = time.time()
     for s in stages:
-        script_path = PIPELINE / s
+        script_path = PIPELINE_CODE / s
         print(f"\n  ▶ {s}")
         result = subprocess.run(
             ["python3", str(script_path)],

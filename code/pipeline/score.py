@@ -21,7 +21,9 @@ from exl_taxonomy import (
     product_outcome, products_for_function, map_legacy_code,
 )
 
-DATA = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/data"
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[2]                      # repo root (code/pipeline/<script>.py)
+DATA = str(REPO / "produced_data" / "pipeline" / "data")
 INGESTION_DATE = date.today().isoformat()
 
 profiles = pd.read_csv(f"{DATA}/client_profiles.csv")

@@ -49,9 +49,11 @@ from datetime import date
 from collections import Counter, defaultdict
 warnings.filterwarnings('ignore')
 
-BASE = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/excel_data"
-OUT  = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/data"
-REPORT = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/INGEST_REPORT.md"
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[2]                      # repo root (code/pipeline/<script>.py)
+BASE = str(REPO / "input_data" / "corpus")                      # source spreadsheets F1-F5
+OUT  = str(REPO / "produced_data" / "pipeline" / "data")        # produced CSVs
+REPORT = str(REPO / "produced_data" / "pipeline" / "INGEST_REPORT.md")
 
 F1 = openpyxl.load_workbook(os.path.join(BASE, "20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx"), data_only=True)
 F2 = openpyxl.load_workbook(os.path.join(BASE, "Captive Operations Details Jun 2021 v3 - Copy.xlsx"), data_only=True)

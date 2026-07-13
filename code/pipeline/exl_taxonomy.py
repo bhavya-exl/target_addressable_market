@@ -1,7 +1,7 @@
 """
 EXL Official Taxonomy + Product Catalog
 ========================================
-Sourced from `extra/Addressable Market Tracker (Project Plan).pptx`:
+Sourced from `docs/project_plan/Addressable Market Tracker (Project Plan).pptx`:
   - Slides 6, 16, 17  → P&C value chain
   - Slides 8-9, 14-15 → L&A value chain
   - Slide 7           → Service offering pillars

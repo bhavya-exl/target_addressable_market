@@ -22,9 +22,11 @@ from exl_taxonomy import (
     product_outcome, products_for_function, map_legacy_code,
 )
 
-DATA = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/data"
-LEADS_DIR = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/leads"
-DIGEST = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/LEADS_DIGEST.md"
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[2]                      # repo root (code/pipeline/<script>.py)
+DATA = str(REPO / "produced_data" / "pipeline" / "data")
+LEADS_DIR = str(REPO / "produced_data" / "pipeline" / "leads")
+DIGEST = str(REPO / "produced_data" / "pipeline" / "LEADS_DIGEST.md")
 
 os.makedirs(LEADS_DIR, exist_ok=True)
 
@@ -467,9 +469,9 @@ pipeline/
 
 Re-run from scratch:
 ```
-python3 pipeline/ingest.py && python3 pipeline/audit.py && \\
-python3 pipeline/profiles.py && python3 pipeline/triggers.py && \\
-python3 pipeline/score.py && python3 pipeline/synthesize.py
+python3 code/pipeline/ingest.py && python3 code/pipeline/audit.py && \\
+python3 code/pipeline/profiles.py && python3 code/pipeline/triggers.py && \\
+python3 code/pipeline/score.py && python3 code/pipeline/synthesize.py
 ```
 
 Total runtime: ~5 seconds for 236 accounts.

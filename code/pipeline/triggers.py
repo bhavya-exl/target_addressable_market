@@ -22,8 +22,10 @@ from datetime import date
 sys.path.insert(0, os.path.dirname(__file__))
 from exl_taxonomy import RETENTION_BENCHMARKS, retention_headroom
 
-DATA = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/data"
-REPORT = "/Users/bhavya242574/Library/CloudStorage/OneDrive-EXLService.com(I)Pvt.Ltd/Desktop/TAM/pipeline/TRIGGERS_REPORT.md"
+from pathlib import Path
+REPO = Path(__file__).resolve().parents[2]                      # repo root (code/pipeline/<script>.py)
+DATA = str(REPO / "produced_data" / "pipeline" / "data")
+REPORT = str(REPO / "produced_data" / "pipeline" / "TRIGGERS_REPORT.md")
 
 INGESTION_DATE = date.today().isoformat()
 

@@ -1,0 +1,140 @@
+{
+  "table_id": "F1.insuretch_anlaysis_roopak",
+  "title": "Insuretch Anlaysis - Roopak",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Insuretch Anlaysis - Roopak",
+    "header_row": 4,
+    "two_row_header": true,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "grain": "one row per value-chain sub-function, describing capability gaps and the kind/need for a partner plus candidate partner companies",
+  "row_count": 9,
+  "summary": "A partnership-gap analysis across the insurance value chain: for each value-chain sub-function (grouped under high-level areas like New Business & Underwriting, Policy Servicing, Claim Operations) it records gaps in operational capabilities, digital solutions, ready-to-deploy analytics, and platform, then states the kind of partner required, the need for that partner, and candidate partner companies. Use it to see, per value-chain area, what capability gaps exist and which external partners could fill them.",
+  "use_cases": [
+    "For a given value-chain sub-function, what capability gaps exist (operational, digital, analytics, platform)?",
+    "What kind of partner is required and why for each value-chain area?",
+    "Which candidate partner companies are suggested for each value-chain function?"
+  ],
+  "entity_key_col": "Unnamed: 2",
+  "columns": [
+    {
+      "name": "Unnamed: 0",
+      "type": "string",
+      "role": "meta",
+      "null_pct": 100,
+      "joins": [],
+      "note": "empty leading column"
+    },
+    {
+      "name": "Value Chain",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 67,
+      "joins": [],
+      "note": "high-level value-chain group; populated only on group lead rows"
+    },
+    {
+      "name": "Unnamed: 2",
+      "type": "string",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F1.white_spaces_experience.Value Chain"
+      ],
+      "note": "value-chain sub-function (unlabeled header column); the row-level identifier"
+    },
+    {
+      "name": "Gaps in Operational Capabilities",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 33,
+      "joins": []
+    },
+    {
+      "name": "Gaps in Digital Solutions",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 33,
+      "joins": []
+    },
+    {
+      "name": "Gaps in ready to deploy Analytics Algorithms",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 56,
+      "joins": []
+    },
+    {
+      "name": "Gaps in Platform",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 78,
+      "joins": []
+    },
+    {
+      "name": "Kind of Partner Required",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Need for Partner",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Potential Partners \n(need more research\u2026work in progress)",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "candidate partner companies; often multi-valued free text"
+    }
+  ],
+  "examples": [
+    {
+      "Value Chain": "New Business & Underwriting",
+      "Unnamed: 2": "Underwriting",
+      "Gaps in Operational Capabilities": "- Experience of managing Underwriter Technician roles - Absence of a strong case study related to UW role optimization",
+      "Kind of Partner Required": "Managing General Agent (MGA) / Digital Insurer",
+      "Need for Partner": "To support new product launches and design back office operations to support digital insurance",
+      "Potential Partners \n(need more research\u2026work in progress)": "TeamFocus Insurance Group",
+      "_source_row": 6
+    },
+    {
+      "Unnamed: 2": "Claim Processing",
+      "Kind of Partner Required": "TPAs Peer Networks",
+      "Need for Partner": "Onshore claim processing, access to provider and peer networks, UR and/or membership functions",
+      "Potential Partners \n(need more research\u2026work in progress)": "TPAs- Crawford, Broadspire, Gallagher Bassett, Sedgwick, York; Peer Networks- Genex Services, EK Health, Unimed Direct",
+      "_source_row": 13
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "How are the candidate partners ranked or rated?",
+      "reason": "no ranking/rating column exists"
+    },
+    {
+      "q": "What are the financial terms or deal values for the partnerships?",
+      "reason": "no financial columns"
+    },
+    {
+      "q": "Which partner was ultimately selected?",
+      "reason": "only candidate partners are listed (marked work in progress)"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "title banner in row 2; header at row 4 with a blank spacer row (row 5) dropped via two-row handling",
+    "profiler mis-detected header_row (12) and only 1 data row; corrected to header_row 4 with ~9 data rows",
+    "'Value Chain' populated only on group lead rows; the row-level function is the unlabeled 'Unnamed: 2' column",
+    "'Potential Partners' cells are multi-valued free text (multiple companies per cell)"
+  ]
+}

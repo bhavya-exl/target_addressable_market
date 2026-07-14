@@ -1,7 +1,7 @@
 {
   "corpus": "EXL insurance TAM",
-  "n_tables": 21,
-  "n_data_tables": 19,
+  "n_tables": 31,
+  "n_data_tables": 27,
   "note": "Routing index. Pick the minimal set of tables by matching a question to summary/use_cases; prefer canonical over duplicate_of; then load the full card(s) from produced_data/cards/<table_id>.json.",
   "tables": [
     {
@@ -20,6 +20,10 @@
       "entity_key_col": "Solution Component",
       "joins": [
         "F1.capability_gap_assessment.Omni Channel Intake",
+        "F1.capability_gap_assessment_2.Solution Components",
+        "F1.capability_gap_assessment_ver2.Solution Components",
+        "F1.insuretch_landscape.InsureTech",
+        "F1.partnership_landscape.Providers",
         "F1.partnerships_and_alliances.otonomo"
       ],
       "duplicate_of": null,
@@ -65,10 +69,73 @@
       ],
       "entity_key_col": "Omni Channel Intake",
       "joins": [
-        "F1.build_buy_partner_analysis.Solution Component"
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.capability_gap_assessment_2.Solution Components",
+        "F1.capability_gap_assessment_ver2.Solution Components"
       ],
       "duplicate_of": null,
       "row_count": 52
+    },
+    {
+      "table_id": "F1.capability_gap_assessment_2",
+      "title": "Capability Gap Assessment 2",
+      "role": "data",
+      "grain": "one row per solution component within a solution area; solution-level fields (#, Area, Solutions, Challenges, Benchmarks, Business Outcomes) populated only on each block's lead row",
+      "as_of": "Aug 2020",
+      "summary": "A capability-gap assessment that breaks each solution (within an Area such as Claim) into solution components and features, rates EXL's capability (Low/Medium/High) for each, describes the capability gap, and flags whether a partnership is required split across three partner types (InsurTech / TPA / Other). It also carries the challenges being solved, benchmarks, and business outcomes per solution. Use it to see where EXL is strong or has gaps by solution component and where partnerships are needed.",
+      "use_cases": [
+        "For each solution component, what is EXL's capability level (Low/Medium/High)?",
+        "Which solution components require a partnership, and of what type (InsurTech/TPA/Other)?",
+        "What capability gap is described for a given solution area (e.g., Claim / FNOL)?",
+        "What benchmarks and business outcomes are tied to each solution?"
+      ],
+      "entity_key_col": "Solution Components",
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.capability_gap_assessment.Omni Channel Intake",
+        "F1.capability_gap_assessment_ver2.Solution Components"
+      ],
+      "duplicate_of": null,
+      "row_count": 52
+    },
+    {
+      "table_id": "F1.capability_gap_assessment_ver2",
+      "title": "Capability Gap Assessment -Ver2",
+      "role": "data",
+      "grain": "one row per solution component within a solution area; solution-level fields (#, Area, Solutions, Challenges, Benchmarks, Business Outcomes) populated only on each block's lead row",
+      "as_of": "Aug 2020",
+      "summary": "An enriched capability-gap assessment: each solution (within an Area such as Claim) is broken into components and features, tagged with a short solution ID, rated for EXL capability both qualitatively (Low/Medium/High) and on a numeric 1-5 scale, and flagged for partnership need by partner type (InsurTech/TPA/Other). It also carries the capability-gap description, challenges, benchmarks, and business outcomes. Use it to quantify EXL's readiness by component and identify partnership needs.",
+      "use_cases": [
+        "What is EXL's numeric capability scale (1-5) and Low/Medium/High rating for each solution component?",
+        "Which components need a partnership and of what type (InsurTech/TPA/Other)?",
+        "For a given solution ID / area, what capability gaps are described?",
+        "What benchmarks and business outcomes are tied to each solution?"
+      ],
+      "entity_key_col": "Solution Components",
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.capability_gap_assessment.Omni Channel Intake",
+        "F1.capability_gap_assessment_2.Solution Components"
+      ],
+      "duplicate_of": null,
+      "row_count": 52
+    },
+    {
+      "table_id": "F1.client_prioritization_framework",
+      "title": "Client Prioritization Framework",
+      "role": "data",
+      "grain": "one row per client-prioritization criterion (parameter) with its option buckets",
+      "as_of": "Aug 2020",
+      "summary": "A reference framework defining how clients should be prioritized. Each row is a scoring parameter (e.g., Combined Ratio, Renewal Time Frame, Future TCV Potential, Works with Competition) with up to five option buckets that describe its possible values. The sheet stacks two versions of the framework: the criterion options and a weightage version that assigns numeric weights to the same parameters. It defines the scoring rubric itself, not scored clients.",
+      "use_cases": [
+        "What criteria are used to prioritize clients?",
+        "What option buckets / value bands exist for a given parameter (e.g., Combined Ratio, Future TCV Potential)?",
+        "What weights are assigned to each prioritization parameter?"
+      ],
+      "entity_key_col": "Parameter",
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 12
     },
     {
       "table_id": "F1.collated_collaterals_list",
@@ -129,7 +196,9 @@
         "What are the next steps and speed-to-market for each offering?"
       ],
       "entity_key_col": "Offering",
-      "joins": [],
+      "joins": [
+        "F1.p_c_solutions_list.Offering"
+      ],
       "duplicate_of": null,
       "row_count": 41
     },
@@ -151,6 +220,88 @@
       "row_count": 47
     },
     {
+      "table_id": "F1.insuretch_anlaysis_roopak",
+      "title": "Insuretch Anlaysis - Roopak",
+      "role": "data",
+      "grain": "one row per value-chain sub-function, describing capability gaps and the kind/need for a partner plus candidate partner companies",
+      "as_of": "Aug 2020",
+      "summary": "A partnership-gap analysis across the insurance value chain: for each value-chain sub-function (grouped under high-level areas like New Business & Underwriting, Policy Servicing, Claim Operations) it records gaps in operational capabilities, digital solutions, ready-to-deploy analytics, and platform, then states the kind of partner required, the need for that partner, and candidate partner companies. Use it to see, per value-chain area, what capability gaps exist and which external partners could fill them.",
+      "use_cases": [
+        "For a given value-chain sub-function, what capability gaps exist (operational, digital, analytics, platform)?",
+        "What kind of partner is required and why for each value-chain area?",
+        "Which candidate partner companies are suggested for each value-chain function?"
+      ],
+      "entity_key_col": "Unnamed: 2",
+      "joins": [
+        "F1.white_spaces_experience.Value Chain"
+      ],
+      "duplicate_of": null,
+      "row_count": 9
+    },
+    {
+      "table_id": "F1.insuretch_landscape",
+      "title": "InsureTech Landscape",
+      "role": "data",
+      "grain": "one row per insurtech company assessed",
+      "as_of": "Aug 2020",
+      "summary": "An assessment of 81 insurtech companies: what each does, its target market, line of business, vertical, products/business lines supported, funding, digital-disruption level, and industry utility, plus EXL's own 2019 ranking, 2020 rating, and investment-potential judgment. A set of line-of-business flag columns (APD, Worker's Compensation, Healthcare, Life, Pet, Personal, Small/Large Commercial, etc.) mark which LOBs each insurtech touches. Use it to look up or filter/rank insurtechs by market, LOB, category, funding, or EXL rating.",
+      "use_cases": [
+        "What does a given insurtech do, and what market/LOB/vertical and funding does it have?",
+        "Which insurtechs did EXL rate highest (2020 EXL Rating) or see most investment potential in?",
+        "Which insurtechs operate in a given line of business (e.g., APD, Healthcare, Personal)?",
+        "Segment or rank insurtechs by category, vertical, or digital-disruption level."
+      ],
+      "entity_key_col": "InsureTech",
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.partnership_landscape.Providers"
+      ],
+      "duplicate_of": null,
+      "row_count": 81
+    },
+    {
+      "table_id": "F1.p_c_solutions_list",
+      "title": "P&C Solutions List",
+      "role": "data",
+      "grain": "one row within a solution block; each solution offering (in 'Offering') spans several stacked rows listing its modules and EXL capability-area ratings, with solution-level fields populated only on the block's lead row",
+      "as_of": "Aug 2020",
+      "summary": "A catalogue of proposed P&C solution offerings, each described by problem statement, component modules, target outcomes, metrics/benchmarks, buying center, client/market appetite, an EXL-capability self-assessment (area, L/M/H rating, details), speed-to-market and next steps. This sheet is an exact copy of the 'Consolidated Solutions' sheet (same columns and values).",
+      "use_cases": [
+        "What P&C solution offerings are proposed and what problem does each address?",
+        "For a given offering, what modules, outcomes, and metrics/benchmarks are listed?",
+        "Which buying center and market appetite are noted for each offering?",
+        "What EXL capability areas and L/M/H readiness back each offering?"
+      ],
+      "entity_key_col": "Offering",
+      "joins": [
+        "F1.consolidated_solutions.Offering"
+      ],
+      "duplicate_of": "F1.consolidated_solutions",
+      "row_count": 41
+    },
+    {
+      "table_id": "F1.partnership_landscape",
+      "title": "Partnership Landscape",
+      "role": "data",
+      "grain": "one row per partner/provider organization assessed",
+      "as_of": "Aug 2020",
+      "summary": "An assessment of 62 potential partner/provider organizations: what each does, its type (InsurTech / Other / etc.), applicable value chain and function, market, line of business, function/capability, inception year, EXL's 2019 ranking and 2020 rating, and the number of solutions it applies to. A set of solution-mapping flag columns (FNOL, Payments as a Service, Submit to Quote, etc.) mark which EXL solutions each provider supports. Use it to look up a provider, or filter/segment providers by type, solution coverage, or EXL rating.",
+      "use_cases": [
+        "What does a given provider do, and what is its type, market, LOB, and inception year?",
+        "Which providers map to a particular solution (e.g., FNOL, Payments as a Service)?",
+        "Which providers has EXL rated highest (2020 EXL Rating)?",
+        "Segment providers by type (InsurTech vs Other) or by number of solutions they apply to."
+      ],
+      "entity_key_col": "Providers",
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.insuretch_landscape.InsureTech",
+        "F1.partnerships_and_alliances.otonomo"
+      ],
+      "duplicate_of": null,
+      "row_count": 62
+    },
+    {
       "table_id": "F1.partnerships_and_alliances",
       "title": "Partner and alliance landscape with capability and rating",
       "role": "data",
@@ -164,7 +315,8 @@
       ],
       "entity_key_col": "otonomo",
       "joins": [
-        "F1.build_buy_partner_analysis.Solution Component"
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.partnership_landscape.Providers"
       ],
       "duplicate_of": null,
       "row_count": 56
@@ -245,6 +397,24 @@
       ],
       "duplicate_of": null,
       "row_count": 224
+    },
+    {
+      "table_id": "F1.white_spaces_experience",
+      "title": "White Spaces - Experience",
+      "role": "data",
+      "grain": "one row per insurance value-chain function/stage",
+      "as_of": "Aug 2020",
+      "summary": "A matrix template listing 20 insurance value-chain functions (rows) that was set up to be scored against segment and line-of-business columns (Personal / Commercial / Specialty, each split by Auto / Property / Liability / Worker's Comp). Only the value-chain function labels are populated; the grid body is entirely empty. In its current state it usefully enumerates the value-chain functions and the intended segment/LOB dimensions, but holds no white-space markings.",
+      "use_cases": [
+        "What insurance value-chain functions/stages are enumerated (from Broker/Agency Management through Risk Control)?",
+        "What segment x line-of-business dimensions were intended for the white-space mapping?"
+      ],
+      "entity_key_col": "Value Chain",
+      "joins": [
+        "F1.insuretch_anlaysis_roopak.Unnamed: 2"
+      ],
+      "duplicate_of": null,
+      "row_count": 20
     },
     {
       "table_id": "F2.captives_in_india",
@@ -441,6 +611,32 @@
       "joins": [],
       "duplicate_of": null,
       "row_count": 1
+    },
+    {
+      "table_id": "F1.reference_tab_do_not_delete",
+      "title": "Reference Tab - Do not Delete",
+      "role": "non_data",
+      "grain": "not a queryable data table",
+      "as_of": "Aug 2020",
+      "summary": "Reference/data-validation backing tab (named 'Do not Delete') holding solution abbreviation codes and cell-range references (e.g., C21:C24) used to populate dropdown lists elsewhere in the workbook, alongside supporting lists of solution feature names. It is scaffolding for the workbook, not an analyzable table.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": null
+    },
+    {
+      "table_id": "F1.solution_evaluation_criteria",
+      "title": "Solution Evaluation Criteria",
+      "role": "non_data",
+      "grain": "not a queryable data table",
+      "as_of": "Aug 2020",
+      "summary": "Empty scaffold sheet \u2014 no data rows or columns are present.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": null
     }
   ]
 }

@@ -1,0 +1,124 @@
+{
+  "table_id": "F1.white_spaces_experience",
+  "title": "White Spaces - Experience",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "White Spaces - Experience",
+    "header_row": 2,
+    "two_row_header": true,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "grain": "one row per insurance value-chain function/stage",
+  "row_count": 20,
+  "summary": "A matrix template listing 20 insurance value-chain functions (rows) that was set up to be scored against segment and line-of-business columns (Personal / Commercial / Specialty, each split by Auto / Property / Liability / Worker's Comp). Only the value-chain function labels are populated; the grid body is entirely empty. In its current state it usefully enumerates the value-chain functions and the intended segment/LOB dimensions, but holds no white-space markings.",
+  "use_cases": [
+    "What insurance value-chain functions/stages are enumerated (from Broker/Agency Management through Risk Control)?",
+    "What segment x line-of-business dimensions were intended for the white-space mapping?"
+  ],
+  "entity_key_col": "Value Chain",
+  "columns": [
+    {
+      "name": "Value Chain",
+      "type": "string",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F1.insuretch_anlaysis_roopak.Unnamed: 2"
+      ],
+      "note": "value-chain function/stage; the only populated column"
+    },
+    {
+      "name": "Personal",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 100,
+      "joins": [],
+      "note": "Personal-Auto column; empty"
+    },
+    {
+      "name": "Unnamed: 2",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 100,
+      "joins": [],
+      "note": "Personal-Property (row-2 sub-header); empty"
+    },
+    {
+      "name": "Unnamed: 3",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 100,
+      "joins": [],
+      "note": "Personal-Liability; empty"
+    },
+    {
+      "name": "Commercial",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 100,
+      "joins": [],
+      "note": "Commercial-Auto column; empty"
+    },
+    {
+      "name": "Unnamed: 5",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 100,
+      "joins": [],
+      "note": "Commercial-Property; empty"
+    },
+    {
+      "name": "Unnamed: 6",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 100,
+      "joins": [],
+      "note": "Commercial-Liability; empty"
+    },
+    {
+      "name": "Unnamed: 7",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 100,
+      "joins": [],
+      "note": "Commercial-Worker's Comp; empty"
+    },
+    {
+      "name": "Specialty",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 100,
+      "joins": [],
+      "note": "Specialty column; empty"
+    }
+  ],
+  "examples": [
+    {
+      "Value Chain": "Broker/Agency Management",
+      "_source_row": 4
+    },
+    {
+      "Value Chain": "Risk Control",
+      "_source_row": 23
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Which value-chain functions have white space in a given segment/line of business?",
+      "reason": "the matrix body cells are all empty"
+    },
+    {
+      "q": "What is the quantitative white-space score per segment?",
+      "reason": "no data populated in the segment/LOB columns"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band: row 2 segment groups (Personal/Commercial/Specialty) + row 3 line-of-business sub-columns (Auto/Property/Liability/Worker's Comp); header_row set to 2",
+    "matrix body entirely empty \u2014 only the 'Value Chain' row labels are populated; all segment/LOB columns are 100% null",
+    "title banner in row 1"
+  ]
+}

@@ -35,7 +35,8 @@
       "role": "entity_key",
       "null_pct": 2,
       "joins": [
-        "F1.build_buy_partner_analysis.Solution Component"
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.partnership_landscape.Providers"
       ],
       "note": "partner/vendor name; header is a data value"
     },

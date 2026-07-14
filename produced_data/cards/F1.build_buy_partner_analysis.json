@@ -37,6 +37,10 @@
       "null_pct": 3,
       "joins": [
         "F1.capability_gap_assessment.Omni Channel Intake",
+        "F1.capability_gap_assessment_2.Solution Components",
+        "F1.capability_gap_assessment_ver2.Solution Components",
+        "F1.insuretch_landscape.InsureTech",
+        "F1.partnership_landscape.Providers",
         "F1.partnerships_and_alliances.otonomo"
       ],
       "note": "component being evaluated"

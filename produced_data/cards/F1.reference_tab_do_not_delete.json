@@ -1,0 +1,23 @@
+{
+  "table_id": "F1.reference_tab_do_not_delete",
+  "title": "Reference Tab - Do not Delete",
+  "role": "non_data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Reference Tab - Do not Delete",
+    "header_row": 3,
+    "two_row_header": true,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "grain": "not a queryable data table",
+  "summary": "Reference/data-validation backing tab (named 'Do not Delete') holding solution abbreviation codes and cell-range references (e.g., C21:C24) used to populate dropdown lists elsewhere in the workbook, alongside supporting lists of solution feature names. It is scaffolding for the workbook, not an analyzable table.",
+  "entity_key_col": null,
+  "columns": [],
+  "duplicate_of": null,
+  "warnings": [
+    "reference / data-validation scaffold tab; primary column holds cell-range references, not entity data",
+    "two-row header band"
+  ]
+}

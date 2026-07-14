@@ -1,0 +1,114 @@
+{
+  "table_id": "F1.client_prioritization_framework",
+  "title": "Client Prioritization Framework",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Client Prioritization Framework",
+    "header_row": 4,
+    "two_row_header": false,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "grain": "one row per client-prioritization criterion (parameter) with its option buckets",
+  "row_count": 12,
+  "summary": "A reference framework defining how clients should be prioritized. Each row is a scoring parameter (e.g., Combined Ratio, Renewal Time Frame, Future TCV Potential, Works with Competition) with up to five option buckets that describe its possible values. The sheet stacks two versions of the framework: the criterion options and a weightage version that assigns numeric weights to the same parameters. It defines the scoring rubric itself, not scored clients.",
+  "use_cases": [
+    "What criteria are used to prioritize clients?",
+    "What option buckets / value bands exist for a given parameter (e.g., Combined Ratio, Future TCV Potential)?",
+    "What weights are assigned to each prioritization parameter?"
+  ],
+  "entity_key_col": "Parameter",
+  "columns": [
+    {
+      "name": "Unnamed: 0",
+      "type": "string",
+      "role": "meta",
+      "null_pct": 100,
+      "joins": [],
+      "note": "empty leading column (home-link column)"
+    },
+    {
+      "name": "Parameter",
+      "type": "string",
+      "role": "entity_key",
+      "null_pct": 33,
+      "joins": [],
+      "note": "prioritization criterion name"
+    },
+    {
+      "name": "Option 1",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 11,
+      "joins": [],
+      "note": "first option bucket / value"
+    },
+    {
+      "name": "Option 2",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 11,
+      "joins": [],
+      "note": "second option bucket"
+    },
+    {
+      "name": "Option 3",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 61,
+      "joins": [],
+      "note": "third option bucket"
+    },
+    {
+      "name": "Option 4",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 83,
+      "joins": [],
+      "note": "fourth option bucket"
+    },
+    {
+      "name": "Option 5",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 83,
+      "joins": [],
+      "note": "fifth option bucket"
+    }
+  ],
+  "examples": [
+    {
+      "Parameter": "Combined Ratio",
+      "Option 1": ">80",
+      "Option 2": "80 - 90",
+      "Option 3": "90 - 100",
+      "Option 4": "100 - 110",
+      "Option 5": ">110",
+      "_source_row": 6
+    },
+    {
+      "Parameter": "Works with Competition and not with EXL",
+      "Option 1": "Yes",
+      "Option 2": "No",
+      "_source_row": 5
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Which specific clients rank highest under this framework?",
+      "reason": "the sheet defines the scoring rubric; there are no client rows or scores"
+    },
+    {
+      "q": "What is a given client's combined ratio or TCV?",
+      "reason": "no client-level data, only the option buckets that define the criteria"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two stacked sub-tables: the criterion options (rows 5-9) and a weightage version below; the second sub-table's header row appears among the data rows",
+    "'Unnamed: 0' leading column is empty",
+    "small reference/framework table (defines criteria, not scored entities)"
+  ]
+}

@@ -52,7 +52,9 @@
       "role": "entity_key",
       "null_pct": 23,
       "joins": [
-        "F1.build_buy_partner_analysis.Solution Component"
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.capability_gap_assessment_2.Solution Components",
+        "F1.capability_gap_assessment_ver2.Solution Components"
       ],
       "note": "solution component name; header is a data value"
     },

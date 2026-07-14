@@ -43,7 +43,9 @@
       "type": "name_company",
       "role": "entity_key",
       "null_pct": 80,
-      "joins": [],
+      "joins": [
+        "F1.p_c_solutions_list.Offering"
+      ],
       "note": "solution/offering name; populated on each block's lead row"
     },
     {

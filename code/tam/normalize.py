@@ -17,7 +17,9 @@ Library:
 import sys, csv, json, argparse, difflib
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from tam_root import resolve_root
+REPO = resolve_root()
 ALIASES = REPO / "produced_data" / "pipeline" / "data" / "aliases.csv"
 
 _CACHE = None

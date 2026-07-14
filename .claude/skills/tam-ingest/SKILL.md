@@ -15,6 +15,11 @@ The point is NOT "read every row" (any tool can dump rows). The point is that wh
 relevant question comes later, `tam-ask` can tell *which* table holds the answer and pull
 *exactly* the right rows — cited and dated. The card is what makes that possible.
 
+## Locating the package
+Paths below are relative to the package root — the folder containing `.tam-root` (the working
+directory in a repo). If not at the root, find it (`find . /mnt -maxdepth 4 -name .tam-root`)
+and run from there, or set `TAM_ROOT`. Scripts resolve their own data paths regardless.
+
 ## Tools (repo-relative)
 - Profiler:      `python3 code/tam/dump.py "<file>" --json produced_data/cards/_profiles/<alias>.profile.json`
 - Card template: `code/tam/templates/card.template.json`  (structure to fill; content comes from the file)

@@ -17,7 +17,8 @@ sys.path.insert(0, str(HERE))
 import normalize as N
 from query import read_table
 
-REPO = HERE.parents[1]
+from tam_root import resolve_root
+REPO = resolve_root()
 CARDS = REPO / "produced_data" / "cards"
 
 MIN_SHARED = 5        # need at least this many shared canonical values

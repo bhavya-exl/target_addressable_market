@@ -34,7 +34,8 @@ from datetime import datetime
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import normalize as N
 
-REPO = Path(__file__).resolve().parents[2]
+from tam_root import resolve_root
+REPO = resolve_root()
 CARDS = REPO / "produced_data" / "cards"
 
 MONTHS = {m: i + 1 for i, m in enumerate(

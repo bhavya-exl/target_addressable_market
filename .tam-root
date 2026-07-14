@@ -1,0 +1,2 @@
+This file marks the root of a TAM Intelligence package (skills + engine + cards + data).
+The engine's tam_root.py resolver looks for this sentinel so scripts work wherever the package is dropped.

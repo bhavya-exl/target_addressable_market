@@ -8,6 +8,11 @@ description: Produce a chart, dashboard, or written report from the EXL insuranc
 Claude's native charting and writing, but grounded: **nothing is plotted or stated that
 isn't a cited row from the corpus.** Built on the same query engine as `tam-ask`.
 
+## Locating the package
+Paths below are relative to the package root — the folder containing `.tam-root` (the working
+directory in a repo). If not at the root, find it (`find . /mnt -maxdepth 4 -name .tam-root`)
+and run from there, or set `TAM_ROOT`. Scripts resolve their own data paths regardless.
+
 ## Layout (repo-relative)
 - Card index / cards: `produced_data/cards/index.json`, `produced_data/cards/<table_id>.json`
 - Query engine:       `python3 code/tam/query.py --spec <spec.json>`

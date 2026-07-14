@@ -9,6 +9,12 @@ You (Claude) are the engine. The corpus is described by compact **schema cards**
 deterministic **query script** is your hands for pulling exact, cited rows. Never
 answer corpus questions from memory — route, query, then compose.
 
+## Locating the package
+Paths below are relative to the package root — the folder containing `.tam-root`. In a repo
+that's the working directory. If a command fails because you're not at the root, find it
+(`find . /mnt -maxdepth 4 -name .tam-root 2>/dev/null`) and run from there, or set
+`TAM_ROOT` to that folder. The scripts resolve their own data paths either way.
+
 ## Layout (repo-relative)
 - Card index (scan first):  `produced_data/cards/index.json`
 - Full cards (one per table): `produced_data/cards/<table_id>.json`

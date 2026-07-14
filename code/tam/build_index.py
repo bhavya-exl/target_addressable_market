@@ -7,10 +7,12 @@ itself) and emits a compact index: enough for Claude to ROUTE a question to the 
 table(s) without loading full schemas. No columns/examples in the index — just id, title,
 grain, summary, use_cases, entity_key_col, as_of, joins, duplicate_of, role.
 """
-import json
+import json, sys
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from tam_root import resolve_root
+REPO = resolve_root()
 CARDS = REPO / "produced_data" / "cards"
 
 

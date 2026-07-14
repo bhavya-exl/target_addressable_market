@@ -13,3 +13,6 @@ venv/
 
 # regenerable ingest profiles
 produced_data/cards/_profiles/
+
+# distributable bundles (regenerable)
+dist/

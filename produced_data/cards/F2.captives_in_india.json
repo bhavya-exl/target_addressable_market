@@ -35,7 +35,9 @@
       "type": "name_company",
       "role": "entity_key",
       "null_pct": 0,
-      "joins": [],
+      "joins": [
+        "F1.buyer_priorities.Travelers Group"
+      ],
       "note": ""
     },
     {
@@ -108,10 +110,10 @@
       "_source_row": 3,
       "S. No.": "1",
       "Company Name": "Metlife",
-      "Location": "• Noida, India\n• Jaipur, India\n• Queretaro, Mexico",
+      "Location": "\u2022 Noida, India\n\u2022 Jaipur, India\n\u2022 Queretaro, Mexico",
       "No. of FTE's": "4500",
-      "Vertical/ BU": "• Individual & Group Ins\n• P&C\n• Corporate Functions",
-      "Areas of Operations": "• Back office\n• Analytics\n• Actuarial support",
+      "Vertical/ BU": "\u2022 Individual & Group Ins\n\u2022 P&C\n\u2022 Corporate Functions",
+      "Areas of Operations": "\u2022 Back office\n\u2022 Analytics\n\u2022 Actuarial support",
       "Type of Operations": "BPO, F&A, Consulting, Corporate Functions",
       "Geos Served": "Global",
       "Subjective Commentary": "Kush Kamra\nYes we have a connect",
@@ -121,10 +123,10 @@
       "_source_row": 5,
       "S. No.": "3",
       "Company Name": "Equitable",
-      "Location": "• Pune, India",
+      "Location": "\u2022 Pune, India",
       "No. of FTE's": "200 - 400",
       "Vertical/ BU": "Insurance",
-      "Areas of Operations": "• Back office\n• Contact center",
+      "Areas of Operations": "\u2022 Back office\n\u2022 Contact center",
       "Type of Operations": "Business, F&A, IT BPO, Actuarial",
       "Geos Served": null,
       "Subjective Commentary": "We have an existing connect",
@@ -132,10 +134,21 @@
     }
   ],
   "not_answerable": [
-    { "q": "What is the annual revenue or operating cost of each captive?", "reason": "No financial/revenue or cost column exists in the table." },
-    { "q": "When was each captive established, and how has headcount changed over time?", "reason": "No founding-date column and no time series; only a single point-in-time FTE figure." },
-    { "q": "Which captives are located in the Philippines?", "reason": "This sheet only covers India-based captives; Philippines captives are in a separate sheet." }
+    {
+      "q": "What is the annual revenue or operating cost of each captive?",
+      "reason": "No financial/revenue or cost column exists in the table."
+    },
+    {
+      "q": "When was each captive established, and how has headcount changed over time?",
+      "reason": "No founding-date column and no time series; only a single point-in-time FTE figure."
+    },
+    {
+      "q": "Which captives are located in the Philippines?",
+      "reason": "This sheet only covers India-based captives; Philippines captives are in a separate sheet."
+    }
   ],
   "duplicate_of": null,
-  "warnings": ["near-duplicate column set with 'Captives in the Philippines' (same schema, different entities/rows)"]
+  "warnings": [
+    "near-duplicate column set with 'Captives in the Philippines' (same schema, different entities/rows)"
+  ]
 }

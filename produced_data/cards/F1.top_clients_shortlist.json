@@ -1,0 +1,334 @@
+{
+  "table_id": "F1.top_clients_shortlist",
+  "title": "Prioritized shortlist of top client accounts",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Top Clients Shortlist",
+    "header_row": 5,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": true,
+  "grain": "one row per shortlisted client account (company)",
+  "row_count": 27,
+  "summary": "A curated shortlist of ~27 top client accounts grouped into strategic \"buckets\" (e.g. \"Drive more adoption of Analytics\"), each with geography, account tier, the growth leader and client exec, named C-suite contacts, headline financials (GWP, growth %, combined ratio), outsourcing status, competitors, renewal date, and a client priority rating. Use it to see the prioritized target accounts and who owns them.",
+  "use_cases": [
+    "Which client accounts are on the priority shortlist and in which strategic bucket?",
+    "Who is the growth leader / client exec for a shortlisted account?",
+    "What is the client priority rating for an account?",
+    "Which shortlisted clients outsource today and who are their competitors?",
+    "Who are the executive contacts (CEO/CFO/CIO) for a shortlisted client?"
+  ],
+  "entity_key_col": "Client",
+  "columns": [
+    {
+      "name": "Bucket",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 4,
+      "joins": [],
+      "note": "strategic grouping/theme"
+    },
+    {
+      "name": "#",
+      "type": "int",
+      "role": "meta",
+      "null_pct": 0,
+      "joins": [],
+      "note": "row number"
+    },
+    {
+      "name": "Client",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME"
+      ]
+    },
+    {
+      "name": "Geography",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Strategic/Named",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "account tier"
+    },
+    {
+      "name": "Growth Leader",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Client Exec",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 4,
+      "joins": []
+    },
+    {
+      "name": "CEO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 4,
+      "joins": []
+    },
+    {
+      "name": "CFO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 4,
+      "joins": []
+    },
+    {
+      "name": "CRO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 19,
+      "joins": []
+    },
+    {
+      "name": "CCO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 26,
+      "joins": []
+    },
+    {
+      "name": "COO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 22,
+      "joins": []
+    },
+    {
+      "name": "CIO/CTO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 7,
+      "joins": []
+    },
+    {
+      "name": "CUO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 70,
+      "joins": [],
+      "note": "70% empty"
+    },
+    {
+      "name": "GWP",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 19,
+      "joins": [],
+      "note": "free-text money; some values misaligned into wrong column"
+    },
+    {
+      "name": "Growth %",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 19,
+      "joins": [],
+      "note": "mostly fractions; some misaligned values"
+    },
+    {
+      "name": "Combined Ratio (2019)",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 19,
+      "joins": [],
+      "note": "mixed format"
+    },
+    {
+      "name": "Do they outsource today",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 19,
+      "joins": []
+    },
+    {
+      "name": "Competitors",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 26,
+      "joins": [],
+      "note": "comma-separated competitor list"
+    },
+    {
+      "name": "Renewal Date",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 30,
+      "joins": [],
+      "note": "mixed dates and free-text notes"
+    },
+    {
+      "name": "Known partnership with InsureTech",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "EXL Solutions Go-To-Market Mapping",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "EXL Client",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "2020-Rev Budget",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "EXL's Share of Wallet",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Competition Account",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Competition's Share of Wallet",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Relationship Maturity (Yrs)",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Renewal Timeframe",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Future TCV Potential",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Client Priority Rating",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 89,
+      "joins": [],
+      "note": "89% empty"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 9,
+      "Bucket": "Drive more adoption of Analytics",
+      "#": "4",
+      "Client": "Zurich",
+      "Geography": "US",
+      "Strategic/Named": "Strategic",
+      "Growth Leader": "Roopak",
+      "Client Exec": "Raish Malik",
+      "CEO": "Kathleen Savio",
+      "CFO": "Peter Hirs",
+      "CRO": "Colleen Zitt",
+      "CCO": "Paul Lavelle",
+      "COO": "Anurag Batta",
+      "CIO/CTO": "Mark Knipfer",
+      "CUO": "Brandin Fick",
+      "GWP": "$34.1B",
+      "Growth %": "0.061",
+      "Combined Ratio (2019)": "96.4",
+      "Do they outsource today": "Yes",
+      "Competitors": "Cognizant, Genpact, Mphasis,Hinduja",
+      "Renewal Date": "2022-01-01 00:00:00"
+    },
+    {
+      "_source_row": 7,
+      "#": "2",
+      "Client": "C-N-A",
+      "Geography": "US",
+      "Strategic/Named": "Strategic",
+      "Growth Leader": "Saju",
+      "Client Exec": "Roopak Chadha",
+      "CEO": "Dino Robusto",
+      "CFO": "Al Miralles",
+      "CCO": "Daniel Franzetti",
+      "COO": "Kevin Leidwinger",
+      "CIO/CTO": "Michael Costonis",
+      "CUO": "Douglas M. Worman",
+      "GWP": "$7.7B",
+      "Growth %": "0.07",
+      "Combined Ratio (2019)": "94.8",
+      "Do they outsource today": "Yes",
+      "Renewal Date": "2022-01-01 00:00:00"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What revenue or TCV does EXL book at each shortlisted client?",
+      "reason": "the EXL revenue/share-of-wallet/TCV columns are all empty"
+    },
+    {
+      "q": "Which EXL solutions are mapped to each client?",
+      "reason": "the 'EXL Solutions Go-To-Market Mapping' column is empty"
+    },
+    {
+      "q": "How has the shortlist changed over time?",
+      "reason": "single snapshot; no time series"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band"
+  ]
+}

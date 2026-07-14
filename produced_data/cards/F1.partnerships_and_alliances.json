@@ -1,0 +1,100 @@
+{
+  "table_id": "F1.partnerships_and_alliances",
+  "title": "Partner and alliance landscape with capability and rating",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Partnerships and Alliances",
+    "header_row": 13,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": true,
+  "grain": "one row per partner/alliance candidate",
+  "row_count": 56,
+  "summary": "A landscape of prospective partners and alliance candidates (e.g. Zesty AI, Crawford/Broadspire, ESIS, Sedgwick, Actec), each tagged with a capability/category (Claim Processing, Contact Center, Content Extraction, etc.) and a Low/Medium/High rating, plus an index and an attribute-label column. WARNING: the detected header row holds actual data values, so column headers are unreliable; read contents structurally.",
+  "use_cases": [
+    "Which partners/alliance candidates are being tracked?",
+    "What capability or category is a partner associated with?",
+    "How is a partner rated (Low/Medium/High)?"
+  ],
+  "entity_key_col": "otonomo",
+  "columns": [
+    {
+      "name": "Big Data",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 73,
+      "joins": [],
+      "note": "capability/category; header is a data value"
+    },
+    {
+      "name": "otonomo",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 2,
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component"
+      ],
+      "note": "partner/vendor name; header is a data value"
+    },
+    {
+      "name": "Low",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 2,
+      "joins": [],
+      "note": "rating Low/Medium/High; header is a data value"
+    },
+    {
+      "name": "1",
+      "type": "int",
+      "role": "meta",
+      "null_pct": 86,
+      "joins": [],
+      "note": "index; header is a data value"
+    },
+    {
+      "name": "Vertical",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 86,
+      "joins": [],
+      "note": "attribute-label list (Products Supported, Market, ...); header misaligned"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 16,
+      "Big Data": "Claim Processing",
+      "otonomo": "Crawford/ Broadspire",
+      "Low": "Low",
+      "1": "4",
+      "Vertical": "Digital Disruption Level"
+    },
+    {
+      "_source_row": 17,
+      "otonomo": "ESIS",
+      "Low": "Low",
+      "1": "5",
+      "Vertical": "Industry Utility"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What is the partnership/contract status with each partner?",
+      "reason": "no status/contract column; only a category and a rating"
+    },
+    {
+      "q": "Which client accounts use each partner?",
+      "reason": "no account/client column on this sheet"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band",
+    "header row contains data values (misaligned headers); column names are unreliable",
+    "confirm sheet layout with data owner"
+  ]
+}

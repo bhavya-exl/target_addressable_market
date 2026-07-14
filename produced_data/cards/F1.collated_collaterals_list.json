@@ -1,0 +1,105 @@
+{
+  "table_id": "F1.collated_collaterals_list",
+  "title": "Collated marketing collateral list with links and authors",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Collated Collaterals List",
+    "header_row": 5,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": false,
+  "grain": "one row per marketing collateral asset",
+  "row_count": 42,
+  "summary": "A catalog of marketing collateral assets (infographics and white papers), each with its content type, a theme/group (Insurance, Claims, COVID, GDPR, Digital, ...), a topic/title, a URL to the published asset, and the authors. Use it to find published collateral by topic or theme and its link and authors.",
+  "use_cases": [
+    "What collateral exists for a given topic or theme?",
+    "What is the URL for a specific piece of collateral?",
+    "Who authored a given collateral asset?",
+    "Which assets are infographics vs white papers?"
+  ],
+  "entity_key_col": "Topic",
+  "columns": [
+    {
+      "name": "Type1",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 95,
+      "joins": [],
+      "note": "sparse secondary type label (95% empty)"
+    },
+    {
+      "name": "Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "Infographic / White Paper"
+    },
+    {
+      "name": "Group",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "content theme/category"
+    },
+    {
+      "name": "Topic",
+      "type": "string",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [],
+      "note": "collateral title/topic"
+    },
+    {
+      "name": "URL",
+      "type": "url",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "link to published asset"
+    },
+    {
+      "name": "Author",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "pipe-separated author names"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 6,
+      "Type1": "Infographics",
+      "Type": "Infographic",
+      "Group": "Insurance",
+      "Topic": "SA Infographic",
+      "URL": "https://www.exlservice.com/our-service-and-support-operations-in-south-africa",
+      "Author": "Mohit Manchanda | Wayne Reed | Nick Lamb"
+    },
+    {
+      "_source_row": 7,
+      "Type": "Infographic",
+      "Group": "Insurance",
+      "Topic": "Philippines Infographic",
+      "URL": "https://www.exlservice.com/sales-and-support-services-for-insurance-organizations-in-philippines",
+      "Author": "Mohit Manchanda | Wayne Reed | Nick Lamb"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "How many times has a collateral been viewed or downloaded?",
+      "reason": "no engagement/metrics columns"
+    },
+    {
+      "q": "When was each collateral published?",
+      "reason": "no date column on this sheet"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": []
+}

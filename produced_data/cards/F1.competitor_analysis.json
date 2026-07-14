@@ -1,0 +1,200 @@
+{
+  "table_id": "F1.competitor_analysis",
+  "title": "Competitor footprint at insurer accounts",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Competitor Analysis",
+    "header_row": 4,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": true,
+  "grain": "one row per (insurer account, service provider, process) engagement",
+  "row_count": 71,
+  "summary": "A list of insurer groups and the service providers (competitors such as CTS, Genpact, Insurity, NTT) delivering work at them, broken out by process area flags (Claims, UW, Premium Audit, F&A, Platform) with approximate FTE counts, contract-renewal timing, account tier, and free-text comments describing the processes. Use it to see who competes at which account and in which functions.",
+  "use_cases": [
+    "Which service providers/competitors are active at a given insurer?",
+    "In which process areas (Claims, UW, F&A, etc.) does a competitor operate at an account?",
+    "How many FTEs does a competitor run at an account?",
+    "When does a competitor's contract renew?",
+    "Which accounts are tagged Strategic vs Named for competitive attention?"
+  ],
+  "entity_key_col": "GROUP NAME",
+  "columns": [
+    {
+      "name": "S No",
+      "type": "int",
+      "role": "meta",
+      "null_pct": 0,
+      "joins": [],
+      "note": "row serial number"
+    },
+    {
+      "name": "GROUP NAME",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME"
+      ]
+    },
+    {
+      "name": "Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 70,
+      "joins": [],
+      "note": "ownership: Mutual/Public/Private"
+    },
+    {
+      "name": "Strategic / Named",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 77,
+      "joins": [],
+      "note": "account tier"
+    },
+    {
+      "name": "EXL Contact",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Service Provider",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "competitor / provider name"
+    },
+    {
+      "name": "Contract Renewal",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 92,
+      "joins": [],
+      "note": "renewal timing band"
+    },
+    {
+      "name": "Claims",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 76,
+      "joins": [],
+      "note": "Y/N process flag"
+    },
+    {
+      "name": "UW",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 69,
+      "joins": [],
+      "note": "Y/N process flag"
+    },
+    {
+      "name": "Premium Audit",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 97,
+      "joins": [],
+      "note": "Y/N process flag"
+    },
+    {
+      "name": "F&A",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 89,
+      "joins": [],
+      "note": "Y/N process flag"
+    },
+    {
+      "name": "Platform",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 93,
+      "joins": [],
+      "note": "Y/N process flag"
+    },
+    {
+      "name": "FTEs",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 45,
+      "joins": [],
+      "note": "approximate FTE count; 45% empty"
+    },
+    {
+      "name": "Comments (Processes etc.)",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 41,
+      "joins": [],
+      "note": "process description"
+    },
+    {
+      "name": "Existing EXL Client",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "< 6 Months",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 97,
+      "joins": [],
+      "note": "stray column; header is a data value; holds a few renewal terms"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 8,
+      "S No": "4",
+      "GROUP NAME": "Travelers Companies Inc.",
+      "Type": "Public",
+      "Strategic / Named": "Named Backup",
+      "Service Provider": "CTS",
+      "Contract Renewal": "< 6 Months",
+      "Claims": "Y",
+      "UW": "Y",
+      "FTEs": "450",
+      "Comments (Processes etc.)": "Personal Insurance, Commercial Insurnace - From new business to claims settlement"
+    },
+    {
+      "_source_row": 9,
+      "S No": "5",
+      "GROUP NAME": "Travelers Companies Inc.",
+      "Service Provider": "CTS",
+      "Contract Renewal": "< 6 Months",
+      "Claims": "Y",
+      "FTEs": "100",
+      "Comments (Processes etc.)": "Bill Review and Utilization Review"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What is the contract value of a competitor engagement?",
+      "reason": "no financial/contract-value column; only FTE counts"
+    },
+    {
+      "q": "Is a given insurer an EXL client?",
+      "reason": "the 'Existing EXL Client' column is entirely empty"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band"
+  ]
+}

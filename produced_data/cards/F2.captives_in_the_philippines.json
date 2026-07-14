@@ -132,10 +132,21 @@
     }
   ],
   "not_answerable": [
-    { "q": "What is the annual revenue or operating cost of each captive?", "reason": "No financial/revenue or cost column exists in the table." },
-    { "q": "When was each captive established, and how has headcount trended over time?", "reason": "No founding-date column and no time series; only a single point-in-time FTE figure." },
-    { "q": "Which captives are located in India?", "reason": "This sheet only covers Philippines-based captives; India captives are in a separate sheet." }
+    {
+      "q": "What is the annual revenue or operating cost of each captive?",
+      "reason": "No financial/revenue or cost column exists in the table."
+    },
+    {
+      "q": "When was each captive established, and how has headcount trended over time?",
+      "reason": "No founding-date column and no time series; only a single point-in-time FTE figure."
+    },
+    {
+      "q": "Which captives are located in India?",
+      "reason": "This sheet only covers Philippines-based captives; India captives are in a separate sheet."
+    }
   ],
   "duplicate_of": null,
-  "warnings": ["near-duplicate column set with 'Captives in India' (same schema, different entities/rows)"]
+  "warnings": [
+    "near-duplicate column set with 'Captives in India' (same schema, different entities/rows)"
+  ]
 }

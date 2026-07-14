@@ -35,7 +35,14 @@
       "type": "name_company",
       "role": "entity_key",
       "null_pct": 0,
-      "joins": [],
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name"
+      ],
       "note": "group/company being tracked; repeats across rows (one row per process line)"
     },
     {
@@ -232,10 +239,22 @@
     }
   ],
   "not_answerable": [
-    { "q": "Who is the EXL contact for a given account?", "reason": "the 'EXL Contact' column is present but 100% empty" },
-    { "q": "Is a given group an existing EXL client?", "reason": "the 'Existing EXL Client' column is present but 100% empty" },
-    { "q": "What is the contract value or revenue of an engagement?", "reason": "no monetary/contract-value column exists (only FTE counts)" },
-    { "q": "How has an engagement's status changed over time?", "reason": "this is a single snapshot (dated 2/21); no time series is present" }
+    {
+      "q": "Who is the EXL contact for a given account?",
+      "reason": "the 'EXL Contact' column is present but 100% empty"
+    },
+    {
+      "q": "Is a given group an existing EXL client?",
+      "reason": "the 'Existing EXL Client' column is present but 100% empty"
+    },
+    {
+      "q": "What is the contract value or revenue of an engagement?",
+      "reason": "no monetary/contract-value column exists (only FTE counts)"
+    },
+    {
+      "q": "How has an engagement's status changed over time?",
+      "reason": "this is a single snapshot (dated 2/21); no time series is present"
+    }
   ],
   "duplicate_of": null,
   "warnings": [

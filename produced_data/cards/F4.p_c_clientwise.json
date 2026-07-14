@@ -32,7 +32,10 @@
         "F1.sheet3.Client",
         "F1.top_clients_shortlist.Client",
         "F1.top_insurers_and_brokers.Company/ Group",
-        "F5.competitor_analysis.GROUP NAME"
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
       ],
       "note": "P&C insurance client; populated only on the first row of each client's block, so 77% null \u2014 forward-fill needed to attribute the competitor rows below it to the correct client"
     },

@@ -33,7 +33,10 @@
         "F1.competitor_analysis.GROUP NAME",
         "F1.top_clients_shortlist.Client",
         "F4.p_c_clientwise.Client Name",
-        "F5.competitor_analysis.GROUP NAME"
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
       ]
     },
     {

@@ -1,7 +1,7 @@
 {
   "corpus": "EXL insurance TAM",
-  "n_tables": 31,
-  "n_data_tables": 27,
+  "n_tables": 39,
+  "n_data_tables": 32,
   "note": "Routing index. Pick the minimal set of tables by matching a question to summary/use_cases; prefer canonical over duplicate_of; then load the full card(s) from produced_data/cards/<table_id>.json.",
   "tables": [
     {
@@ -49,7 +49,10 @@
         "F1.top_insurers_and_brokers.Company/ Group",
         "F2.captives_in_india.Company Name",
         "F4.p_c_clientwise.Client Name",
-        "F5.competitor_analysis.GROUP NAME"
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
       "row_count": 35
@@ -176,7 +179,10 @@
         "F1.top_clients_shortlist.Client",
         "F1.top_insurers_and_brokers.Company/ Group",
         "F4.p_c_clientwise.Client Name",
-        "F5.competitor_analysis.GROUP NAME"
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
       "row_count": 71
@@ -341,7 +347,10 @@
         "F1.competitor_analysis.GROUP NAME",
         "F1.top_clients_shortlist.Client",
         "F4.p_c_clientwise.Client Name",
-        "F5.competitor_analysis.GROUP NAME"
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
       "row_count": 14
@@ -367,7 +376,10 @@
         "F1.sheet3.Client",
         "F1.top_insurers_and_brokers.Company/ Group",
         "F4.p_c_clientwise.Client Name",
-        "F5.competitor_analysis.GROUP NAME"
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
       "row_count": 27
@@ -393,7 +405,10 @@
         "F1.competitor_analysis.GROUP NAME",
         "F1.top_clients_shortlist.Client",
         "F4.p_c_clientwise.Client Name",
-        "F5.competitor_analysis.GROUP NAME"
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
       "row_count": 224
@@ -554,7 +569,10 @@
         "F1.sheet3.Client",
         "F1.top_clients_shortlist.Client",
         "F1.top_insurers_and_brokers.Company/ Group",
-        "F5.competitor_analysis.GROUP NAME"
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
       "row_count": 52
@@ -581,10 +599,133 @@
         "F1.sheet3.Client",
         "F1.top_clients_shortlist.Client",
         "F1.top_insurers_and_brokers.Company/ Group",
-        "F4.p_c_clientwise.Client Name"
+        "F4.p_c_clientwise.Client Name",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
       "row_count": 71
+    },
+    {
+      "table_id": "F6.2_data_collection",
+      "title": "P&C Insurance Directory \u2014 Data Collection",
+      "role": "data",
+      "grain": "one row per client process/task delivered by EXL \u2014 a Function (L1) > Function (L2) > Process (L3) > Task at a specific EXL delivery location \u2014 with its staffing, volumes, SLAs, pricing, and transformation notes",
+      "as_of": "Sep 2025",
+      "summary": "The main operational inventory of the workbook: each row is a discrete process or task that EXL runs for a named insurance client at a given delivery location. Columns capture the client and its geography, the EXL delivery site/country and process manager, a four-level process taxonomy (Function L1/L2, Process L3, Task) with a free-text description, business line / line-of-business, staffing counts (billable FTEs, SME/QA/trainer, supervisors, buffer roster, total staff), volumes and handling time, SLAs and quality methodology, pain points, and implemented/planned digital solutions with their expected benefits. It answers who EXL serves, what work is done where, how it is staffed and priced, and what transformation is underway.",
+      "use_cases": [
+        "What processes or tasks does EXL run for a given client (e.g. Nationwide)?",
+        "Total Staff or Billable FTEs by client, function, or EXL delivery location (aggregation/ranking)",
+        "Which delivery countries/sites handle Claims vs Underwriting vs Sales & Service work? (segment/filter)",
+        "What is the pricing model and annual rate for a client's processes?",
+        "Which processes have digital solutions implemented or planned, and what benefits are expected? (filter)",
+        "Average monthly volume, AHT, and SLAs for a specific process or task (lookup)"
+      ],
+      "entity_key_col": "Client",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "duplicate_of": null,
+      "row_count": 811
+    },
+    {
+      "table_id": "F6.claims_data",
+      "title": "Claims Data \u2014 Claim FTEs by Client and Delivery Geography",
+      "role": "data",
+      "grain": "one row per client, with claims-handling headcount (Claim FTEs) split across EXL delivery geographies",
+      "as_of": "Sep 2025",
+      "summary": "A per-client roll-up of claims-handling staff. Each row names a client and gives its total Claim FTEs together with a breakdown of that headcount by delivery geography (India, Philippines, South Africa, US, UK, Colombia) plus a Total. It answers how large each client's claims operation is and where it is delivered.",
+      "use_cases": [
+        "How many Claim FTEs does EXL run for a given client?",
+        "Which clients have the largest claims operations? (ranking)",
+        "How is a client's claims headcount split across delivery countries? (segment)",
+        "Which delivery geography carries the most claims FTEs overall? (aggregation)"
+      ],
+      "entity_key_col": "Client Name",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "duplicate_of": null,
+      "row_count": 45
+    },
+    {
+      "table_id": "F6.p_c_transactional_data",
+      "title": "P&C Transactional Data \u2014 Staff & Volume by Client/Function (Pivot)",
+      "role": "data",
+      "grain": "one row per pivot label \u2014 a client, or a function/sub-function nested under a client \u2014 with summed Total Staff and Average Monthly Volume",
+      "as_of": "Sep 2025",
+      "summary": "A hierarchical pivot summarizing the Data Collection sheet. Row Labels interleave client names with the functions and sub-functions beneath each client, and each row carries the summed Total Staff and summed Average Monthly Volume for that label. It is a quick roll-up of staffing and throughput by client and by function.",
+      "use_cases": [
+        "What is a client's total staff and monthly transaction volume? (lookup)",
+        "Which clients have the highest total staff or volume? (ranking)",
+        "How is a client's staff/volume distributed across functions and sub-functions? (segment)",
+        "Total staff or volume aggregated across all clients (aggregation)"
+      ],
+      "entity_key_col": "Row Labels",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name"
+      ],
+      "duplicate_of": null,
+      "row_count": 185
+    },
+    {
+      "table_id": "F6.pivot_table",
+      "title": "Function/Sub-function by Business Line (Pivot)",
+      "role": "data",
+      "grain": "one row per function or sub-function (Row Labels), with a summed numeric measure split across business lines",
+      "as_of": "Sep 2025",
+      "summary": "A pivot summarizing an unnamed numeric measure by process taxonomy against business line. Row Labels list functions and their sub-functions; columns give the value for each business line (Commercial & Specialty, Personal, Specialty, Commercial, London Market) plus a Grand Total. It shows how work in each function is distributed across business lines.",
+      "use_cases": [
+        "How is a given function/sub-function split across business lines? (segment)",
+        "Which business line carries the most of a given function? (ranking)",
+        "Grand total for a function or sub-function across all business lines (lookup)"
+      ],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 22
+    },
+    {
+      "table_id": "F6.sheet1",
+      "title": "Function/Sub-function by Delivery Country (Pivot)",
+      "role": "data",
+      "grain": "one row per function or sub-function (Row Labels), with a summed numeric measure split across EXL delivery countries",
+      "as_of": "Sep 2025",
+      "summary": "A pivot summarizing an unnamed numeric measure by process taxonomy against EXL delivery country. Row Labels list functions (e.g. Claims) and their sub-functions (Initiation, Investigation, Evaluation, etc.); columns give the value for Colombia, India, Philippines and South Africa plus a Grand Total. It shows how work in each function is distributed across delivery countries.",
+      "use_cases": [
+        "How is a given function/sub-function distributed across delivery countries? (segment)",
+        "Which delivery country carries the most of a given function? (ranking)",
+        "Grand total for a function or sub-function across all countries (lookup)"
+      ],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 21
     },
     {
       "table_id": "F1.dashboard",
@@ -632,6 +773,45 @@
       "grain": "not a queryable data table",
       "as_of": "Aug 2020",
       "summary": "Empty scaffold sheet \u2014 no data rows or columns are present.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": null
+    },
+    {
+      "table_id": "F6.1_general_instructions",
+      "title": "1. General Instructions",
+      "role": "non_data",
+      "grain": null,
+      "as_of": "Sep 2025",
+      "summary": "Instruction/legend sheet for filling the Data Collection template: a numbered list of Field Names, each with its Field Type (Drop Down / Free Text) and a Description of what to enter. A worked single-example answer is spread across the far-right columns (all single-value). Not tabular records.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": null
+    },
+    {
+      "table_id": "F6.dropdown_list",
+      "title": "Dropdown List",
+      "role": "non_data",
+      "grain": null,
+      "as_of": "Sep 2025",
+      "summary": "Reference lookup backing the template's drop-down validation. Each column is an independent option list (Functions and the sub-process options under Claims, Underwriting, Sales & Service, Legal Support, etc.). Columns are parallel pick-lists, not fields of a shared row entity, so it is not a row-grain data table.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": null
+    },
+    {
+      "table_id": "F6.sheet2",
+      "title": "Sheet2",
+      "role": "non_data",
+      "grain": null,
+      "as_of": "Sep 2025",
+      "summary": "Small scratch note: three rows under a single 'Missing Data' column listing client/geography entries flagged as missing (e.g. 'Hollard (Philippines)', 'AMIG (Philippines)', 'AA Insurance (India)'). The two leading columns are empty. Near-zero rows; a working note, not a data table.",
       "use_cases": [],
       "entity_key_col": null,
       "joins": [],

@@ -1,0 +1,16 @@
+{
+  "table_id": "F6.1_general_instructions",
+  "title": "1. General Instructions",
+  "role": "non_data",
+  "source": {
+    "file": "input_data/PC Insurance Directory - Sep 2025_Final (2).xlsx",
+    "file_alias": "F6",
+    "sheet": "1. General Instructions",
+    "header_row": 14,
+    "as_of": "Sep 2025",
+    "captured_date": null
+  },
+  "summary": "Instruction/legend sheet for filling the Data Collection template: a numbered list of Field Names, each with its Field Type (Drop Down / Free Text) and a Description of what to enter. A worked single-example answer is spread across the far-right columns (all single-value). Not tabular records.",
+  "duplicate_of": null,
+  "warnings": ["two-row header band", "non-data: field-definition / instructions sheet, not queryable records"]
+}

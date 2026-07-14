@@ -41,7 +41,10 @@
         "F1.sheet3.Client",
         "F1.top_clients_shortlist.Client",
         "F1.top_insurers_and_brokers.Company/ Group",
-        "F4.p_c_clientwise.Client Name"
+        "F4.p_c_clientwise.Client Name",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
       ],
       "note": "group/company being tracked; repeats across rows (one row per process line)"
     },

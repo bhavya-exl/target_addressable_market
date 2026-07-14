@@ -1,0 +1,94 @@
+{
+  "table_id": "F4.p_c_clientwise",
+  "title": "P&C Clientwise — Competitors Serving P&C Insurance Clients",
+  "source": {
+    "file": "input_data/corpus/EXL Insurance Competitors.xlsx",
+    "file_alias": "F4",
+    "sheet": "P&C Clientwise",
+    "header_row": 2,
+    "as_of": null,
+    "captured_date": null
+  },
+  "grain": "one row per competitor engaged at a given P&C insurance client (client-to-competitor pairing)",
+  "row_count": 52,
+  "summary": "Lists, for each P&C insurance client, the competing service providers active at that client, an approximate size of each competitor's footprint (headcount or revenue), the segment/function the competitor supports, and free-text research notes on what the competitor does there. It lets you see which competitors are present at a named client and roughly how large their presence is.",
+  "use_cases": [
+    "Which competitors are engaged at a given P&C client (e.g. Allstate)?",
+    "At which P&C clients does a specific competitor (e.g. Accenture) appear?",
+    "What is the approximate FTE or revenue footprint of a competitor at a client?",
+    "Which functions or segments does a competitor support at a P&C client?",
+    "How many distinct competitors are listed against each P&C client?"
+  ],
+  "entity_key_col": "Client Name",
+  "columns": [
+    {
+      "name": "Client Name",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 77,
+      "joins": [],
+      "note": "P&C insurance client; populated only on the first row of each client's block, so 77% null — forward-fill needed to attribute the competitor rows below it to the correct client"
+    },
+    {
+      "name": "Competitor",
+      "type": "name_company",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "competing service provider at the client; value 'Captive' denotes an in-house/captive operation rather than a named third-party vendor"
+    },
+    {
+      "name": "FTEs/Revenue",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 27,
+      "joins": [],
+      "note": "approximate size of the competitor's footprint; mixed units and ranges stored as text (e.g. '300-500 FTEs', '$2.5-3M', 'Unknown'), not a clean numeric measure"
+    },
+    {
+      "name": "Segment supported by competitor",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 65,
+      "joins": [],
+      "note": "function/segment the competitor supports; mostly empty"
+    },
+    {
+      "name": "CoPilot Research",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 65,
+      "joins": [],
+      "note": "multi-line research notes on the competitor's role across insurance value-chain functions; mostly empty"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 3,
+      "Client Name": "Allstate",
+      "Competitor": "Captive",
+      "FTEs/Revenue": "5000 FTEs (India) & 150-200 FTEs (Mexico)",
+      "Segment supported by competitor": null,
+      "CoPilot Research": null
+    },
+    {
+      "_source_row": 4,
+      "Client Name": null,
+      "Competitor": "WNS",
+      "FTEs/Revenue": "300-500 FTEs",
+      "Segment supported by competitor": null,
+      "CoPilot Research": null
+    }
+  ],
+  "not_answerable": [
+    { "q": "What is the P&C client's own premium or revenue?", "reason": "no column carries the client's financials; FTEs/Revenue describes the competitor's footprint, not the client" },
+    { "q": "How has a competitor's footprint at a client changed over time?", "reason": "there is no date or time-series column; the table is a single snapshot" },
+    { "q": "What is EXL's own scope or revenue at these clients?", "reason": "no column captures the host provider's engagement, only competitors' presence" }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "vintage_unknown — no date found in filename, sheet names, headers, or cell values; data owner should confirm the as-of date",
+    "near-duplicate column set with 'L&A Clientwise' — same schema but distinct data (P&C clients vs L&A clients); not a duplicate",
+    "Client Name is sparse (77% null): the client name appears only on the first row of each client's competitor block, so forward-fill is required to associate competitor rows with their client"
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "table_id": "F5.competitor_analysis",
+  "title": "Competitor Analysis",
+  "source": {
+    "file": "input_data/corpus/P&C Competitor Analysis.xlsx",
+    "file_alias": "F5",
+    "sheet": "Competitor Analysis",
+    "header_row": 4,
+    "as_of": "Feb 2021",
+    "captured_date": null
+  },
+  "grain": "one row per outsourced service/process line served by a third-party service provider at a named group (company), with process-area flags and an account-pursuit status",
+  "row_count": 71,
+  "summary": "Each row records a group (company) and a third-party service provider engaged for a specific process line, tagged with which functional areas the engagement covers (Claims, UW, Premium Audit, F&A, Platform), an approximate FTE count, and a free-text status/comment on the pursuit. It is an account-tracking sheet mapping which competitor/service provider holds which work at each group, plus contract-renewal timing and an internal owner. It lets you see who is servicing a group, in what process areas, at what scale, and where things stand.",
+  "use_cases": [
+    "Which service providers are engaged at a given group (e.g. Liberty Mutual or Travelers), and in what process areas?",
+    "Which groups does a particular service provider (e.g. CTS, Genpact, Insurity) serve?",
+    "Which engagements cover Claims vs Underwriting (UW) vs F&A vs Premium Audit vs Platform?",
+    "Which accounts have a contract renewal coming up (e.g. < 6 Months)?",
+    "How many FTEs are deployed on a given engagement or across a group?",
+    "Which accounts are flagged Strategic vs Named, and who is the internal owner?"
+  ],
+  "entity_key_col": "GROUP NAME",
+  "columns": [
+    {
+      "name": "S No",
+      "type": "int",
+      "role": "meta",
+      "null_pct": 0,
+      "joins": [],
+      "note": "row serial number"
+    },
+    {
+      "name": "GROUP NAME",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [],
+      "note": "group/company being tracked; repeats across rows (one row per process line)"
+    },
+    {
+      "name": "Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 70,
+      "joins": [],
+      "note": "ownership type: Mutual / Public / Private/Mutual; typically set only on a group's first row"
+    },
+    {
+      "name": "Strategic / Named",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 77,
+      "joins": [],
+      "note": "account tier: Named / Named Backup / Strategic"
+    },
+    {
+      "name": "EXL Contact",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "column present but entirely empty"
+    },
+    {
+      "name": "Service Provider",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "third-party provider serving the process line (e.g. CTS, Genpact, Insurity, Medata, NTT)"
+    },
+    {
+      "name": "Contract Renewal",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 92,
+      "joins": [],
+      "note": "renewal window when noted: < 6 Months / 1 Year"
+    },
+    {
+      "name": "Claims",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 76,
+      "joins": [],
+      "note": "Y flags the engagement covers Claims"
+    },
+    {
+      "name": "UW",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 69,
+      "joins": [],
+      "note": "Y flags Underwriting coverage"
+    },
+    {
+      "name": "Premium Audit",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 97,
+      "joins": [],
+      "note": "Y flags Premium Audit coverage (only Y observed)"
+    },
+    {
+      "name": "F&A",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 89,
+      "joins": [],
+      "note": "Y flags Finance & Accounting coverage (only Y observed)"
+    },
+    {
+      "name": "Platform",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 93,
+      "joins": [],
+      "note": "Y flags Platform coverage (only Y observed)"
+    },
+    {
+      "name": "FTEs",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 45,
+      "joins": [],
+      "note": "approximate headcount on the engagement"
+    },
+    {
+      "name": "Comments (Processes etc.)",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 41,
+      "joins": [],
+      "note": "free-text description of processes covered"
+    },
+    {
+      "name": "Current Status - 2/21",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 77,
+      "joins": [],
+      "note": "free-text pursuit status; header dates the snapshot to 2/21 (Feb 2021)"
+    },
+    {
+      "name": "Owner",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 85,
+      "joins": [],
+      "note": "internal owner (first name or full name)"
+    },
+    {
+      "name": "col16",
+      "type": "string",
+      "role": "meta",
+      "null_pct": 100,
+      "joins": [],
+      "note": "unnamed, entirely empty column"
+    },
+    {
+      "name": "Existing EXL Client",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "column present but entirely empty"
+    },
+    {
+      "name": "col18",
+      "type": "string",
+      "role": "meta",
+      "null_pct": 100,
+      "joins": [],
+      "note": "unnamed, entirely empty column"
+    },
+    {
+      "name": "< 6 Months",
+      "type": "string",
+      "role": "meta",
+      "null_pct": 97,
+      "joins": [],
+      "note": "off-to-the-side stray column (values '2 Year','3 Year'); appears to be a legend/secondary-table fragment, not part of the main grain"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 8,
+      "S No": "4",
+      "GROUP NAME": "Travelers Companies Inc.",
+      "Type": "Public",
+      "Strategic / Named": "Named Backup",
+      "EXL Contact": null,
+      "Service Provider": "CTS",
+      "Contract Renewal": "< 6 Months",
+      "Claims": "Y",
+      "UW": "Y",
+      "Premium Audit": null,
+      "F&A": null,
+      "Platform": null,
+      "FTEs": "450",
+      "Comments (Processes etc.)": "Personal Insurance, Commercial Insurnace - From new business to claims settlement",
+      "Current Status - 2/21": "Champion Challenger concept in discussion. Rohit has met Mojgan. Subsequent follow-ups in progress. Sharing capability material as next step",
+      "Owner": "Saju",
+      "col16": null,
+      "Existing EXL Client": null,
+      "col18": null,
+      "< 6 Months": null
+    },
+    {
+      "_source_row": 9,
+      "S No": "5",
+      "GROUP NAME": "Travelers Companies Inc.",
+      "Type": null,
+      "Strategic / Named": null,
+      "EXL Contact": null,
+      "Service Provider": "CTS",
+      "Contract Renewal": "< 6 Months",
+      "Claims": "Y",
+      "UW": null,
+      "Premium Audit": null,
+      "F&A": null,
+      "Platform": null,
+      "FTEs": "100",
+      "Comments (Processes etc.)": "Bill Review and Utilization Review",
+      "Current Status - 2/21": null,
+      "Owner": null,
+      "col16": null,
+      "Existing EXL Client": null,
+      "col18": null,
+      "< 6 Months": null
+    }
+  ],
+  "not_answerable": [
+    { "q": "Who is the EXL contact for a given account?", "reason": "the 'EXL Contact' column is present but 100% empty" },
+    { "q": "Is a given group an existing EXL client?", "reason": "the 'Existing EXL Client' column is present but 100% empty" },
+    { "q": "What is the contract value or revenue of an engagement?", "reason": "no monetary/contract-value column exists (only FTE counts)" },
+    { "q": "How has an engagement's status changed over time?", "reason": "this is a single snapshot (dated 2/21); no time series is present" }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band (header_row=4)",
+    "vintage inferred from column header 'Current Status - 2/21' (Feb 2021); confirm as-of with data owner",
+    "stray column '< 6 Months' with values '2 Year'/'3 Year' appears to be a legend/secondary-table fragment off to the side, not part of the main grain",
+    "columns 'EXL Contact', 'Existing EXL Client', 'col16', 'col18' are entirely empty",
+    "'Type' and 'Strategic / Named' are sparse (typically populated only on a group's first row)"
+  ]
+}

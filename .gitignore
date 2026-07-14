@@ -10,3 +10,6 @@ venv/
 
 # Excel/Office lock files
 ~$*
+
+# regenerable ingest profiles
+produced_data/cards/_profiles/

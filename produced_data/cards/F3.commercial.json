@@ -1,0 +1,120 @@
+{
+  "table_id": "F3.commercial",
+  "title": "Commercial",
+  "source": {
+    "file": "input_data/corpus/Competitor Analysis PL and CL.xlsx",
+    "file_alias": "F3",
+    "sheet": "Commercial",
+    "header_row": 2,
+    "as_of": null,
+    "captured_date": null
+  },
+  "grain": "one row per business function / process area within Commercial lines",
+  "row_count": 7,
+  "summary": "A qualitative capability matrix for Commercial lines, with one row per business function (Underwriting Operations, Claims Operations, Finance Operations, Delegated Operations). For each function it captures, in free text, the scale of operations and named clients across regions, the delivery locations, the transformation philosophy and target metrics, the digital solutions offered, partner/collaboration names, and showcase clients with headcounts. It is a narrative reference for what is delivered per function rather than a source of numeric facts.",
+  "use_cases": [
+    "What digital solutions are positioned for Delegated Operations in Commercial lines?",
+    "Which delivery locations support Commercial Claims Operations?",
+    "What is the transformation philosophy and target metrics for Commercial Finance Operations?",
+    "Which partners or collaborations are named for a given Commercial function?",
+    "Which showcase clients are cited for Commercial Underwriting Operations?"
+  ],
+  "entity_key_col": null,
+  "columns": [
+    {
+      "name": "#",
+      "type": "int",
+      "role": "meta",
+      "null_pct": 38,
+      "joins": [],
+      "note": "sequential row index; blank on spacer/note rows"
+    },
+    {
+      "name": "Function",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 50,
+      "joins": [],
+      "note": "business/process area that labels each row"
+    },
+    {
+      "name": "Scale of the Operations",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 25,
+      "joins": [],
+      "note": "narrative on operational scale by region; embeds named clients"
+    },
+    {
+      "name": "Delivery Location(s)",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 50,
+      "joins": [],
+      "note": "geographies where the function is delivered"
+    },
+    {
+      "name": "Transformation Philopsophy",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 50,
+      "joins": [],
+      "note": "header misspelled as in source; narrative approach plus target metrics"
+    },
+    {
+      "name": "Digital Solutions",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 50,
+      "joins": [],
+      "note": "bulleted list of solutions/platforms per function"
+    },
+    {
+      "name": "Partnerships / Collaborations",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 62,
+      "joins": [],
+      "note": "named partner firms; frequently blank"
+    },
+    {
+      "name": "Showcase Clients / Capabilities",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 50,
+      "joins": [],
+      "note": "named clients, some with FTE headcounts embedded in text"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 3,
+      "#": "1",
+      "Function": "Underwriting Operations (Pre Bind, Post Bind, Policy Admin)",
+      "Scale of the Operations": "US Clients include - Travelers, Philadelphia, Grange\nUK - Multiple clients in broader P&C/Specialty segment within UK (Mosaic, Mcgill, Howden, Aventum, Apollo, Canopius).\nAPAC clients include Suncorp, IAG.",
+      "Delivery Location(s)": "India, Costa Rica, Philippines, UK (middle office for some UK clients)",
+      "Transformation Philopsophy": "Driving efficiency and effectiveness and focussing on improving key business metrics.\n\nKey focus would be on STP, auto renewals uptick, triaging efficiency, MTA productivity, reduction in cancellation and lapse rate etc.",
+      "Digital Solutions": "Skense IDP Solution (Proprietary solution); Digital Underwriting workbench (submissions, quote, post-bind, endorsement mgmt. etc.) (Proprietary on Appian, whitelabelled on evoluteIQ); Unified Analytics Platform (Proprietary Solution); RPA (UIPath/AA/BluePrism); Knowra+ (Gen AI enabled Knowledge Mgmt.) (Proprietary solution); Enabling workflows/case management solutions",
+      "Partnerships / Collaborations": "Appian, RPA CoE (UIPath, AA etc.)",
+      "Showcase Clients / Capabilities": "Philadelphia, Howden, Suncorp"
+    },
+    {
+      "_source_row": 9,
+      "#": null,
+      "Function": null,
+      "Scale of the Operations": "Embedded Analytics would be a theme throughout across process areas.",
+      "Delivery Location(s)": null,
+      "Transformation Philopsophy": null,
+      "Digital Solutions": null,
+      "Partnerships / Collaborations": null,
+      "Showcase Clients / Capabilities": null
+    }
+  ],
+  "not_answerable": [
+    { "q": "What revenue or contract value is tied to each function?", "reason": "no monetary/measure column exists; all fields are qualitative free text" },
+    { "q": "How have these capabilities changed year over year?", "reason": "no date or year column; the sheet is a single undated snapshot" },
+    { "q": "Exactly how many clients does each function serve?", "reason": "clients appear as narrative names inside free text, not as structured counts" }
+  ],
+  "duplicate_of": null,
+  "warnings": ["vintage_unknown", "empty leading column (col0) dropped", "header text 'Transformation Philopsophy' misspelled in source", "blank spacer row and trailing note rows within the data (e.g. source rows 7 and 9)"]
+}

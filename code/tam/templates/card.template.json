@@ -1,0 +1,38 @@
+{
+  "table_id": "<file_alias>.<sheet_slug>            // stable id, e.g. F1.top_insurers_and_brokers",
+  "title": "<human sheet title>",
+  "source": {
+    "file": "<repo-relative path to the source file>",
+    "file_alias": "<F1..Fn or new alias>",
+    "sheet": "<exact sheet name>",
+    "header_row": 0,
+    "as_of": "<vintage, e.g. 'Aug 2020' — ALWAYS set; this dates every answer built on the table>",
+    "captured_date": "<optional: when the data was collected, if different from as_of>"
+  },
+  "grain": "one row per <entity>",
+  "row_count": 0,
+  "summary": "<2-3 plain sentences: what this table is, what it is FOR, why a rep would touch it>",
+  "use_cases": [
+    "<a real question this table is the right source for>",
+    "<another — cover lookup, ranking/aggregation, and segment/filter styles>"
+  ],
+  "entity_key_col": "<the column holding the normalizable entity name, or null>",
+  "columns": [
+    {
+      "name": "<exact column header>",
+      "type": "string|enum|int|float|currency_usd|percent|date|year|bool|id|name_company|name_person|freetext|url",
+      "role": "entity_key|dimension|measure|attribute|meta",
+      "null_pct": 0,
+      "joins": ["<other_table_id>.<col>"],
+      "note": "<terse: units, sparsity, meaning — only when non-obvious>"
+    }
+  ],
+  "examples": [
+    "<2-3 representative rows as objects; include one populated + one sparse/edge case>"
+  ],
+  "not_answerable": [
+    { "q": "<a plausible question this table CANNOT answer>", "reason": "<which column/time span is missing>" }
+  ],
+  "duplicate_of": null,
+  "warnings": ["<two-row header | trailing space in sheet name | mostly-empty col | near-duplicate | epoch-date artifact>"]
+}

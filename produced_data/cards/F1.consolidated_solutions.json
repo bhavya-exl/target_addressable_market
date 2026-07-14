@@ -1,0 +1,188 @@
+{
+  "table_id": "F1.consolidated_solutions",
+  "title": "Consolidated Solutions",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Consolidated Solutions",
+    "header_row": 1,
+    "two_row_header": true,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "grain": "one row within a solution block; each solution offering (in 'Offering') spans several stacked rows that list its modules and its EXL capability-area ratings, with solution-level fields populated only on the block's lead row",
+  "row_count": 41,
+  "summary": "A catalogue of proposed solution offerings, each described by its problem statement, component modules, target outcomes, metrics/benchmarks, buying center, and client/market appetite, plus an EXL-capability self-assessment (capability area, an L/M/H rating, and details) and next steps / speed-to-market. It lets you look up what each offering is, why it matters, who buys it, and how ready EXL is to deliver it. The layout is a multi-row block per offering, so offering-level fields appear only on each block's first row.",
+  "use_cases": [
+    "What solution offerings are proposed and what problem does each address?",
+    "For a given offering (e.g., FNOL 'As a Service'), what modules, outcomes, and metrics/benchmarks are listed?",
+    "Which buying center, client appetite, and market appetite are noted for each offering?",
+    "What EXL capability areas (Operational/Platform/Analytics/Digital) and L/M/H readiness back each offering?",
+    "What are the next steps and speed-to-market for each offering?"
+  ],
+  "entity_key_col": "Offering",
+  "columns": [
+    {
+      "name": "#",
+      "type": "int",
+      "role": "meta",
+      "null_pct": 80,
+      "joins": [],
+      "note": "solution block sequence number; populated on lead row only"
+    },
+    {
+      "name": "Problem Statement",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 80,
+      "joins": []
+    },
+    {
+      "name": "Offering",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 80,
+      "joins": [
+        "F1.p_c_solutions_list.Offering"
+      ],
+      "note": "solution/offering name; populated on each block's lead row"
+    },
+    {
+      "name": "Modules",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 32,
+      "joins": [],
+      "note": "one module per row; the most row-level field"
+    },
+    {
+      "name": "Outcomes",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 80,
+      "joins": []
+    },
+    {
+      "name": "Metrics and Benchmarks",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 95,
+      "joins": []
+    },
+    {
+      "name": "Buying Center",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 80,
+      "joins": [],
+      "note": "target buyer role, e.g. Chief Claim Officer"
+    },
+    {
+      "name": "Client Appetite / Feedback\nFeedback received from clients to be updated here",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 84,
+      "joins": [],
+      "note": "free-text list of interested client names"
+    },
+    {
+      "name": "Market Appetite",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 82,
+      "joins": [],
+      "note": "High/Medium/Low"
+    },
+    {
+      "name": "Existing Capability in market (are there any existing similar products in the market?).  Describe.",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 86,
+      "joins": []
+    },
+    {
+      "name": "EXL Capabilities",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 52,
+      "joins": [],
+      "note": "the 'Area' sub-column of the two-row 'EXL Capabilities' header: Operational/Platform/Analytics/Digital"
+    },
+    {
+      "name": "Unnamed: 11",
+      "type": "enum",
+      "role": "attribute",
+      "null_pct": 50,
+      "joins": [],
+      "note": "L/M/H rating for the EXL capability area (row-2 sub-header 'L/M/H')"
+    },
+    {
+      "name": "Unnamed: 12",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 52,
+      "joins": [],
+      "note": "Details for the EXL capability area (row-2 sub-header 'Details')"
+    },
+    {
+      "name": "Speed to Market",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 80,
+      "joins": []
+    },
+    {
+      "name": "Next Steps",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 82,
+      "joins": []
+    }
+  ],
+  "examples": [
+    {
+      "#": 1.0,
+      "Problem Statement": "The first step in the Claim process is FNOL and it is one of the most important. It is often the first interaction a policyholder has with their insurance carrier and it represents a Moment of Truth for the carrier...[truncated]",
+      "Offering": "FNOL \"As a Service\"",
+      "Modules": "1. Omni Channel Intake - provides a channel agnostic claim reporting solution for customers (broker and insured)",
+      "Outcomes": "-Reduce claim costs - ALAE and ULAE; -Streamline and simplify the process; -Improve accuracy of assignment; -Provide early warning flags for fraud, litigation...[truncated]",
+      "Metrics and Benchmarks": "TAT Non Voice - 95% assigned within 2 hours (most stringent); AHT - not always measured; Quality - 88%-95% DPU and DPO...[truncated]",
+      "Buying Center": "Chief Claim Officer",
+      "Client Appetite / Feedback\nFeedback received from clients to be updated here": "Allstate, Assurant, CNA, Hanover, HIG, Liberty Mutual",
+      "Market Appetite": "High",
+      "Existing Capability in market (are there any existing similar products in the market?).  Describe.": "More research needed here. No one has tied the whole solution together. We are creating a one stop shop with the ability to provide data loops",
+      "EXL Capabilities": "Operational",
+      "Unnamed: 11": "High",
+      "Unnamed: 12": "Moderate footprint in FNOL both voice and non-voice across personal and commercial insurance",
+      "Speed to Market": "Medium. We can package and put Value Prop together quickly. Building and stitching the modules together will take more time.",
+      "Next Steps": "1. Vet the solution concept and components with existing clients 2. If prioritized, begin to build the Packaged Solution collateral including the Value Prop",
+      "_source_row": 3
+    },
+    {
+      "Modules": "2. Automated Entry FNOL capability (Thin Human/Heavy Digital) - provides front end capability to ingest all types of FNOL documents across all lines of business...[truncated]",
+      "_source_row": 4
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What is the revenue or price of each solution offering?",
+      "reason": "no financial/pricing column exists in this table"
+    },
+    {
+      "q": "How has appetite for an offering changed over time?",
+      "reason": "single snapshot; no dated/time-series columns"
+    },
+    {
+      "q": "How do named competitors rate against each offering?",
+      "reason": "no competitor columns in this sheet"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band: row 1 group headers + row 2 sub-headers (Area / L/M/H / Details under 'EXL Capabilities'); profiler-detected header_row corrected to 1",
+    "multi-row block layout: solution-level fields (#/Offering/Problem Statement/Outcomes/etc.) populated only on each block's lead row, blank on continuation rows",
+    "near-duplicate of sheet 'P&C Solutions List' (identical column set and values); this sheet kept as canonical",
+    "'EXL Capabilities' L/M/H and Details live in the 'Unnamed: 11'/'Unnamed: 12' columns due to the merged two-row header"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "table_id": "F4.competitor_wise",
+  "title": "Competitor wise \u2014 Competitor Capabilities by Value-Chain Segment",
+  "source": {
+    "file": "input_data/corpus/EXL Insurance Competitors.xlsx",
+    "file_alias": "F4",
+    "sheet": "Competitor wise",
+    "header_row": 1,
+    "as_of": null,
+    "captured_date": null
+  },
+  "grain": "one row per competitor company and value-chain segment (a company expands into several segment rows)",
+  "row_count": 46,
+  "summary": "Breaks down each competitor company by the insurance value-chain segment it addresses, with multi-line research notes describing the company's capabilities and offerings in that segment. It lets you profile a competitor's coverage across functions (e.g. underwriting, claims, policy administration) rather than by client.",
+  "use_cases": [
+    "Which value-chain segments does a given competitor (e.g. Genpact) cover?",
+    "What capabilities does a competitor offer in a specific segment (e.g. Claims Management)?",
+    "Which competitors address a particular insurance function/segment?",
+    "Compare the breadth of segment coverage across competitors."
+  ],
+  "entity_key_col": "Company Name",
+  "columns": [
+    {
+      "name": "Company Name",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 87,
+      "joins": [],
+      "note": "competitor company; populated only on the first row of each company's block, so 87% null \u2014 forward-fill needed to attribute the segment rows below it to the correct company"
+    },
+    {
+      "name": "Segment - Co-Pilot",
+      "type": "freetext",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "insurance value-chain segment/function the competitor addresses (e.g. Underwriting, Policy Administration, Claims Management)"
+    },
+    {
+      "name": "CoPilot Research",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "multi-line research notes describing the competitor's capabilities/offerings within the segment"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 2,
+      "Company Name": "Genpact",
+      "Segment - Co-Pilot": "Sales, Distribution & Broker/MGA Support",
+      "CoPilot Research": "Digital and AI-driven operations transformation\nEnhanced broker management and submission handling\nSolutions that strengthen submission-to-bind ratios"
+    },
+    {
+      "_source_row": 3,
+      "Company Name": null,
+      "Segment - Co-Pilot": "Underwriting",
+      "CoPilot Research": "Data-driven underwriting using digital and AI technologies\nAI-powered pre-bind underwriting automation\nUse of specialized AI agents for classification, extraction, anomaly detection, and risk ranking"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Which clients does this competitor serve in a segment?",
+      "reason": "there is no client column on this sheet; it profiles competitors by segment, not by client"
+    },
+    {
+      "q": "What is the FTE or revenue size of a competitor's segment presence?",
+      "reason": "no size/headcount/revenue column exists on this sheet"
+    },
+    {
+      "q": "How have these competitor capabilities changed over time?",
+      "reason": "there is no date or time-series column; the table is a single snapshot"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "vintage_unknown \u2014 no date found in filename, sheet names, headers, or cell values; data owner should confirm the as-of date",
+    "Company Name is sparse (87% null): the company name appears only on the first row of each company's segment block, so forward-fill is required to associate segment rows with their company"
+  ]
+}

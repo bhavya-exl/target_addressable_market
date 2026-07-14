@@ -1,0 +1,210 @@
+{
+  "table_id": "F1.capability_gap_assessment_2",
+  "title": "Capability Gap Assessment 2",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Capability Gap Assessment 2",
+    "header_row": 1,
+    "two_row_header": true,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "grain": "one row per solution component within a solution area; solution-level fields (#, Area, Solutions, Challenges, Benchmarks, Business Outcomes) populated only on each block's lead row",
+  "row_count": 52,
+  "summary": "A capability-gap assessment that breaks each solution (within an Area such as Claim) into solution components and features, rates EXL's capability (Low/Medium/High) for each, describes the capability gap, and flags whether a partnership is required split across three partner types (InsurTech / TPA / Other). It also carries the challenges being solved, benchmarks, and business outcomes per solution. Use it to see where EXL is strong or has gaps by solution component and where partnerships are needed.",
+  "use_cases": [
+    "For each solution component, what is EXL's capability level (Low/Medium/High)?",
+    "Which solution components require a partnership, and of what type (InsurTech/TPA/Other)?",
+    "What capability gap is described for a given solution area (e.g., Claim / FNOL)?",
+    "What benchmarks and business outcomes are tied to each solution?"
+  ],
+  "entity_key_col": "Solution Components",
+  "columns": [
+    {
+      "name": "#",
+      "type": "int",
+      "role": "meta",
+      "null_pct": 84,
+      "joins": [],
+      "note": "solution block sequence number; lead row only"
+    },
+    {
+      "name": "Area",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 82,
+      "joins": [],
+      "note": "solution area, e.g. Claim; lead row only"
+    },
+    {
+      "name": "Solutions",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 82,
+      "joins": [],
+      "note": "solution name, e.g. FNOL-as-a-Service; lead row only"
+    },
+    {
+      "name": "Solution Components",
+      "type": "string",
+      "role": "entity_key",
+      "null_pct": 23,
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.capability_gap_assessment.Omni Channel Intake",
+        "F1.capability_gap_assessment_ver2.Solution Components"
+      ],
+      "note": "row-level component name, e.g. Omni Channel Intake"
+    },
+    {
+      "name": "Solution Features",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 16,
+      "joins": []
+    },
+    {
+      "name": "EXL Capability",
+      "type": "enum",
+      "role": "measure",
+      "null_pct": 15,
+      "joins": [],
+      "note": "EXL capability level: Low/Medium/High"
+    },
+    {
+      "name": "Challenges we are trying to solve",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 82,
+      "joins": []
+    },
+    {
+      "name": "Capability Gap Description",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 60,
+      "joins": []
+    },
+    {
+      "name": "Partnership Required",
+      "type": "enum",
+      "role": "attribute",
+      "null_pct": 52,
+      "joins": [],
+      "note": "Y/N \u2014 InsurTech partner (row-2 sub-header 'InsurTech' of 'Partnership Required')"
+    },
+    {
+      "name": "Unnamed: 9",
+      "type": "enum",
+      "role": "attribute",
+      "null_pct": 52,
+      "joins": [],
+      "note": "Y/N \u2014 TPA partner (row-2 sub-header 'TPA')"
+    },
+    {
+      "name": "Unnamed: 10",
+      "type": "enum",
+      "role": "attribute",
+      "null_pct": 52,
+      "joins": [],
+      "note": "Y/N \u2014 Other partner (row-2 sub-header 'Other')"
+    },
+    {
+      "name": "Competition Capability",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "entirely empty (Genpact sub-column of 'Competition Capability')"
+    },
+    {
+      "name": "Unnamed: 12",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "entirely empty (WNS)"
+    },
+    {
+      "name": "Unnamed: 13",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "entirely empty (TCS)"
+    },
+    {
+      "name": "Unnamed: 14",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "entirely empty (Cognizant)"
+    },
+    {
+      "name": "Benchmarks",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 95,
+      "joins": []
+    },
+    {
+      "name": "Business Outcomes",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 84,
+      "joins": []
+    }
+  ],
+  "examples": [
+    {
+      "#": 1.0,
+      "Area": "Claim",
+      "Solutions": "FNOL-as-a- Service",
+      "Solution Components": "Omni Channel Intake",
+      "Solution Features": "Provides a channel agnostic claim reporting solution for customers (broker and insured)",
+      "EXL Capability": "Medium",
+      "Challenges we are trying to solve": "-Brokers and Insureds want the choice of reporting channels (Mobile, Web, Email, Fax, Phone)...[truncated]",
+      "Capability Gap Description": "Capability exists. 1. Full scale multi-channel implementation has not been done with any client to date 2. Mobile interface and reporting does not exist today",
+      "Partnership Required": "Y",
+      "Unnamed: 9": "N",
+      "Unnamed: 10": "N",
+      "Benchmarks": "TAT Non Voice - 95% assigned within 2 hours (most stringent)...[truncated]",
+      "Business Outcomes": "-Reduce claim costs - ALAE and ULAE; -Streamline and simplify the process...[truncated]",
+      "_source_row": 3
+    },
+    {
+      "Solution Components": "Acknowledgement Notice Automation",
+      "Solution Features": "Provides immediate notice to insured and broker that the claim has been received and a claim number assigned",
+      "EXL Capability": "High",
+      "Partnership Required": "N",
+      "Unnamed: 9": "N",
+      "Unnamed: 10": "N",
+      "_source_row": 6
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "How do named competitors (Genpact/WNS/TCS/Cognizant) rate on each capability?",
+      "reason": "the 'Competition Capability' columns are entirely empty"
+    },
+    {
+      "q": "What is the numeric capability score for each component?",
+      "reason": "this sheet has only a Low/Medium/High rating, no numeric scale column"
+    },
+    {
+      "q": "How has the capability gap changed over time?",
+      "reason": "single snapshot; no dated columns"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band: row-2 sub-headers InsurTech/TPA/Other (under 'Partnership Required') and Genpact/WNS/TCS/Cognizant (under 'Competition Capability'); profiler-detected header_row corrected to 1",
+    "'Partnership Required'/'Unnamed: 9'/'Unnamed: 10' are the InsurTech/TPA/Other Y-N flags",
+    "'Competition Capability' and its Unnamed sub-columns are entirely empty",
+    "solution-level fields (#/Area/Solutions/Challenges/Benchmarks/Business Outcomes) populated only on block lead rows",
+    "near-duplicate column set with: ['Capability Gap Assessment '] (per profiler; that sheet is outside this ingest scope)"
+  ]
+}

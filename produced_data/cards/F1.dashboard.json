@@ -1,0 +1,26 @@
+{
+  "table_id": "F1.dashboard",
+  "title": "Dashboard (empty scaffold)",
+  "role": "non_data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Dashboard",
+    "header_row": 5,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": true,
+  "grain": null,
+  "row_count": 0,
+  "summary": "Empty dashboard sheet: a header band is present but there are zero data rows and no populated columns. Nothing to query.",
+  "use_cases": [],
+  "entity_key_col": null,
+  "columns": [],
+  "examples": [],
+  "not_answerable": [],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band"
+  ]
+}

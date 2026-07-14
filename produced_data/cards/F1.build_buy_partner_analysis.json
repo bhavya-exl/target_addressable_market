@@ -1,0 +1,151 @@
+{
+  "table_id": "F1.build_buy_partner_analysis",
+  "title": "Build/Buy/Partner analysis of solution components and suppliers",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Build-Buy-Partner Analysis",
+    "header_row": 13,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": false,
+  "grain": "one row per solution component evaluated for build/buy/partner",
+  "row_count": 122,
+  "summary": "For each solution component (grouped under a parent solution such as \"Solution 1 FNOL\"), this sheet records the capability gap, the evaluation criteria, and candidate suppliers split across InsureTech, TPA, and Other, plus a Y/N applicability flag and comments. Use it to see which external suppliers could fill each solution gap and how they are categorized.",
+  "use_cases": [
+    "Which suppliers (InsureTech / TPA / Other) are candidates for a given solution component?",
+    "What is the capability gap for a solution component?",
+    "What evaluation criteria apply to a solution component?",
+    "Which components roll up under a given parent solution?"
+  ],
+  "entity_key_col": "Solution Component",
+  "columns": [
+    {
+      "name": "Solution Name",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 90,
+      "joins": [],
+      "note": "parent solution; only on the first component of each solution (90% empty)"
+    },
+    {
+      "name": "Solution Component",
+      "type": "string",
+      "role": "entity_key",
+      "null_pct": 3,
+      "joins": [
+        "F1.capability_gap_assessment.Omni Channel Intake",
+        "F1.capability_gap_assessment_2.Solution Components",
+        "F1.capability_gap_assessment_ver2.Solution Components",
+        "F1.insuretch_landscape.InsureTech",
+        "F1.partnership_landscape.Providers",
+        "F1.partnerships_and_alliances.otonomo"
+      ],
+      "note": "component being evaluated"
+    },
+    {
+      "name": "Gap Description",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 58,
+      "joins": []
+    },
+    {
+      "name": "Evaluation Criteria",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 68,
+      "joins": []
+    },
+    {
+      "name": "Supplier Applicability",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 62,
+      "joins": [],
+      "note": "newline-separated candidate supplier list"
+    },
+    {
+      "name": "InsureTech",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 92,
+      "joins": [],
+      "note": "insuretech supplier candidates"
+    },
+    {
+      "name": "TPA",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 97,
+      "joins": [],
+      "note": "TPA supplier candidates"
+    },
+    {
+      "name": "Other",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 93,
+      "joins": [],
+      "note": "other supplier candidates"
+    },
+    {
+      "name": "Y/N",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 82,
+      "joins": [],
+      "note": "applicability flag; only 'Y' appears"
+    },
+    {
+      "name": "Comments",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 94,
+      "joins": []
+    },
+    {
+      "name": "Develop evaluation criterion",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 14,
+      "Solution Name": "Solution 1\nFNOL",
+      "Solution Component": "Omni Channel Intake",
+      "Gap Description": "1. Full scale multi-channel implementation has not been done with any client to date \n2. Mobile interface and reporting does not exist today",
+      "Evaluation Criteria": "Market\nLine of Business\nFunctional Capability\nApplies to Solution",
+      "Supplier Applicability": "Gradient/NetClaim\nCrawford/Broadspire\nActec\nAnsaFone\nLightico\nSafelite\nKORE\nGallagher Bassett\nOmni.us\nShift Technology",
+      "InsureTech": "KORE",
+      "TPA": "Gallagher Bassett",
+      "Other": "Safelite",
+      "Y/N": "Y",
+      "Comments": "KORE:  Digital Assistant"
+    },
+    {
+      "_source_row": 18,
+      "Solution Component": "Cloud Hosted",
+      "Gap Description": "EXL needs a partner with experience in client/customer sensitive data hosting on cloud compliant with regulations (AWS)",
+      "Other": "AWS"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Which supplier was actually selected for a component?",
+      "reason": "sheet lists candidates only; no selection/decision column"
+    },
+    {
+      "q": "What is the price or contract value for a supplier?",
+      "reason": "no cost/pricing columns"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": []
+}

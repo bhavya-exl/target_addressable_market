@@ -1,0 +1,822 @@
+{
+  "corpus": "EXL insurance TAM",
+  "n_tables": 39,
+  "n_data_tables": 32,
+  "note": "Routing index. Pick the minimal set of tables by matching a question to summary/use_cases; prefer canonical over duplicate_of; then load the full card(s) from produced_data/cards/<table_id>.json.",
+  "tables": [
+    {
+      "table_id": "F1.build_buy_partner_analysis",
+      "title": "Build/Buy/Partner analysis of solution components and suppliers",
+      "role": "data",
+      "grain": "one row per solution component evaluated for build/buy/partner",
+      "as_of": "Aug 2020",
+      "summary": "For each solution component (grouped under a parent solution such as \"Solution 1 FNOL\"), this sheet records the capability gap, the evaluation criteria, and candidate suppliers split across InsureTech, TPA, and Other, plus a Y/N applicability flag and comments. Use it to see which external suppliers could fill each solution gap and how they are categorized.",
+      "use_cases": [
+        "Which suppliers (InsureTech / TPA / Other) are candidates for a given solution component?",
+        "What is the capability gap for a solution component?",
+        "What evaluation criteria apply to a solution component?",
+        "Which components roll up under a given parent solution?"
+      ],
+      "entity_key_col": "Solution Component",
+      "joins": [
+        "F1.capability_gap_assessment.Omni Channel Intake",
+        "F1.capability_gap_assessment_2.Solution Components",
+        "F1.capability_gap_assessment_ver2.Solution Components",
+        "F1.insuretch_landscape.InsureTech",
+        "F1.partnership_landscape.Providers",
+        "F1.partnerships_and_alliances.otonomo"
+      ],
+      "duplicate_of": null,
+      "row_count": 122
+    },
+    {
+      "table_id": "F1.buyer_priorities",
+      "title": "Buyer priorities and solution mapping by insurer",
+      "role": "data",
+      "grain": "one row per (insurer, buyer-priority / solution-mapping) entry",
+      "as_of": "Aug 2020",
+      "summary": "A denormalized mapping of a few insurer groups (e.g. Travelers, Allstate, CNA) to their stated buyer/strategic priorities (e.g. \"Strong Top Line Performance\", \"Optimizing our productivity and efficiency\") and to candidate solution offerings and components (FNOL, PaaS, endorsement processing, voice CoE features) with an initiation status. WARNING: the detected header row contains actual data values, so column headers are unreliable; treat contents structurally and confirm layout with the data owner.",
+      "use_cases": [
+        "What buyer/strategic priorities are recorded for a given insurer?",
+        "Which solution offerings or components are mapped to an insurer's priorities?",
+        "What is the initiation status of a mapped solution for an insurer?"
+      ],
+      "entity_key_col": "Travelers Group",
+      "joins": [
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F2.captives_in_india.Company Name",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "duplicate_of": null,
+      "row_count": 35
+    },
+    {
+      "table_id": "F1.capability_gap_assessment",
+      "title": "Capability gap assessment by solution component (Build/Buy/Partner)",
+      "role": "data",
+      "grain": "one row per solution component within a solution area",
+      "as_of": "Aug 2020",
+      "summary": "A capability-gap matrix: each row is a solution component (e.g. Omni Channel Intake, Predictive Analytics, Cloud Hosted) within a solution area (Claim / UW / F&A), with a description, a priority rating (Low/Medium/High), a narrative of the current capability/gap, and Build / Buy / Partner Y-N flags. WARNING: the detected header row holds actual data values, so column headers are unreliable (some are very long narrative strings); read contents structurally. Near-duplicate of another sheet in the workbook.",
+      "use_cases": [
+        "Which solution components have capability gaps and in which solution area?",
+        "What is the priority rating of a given solution component?",
+        "For a component, is the recommended approach Build, Buy, or Partner?",
+        "What is the described current capability or gap for a component?"
+      ],
+      "entity_key_col": "Omni Channel Intake",
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.capability_gap_assessment_2.Solution Components",
+        "F1.capability_gap_assessment_ver2.Solution Components"
+      ],
+      "duplicate_of": null,
+      "row_count": 52
+    },
+    {
+      "table_id": "F1.capability_gap_assessment_2",
+      "title": "Capability Gap Assessment 2",
+      "role": "data",
+      "grain": "one row per solution component within a solution area; solution-level fields (#, Area, Solutions, Challenges, Benchmarks, Business Outcomes) populated only on each block's lead row",
+      "as_of": "Aug 2020",
+      "summary": "A capability-gap assessment that breaks each solution (within an Area such as Claim) into solution components and features, rates EXL's capability (Low/Medium/High) for each, describes the capability gap, and flags whether a partnership is required split across three partner types (InsurTech / TPA / Other). It also carries the challenges being solved, benchmarks, and business outcomes per solution. Use it to see where EXL is strong or has gaps by solution component and where partnerships are needed.",
+      "use_cases": [
+        "For each solution component, what is EXL's capability level (Low/Medium/High)?",
+        "Which solution components require a partnership, and of what type (InsurTech/TPA/Other)?",
+        "What capability gap is described for a given solution area (e.g., Claim / FNOL)?",
+        "What benchmarks and business outcomes are tied to each solution?"
+      ],
+      "entity_key_col": "Solution Components",
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.capability_gap_assessment.Omni Channel Intake",
+        "F1.capability_gap_assessment_ver2.Solution Components"
+      ],
+      "duplicate_of": null,
+      "row_count": 52
+    },
+    {
+      "table_id": "F1.capability_gap_assessment_ver2",
+      "title": "Capability Gap Assessment -Ver2",
+      "role": "data",
+      "grain": "one row per solution component within a solution area; solution-level fields (#, Area, Solutions, Challenges, Benchmarks, Business Outcomes) populated only on each block's lead row",
+      "as_of": "Aug 2020",
+      "summary": "An enriched capability-gap assessment: each solution (within an Area such as Claim) is broken into components and features, tagged with a short solution ID, rated for EXL capability both qualitatively (Low/Medium/High) and on a numeric 1-5 scale, and flagged for partnership need by partner type (InsurTech/TPA/Other). It also carries the capability-gap description, challenges, benchmarks, and business outcomes. Use it to quantify EXL's readiness by component and identify partnership needs.",
+      "use_cases": [
+        "What is EXL's numeric capability scale (1-5) and Low/Medium/High rating for each solution component?",
+        "Which components need a partnership and of what type (InsurTech/TPA/Other)?",
+        "For a given solution ID / area, what capability gaps are described?",
+        "What benchmarks and business outcomes are tied to each solution?"
+      ],
+      "entity_key_col": "Solution Components",
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.capability_gap_assessment.Omni Channel Intake",
+        "F1.capability_gap_assessment_2.Solution Components"
+      ],
+      "duplicate_of": null,
+      "row_count": 52
+    },
+    {
+      "table_id": "F1.client_prioritization_framework",
+      "title": "Client Prioritization Framework",
+      "role": "data",
+      "grain": "one row per client-prioritization criterion (parameter) with its option buckets",
+      "as_of": "Aug 2020",
+      "summary": "A reference framework defining how clients should be prioritized. Each row is a scoring parameter (e.g., Combined Ratio, Renewal Time Frame, Future TCV Potential, Works with Competition) with up to five option buckets that describe its possible values. The sheet stacks two versions of the framework: the criterion options and a weightage version that assigns numeric weights to the same parameters. It defines the scoring rubric itself, not scored clients.",
+      "use_cases": [
+        "What criteria are used to prioritize clients?",
+        "What option buckets / value bands exist for a given parameter (e.g., Combined Ratio, Future TCV Potential)?",
+        "What weights are assigned to each prioritization parameter?"
+      ],
+      "entity_key_col": "Parameter",
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 12
+    },
+    {
+      "table_id": "F1.collated_collaterals_list",
+      "title": "Collated marketing collateral list with links and authors",
+      "role": "data",
+      "grain": "one row per marketing collateral asset",
+      "as_of": "Aug 2020",
+      "summary": "A catalog of marketing collateral assets (infographics and white papers), each with its content type, a theme/group (Insurance, Claims, COVID, GDPR, Digital, ...), a topic/title, a URL to the published asset, and the authors. Use it to find published collateral by topic or theme and its link and authors.",
+      "use_cases": [
+        "What collateral exists for a given topic or theme?",
+        "What is the URL for a specific piece of collateral?",
+        "Who authored a given collateral asset?",
+        "Which assets are infographics vs white papers?"
+      ],
+      "entity_key_col": "Topic",
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 42
+    },
+    {
+      "table_id": "F1.competitor_analysis",
+      "title": "Competitor footprint at insurer accounts",
+      "role": "data",
+      "grain": "one row per (insurer account, service provider, process) engagement",
+      "as_of": "Aug 2020",
+      "summary": "A list of insurer groups and the service providers (competitors such as CTS, Genpact, Insurity, NTT) delivering work at them, broken out by process area flags (Claims, UW, Premium Audit, F&A, Platform) with approximate FTE counts, contract-renewal timing, account tier, and free-text comments describing the processes. Use it to see who competes at which account and in which functions.",
+      "use_cases": [
+        "Which service providers/competitors are active at a given insurer?",
+        "In which process areas (Claims, UW, F&A, etc.) does a competitor operate at an account?",
+        "How many FTEs does a competitor run at an account?",
+        "When does a competitor's contract renew?",
+        "Which accounts are tagged Strategic vs Named for competitive attention?"
+      ],
+      "entity_key_col": "GROUP NAME",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "duplicate_of": null,
+      "row_count": 71
+    },
+    {
+      "table_id": "F1.consolidated_solutions",
+      "title": "Consolidated Solutions",
+      "role": "data",
+      "grain": "one row within a solution block; each solution offering (in 'Offering') spans several stacked rows that list its modules and its EXL capability-area ratings, with solution-level fields populated only on the block's lead row",
+      "as_of": "Aug 2020",
+      "summary": "A catalogue of proposed solution offerings, each described by its problem statement, component modules, target outcomes, metrics/benchmarks, buying center, and client/market appetite, plus an EXL-capability self-assessment (capability area, an L/M/H rating, and details) and next steps / speed-to-market. It lets you look up what each offering is, why it matters, who buys it, and how ready EXL is to deliver it. The layout is a multi-row block per offering, so offering-level fields appear only on each block's first row.",
+      "use_cases": [
+        "What solution offerings are proposed and what problem does each address?",
+        "For a given offering (e.g., FNOL 'As a Service'), what modules, outcomes, and metrics/benchmarks are listed?",
+        "Which buying center, client appetite, and market appetite are noted for each offering?",
+        "What EXL capability areas (Operational/Platform/Analytics/Digital) and L/M/H readiness back each offering?",
+        "What are the next steps and speed-to-market for each offering?"
+      ],
+      "entity_key_col": "Offering",
+      "joins": [
+        "F1.p_c_solutions_list.Offering"
+      ],
+      "duplicate_of": null,
+      "row_count": 41
+    },
+    {
+      "table_id": "F1.go_to_market_plan",
+      "title": "Go-to-market strategy narrative and critical success factors",
+      "role": "data",
+      "grain": "one row per strategy statement / critical-success-factor bullet",
+      "as_of": "Aug 2020",
+      "summary": "A free-text outline of the go-to-market strategy, captured as a single column of narrative statements (\"Critical success factors for EXL P&C\") with an occasional outline letter. Rows are strategy bullets such as growth targets, positioning (\"solutions organization vs services organization\"), and what clients are telling us. Mostly a narrative/planning sheet rather than a structured table.",
+      "use_cases": [
+        "What are the stated critical success factors for the P&C go-to-market plan?",
+        "What is the strategic positioning or aspiration described in the plan?",
+        "What are clients telling us according to the GTM narrative?"
+      ],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 47
+    },
+    {
+      "table_id": "F1.insuretch_anlaysis_roopak",
+      "title": "Insuretch Anlaysis - Roopak",
+      "role": "data",
+      "grain": "one row per value-chain sub-function, describing capability gaps and the kind/need for a partner plus candidate partner companies",
+      "as_of": "Aug 2020",
+      "summary": "A partnership-gap analysis across the insurance value chain: for each value-chain sub-function (grouped under high-level areas like New Business & Underwriting, Policy Servicing, Claim Operations) it records gaps in operational capabilities, digital solutions, ready-to-deploy analytics, and platform, then states the kind of partner required, the need for that partner, and candidate partner companies. Use it to see, per value-chain area, what capability gaps exist and which external partners could fill them.",
+      "use_cases": [
+        "For a given value-chain sub-function, what capability gaps exist (operational, digital, analytics, platform)?",
+        "What kind of partner is required and why for each value-chain area?",
+        "Which candidate partner companies are suggested for each value-chain function?"
+      ],
+      "entity_key_col": "Unnamed: 2",
+      "joins": [
+        "F1.white_spaces_experience.Value Chain"
+      ],
+      "duplicate_of": null,
+      "row_count": 9
+    },
+    {
+      "table_id": "F1.insuretch_landscape",
+      "title": "InsureTech Landscape",
+      "role": "data",
+      "grain": "one row per insurtech company assessed",
+      "as_of": "Aug 2020",
+      "summary": "An assessment of 81 insurtech companies: what each does, its target market, line of business, vertical, products/business lines supported, funding, digital-disruption level, and industry utility, plus EXL's own 2019 ranking, 2020 rating, and investment-potential judgment. A set of line-of-business flag columns (APD, Worker's Compensation, Healthcare, Life, Pet, Personal, Small/Large Commercial, etc.) mark which LOBs each insurtech touches. Use it to look up or filter/rank insurtechs by market, LOB, category, funding, or EXL rating.",
+      "use_cases": [
+        "What does a given insurtech do, and what market/LOB/vertical and funding does it have?",
+        "Which insurtechs did EXL rate highest (2020 EXL Rating) or see most investment potential in?",
+        "Which insurtechs operate in a given line of business (e.g., APD, Healthcare, Personal)?",
+        "Segment or rank insurtechs by category, vertical, or digital-disruption level."
+      ],
+      "entity_key_col": "InsureTech",
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.partnership_landscape.Providers"
+      ],
+      "duplicate_of": null,
+      "row_count": 81
+    },
+    {
+      "table_id": "F1.p_c_solutions_list",
+      "title": "P&C Solutions List",
+      "role": "data",
+      "grain": "one row within a solution block; each solution offering (in 'Offering') spans several stacked rows listing its modules and EXL capability-area ratings, with solution-level fields populated only on the block's lead row",
+      "as_of": "Aug 2020",
+      "summary": "A catalogue of proposed P&C solution offerings, each described by problem statement, component modules, target outcomes, metrics/benchmarks, buying center, client/market appetite, an EXL-capability self-assessment (area, L/M/H rating, details), speed-to-market and next steps. This sheet is an exact copy of the 'Consolidated Solutions' sheet (same columns and values).",
+      "use_cases": [
+        "What P&C solution offerings are proposed and what problem does each address?",
+        "For a given offering, what modules, outcomes, and metrics/benchmarks are listed?",
+        "Which buying center and market appetite are noted for each offering?",
+        "What EXL capability areas and L/M/H readiness back each offering?"
+      ],
+      "entity_key_col": "Offering",
+      "joins": [
+        "F1.consolidated_solutions.Offering"
+      ],
+      "duplicate_of": "F1.consolidated_solutions",
+      "row_count": 41
+    },
+    {
+      "table_id": "F1.partnership_landscape",
+      "title": "Partnership Landscape",
+      "role": "data",
+      "grain": "one row per partner/provider organization assessed",
+      "as_of": "Aug 2020",
+      "summary": "An assessment of 62 potential partner/provider organizations: what each does, its type (InsurTech / Other / etc.), applicable value chain and function, market, line of business, function/capability, inception year, EXL's 2019 ranking and 2020 rating, and the number of solutions it applies to. A set of solution-mapping flag columns (FNOL, Payments as a Service, Submit to Quote, etc.) mark which EXL solutions each provider supports. Use it to look up a provider, or filter/segment providers by type, solution coverage, or EXL rating.",
+      "use_cases": [
+        "What does a given provider do, and what is its type, market, LOB, and inception year?",
+        "Which providers map to a particular solution (e.g., FNOL, Payments as a Service)?",
+        "Which providers has EXL rated highest (2020 EXL Rating)?",
+        "Segment providers by type (InsurTech vs Other) or by number of solutions they apply to."
+      ],
+      "entity_key_col": "Providers",
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.insuretch_landscape.InsureTech",
+        "F1.partnerships_and_alliances.otonomo"
+      ],
+      "duplicate_of": null,
+      "row_count": 62
+    },
+    {
+      "table_id": "F1.partnerships_and_alliances",
+      "title": "Partner and alliance landscape with capability and rating",
+      "role": "data",
+      "grain": "one row per partner/alliance candidate",
+      "as_of": "Aug 2020",
+      "summary": "A landscape of prospective partners and alliance candidates (e.g. Zesty AI, Crawford/Broadspire, ESIS, Sedgwick, Actec), each tagged with a capability/category (Claim Processing, Contact Center, Content Extraction, etc.) and a Low/Medium/High rating, plus an index and an attribute-label column. WARNING: the detected header row holds actual data values, so column headers are unreliable; read contents structurally.",
+      "use_cases": [
+        "Which partners/alliance candidates are being tracked?",
+        "What capability or category is a partner associated with?",
+        "How is a partner rated (Low/Medium/High)?"
+      ],
+      "entity_key_col": "otonomo",
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.partnership_landscape.Providers"
+      ],
+      "duplicate_of": null,
+      "row_count": 56
+    },
+    {
+      "table_id": "F1.sheet3",
+      "title": "Client account profiles with executive contacts and financials",
+      "role": "data",
+      "grain": "one row per client account (company)",
+      "as_of": "Aug 2020",
+      "summary": "A shortlist of client companies, each with its geography, account tier (Strategic/Named/Other), the assigned client executive, and a roster of named C-suite contacts (CEO, CFO, CRO, CCO, COO, CIO/CTO, CUO). Each row also carries headline financials (gross written premium, growth %, combined ratio), whether the company outsources today, its competitors, and a renewal date/note. Use it to look up who owns an account, who the executive buyers are, and basic financial context.",
+      "use_cases": [
+        "Who is the CEO / CFO / CIO of a given client company?",
+        "Which client executive owns a particular account?",
+        "Which accounts are tagged Strategic vs Named?",
+        "Which clients already outsource today and who are their competitors?",
+        "What is a client's gross written premium, growth %, or combined ratio?"
+      ],
+      "entity_key_col": "Client",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.top_clients_shortlist.Client",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "duplicate_of": null,
+      "row_count": 14
+    },
+    {
+      "table_id": "F1.top_clients_shortlist",
+      "title": "Prioritized shortlist of top client accounts",
+      "role": "data",
+      "grain": "one row per shortlisted client account (company)",
+      "as_of": "Aug 2020",
+      "summary": "A curated shortlist of ~27 top client accounts grouped into strategic \"buckets\" (e.g. \"Drive more adoption of Analytics\"), each with geography, account tier, the growth leader and client exec, named C-suite contacts, headline financials (GWP, growth %, combined ratio), outsourcing status, competitors, renewal date, and a client priority rating. Use it to see the prioritized target accounts and who owns them.",
+      "use_cases": [
+        "Which client accounts are on the priority shortlist and in which strategic bucket?",
+        "Who is the growth leader / client exec for a shortlisted account?",
+        "What is the client priority rating for an account?",
+        "Which shortlisted clients outsource today and who are their competitors?",
+        "Who are the executive contacts (CEO/CFO/CIO) for a shortlisted client?"
+      ],
+      "entity_key_col": "Client",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "duplicate_of": null,
+      "row_count": 27
+    },
+    {
+      "table_id": "F1.top_insurers_and_brokers",
+      "title": "Top insurers and brokers ranked by net written premium",
+      "role": "data",
+      "grain": "one row per insurer/broker company (group)",
+      "as_of": "Aug 2020",
+      "summary": "The master market-sizing table: 224 US insurance carriers and brokers ranked by 2019 net written premium (NWP), with year-over-year % change, 2018/2019 ranks, combined ratio, and premium/rank band buckets. For a subset of priority accounts it also carries relationship tier, the assigned client exec, named C-suite contacts, EXL-relationship flags (EXL Client, EXL competitors, share of wallet, 2020 revenue budget), and an anonymized insuretech-partner code. Use it to rank/segment the market and to see which large carriers are EXL clients.",
+      "use_cases": [
+        "Which insurers/brokers are the largest by 2019 net written premium?",
+        "Rank or filter companies by NWP band or ranking band (Top 10, 11-25, etc.).",
+        "Which companies are flagged as EXL clients, and what is their 2020 revenue budget?",
+        "What is a company's combined ratio or year-over-year premium % change?",
+        "Which companies are carriers vs brokers?",
+        "Who is the client exec / relationship tier for a priority account?"
+      ],
+      "entity_key_col": "Company/ Group",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.top_clients_shortlist.Client",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "duplicate_of": null,
+      "row_count": 224
+    },
+    {
+      "table_id": "F1.white_spaces_experience",
+      "title": "White Spaces - Experience",
+      "role": "data",
+      "grain": "one row per insurance value-chain function/stage",
+      "as_of": "Aug 2020",
+      "summary": "A matrix template listing 20 insurance value-chain functions (rows) that was set up to be scored against segment and line-of-business columns (Personal / Commercial / Specialty, each split by Auto / Property / Liability / Worker's Comp). Only the value-chain function labels are populated; the grid body is entirely empty. In its current state it usefully enumerates the value-chain functions and the intended segment/LOB dimensions, but holds no white-space markings.",
+      "use_cases": [
+        "What insurance value-chain functions/stages are enumerated (from Broker/Agency Management through Risk Control)?",
+        "What segment x line-of-business dimensions were intended for the white-space mapping?"
+      ],
+      "entity_key_col": "Value Chain",
+      "joins": [
+        "F1.insuretch_anlaysis_roopak.Unnamed: 2"
+      ],
+      "duplicate_of": null,
+      "row_count": 20
+    },
+    {
+      "table_id": "F2.captives_in_india",
+      "title": "Captives in India",
+      "role": "data",
+      "grain": "one row per company operating a captive / shared-services center in India",
+      "as_of": "Jun 2021",
+      "summary": "A hand-compiled profile of companies running captive or shared-services operations based in India. Each row names a company and describes its captive footprint: the cities/countries where it operates, headcount (FTEs), the business verticals and functional areas handled, the type of operations, the geographies served, plus narrative notes on internal contacts and how COVID affected the operation. It is a qualitative reference for who has captive centers in India and what those centers do.",
+      "use_cases": [
+        "Which companies run captive/shared-service centers in India?",
+        "Where (which cities) is a given company's captive located and how many FTEs does it have?",
+        "What business verticals and areas of operation does a company's India captive cover?",
+        "Which captives serve global vs US-only geographies?",
+        "What internal contacts or connections do we have at a company's captive?",
+        "How did COVID affect a particular captive's ways of working (WFH/WFO)?"
+      ],
+      "entity_key_col": "Company Name",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group"
+      ],
+      "duplicate_of": null,
+      "row_count": 7
+    },
+    {
+      "table_id": "F2.captives_in_the_philippines",
+      "title": "Captives in the Philippines",
+      "role": "data",
+      "grain": "one row per company operating a captive / shared-services center in the Philippines",
+      "as_of": "Jun 2021",
+      "summary": "A hand-compiled profile of companies running captive or shared-services operations based in the Philippines. Each row names a company and describes its captive footprint: the city/site of operation, headcount (FTEs), the business verticals and functional areas handled, the type of operations, the geographies served, plus narrative notes on internal contacts and how COVID affected the operation. It is a qualitative reference for who has captive centers in the Philippines and what those centers do.",
+      "use_cases": [
+        "Which companies run captive/shared-service centers in the Philippines?",
+        "Where (which city) is a given company's Philippine captive located and how many FTEs does it have?",
+        "What business verticals and areas of operation does a company's Philippine captive cover?",
+        "Which captives serve local (PHP) vs international geographies?",
+        "What internal contacts or connections do we have at a company's Philippine captive?",
+        "What WFH/WFO split did a captive adopt during COVID?"
+      ],
+      "entity_key_col": "Company Name",
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 7
+    },
+    {
+      "table_id": "F3.commercial",
+      "title": "Commercial",
+      "role": "data",
+      "grain": "one row per business function / process area within Commercial lines",
+      "as_of": null,
+      "summary": "A qualitative capability matrix for Commercial lines, with one row per business function (Underwriting Operations, Claims Operations, Finance Operations, Delegated Operations). For each function it captures, in free text, the scale of operations and named clients across regions, the delivery locations, the transformation philosophy and target metrics, the digital solutions offered, partner/collaboration names, and showcase clients with headcounts. It is a narrative reference for what is delivered per function rather than a source of numeric facts.",
+      "use_cases": [
+        "What digital solutions are positioned for Delegated Operations in Commercial lines?",
+        "Which delivery locations support Commercial Claims Operations?",
+        "What is the transformation philosophy and target metrics for Commercial Finance Operations?",
+        "Which partners or collaborations are named for a given Commercial function?",
+        "Which showcase clients are cited for Commercial Underwriting Operations?"
+      ],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 7
+    },
+    {
+      "table_id": "F3.personal_lines",
+      "title": "Personal Lines",
+      "role": "data",
+      "grain": "one row per business function / process area within Personal Lines",
+      "as_of": null,
+      "summary": "A qualitative capability matrix for Personal Lines, with one row per business function (Sales & Service, Underwriting Operations, Claims Operations, Finance Operations, HR Operations). For each function it captures, in free text, the scale of operations and named clients, the delivery locations, the transformation philosophy and target metrics, the digital solutions offered, partner/collaboration names, and showcase clients with headcounts. It is a narrative reference for what is delivered per function rather than a source of numeric facts.",
+      "use_cases": [
+        "What digital solutions are positioned for Claims Operations in Personal Lines?",
+        "Which delivery locations support a given Personal Lines function?",
+        "What is the transformation philosophy and target metrics for Underwriting Operations?",
+        "Which partners or collaborations are named for a given function?",
+        "Which showcase clients and headcounts are cited for a function?"
+      ],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 7
+    },
+    {
+      "table_id": "F4.competitor_wise",
+      "title": "Competitor wise \u2014 Competitor Capabilities by Value-Chain Segment",
+      "role": "data",
+      "grain": "one row per competitor company and value-chain segment (a company expands into several segment rows)",
+      "as_of": null,
+      "summary": "Breaks down each competitor company by the insurance value-chain segment it addresses, with multi-line research notes describing the company's capabilities and offerings in that segment. It lets you profile a competitor's coverage across functions (e.g. underwriting, claims, policy administration) rather than by client.",
+      "use_cases": [
+        "Which value-chain segments does a given competitor (e.g. Genpact) cover?",
+        "What capabilities does a competitor offer in a specific segment (e.g. Claims Management)?",
+        "Which competitors address a particular insurance function/segment?",
+        "Compare the breadth of segment coverage across competitors."
+      ],
+      "entity_key_col": "Company Name",
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 46
+    },
+    {
+      "table_id": "F4.l_a_clientwise",
+      "title": "L&A Clientwise \u2014 Competitors Serving L&A Insurance Clients",
+      "role": "data",
+      "grain": "one row per competitor engaged at a given L&A insurance client (client-to-competitor pairing)",
+      "as_of": null,
+      "summary": "Lists, for each L&A insurance client, the competing service providers active at that client, an approximate size of each competitor's footprint (mostly revenue ranges), the segment/function the competitor supports, and free-text research notes on what the competitor does there. It lets you see which competitors are present at a named client and roughly how large their presence is.",
+      "use_cases": [
+        "Which competitors are engaged at a given L&A client (e.g. Prudential)?",
+        "At which L&A clients does a specific competitor (e.g. Accenture) appear?",
+        "What is the approximate revenue or FTE footprint of a competitor at a client?",
+        "Which functions or segments does a competitor support at an L&A client?",
+        "How many distinct competitors are listed against each L&A client?"
+      ],
+      "entity_key_col": "Client Name",
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 59
+    },
+    {
+      "table_id": "F4.p_c_clientwise",
+      "title": "P&C Clientwise \u2014 Competitors Serving P&C Insurance Clients",
+      "role": "data",
+      "grain": "one row per competitor engaged at a given P&C insurance client (client-to-competitor pairing)",
+      "as_of": null,
+      "summary": "Lists, for each P&C insurance client, the competing service providers active at that client, an approximate size of each competitor's footprint (headcount or revenue), the segment/function the competitor supports, and free-text research notes on what the competitor does there. It lets you see which competitors are present at a named client and roughly how large their presence is.",
+      "use_cases": [
+        "Which competitors are engaged at a given P&C client (e.g. Allstate)?",
+        "At which P&C clients does a specific competitor (e.g. Accenture) appear?",
+        "What is the approximate FTE or revenue footprint of a competitor at a client?",
+        "Which functions or segments does a competitor support at a P&C client?",
+        "How many distinct competitors are listed against each P&C client?"
+      ],
+      "entity_key_col": "Client Name",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "duplicate_of": null,
+      "row_count": 52
+    },
+    {
+      "table_id": "F5.competitor_analysis",
+      "title": "Competitor Analysis",
+      "role": "data",
+      "grain": "one row per outsourced service/process line served by a third-party service provider at a named group (company), with process-area flags and an account-pursuit status",
+      "as_of": "Feb 2021",
+      "summary": "Each row records a group (company) and a third-party service provider engaged for a specific process line, tagged with which functional areas the engagement covers (Claims, UW, Premium Audit, F&A, Platform), an approximate FTE count, and a free-text status/comment on the pursuit. It is an account-tracking sheet mapping which competitor/service provider holds which work at each group, plus contract-renewal timing and an internal owner. It lets you see who is servicing a group, in what process areas, at what scale, and where things stand.",
+      "use_cases": [
+        "Which service providers are engaged at a given group (e.g. Liberty Mutual or Travelers), and in what process areas?",
+        "Which groups does a particular service provider (e.g. CTS, Genpact, Insurity) serve?",
+        "Which engagements cover Claims vs Underwriting (UW) vs F&A vs Premium Audit vs Platform?",
+        "Which accounts have a contract renewal coming up (e.g. < 6 Months)?",
+        "How many FTEs are deployed on a given engagement or across a group?",
+        "Which accounts are flagged Strategic vs Named, and who is the internal owner?"
+      ],
+      "entity_key_col": "GROUP NAME",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "duplicate_of": null,
+      "row_count": 71
+    },
+    {
+      "table_id": "F6.2_data_collection",
+      "title": "P&C Insurance Directory \u2014 Data Collection",
+      "role": "data",
+      "grain": "one row per client process/task delivered by EXL \u2014 a Function (L1) > Function (L2) > Process (L3) > Task at a specific EXL delivery location \u2014 with its staffing, volumes, SLAs, pricing, and transformation notes",
+      "as_of": "Sep 2025",
+      "summary": "The main operational inventory of the workbook: each row is a discrete process or task that EXL runs for a named insurance client at a given delivery location. Columns capture the client and its geography, the EXL delivery site/country and process manager, a four-level process taxonomy (Function L1/L2, Process L3, Task) with a free-text description, business line / line-of-business, staffing counts (billable FTEs, SME/QA/trainer, supervisors, buffer roster, total staff), volumes and handling time, SLAs and quality methodology, pain points, and implemented/planned digital solutions with their expected benefits. It answers who EXL serves, what work is done where, how it is staffed and priced, and what transformation is underway.",
+      "use_cases": [
+        "What processes or tasks does EXL run for a given client (e.g. Nationwide)?",
+        "Total Staff or Billable FTEs by client, function, or EXL delivery location (aggregation/ranking)",
+        "Which delivery countries/sites handle Claims vs Underwriting vs Sales & Service work? (segment/filter)",
+        "What is the pricing model and annual rate for a client's processes?",
+        "Which processes have digital solutions implemented or planned, and what benefits are expected? (filter)",
+        "Average monthly volume, AHT, and SLAs for a specific process or task (lookup)"
+      ],
+      "entity_key_col": "Client",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "duplicate_of": null,
+      "row_count": 811
+    },
+    {
+      "table_id": "F6.claims_data",
+      "title": "Claims Data \u2014 Claim FTEs by Client and Delivery Geography",
+      "role": "data",
+      "grain": "one row per client, with claims-handling headcount (Claim FTEs) split across EXL delivery geographies",
+      "as_of": "Sep 2025",
+      "summary": "A per-client roll-up of claims-handling staff. Each row names a client and gives its total Claim FTEs together with a breakdown of that headcount by delivery geography (India, Philippines, South Africa, US, UK, Colombia) plus a Total. It answers how large each client's claims operation is and where it is delivered.",
+      "use_cases": [
+        "How many Claim FTEs does EXL run for a given client?",
+        "Which clients have the largest claims operations? (ranking)",
+        "How is a client's claims headcount split across delivery countries? (segment)",
+        "Which delivery geography carries the most claims FTEs overall? (aggregation)"
+      ],
+      "entity_key_col": "Client Name",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "duplicate_of": null,
+      "row_count": 45
+    },
+    {
+      "table_id": "F6.p_c_transactional_data",
+      "title": "P&C Transactional Data \u2014 Staff & Volume by Client/Function (Pivot)",
+      "role": "data",
+      "grain": "one row per pivot label \u2014 a client, or a function/sub-function nested under a client \u2014 with summed Total Staff and Average Monthly Volume",
+      "as_of": "Sep 2025",
+      "summary": "A hierarchical pivot summarizing the Data Collection sheet. Row Labels interleave client names with the functions and sub-functions beneath each client, and each row carries the summed Total Staff and summed Average Monthly Volume for that label. It is a quick roll-up of staffing and throughput by client and by function.",
+      "use_cases": [
+        "What is a client's total staff and monthly transaction volume? (lookup)",
+        "Which clients have the highest total staff or volume? (ranking)",
+        "How is a client's staff/volume distributed across functions and sub-functions? (segment)",
+        "Total staff or volume aggregated across all clients (aggregation)"
+      ],
+      "entity_key_col": "Row Labels",
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name"
+      ],
+      "duplicate_of": null,
+      "row_count": 185
+    },
+    {
+      "table_id": "F6.pivot_table",
+      "title": "Function/Sub-function by Business Line (Pivot)",
+      "role": "data",
+      "grain": "one row per function or sub-function (Row Labels), with a summed numeric measure split across business lines",
+      "as_of": "Sep 2025",
+      "summary": "A pivot summarizing an unnamed numeric measure by process taxonomy against business line. Row Labels list functions and their sub-functions; columns give the value for each business line (Commercial & Specialty, Personal, Specialty, Commercial, London Market) plus a Grand Total. It shows how work in each function is distributed across business lines.",
+      "use_cases": [
+        "How is a given function/sub-function split across business lines? (segment)",
+        "Which business line carries the most of a given function? (ranking)",
+        "Grand total for a function or sub-function across all business lines (lookup)"
+      ],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 22
+    },
+    {
+      "table_id": "F6.sheet1",
+      "title": "Function/Sub-function by Delivery Country (Pivot)",
+      "role": "data",
+      "grain": "one row per function or sub-function (Row Labels), with a summed numeric measure split across EXL delivery countries",
+      "as_of": "Sep 2025",
+      "summary": "A pivot summarizing an unnamed numeric measure by process taxonomy against EXL delivery country. Row Labels list functions (e.g. Claims) and their sub-functions (Initiation, Investigation, Evaluation, etc.); columns give the value for Colombia, India, Philippines and South Africa plus a Grand Total. It shows how work in each function is distributed across delivery countries.",
+      "use_cases": [
+        "How is a given function/sub-function distributed across delivery countries? (segment)",
+        "Which delivery country carries the most of a given function? (ranking)",
+        "Grand total for a function or sub-function across all countries (lookup)"
+      ],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 21
+    },
+    {
+      "table_id": "F1.dashboard",
+      "title": "Dashboard (empty scaffold)",
+      "role": "non_data",
+      "grain": null,
+      "as_of": "Aug 2020",
+      "summary": "Empty dashboard sheet: a header band is present but there are zero data rows and no populated columns. Nothing to query.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 0
+    },
+    {
+      "table_id": "F1.home",
+      "title": "Home / cover page",
+      "role": "non_data",
+      "grain": null,
+      "as_of": "Aug 2020",
+      "summary": "Cover/title page ('P&C Solutions and Go-To-Market Strategy'); all data cells empty except workbook meta ('Version 1.5', 'Last Updated' 2020-08-03). No queryable rows.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": 1
+    },
+    {
+      "table_id": "F1.reference_tab_do_not_delete",
+      "title": "Reference Tab - Do not Delete",
+      "role": "non_data",
+      "grain": "not a queryable data table",
+      "as_of": "Aug 2020",
+      "summary": "Reference/data-validation backing tab (named 'Do not Delete') holding solution abbreviation codes and cell-range references (e.g., C21:C24) used to populate dropdown lists elsewhere in the workbook, alongside supporting lists of solution feature names. It is scaffolding for the workbook, not an analyzable table.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": null
+    },
+    {
+      "table_id": "F1.solution_evaluation_criteria",
+      "title": "Solution Evaluation Criteria",
+      "role": "non_data",
+      "grain": "not a queryable data table",
+      "as_of": "Aug 2020",
+      "summary": "Empty scaffold sheet \u2014 no data rows or columns are present.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": null
+    },
+    {
+      "table_id": "F6.1_general_instructions",
+      "title": "1. General Instructions",
+      "role": "non_data",
+      "grain": null,
+      "as_of": "Sep 2025",
+      "summary": "Instruction/legend sheet for filling the Data Collection template: a numbered list of Field Names, each with its Field Type (Drop Down / Free Text) and a Description of what to enter. A worked single-example answer is spread across the far-right columns (all single-value). Not tabular records.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": null
+    },
+    {
+      "table_id": "F6.dropdown_list",
+      "title": "Dropdown List",
+      "role": "non_data",
+      "grain": null,
+      "as_of": "Sep 2025",
+      "summary": "Reference lookup backing the template's drop-down validation. Each column is an independent option list (Functions and the sub-process options under Claims, Underwriting, Sales & Service, Legal Support, etc.). Columns are parallel pick-lists, not fields of a shared row entity, so it is not a row-grain data table.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": null
+    },
+    {
+      "table_id": "F6.sheet2",
+      "title": "Sheet2",
+      "role": "non_data",
+      "grain": null,
+      "as_of": "Sep 2025",
+      "summary": "Small scratch note: three rows under a single 'Missing Data' column listing client/geography entries flagged as missing (e.g. 'Hollard (Philippines)', 'AMIG (Philippines)', 'AA Insurance (India)'). The two leading columns are empty. Near-zero rows; a working note, not a data table.",
+      "use_cases": [],
+      "entity_key_col": null,
+      "joins": [],
+      "duplicate_of": null,
+      "row_count": null
+    }
+  ]
+}

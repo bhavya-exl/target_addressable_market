@@ -1,0 +1,218 @@
+{
+  "table_id": "F1.sheet3",
+  "title": "Client account profiles with executive contacts and financials",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Sheet3",
+    "header_row": 1,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": false,
+  "grain": "one row per client account (company)",
+  "row_count": 14,
+  "summary": "A shortlist of client companies, each with its geography, account tier (Strategic/Named/Other), the assigned client executive, and a roster of named C-suite contacts (CEO, CFO, CRO, CCO, COO, CIO/CTO, CUO). Each row also carries headline financials (gross written premium, growth %, combined ratio), whether the company outsources today, its competitors, and a renewal date/note. Use it to look up who owns an account, who the executive buyers are, and basic financial context.",
+  "use_cases": [
+    "Who is the CEO / CFO / CIO of a given client company?",
+    "Which client executive owns a particular account?",
+    "Which accounts are tagged Strategic vs Named?",
+    "Which clients already outsource today and who are their competitors?",
+    "What is a client's gross written premium, growth %, or combined ratio?"
+  ],
+  "entity_key_col": "Client",
+  "columns": [
+    {
+      "name": "Client",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.top_clients_shortlist.Client",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ]
+    },
+    {
+      "name": "Geography",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Strategic/Named",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "account tier: Named / Strategic / Other"
+    },
+    {
+      "name": "Client Exec",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "assigned account owner (person)"
+    },
+    {
+      "name": "CEO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "CFO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "CRO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 7,
+      "joins": []
+    },
+    {
+      "name": "CCO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 21,
+      "joins": []
+    },
+    {
+      "name": "COO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 7,
+      "joins": []
+    },
+    {
+      "name": "CIO/CTO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "CUO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 71,
+      "joins": [],
+      "note": "71% empty"
+    },
+    {
+      "name": "GWP",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "free-text money values with mixed units ($42,228M, $49.3B, 6.9)"
+    },
+    {
+      "name": "Growth %",
+      "type": "percent",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": [],
+      "note": "fraction, e.g. 0.029 = 2.9%"
+    },
+    {
+      "name": "Combined Ratio (2019)",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "mixed scale/format (1.0708, 88.7, N/A)"
+    },
+    {
+      "name": "Do they outsource today",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 7,
+      "joins": []
+    },
+    {
+      "name": "Competitors",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 7,
+      "joins": [],
+      "note": "comma-separated competitor list"
+    },
+    {
+      "name": "Renewal Date",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 7,
+      "joins": [],
+      "note": "free-text renewal note, not a clean date"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 4,
+      "Client": "American Modern",
+      "Geography": "US",
+      "Strategic/Named": "Named",
+      "Client Exec": "Sean",
+      "CEO": "Andreas Kleiner",
+      "CFO": "Rene Gobanya",
+      "CRO": "Trey Griffith",
+      "CCO": "Eric Hunzinger",
+      "COO": "Paul Schneider",
+      "CIO/CTO": "Bill Gottsacker",
+      "CUO": "Kam Jha",
+      "GWP": "$2.5B",
+      "Growth %": "0.03",
+      "Combined Ratio (2019)": "N/A",
+      "Do they outsource today": "Yes",
+      "Competitors": "TCS",
+      "Renewal Date": "Just signed with us"
+    },
+    {
+      "_source_row": 7,
+      "Client": "IAG",
+      "Geography": "Australia",
+      "Strategic/Named": "Strategic",
+      "Client Exec": "Vilas",
+      "CEO": "Peter Harmer",
+      "CFO": "Nick Hawkins",
+      "CRO": "David Watts",
+      "CIO/CTO": "Neil Morgan",
+      "GWP": "12,135 ($m)",
+      "Growth %": "0.011",
+      "Combined Ratio (2019)": "1.23",
+      "Do they outsource today": "Yes",
+      "Competitors": "WNS",
+      "Renewal Date": "2021-10-01 00:00:00"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What is the contract value or revenue booked for a client?",
+      "reason": "no revenue/TCV column; only GWP and ratios are present"
+    },
+    {
+      "q": "How have these contacts or financials changed over time?",
+      "reason": "single snapshot; no time series"
+    },
+    {
+      "q": "Which specific services/solutions does the client buy?",
+      "reason": "no solution/service column on this sheet"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": []
+}

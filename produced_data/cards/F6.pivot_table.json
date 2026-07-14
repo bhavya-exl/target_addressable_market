@@ -1,0 +1,43 @@
+{
+  "table_id": "F6.pivot_table",
+  "title": "Function/Sub-function by Business Line (Pivot)",
+  "source": {
+    "file": "input_data/PC Insurance Directory - Sep 2025_Final (2).xlsx",
+    "file_alias": "F6",
+    "sheet": "Pivot Table",
+    "header_row": 13,
+    "as_of": "Sep 2025",
+    "captured_date": null
+  },
+  "grain": "one row per function or sub-function (Row Labels), with a summed numeric measure split across business lines",
+  "row_count": 22,
+  "summary": "A pivot summarizing an unnamed numeric measure by process taxonomy against business line. Row Labels list functions and their sub-functions; columns give the value for each business line (Commercial & Specialty, Personal, Specialty, Commercial, London Market) plus a Grand Total. It shows how work in each function is distributed across business lines.",
+  "use_cases": [
+    "How is a given function/sub-function split across business lines? (segment)",
+    "Which business line carries the most of a given function? (ranking)",
+    "Grand total for a function or sub-function across all business lines (lookup)"
+  ],
+  "entity_key_col": null,
+  "columns": [
+    { "name": "Row Labels", "type": "string", "role": "dimension", "null_pct": 0, "joins": [], "note": "functions and sub-functions (process taxonomy)" },
+    { "name": "Commercial & Specialty", "type": "float", "role": "measure", "null_pct": 55, "joins": [] },
+    { "name": "Personal", "type": "float", "role": "measure", "null_pct": 18, "joins": [] },
+    { "name": "Specialty", "type": "float", "role": "measure", "null_pct": 55, "joins": [] },
+    { "name": "Commercial", "type": "float", "role": "measure", "null_pct": 18, "joins": [] },
+    { "name": "London Market", "type": "float", "role": "measure", "null_pct": 77, "joins": [] },
+    { "name": "Grand Total", "type": "float", "role": "measure", "null_pct": 0, "joins": [] }
+  ],
+  "examples": [
+    { "_source_row": 14, "Row Labels": "Claims", "Commercial & Specialty": "6", "Personal": "2682.212945454545", "Specialty": "104.07000000000002", "Commercial": "2028.9779382988409", "London Market": "15", "Grand Total": "4836.260883753386" },
+    { "_source_row": 15, "Row Labels": "Evaluation", "Commercial & Specialty": "6", "Personal": "19.450000000000003", "Specialty": null, "Commercial": "416.7187451249526", "London Market": null, "Grand Total": "442.1687451249526" }
+  ],
+  "not_answerable": [
+    { "q": "Which specific measure is being summed?", "reason": "the sheet labels the values only as a Grand Total; the underlying measure name is not stated on the sheet" },
+    { "q": "Which delivery country or client do these figures belong to?", "reason": "this pivot is cut by business line only; it has no country or client dimension" }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "the summed measure is not labeled on the sheet",
+    "Row Labels mixes function (L1) and sub-function (L2) levels with hierarchical subtotals"
+  ]
+}

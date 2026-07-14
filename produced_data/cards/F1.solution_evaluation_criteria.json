@@ -1,0 +1,22 @@
+{
+  "table_id": "F1.solution_evaluation_criteria",
+  "title": "Solution Evaluation Criteria",
+  "role": "non_data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Solution Evaluation Criteria",
+    "header_row": 1,
+    "two_row_header": false,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "grain": "not a queryable data table",
+  "summary": "Empty scaffold sheet — no data rows or columns are present.",
+  "entity_key_col": null,
+  "columns": [],
+  "duplicate_of": null,
+  "warnings": [
+    "empty or scaffold sheet (no data)"
+  ]
+}

@@ -1,0 +1,436 @@
+{
+  "table_id": "F1.top_insurers_and_brokers",
+  "title": "Top insurers and brokers ranked by net written premium",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Top Insurers and Brokers",
+    "header_row": 6,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": true,
+  "grain": "one row per insurer/broker company (group)",
+  "row_count": 224,
+  "summary": "The master market-sizing table: 224 US insurance carriers and brokers ranked by 2019 net written premium (NWP), with year-over-year % change, 2018/2019 ranks, combined ratio, and premium/rank band buckets. For a subset of priority accounts it also carries relationship tier, the assigned client exec, named C-suite contacts, EXL-relationship flags (EXL Client, EXL competitors, share of wallet, 2020 revenue budget), and an anonymized insuretech-partner code. Use it to rank/segment the market and to see which large carriers are EXL clients.",
+  "use_cases": [
+    "Which insurers/brokers are the largest by 2019 net written premium?",
+    "Rank or filter companies by NWP band or ranking band (Top 10, 11-25, etc.).",
+    "Which companies are flagged as EXL clients, and what is their 2020 revenue budget?",
+    "What is a company's combined ratio or year-over-year premium % change?",
+    "Which companies are carriers vs brokers?",
+    "Who is the client exec / relationship tier for a priority account?"
+  ],
+  "entity_key_col": "Company/ Group",
+  "columns": [
+    {
+      "name": "Growth Leader",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 91,
+      "joins": [],
+      "note": "91% empty; only on priority accounts"
+    },
+    {
+      "name": "Company/ Group",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.top_clients_shortlist.Client",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ]
+    },
+    {
+      "name": "CID",
+      "type": "id",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "internal company id, unique per row"
+    },
+    {
+      "name": "Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "Carrier or Broker"
+    },
+    {
+      "name": "NWP - 2019",
+      "type": "currency_usd",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": [],
+      "note": "net written premium 2019, whole USD"
+    },
+    {
+      "name": "% Change",
+      "type": "percent",
+      "role": "measure",
+      "null_pct": 45,
+      "joins": [],
+      "note": "YoY change, fraction"
+    },
+    {
+      "name": "2018 Rank",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "2019 Rank",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Geography",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "all US"
+    },
+    {
+      "name": "Combined Ratio - 2019",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 92,
+      "joins": [],
+      "note": "percent-scale (e.g. 85 = 85%); 92% empty"
+    },
+    {
+      "name": "Relationship Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 91,
+      "joins": [],
+      "note": "Strategic/Named; only on priority accounts"
+    },
+    {
+      "name": "CE",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 91,
+      "joins": [],
+      "note": "client exec (person)"
+    },
+    {
+      "name": "CEO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 92,
+      "joins": []
+    },
+    {
+      "name": "CFO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 92,
+      "joins": []
+    },
+    {
+      "name": "CRO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 93,
+      "joins": []
+    },
+    {
+      "name": "CCO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 92,
+      "joins": []
+    },
+    {
+      "name": "COO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 93,
+      "joins": []
+    },
+    {
+      "name": "CIO/CTO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 92,
+      "joins": []
+    },
+    {
+      "name": "CUO",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 96,
+      "joins": []
+    },
+    {
+      "name": "Outsource",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 91,
+      "joins": []
+    },
+    {
+      "name": "EXL Competitors",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 93,
+      "joins": [],
+      "note": "comma-separated competitor list"
+    },
+    {
+      "name": "Renewal Date",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 94,
+      "joins": [],
+      "note": "mixed dates and free-text notes"
+    },
+    {
+      "name": "InsureTech Partner 1",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 90,
+      "joins": [],
+      "note": "anonymized codes ITP1/ITP2/ITP3"
+    },
+    {
+      "name": "InsureTech Partner 2",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "InsureTech Partner 3",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "InsureTech Partner 4",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "InsureTech Partner 5",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "TPA Partner 1",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "TPA Partner 2",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "TPA Partner 3",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "TPA Partner 4",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "TPA Partner 5",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "NWP-Range",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "premium band bucket"
+    },
+    {
+      "name": "Ranking Range",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "rank band bucket (Top 10, 11-25, ...)"
+    },
+    {
+      "name": "EXL Client",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 90,
+      "joins": [],
+      "note": "'Yes' where EXL client; else empty"
+    },
+    {
+      "name": "2020-Rev Budget",
+      "type": "currency_usd",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": [],
+      "note": "USD; 0 where none"
+    },
+    {
+      "name": "EXL's Share of Wallet",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 97,
+      "joins": [],
+      "note": "97% empty"
+    },
+    {
+      "name": "Competition Account",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 97,
+      "joins": [],
+      "note": "97% empty"
+    },
+    {
+      "name": "Competition's Share of Wallet",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Relationship Maturity (Yrs)",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Renewal Timeframe",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Future TCV Potential",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Client Priority Rating",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 10,
+      "Growth Leader": "Roopak",
+      "Company/ Group": "Allstate Ins Group",
+      "CID": "4",
+      "Type": "Carrier",
+      "NWP - 2019": "34038467000",
+      "% Change": "0.054",
+      "2018 Rank": "4",
+      "2019 Rank": "4",
+      "Geography": "US",
+      "Combined Ratio - 2019": "85",
+      "Relationship Type": "Strategic",
+      "CE": "Amit Gaba",
+      "CEO": "Tom Wilson",
+      "CFO": "Mario Rizzo",
+      "CRO": "Mark Prindiville",
+      "CCO": "Eric Brandt",
+      "COO": "Glenn Shapiro",
+      "CIO/CTO": "Suren Gupta",
+      "Outsource": "Yes",
+      "EXL Competitors": "Genpact, Fractal",
+      "Renewal Date": "Perpetual MSA",
+      "InsureTech Partner 1": "ITP2",
+      "NWP-Range": "$50B - $B",
+      "Ranking Range": "Top 10",
+      "EXL Client": "Yes",
+      "2020-Rev Budget": "9190553.400011495",
+      "EXL's Share of Wallet": "Medium",
+      "Competition Account": "Yes"
+    },
+    {
+      "_source_row": 8,
+      "Company/ Group": "Berkshire Hathaway Ins",
+      "CID": "2",
+      "Type": "Carrier",
+      "NWP - 2019": "53754763000",
+      "% Change": "0.079",
+      "2018 Rank": "2",
+      "2019 Rank": "2",
+      "Geography": "US",
+      "InsureTech Partner 1": "ITP2",
+      "NWP-Range": "Above $50B",
+      "Ranking Range": "Top 10",
+      "2020-Rev Budget": "0"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What is each company's NWP for years other than 2019?",
+      "reason": "only NWP - 2019 is present; no other year columns populated"
+    },
+    {
+      "q": "Which named insuretech or TPA partners does a company use?",
+      "reason": "partner-1 is an anonymized code; partner 2-5 and all TPA columns are empty"
+    },
+    {
+      "q": "What is EXL's actual booked revenue by company?",
+      "reason": "only a 2020 revenue budget is present, not actuals"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band"
+  ]
+}

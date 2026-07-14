@@ -1,0 +1,67 @@
+{
+  "table_id": "F1.go_to_market_plan",
+  "title": "Go-to-market strategy narrative and critical success factors",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Go-To-Market Plan",
+    "header_row": 8,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": true,
+  "grain": "one row per strategy statement / critical-success-factor bullet",
+  "row_count": 47,
+  "summary": "A free-text outline of the go-to-market strategy, captured as a single column of narrative statements (\"Critical success factors for EXL P&C\") with an occasional outline letter. Rows are strategy bullets such as growth targets, positioning (\"solutions organization vs services organization\"), and what clients are telling us. Mostly a narrative/planning sheet rather than a structured table.",
+  "use_cases": [
+    "What are the stated critical success factors for the P&C go-to-market plan?",
+    "What is the strategic positioning or aspiration described in the plan?",
+    "What are clients telling us according to the GTM narrative?"
+  ],
+  "entity_key_col": null,
+  "columns": [
+    {
+      "name": "A.",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 70,
+      "joins": [],
+      "note": "sparse outline/section marker"
+    },
+    {
+      "name": "Critical success factors for EXL P&C",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 25,
+      "joins": [],
+      "note": "narrative strategy statements"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 15,
+      "A.": "B.",
+      "Critical success factors for EXL P&C": "What are clients telling us"
+    },
+    {
+      "_source_row": 10,
+      "Critical success factors for EXL P&C": "How: Global Market Share - ~20% CAGR; Growth Focus - $500M Annual Revenue; Industry Recognition -Thought Leader, Digital Disruptor"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Which clients or accounts does each statement apply to?",
+      "reason": "no entity/account column; free-text narrative only"
+    },
+    {
+      "q": "What quantitative targets or measures back each factor?",
+      "reason": "no numeric measure columns"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band",
+    "mostly narrative free-text, not a structured entity table"
+  ]
+}

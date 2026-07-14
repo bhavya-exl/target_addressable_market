@@ -1,0 +1,263 @@
+{
+  "table_id": "F1.partnership_landscape",
+  "title": "Partnership Landscape",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Partnership Landscape",
+    "header_row": 7,
+    "two_row_header": false,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "grain": "one row per partner/provider organization assessed",
+  "row_count": 62,
+  "summary": "An assessment of 62 potential partner/provider organizations: what each does, its type (InsurTech / Other / etc.), applicable value chain and function, market, line of business, function/capability, inception year, EXL's 2019 ranking and 2020 rating, and the number of solutions it applies to. A set of solution-mapping flag columns (FNOL, Payments as a Service, Submit to Quote, etc.) mark which EXL solutions each provider supports. Use it to look up a provider, or filter/segment providers by type, solution coverage, or EXL rating.",
+  "use_cases": [
+    "What does a given provider do, and what is its type, market, LOB, and inception year?",
+    "Which providers map to a particular solution (e.g., FNOL, Payments as a Service)?",
+    "Which providers has EXL rated highest (2020 EXL Rating)?",
+    "Segment providers by type (InsurTech vs Other) or by number of solutions they apply to."
+  ],
+  "entity_key_col": "Providers",
+  "columns": [
+    {
+      "name": "Providers",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.insuretch_landscape.InsureTech",
+        "F1.partnerships_and_alliances.otonomo"
+      ],
+      "note": "provider/partner organization name"
+    },
+    {
+      "name": "Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 3,
+      "joins": [],
+      "note": "e.g. InsurTech / Other"
+    },
+    {
+      "name": "What they do",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Value Chain",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "applicable value-chain area(s)"
+    },
+    {
+      "name": "Applicable Function",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Market",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "e.g. Both/Personal"
+    },
+    {
+      "name": "LOB",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Function/Capability",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Inception Year",
+      "type": "year",
+      "role": "attribute",
+      "null_pct": 14,
+      "joins": [],
+      "note": "founding year, e.g. 1975"
+    },
+    {
+      "name": "2019 EXL Ranking",
+      "type": "enum",
+      "role": "measure",
+      "null_pct": 13,
+      "joins": [],
+      "note": "e.g. Not Evaluated / Low / Medium / High"
+    },
+    {
+      "name": "2020 EXL Rating",
+      "type": "enum",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": [],
+      "note": "Low/Medium/High"
+    },
+    {
+      "name": "No of solutions that it aplies to",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": [],
+      "note": "count of solutions the provider maps to"
+    },
+    {
+      "name": "FNOL",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 62,
+      "joins": [],
+      "note": "solution flag: 'Yes' or blank"
+    },
+    {
+      "name": "Payments as a Service",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 75,
+      "joins": [],
+      "note": "solution flag"
+    },
+    {
+      "name": "Worker's Compensation",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 79,
+      "joins": [],
+      "note": "solution flag"
+    },
+    {
+      "name": "Submit to Quote",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 75,
+      "joins": [],
+      "note": "solution flag"
+    },
+    {
+      "name": "Endorsements",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 89,
+      "joins": [],
+      "note": "solution flag"
+    },
+    {
+      "name": "Broker Intake",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 84,
+      "joins": [],
+      "note": "solution flag"
+    },
+    {
+      "name": "Intelligent Collections",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 97,
+      "joins": [],
+      "note": "solution flag"
+    },
+    {
+      "name": "Audit Analytics",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 100,
+      "joins": [],
+      "note": "solution flag; entirely empty"
+    },
+    {
+      "name": "Process Risk Assessment",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 98,
+      "joins": [],
+      "note": "solution flag"
+    },
+    {
+      "name": "Finance Automation",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 89,
+      "joins": [],
+      "note": "solution flag"
+    },
+    {
+      "name": "Transformation Roadmap for Finance Function",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 100,
+      "joins": [],
+      "note": "solution flag; entirely empty"
+    }
+  ],
+  "examples": [
+    {
+      "Providers": "ACI Worldwide",
+      "Type": "Other",
+      "What they do": "Powers electronic payments for more than 6,000 organizations around the world...[truncated]",
+      "Value Chain": "P & C Claims, Finance",
+      "Applicable Function": "Claims Payment, AP",
+      "Market": "Both",
+      "LOB": "All",
+      "Function/Capability": "Payment Platform",
+      "Inception Year": 1975.0,
+      "2019 EXL Ranking": "Not Evaluated",
+      "2020 EXL Rating": "Medium",
+      "No of solutions that it aplies to": 2,
+      "Payments as a Service": "Yes",
+      "Finance Automation": "Yes",
+      "_source_row": 8
+    },
+    {
+      "Providers": "acko (India)",
+      "Type": "InsurTech",
+      "What they do": "A wholly independent digital platform providing general insurance in India, which recently received investment from Amazon...[truncated]",
+      "Value Chain": "Underwriting",
+      "Applicable Function": "Risk Assessment",
+      "Market": "Personal",
+      "LOB": "Auto",
+      "Function/Capability": "Digital Insurer",
+      "2019 EXL Ranking": "Not Evaluated",
+      "2020 EXL Rating": "Low",
+      "No of solutions that it aplies to": 0,
+      "_source_row": 9
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What are the contract terms or fees with each provider?",
+      "reason": "no financial/terms columns"
+    },
+    {
+      "q": "Which providers support Audit Analytics or the Finance Transformation Roadmap solution?",
+      "reason": "those two solution-flag columns are entirely empty"
+    },
+    {
+      "q": "How much revenue does EXL earn through each provider?",
+      "reason": "no revenue column in this table"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "profiler flagged a two-row header, but the actual header is a single row (row 7) with data from row 8; set two_row_header=false so the first provider row is not dropped",
+    "solution-mapping columns (FNOL ... Finance Automation) are sparse 'Yes'/blank flags; 'Audit Analytics' and 'Transformation Roadmap for Finance Function' are entirely empty",
+    "title and description banners occupy rows 1-6; header_row is 7"
+  ]
+}

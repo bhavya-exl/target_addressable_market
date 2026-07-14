@@ -1,0 +1,120 @@
+{
+  "table_id": "F3.personal_lines",
+  "title": "Personal Lines",
+  "source": {
+    "file": "input_data/corpus/Competitor Analysis PL and CL.xlsx",
+    "file_alias": "F3",
+    "sheet": "Personal Lines",
+    "header_row": 2,
+    "as_of": null,
+    "captured_date": null
+  },
+  "grain": "one row per business function / process area within Personal Lines",
+  "row_count": 7,
+  "summary": "A qualitative capability matrix for Personal Lines, with one row per business function (Sales & Service, Underwriting Operations, Claims Operations, Finance Operations, HR Operations). For each function it captures, in free text, the scale of operations and named clients, the delivery locations, the transformation philosophy and target metrics, the digital solutions offered, partner/collaboration names, and showcase clients with headcounts. It is a narrative reference for what is delivered per function rather than a source of numeric facts.",
+  "use_cases": [
+    "What digital solutions are positioned for Claims Operations in Personal Lines?",
+    "Which delivery locations support a given Personal Lines function?",
+    "What is the transformation philosophy and target metrics for Underwriting Operations?",
+    "Which partners or collaborations are named for a given function?",
+    "Which showcase clients and headcounts are cited for a function?"
+  ],
+  "entity_key_col": null,
+  "columns": [
+    {
+      "name": "#",
+      "type": "int",
+      "role": "meta",
+      "null_pct": 38,
+      "joins": [],
+      "note": "sequential row index; blank on spacer/note rows"
+    },
+    {
+      "name": "Function",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 38,
+      "joins": [],
+      "note": "business/process area that labels each row"
+    },
+    {
+      "name": "Scale of the Operations (UK clients)",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 12,
+      "joins": [],
+      "note": "narrative on operational scale; embeds named clients"
+    },
+    {
+      "name": "Delivery Location(s)",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 38,
+      "joins": [],
+      "note": "geographies where the function is delivered"
+    },
+    {
+      "name": "Transformation Philopsophy",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 38,
+      "joins": [],
+      "note": "header misspelled as in source; narrative approach plus target metrics"
+    },
+    {
+      "name": "Digital Solutions",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 38,
+      "joins": [],
+      "note": "bulleted list of solutions/platforms per function"
+    },
+    {
+      "name": "Partnerships / Collaborations",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 50,
+      "joins": [],
+      "note": "named partner firms; frequently blank"
+    },
+    {
+      "name": "Showcase Clients / Capabilities",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 38,
+      "joins": [],
+      "note": "named clients, some with FTE headcounts embedded in text"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 3,
+      "#": "1",
+      "Function": "Sales & Service",
+      "Scale of the Operations (UK clients)": "No other UK based PL insurance client apart from Aviva.",
+      "Delivery Location(s)": "South Africa, India",
+      "Transformation Philopsophy": "Outcome driven transformation aimed at impacting NPS, Efficiency and NWP.\n\nKey Metrics - CSAT, Cost to Serve, Digital Containment, Retention rate, Cross/up selling, Premium Leakage, Online dropout yields, Complaints Reduction, FCR improvement, Call elimination etc.",
+      "Digital Solutions": "Agent Assist (Partner Solution - Uniphore); AI Coaching and Gamification (Partner Solution - Datagamz); Unified Agent Desktop (Appian delivered in-house via WNS Vuram); Knowra+ (Gen AI enabled Knowledge Mgmt.) (Proprietary solution); Unified Analytics Platform (Proprietary Solution); RPA (UIPath/AA/BluePrism); Conversational AI; Skense IDP Solution (Proprietary solution)",
+      "Partnerships / Collaborations": "Uniphore, Datagamz",
+      "Showcase Clients / Capabilities": "Suncorp (500 FTEs across Philippines and India), IAG, Allstate (900 FTEs, not sure how much of this 900 is Sales and Service)"
+    },
+    {
+      "_source_row": 9,
+      "#": null,
+      "Function": null,
+      "Scale of the Operations (UK clients)": "Embedded Analytics would be a theme throughout across process areas.",
+      "Delivery Location(s)": null,
+      "Transformation Philopsophy": null,
+      "Digital Solutions": null,
+      "Partnerships / Collaborations": null,
+      "Showcase Clients / Capabilities": null
+    }
+  ],
+  "not_answerable": [
+    { "q": "What revenue or contract value is tied to each function?", "reason": "no monetary/measure column exists; all fields are qualitative free text" },
+    { "q": "How have these capabilities changed year over year?", "reason": "no date or year column; the sheet is a single undated snapshot" },
+    { "q": "Exactly how many clients does each function serve?", "reason": "clients appear as narrative names inside free text, not as structured counts" }
+  ],
+  "duplicate_of": null,
+  "warnings": ["vintage_unknown", "empty leading column (col0) dropped", "header text 'Transformation Philopsophy' misspelled in source", "trailing spacer/note rows below the data (e.g. source row 9)"]
+}

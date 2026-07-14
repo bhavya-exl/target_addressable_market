@@ -1,0 +1,180 @@
+{
+  "table_id": "F6.claims_data",
+  "title": "Claims Data \u2014 Claim FTEs by Client and Delivery Geography",
+  "source": {
+    "file": "input_data/PC Insurance Directory - Sep 2025_Final (2).xlsx",
+    "file_alias": "F6",
+    "sheet": "Claims Data",
+    "header_row": 2,
+    "as_of": "Sep 2025",
+    "captured_date": null
+  },
+  "grain": "one row per client, with claims-handling headcount (Claim FTEs) split across EXL delivery geographies",
+  "row_count": 45,
+  "summary": "A per-client roll-up of claims-handling staff. Each row names a client and gives its total Claim FTEs together with a breakdown of that headcount by delivery geography (India, Philippines, South Africa, US, UK, Colombia) plus a Total. It answers how large each client's claims operation is and where it is delivered.",
+  "use_cases": [
+    "How many Claim FTEs does EXL run for a given client?",
+    "Which clients have the largest claims operations? (ranking)",
+    "How is a client's claims headcount split across delivery countries? (segment)",
+    "Which delivery geography carries the most claims FTEs overall? (aggregation)"
+  ],
+  "entity_key_col": "Client Name",
+  "columns": [
+    {
+      "name": "col0",
+      "type": "string",
+      "role": "meta",
+      "null_pct": 100,
+      "joins": [],
+      "note": "empty leading column"
+    },
+    {
+      "name": "Client Name",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 2,
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "note": "client; also contains footer/repeat labels ('Total FTEs', 'Client Name', 'Total')"
+    },
+    {
+      "name": "Pseudo Name",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 61,
+      "joins": [],
+      "note": "sparse and misaligned \u2014 sample values are stray labels/numbers ('Initiate', '349'), not clean names"
+    },
+    {
+      "name": "Relationship Since",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 74,
+      "joins": [],
+      "note": "sparse and misaligned \u2014 sample values are stray labels/numbers, not dates"
+    },
+    {
+      "name": "Claim FTEs",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 35,
+      "joins": [],
+      "note": "total claims headcount for the client; stored as text"
+    },
+    {
+      "name": "India",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 41,
+      "joins": [],
+      "note": "claim FTEs delivered from India; stored as text"
+    },
+    {
+      "name": "Philippines",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 46,
+      "joins": [],
+      "note": "claim FTEs delivered from Philippines; stored as text"
+    },
+    {
+      "name": "South Africa",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 30,
+      "joins": [],
+      "note": "claim FTEs delivered from South Africa; stored as text"
+    },
+    {
+      "name": "US",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 91,
+      "joins": []
+    },
+    {
+      "name": "UK",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 98,
+      "joins": [],
+      "note": "mostly empty; only value seen is 0"
+    },
+    {
+      "name": "Colombia",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 93,
+      "joins": []
+    },
+    {
+      "name": "Total",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 52,
+      "joins": [],
+      "note": "row total of geography splits"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 3,
+      "col0": null,
+      "Client Name": "Allstate",
+      "Pseudo Name": null,
+      "Relationship Since": null,
+      "Claim FTEs": "349",
+      "India": null,
+      "Philippines": "186",
+      "South Africa": "163",
+      "US": null,
+      "UK": null,
+      "Colombia": null,
+      "Total": "349"
+    },
+    {
+      "_source_row": 4,
+      "col0": null,
+      "Client Name": "AMIG",
+      "Pseudo Name": null,
+      "Relationship Since": null,
+      "Claim FTEs": "12",
+      "India": "6",
+      "Philippines": "6",
+      "South Africa": null,
+      "US": null,
+      "UK": null,
+      "Colombia": null,
+      "Total": "12"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What processes or tasks make up a client's claims work?",
+      "reason": "this sheet is aggregated to client x geography; process/task detail lives in the 2. Data Collection sheet, not here"
+    },
+    {
+      "q": "What revenue or pricing is tied to these claims FTEs?",
+      "reason": "no financial/pricing columns are present"
+    },
+    {
+      "q": "When did each client relationship begin?",
+      "reason": "the 'Relationship Since' column is sparse and its values are misaligned/non-date"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "leading column 'col0' is entirely empty",
+    "'Pseudo Name' and 'Relationship Since' columns appear misaligned \u2014 they hold stray labels/numbers rather than the values their headers imply",
+    "the 'Client Name' column includes footer/total and repeated-header rows ('Total FTEs', 'Client Name', 'Total')"
+  ]
+}

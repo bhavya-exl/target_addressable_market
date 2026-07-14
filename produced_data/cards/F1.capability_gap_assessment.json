@@ -1,0 +1,174 @@
+{
+  "table_id": "F1.capability_gap_assessment",
+  "title": "Capability gap assessment by solution component (Build/Buy/Partner)",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Capability Gap Assessment ",
+    "header_row": 8,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": true,
+  "grain": "one row per solution component within a solution area",
+  "row_count": 52,
+  "summary": "A capability-gap matrix: each row is a solution component (e.g. Omni Channel Intake, Predictive Analytics, Cloud Hosted) within a solution area (Claim / UW / F&A), with a description, a priority rating (Low/Medium/High), a narrative of the current capability/gap, and Build / Buy / Partner Y-N flags. WARNING: the detected header row holds actual data values, so column headers are unreliable (some are very long narrative strings); read contents structurally. Near-duplicate of another sheet in the workbook.",
+  "use_cases": [
+    "Which solution components have capability gaps and in which solution area?",
+    "What is the priority rating of a given solution component?",
+    "For a component, is the recommended approach Build, Buy, or Partner?",
+    "What is the described current capability or gap for a component?"
+  ],
+  "entity_key_col": "Omni Channel Intake",
+  "columns": [
+    {
+      "name": "1",
+      "type": "int",
+      "role": "meta",
+      "null_pct": 85,
+      "joins": [],
+      "note": "serial index; 85% empty"
+    },
+    {
+      "name": "Claim",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 83,
+      "joins": [],
+      "note": "solution area: Claim / UW / F&A; header is a data value"
+    },
+    {
+      "name": "FNOL-as-a- Service",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 83,
+      "joins": [],
+      "note": "parent solution name; header is a data value; 83% empty"
+    },
+    {
+      "name": "Omni Channel Intake",
+      "type": "string",
+      "role": "entity_key",
+      "null_pct": 23,
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.capability_gap_assessment_2.Solution Components",
+        "F1.capability_gap_assessment_ver2.Solution Components"
+      ],
+      "note": "solution component name; header is a data value"
+    },
+    {
+      "name": "Provides a channel agnostic claim reporting solution for customers (broker and insured)",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 17,
+      "joins": [],
+      "note": "component description; header is a data value"
+    },
+    {
+      "name": "Medium",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 15,
+      "joins": [],
+      "note": "priority rating Medium/High/Low; header is a data value"
+    },
+    {
+      "name": "-Brokers and Insureds want the choice of reporting channels (Mobile, Web, Email, Fax, Phone) and expect a carrier to provide them with all options \n-Carriers and customers desire FNOL set up (claim # assignment) and adjuster assignment as quickly as possible in order to ensure timely investigation, evaluation reserving and resolution.  Anything more than 4 hours is often perceived as too long leading to adverse impacts on the claim and the customer experience.   \n-An FNOL contains a number of data points which are important to capture quickly and accurately so they can be immediately used to predict claim outcomes, properly reserve, report losses to underwriting, price risks and manage aggregate loss costs. \n-Significant effort and cost is needed to convert unstructured, semi-structured and structured documents, embedded files, notes, ACORD forms, scans, images etc...) to useable formats.\n-Customers often complain of insufficient transparency into the claim assignment process.  They do not receive timely notification of the claim number nor the adjuster ID leading to unnecessary phone calls and emails and ultimately poor customer satisfaction.  .  \n-Customers and regulators require data privacy and security for all PHI, PII information shared when reporting a loss.",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 83,
+      "joins": [],
+      "note": "gap / pain-point narrative; header is a very long data value"
+    },
+    {
+      "name": "Capability exists.  \n1. Full scale multi-channel implementation has not been done with any client to date \n2. Mobile interface and reporting does not exist today",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 50,
+      "joins": [],
+      "note": "metrics/benefits narrative; header is a very long data value; mostly empty"
+    },
+    {
+      "name": "Y",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 53,
+      "joins": [],
+      "note": "Build flag (Y/N); header is a data value"
+    },
+    {
+      "name": "N",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 53,
+      "joins": [],
+      "note": "Buy flag (Y/N); header is a data value"
+    },
+    {
+      "name": "N.1",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 53,
+      "joins": [],
+      "note": "Partner flag (Y/N); header is a data value"
+    },
+    {
+      "name": "TAT Non Voice - 95% assigned within 2 hours (most stringent)\n\nAHT - not always measured.  HIG Measures and standard is 4.30.  (Typical AHT across commercial lines is 10 - 20min)\n\nQuality - 88% - 95% DPU and DPO (typical is 90 - 95% DPU)\n\n%Reassignments\nComplaint Ratio\n\nVoice ASA - 70 - 80 % answered within 20 - 25 sec industry might reflect higher)\n\nAbandonment Rate - 2%-7%",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 97,
+      "joins": [],
+      "note": "metrics/benefits narrative; header is a very long data value; mostly empty"
+    },
+    {
+      "name": "-Reduce claim costs - ALAE and ULAE\n\n-Streamline and simplify the process\n\n-Improve accuracy of assignment\n\n-Provide early warning flags for fraud, litigation etc. reducing indemnity and legal cost\n\n-Improve customer experience\n\n-Simplify pricing - price per FNOL - allows for surge capacity and flexibility transferring burden to supplier",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 85,
+      "joins": [],
+      "note": "metrics/benefits narrative; header is a very long data value; mostly empty"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 10,
+      "Omni Channel Intake": "Voice Center of Excellence (COE)",
+      "Provides a channel agnostic claim reporting solution for customers (broker and insured)": "Provides insured/broker with the ability to report claims via phone in a workflow enabled call flow using dynamic scripts, triage and adjuster assignment. \nClaims Inquiry and Provider Help lines may also be part of the module.",
+      "Medium": "Medium",
+      "Capability exists.  \n1. Full scale multi-channel implementation has not been done with any client to date \n2. Mobile interface and reporting does not exist today": "Offshore Voice FNOL capability exists with entry into client platforms.  Gap:  \n1. Front end (Cloud Based) Dynamically scripted FNOL tool to capture loss information to reduce AHT and improve CX\n2. No onshore competitive capability",
+      "Y": "Y",
+      "N": "Y",
+      "N.1": "Y"
+    },
+    {
+      "_source_row": 12,
+      "Omni Channel Intake": "Reports and Dashboards",
+      "Provides a channel agnostic claim reporting solution for customers (broker and insured)": "Provides ability to capture and report real time on TAT, Volume by LOB, Volume by Channel, Quality etc..)",
+      "Medium": "High",
+      "Capability exists.  \n1. Full scale multi-channel implementation has not been done with any client to date \n2. Mobile interface and reporting does not exist today": "None",
+      "Y": "N",
+      "N": "N",
+      "N.1": "N"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Which specific supplier/partner should fill a gap?",
+      "reason": "no supplier column on this sheet (that lives on the Build-Buy-Partner Analysis sheet)"
+    },
+    {
+      "q": "What is the cost or timeline to close a gap?",
+      "reason": "no cost/effort/timeline columns"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band",
+    "trailing space in sheet name 'Capability Gap Assessment '",
+    "near-duplicate column set with: ['Capability Gap Assessment 2']",
+    "header row contains data values (misaligned headers); column names are unreliable",
+    "confirm sheet layout with data owner"
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "table_id": "F1.buyer_priorities",
+  "title": "Buyer priorities and solution mapping by insurer",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Buyer Priorities",
+    "header_row": 9,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": true,
+  "grain": "one row per (insurer, buyer-priority / solution-mapping) entry",
+  "row_count": 35,
+  "summary": "A denormalized mapping of a few insurer groups (e.g. Travelers, Allstate, CNA) to their stated buyer/strategic priorities (e.g. \"Strong Top Line Performance\", \"Optimizing our productivity and efficiency\") and to candidate solution offerings and components (FNOL, PaaS, endorsement processing, voice CoE features) with an initiation status. WARNING: the detected header row contains actual data values, so column headers are unreliable; treat contents structurally and confirm layout with the data owner.",
+  "use_cases": [
+    "What buyer/strategic priorities are recorded for a given insurer?",
+    "Which solution offerings or components are mapped to an insurer's priorities?",
+    "What is the initiation status of a mapped solution for an insurer?"
+  ],
+  "entity_key_col": "Travelers Group",
+  "columns": [
+    {
+      "name": "Travelers Group",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 46,
+      "joins": [
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F2.captives_in_india.Company Name",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "note": "insurer group name; header cell is itself a data value (misaligned header)"
+    },
+    {
+      "name": "CEO",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": [],
+      "note": "all-empty in this file"
+    },
+    {
+      "name": "Alan Schnitzer",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 46,
+      "joins": [],
+      "note": "values are #N/A; header is a data value"
+    },
+    {
+      "name": "US",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 46,
+      "joins": [],
+      "note": "geography; header is a data value"
+    },
+    {
+      "name": "Sean",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 46,
+      "joins": [],
+      "note": "owner (person); header is a data value"
+    },
+    {
+      "name": "Press Release",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 46,
+      "joins": [],
+      "note": "source/channel tag; header is a data value"
+    },
+    {
+      "name": "Optimizing Operating Leverage",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 46,
+      "joins": [],
+      "note": "buyer priority theme; header is a data value"
+    },
+    {
+      "name": "Optimizing our productivity and efficiency",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 46,
+      "joins": [],
+      "note": "buyer priority statement; header is a data value"
+    },
+    {
+      "name": "FNOL",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 71,
+      "joins": [],
+      "note": "solution offering code; header is a data value"
+    },
+    {
+      "name": "Administrative Support and Services",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 71,
+      "joins": [],
+      "note": "solution component; header is a data value"
+    },
+    {
+      "name": "Not Initiated",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 71,
+      "joins": [],
+      "note": "initiation status; header is a data value"
+    },
+    {
+      "name": "DT-WC",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 80,
+      "joins": [],
+      "note": "solution code; header is a data value"
+    },
+    {
+      "name": "FNOL.1",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "solution offering code"
+    },
+    {
+      "name": "Voice Center of Excellence (COE)",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "solution component; header is a data value"
+    },
+    {
+      "name": "CEO.1",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 86,
+      "joins": [],
+      "note": "role-label list; header misaligned"
+    },
+    {
+      "name": "12",
+      "type": "int",
+      "role": "attribute",
+      "null_pct": 86,
+      "joins": [],
+      "note": "index; header is a data value"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 11,
+      "Travelers Group": "Travelers Group",
+      "Alan Schnitzer": "#N/A",
+      "US": "US",
+      "Sean": "Sean",
+      "Press Release": "RM-Meet",
+      "Optimizing Operating Leverage": "Strong Top Line Performance",
+      "Optimizing our productivity and efficiency": "Extending our advantage in risk expertise",
+      "FNOL": "NB_PaaS",
+      "Administrative Support and Services": "Rating",
+      "Not Initiated": "Not Initiated",
+      "DT-WC": "E-E2E",
+      "FNOL.1": "FNOL",
+      "Voice Center of Excellence (COE)": "Cloud Hosted",
+      "CEO.1": "CRO",
+      "12": "14"
+    },
+    {
+      "_source_row": 16,
+      "Travelers Group": "Travelers Group",
+      "Alan Schnitzer": "#N/A",
+      "US": "US",
+      "Sean": "Sean",
+      "Press Release": "RM-Meet",
+      "Optimizing Operating Leverage": "Optimizing Operating Leverage",
+      "Optimizing our productivity and efficiency": "Providing great experiences for our customers, agents and brokers and employees",
+      "FNOL": "FNOL",
+      "Administrative Support and Services": "Automated Entry FNOL capability (Thin Human/Heavy Digital)",
+      "Not Initiated": "Not Initiated",
+      "DT-WC": "Fin-Auto",
+      "FNOL.1": "PaaS",
+      "Voice Center of Excellence (COE)": "Administrative Support and Services"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What are the priorities for insurers not listed here?",
+      "reason": "only ~3 insurer groups appear (46% of rows blank in the entity column)"
+    },
+    {
+      "q": "What revenue or contract value is tied to each priority?",
+      "reason": "no financial columns on this sheet"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band",
+    "header row contains data values (misaligned headers); column names are unreliable",
+    "confirm sheet layout with data owner"
+  ]
+}

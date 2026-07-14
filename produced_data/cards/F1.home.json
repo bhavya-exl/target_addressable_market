@@ -1,0 +1,24 @@
+{
+  "table_id": "F1.home",
+  "title": "Home / cover page",
+  "role": "non_data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "Home",
+    "header_row": 1,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "two_row_header": false,
+  "grain": null,
+  "row_count": 1,
+  "summary": "Cover/title page ('P&C Solutions and Go-To-Market Strategy'); all data cells empty except workbook meta ('Version 1.5', 'Last Updated' 2020-08-03). No queryable rows.",
+  "use_cases": [],
+  "entity_key_col": null,
+  "columns": [],
+  "examples": [],
+  "not_answerable": [],
+  "duplicate_of": null,
+  "warnings": []
+}

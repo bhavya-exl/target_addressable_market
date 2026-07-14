@@ -1,0 +1,152 @@
+{
+  "table_id": "F2.captives_in_the_philippines",
+  "title": "Captives in the Philippines",
+  "source": {
+    "file": "input_data/corpus/Captive Operations Details Jun 2021 v3 - Copy.xlsx",
+    "file_alias": "F2",
+    "sheet": "Captives in the Philippines",
+    "header_row": 2,
+    "as_of": "Jun 2021",
+    "captured_date": null
+  },
+  "grain": "one row per company operating a captive / shared-services center in the Philippines",
+  "row_count": 7,
+  "summary": "A hand-compiled profile of companies running captive or shared-services operations based in the Philippines. Each row names a company and describes its captive footprint: the city/site of operation, headcount (FTEs), the business verticals and functional areas handled, the type of operations, the geographies served, plus narrative notes on internal contacts and how COVID affected the operation. It is a qualitative reference for who has captive centers in the Philippines and what those centers do.",
+  "use_cases": [
+    "Which companies run captive/shared-service centers in the Philippines?",
+    "Where (which city) is a given company's Philippine captive located and how many FTEs does it have?",
+    "What business verticals and areas of operation does a company's Philippine captive cover?",
+    "Which captives serve local (PHP) vs international geographies?",
+    "What internal contacts or connections do we have at a company's Philippine captive?",
+    "What WFH/WFO split did a captive adopt during COVID?"
+  ],
+  "entity_key_col": "Company Name",
+  "columns": [
+    {
+      "name": "S. No.",
+      "type": "int",
+      "role": "meta",
+      "null_pct": 0,
+      "joins": [],
+      "note": "Row serial number, 1-7; not a business measure."
+    },
+    {
+      "name": "Company Name",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [],
+      "note": ""
+    },
+    {
+      "name": "Location",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "City / metro-area site of the captive."
+    },
+    {
+      "name": "No. of FTE's",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 14,
+      "joins": [],
+      "note": "Free-form headcount: exact numbers or approximations ('2000+', '400+'); not a clean numeric; ~14% blank."
+    },
+    {
+      "name": "Vertical/ BU",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "Business unit / vertical (Life, H&A, Group, Bancassurance, etc.)."
+    },
+    {
+      "name": "Areas of Operations",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "Functions performed at the captive (New Business, Claims, contact center, etc.)."
+    },
+    {
+      "name": "Type of Operations",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "Narrative on operation model (in-house back office, BPO, IT shared services, etc.)."
+    },
+    {
+      "name": "Geos Served",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 57,
+      "joins": [],
+      "note": "Geography served (e.g. PHP; UK/EU, US, Australia); majority blank (~57%)."
+    },
+    {
+      "name": "Subjective Commentary",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "Named internal contacts / relationship notes about the captive."
+    },
+    {
+      "name": "COVID's Impact on Operations",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "Narrative on COVID effect / WFH-WFO split."
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 4,
+      "S. No.": "2",
+      "Company Name": "Sun Life of Canada",
+      "Location": "Taguig City, MM",
+      "No. of FTE's": "2000+",
+      "Vertical/ BU": "Life Insurance / H&A Insurance / Group Insurance",
+      "Areas of Operations": "All back-office work from New Business to Claims as well contact center for servicing and claims (PH clientele)",
+      "Type of Operations": "Inhouse back-office work from New Business to Claims\nContact Center - Customer Service (Servicing and Claims)",
+      "Geos Served": "PHP",
+      "Subjective Commentary": "Kshitij Kohli - Head of SunLife's Asia Service Centre (previous SAVP in EXL for TRV)",
+      "COVID's Impact on Operations": "We can connect with Kshitij Kohli to get the numbers"
+    },
+    {
+      "_source_row": 3,
+      "S. No.": "1",
+      "Company Name": "Manulife Data Services Inc.",
+      "Location": "Diliman, Quezon City, MM",
+      "No. of FTE's": null,
+      "Vertical/ BU": "Life Insurance",
+      "Areas of Operations": "Claims, Policy Administration, New Business",
+      "Type of Operations": "BPO, IT Shared Services",
+      "Geos Served": null,
+      "Subjective Commentary": "Connection: Barbara Gatbonton - Head of Business Relationships",
+      "COVID's Impact on Operations": "30% WFO / 70% WFH"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What is the annual revenue or operating cost of each captive?",
+      "reason": "No financial/revenue or cost column exists in the table."
+    },
+    {
+      "q": "When was each captive established, and how has headcount trended over time?",
+      "reason": "No founding-date column and no time series; only a single point-in-time FTE figure."
+    },
+    {
+      "q": "Which captives are located in India?",
+      "reason": "This sheet only covers Philippines-based captives; India captives are in a separate sheet."
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "near-duplicate column set with 'Captives in India' (same schema, different entities/rows)"
+  ]
+}

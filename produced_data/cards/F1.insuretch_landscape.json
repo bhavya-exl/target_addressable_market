@@ -1,0 +1,325 @@
+{
+  "table_id": "F1.insuretch_landscape",
+  "title": "InsureTech Landscape",
+  "role": "data",
+  "source": {
+    "file": "input_data/corpus/20200803 PC-Strategy-Solution Development and GoToMarket PlanVer1.5.xlsx",
+    "file_alias": "F1",
+    "sheet": "InsureTech Landscape",
+    "header_row": 7,
+    "two_row_header": false,
+    "as_of": "Aug 2020",
+    "captured_date": null
+  },
+  "grain": "one row per insurtech company assessed",
+  "row_count": 81,
+  "summary": "An assessment of 81 insurtech companies: what each does, its target market, line of business, vertical, products/business lines supported, funding, digital-disruption level, and industry utility, plus EXL's own 2019 ranking, 2020 rating, and investment-potential judgment. A set of line-of-business flag columns (APD, Worker's Compensation, Healthcare, Life, Pet, Personal, Small/Large Commercial, etc.) mark which LOBs each insurtech touches. Use it to look up or filter/rank insurtechs by market, LOB, category, funding, or EXL rating.",
+  "use_cases": [
+    "What does a given insurtech do, and what market/LOB/vertical and funding does it have?",
+    "Which insurtechs did EXL rate highest (2020 EXL Rating) or see most investment potential in?",
+    "Which insurtechs operate in a given line of business (e.g., APD, Healthcare, Personal)?",
+    "Segment or rank insurtechs by category, vertical, or digital-disruption level."
+  ],
+  "entity_key_col": "InsureTech",
+  "columns": [
+    {
+      "name": "S.No",
+      "type": "int",
+      "role": "meta",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "InsureTech",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F1.build_buy_partner_analysis.Solution Component",
+        "F1.partnership_landscape.Providers"
+      ],
+      "note": "insurtech company name"
+    },
+    {
+      "name": "What they do",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 2,
+      "joins": []
+    },
+    {
+      "name": "Market",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 2,
+      "joins": [],
+      "note": "segment/market, e.g. Personal/Healthcare"
+    },
+    {
+      "name": "LOB",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 2,
+      "joins": [],
+      "note": "line of business"
+    },
+    {
+      "name": "2019 EXL Ranking",
+      "type": "enum",
+      "role": "measure",
+      "null_pct": 2,
+      "joins": [],
+      "note": "Low/Medium/High"
+    },
+    {
+      "name": "2020 EXL Rating",
+      "type": "enum",
+      "role": "measure",
+      "null_pct": 2,
+      "joins": [],
+      "note": "Low/Medium/High; some rows carry a numeric 0"
+    },
+    {
+      "name": "Category",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 2,
+      "joins": [],
+      "note": "e.g. Digital/Telematics/CX"
+    },
+    {
+      "name": "Value Chain",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "comma-separated value-chain stages covered"
+    },
+    {
+      "name": "Market.1",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "second column literally named 'Market'; here geography, e.g. US"
+    },
+    {
+      "name": "Potential Funding",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 1,
+      "joins": [],
+      "note": "funding amount as free text with units, e.g. $925m / $1.3b"
+    },
+    {
+      "name": "Vertical",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 1,
+      "joins": [],
+      "note": "e.g. Health/P&C"
+    },
+    {
+      "name": "Business Lines Supported",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 2,
+      "joins": []
+    },
+    {
+      "name": "Products Supported",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 1,
+      "joins": []
+    },
+    {
+      "name": "Digital Disruption Level",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 1,
+      "joins": []
+    },
+    {
+      "name": "Industry Utility",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 1,
+      "joins": []
+    },
+    {
+      "name": "Product",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 1,
+      "joins": []
+    },
+    {
+      "name": "Market.2",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "third column literally named 'Market'; segment, e.g. Personal/Small Business"
+    },
+    {
+      "name": "EXL Investment Potential",
+      "type": "enum",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": [],
+      "note": "Low/Medium/High"
+    },
+    {
+      "name": "APD",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 33,
+      "joins": [],
+      "note": "LOB flag: 'Yes' or blank"
+    },
+    {
+      "name": "Worker's Compensation",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 90,
+      "joins": [],
+      "note": "LOB flag: 'Yes' or blank"
+    },
+    {
+      "name": "General Liability",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 93,
+      "joins": [],
+      "note": "LOB flag"
+    },
+    {
+      "name": "Healthcare",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 70,
+      "joins": [],
+      "note": "LOB flag"
+    },
+    {
+      "name": "Life",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 83,
+      "joins": [],
+      "note": "LOB flag"
+    },
+    {
+      "name": "Pet",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 98,
+      "joins": [],
+      "note": "LOB flag"
+    },
+    {
+      "name": "Specialty",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 90,
+      "joins": [],
+      "note": "LOB flag"
+    },
+    {
+      "name": "Personal",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 12,
+      "joins": [],
+      "note": "LOB flag"
+    },
+    {
+      "name": "Small Commercial",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 81,
+      "joins": [],
+      "note": "LOB flag"
+    },
+    {
+      "name": "Large/Mid Commercial",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 95,
+      "joins": [],
+      "note": "LOB flag"
+    }
+  ],
+  "examples": [
+    {
+      "S.No": 1,
+      "InsureTech": "Clover Health",
+      "What they do": "A health insurer, utilizing a data driven system to allow for more in-depth personalization...[truncated]",
+      "Market": "Healthcare",
+      "LOB": "Healthcare",
+      "2019 EXL Ranking": "Medium",
+      "2020 EXL Rating": "Medium",
+      "Category": "Digital",
+      "Value Chain": "Policy Acquisition, Policy Underwriting, Policy Servicing, Claims Management, F&A",
+      "Market.1": "US",
+      "Potential Funding": "$925m",
+      "Vertical": "Health",
+      "Business Lines Supported": "Personal",
+      "Products Supported": "Health insurance, Medicare",
+      "Digital Disruption Level": "Digital Customer Engagement",
+      "Industry Utility": "Analytics",
+      "Product": "HealthCare",
+      "Market.2": "Personal",
+      "EXL Investment Potential": "Medium",
+      "Healthcare": "Yes",
+      "Personal": "Yes",
+      "_source_row": 8
+    },
+    {
+      "S.No": 2,
+      "InsureTech": "Metromile",
+      "What they do": "A car insurance company helping low-mileage drivers save money with a pay-per-mile insurance model. Personal auto. Telematics",
+      "Market": "Personal",
+      "LOB": "Auto",
+      "2019 EXL Ranking": "Low",
+      "2020 EXL Rating": "Low",
+      "Category": "Telematics",
+      "Value Chain": "Policy Acquisition, Policy Underwriting, Policy Servicing, Claims Management",
+      "Market.1": "US",
+      "Potential Funding": "$295.5m",
+      "Vertical": "P&C",
+      "Business Lines Supported": "Personal",
+      "Products Supported": "Auto",
+      "Digital Disruption Level": "Digital Data Flows",
+      "Industry Utility": "Telematics",
+      "Product": "Auto",
+      "Market.2": "Personal",
+      "EXL Investment Potential": "Low",
+      "APD": "Yes",
+      "Personal": "Yes",
+      "_source_row": 9
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What is each insurtech's exact annual revenue?",
+      "reason": "only 'Potential Funding' is given as free text; no standardized revenue figure"
+    },
+    {
+      "q": "How did an insurtech's rating trend beyond 2019 and 2020?",
+      "reason": "only 2019 ranking and 2020 rating columns exist"
+    },
+    {
+      "q": "Is a given insurtech an EXL client and how much revenue does it generate?",
+      "reason": "no EXL client/revenue columns in this table"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "three columns are literally named 'Market' -> pandas renames them 'Market'/'Market.1'/'Market.2' with different meanings (segment / geography / segment)",
+    "line-of-business columns (APD, Worker's Compensation, ... Large/Mid Commercial) are sparse 'Yes'/blank flags",
+    "title and description banners occupy rows 1-6; header_row is 7",
+    "'2020 EXL Rating' mixes Low/Medium/High text with a numeric 0 in some rows"
+  ]
+}

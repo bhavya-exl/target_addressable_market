@@ -80,7 +80,7 @@ def main():
     for f in sorted(data_files):
         n += copy(f)
 
-    # 7. zip it
+    # 7. zip the Project bundle
     zip_path = ROOT / "dist" / "tam-project-bundle.zip"
     if zip_path.exists():
         zip_path.unlink()
@@ -88,6 +88,22 @@ def main():
         for p in OUT.rglob("*"):
             if p.is_file():
                 z.write(p, p.relative_to(OUT.parent))
+
+    # 8. one upload-ready .zip per skill (claude.ai Skills wants a zip containing SKILL.md)
+    skills_dir = ROOT / "dist" / "skills"
+    if skills_dir.exists():
+        shutil.rmtree(skills_dir)
+    skills_dir.mkdir(parents=True)
+    for s in ("tam-ingest", "tam-ask", "tam-report"):
+        src = ROOT / ".claude" / "skills" / s
+        if not src.exists():
+            continue
+        sz = skills_dir / f"{s}.zip"
+        with zipfile.ZipFile(sz, "w", zipfile.ZIP_DEFLATED) as z:
+            for p in src.rglob("*"):
+                if p.is_file() and "__pycache__" not in p.parts:
+                    z.write(p, Path(s) / p.relative_to(src))
+    print(f"  skill upload zips: {skills_dir}/{{tam-ingest,tam-ask,tam-report}}.zip")
 
     size_mb = zip_path.stat().st_size / 1e6
     print(f"\nBundle: {OUT}  ({n} files)")

@@ -15,9 +15,11 @@ cited, dated — exactly as in the repo.
 ```
 python3 code/tam/package.py
 ```
-This writes `dist/tam-project-bundle.zip` — skills + engine + cards + alias map + the
-`.tam-root` marker + **only the source spreadsheets the cards actually reference**
-(derived from the cards, so nothing extra ships).
+This writes:
+- `dist/tam-project-bundle.zip` — the Project files (engine + cards + alias map + `.tam-root`
+  marker + **only the source spreadsheets the cards reference**), and
+- `dist/skills/{tam-ingest,tam-ask,tam-report}.zip` — three upload-ready Skill files (each is
+  a zip containing its `SKILL.md`, which is the format claude.ai wants).
 
 **2 — Create the Project.** In claude.ai → Projects → new Project (e.g. "EXL TAM Intelligence").
 Upload the **unzipped** bundle into the Project's files, keeping the folder structure intact.
@@ -30,12 +32,16 @@ tam-project-bundle/
   input_data/…          .claude/skills/…             docs/…
 ```
 
-**3 — Add the Skills.** In Settings → Capabilities → **Skills**, add the three skill folders
-from the bundle (`.claude/skills/tam-ingest`, `tam-ask`, `tam-report`) as org Skills, per the
-current claude.ai Skills upload flow. (If your workspace supports Project-scoped skills, add
-them to the Project instead.)
+**3 — Turn on Skills for the org.** In **Organization settings → Skills**, toggle on both
+**"Code execution and file creation"** and **"Skills."** Then **upload** the three files
+`dist/skills/tam-ingest.zip`, `tam-ask.zip`, `tam-report.zip` (one at a time). Uploaded via
+org settings, they become available to everyone under **Customize → Skills** — reps never
+upload anything themselves.
+(Single user on Pro/Max instead: Settings → Capabilities → enable code execution, then
+Settings → Capabilities → Skills → upload the same three zips.)
 
-**4 — Enable code execution** for the Project (the skills run Python).
+**4 — Confirm code execution is on** for the workspace/Project (the skills run Python).
+Requires a Pro, Max, Team, or Enterprise plan.
 
 **5 — Smoke-test.** In the Project, ask:
 - *"Top 10 EXL clients by revenue"* → Hartford #1 (~$18.4M), **as of Aug 2020**, cited to `F1`.

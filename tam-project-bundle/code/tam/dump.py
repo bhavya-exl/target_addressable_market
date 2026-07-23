@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
 """
-dump.py — universal table profiler (Claude's "eyes" during tam-ingest).
+dump.py — universal document profiler (Claude's "eyes" during tam-ingest).
 
-Deterministic, no LLM. Given any .xlsx/.xlsm/.csv (best-effort .docx/.pptx tables),
-emit a JSON profile per sheet that Claude reads to AUTHOR a schema card:
+Deterministic, no LLM. Detects the file type and emits a JSON profile Claude reads
+to AUTHOR a schema card.
+
+Spreadsheets (.xlsx/.xlsm/.csv/.tsv) — one profile per sheet:
   - detected header row (not assumed to be row 1)
   - per column: inferred type, null %, distinct count, sample values, role hint
   - N sample data rows WITH their real source row numbers (for provenance)
   - anomaly flags: two-row header band, empty/scaffold sheet, near-duplicate sheet
+
+Presentations (.pptx/.pptm) — one profile per DECK (slides are the grain):
+  - per slide: title, text lines/bullets, any tables, speaker notes, image count,
+    with the real 1-based SLIDE NUMBER (for provenance — a slide is retrievable)
+  - deterministic entity_hints (frequency-ranked capitalized phrases + the slides
+    they appear on) — hints Claude curates into the card's entities, never gospel
 
 Usage:
   python3 code/tam/dump.py "<file>" [--sheet NAME] [--rows N] [--json OUT]
@@ -131,6 +139,75 @@ def read_csv(path):
     return {Path(path).stem: grid}
 
 
+# ---------- presentation reader (shared with query.py for grounded retrieval) ----------
+def read_pptx(path):
+    """Extract one dict per slide from a .pptx/.pptm. Deterministic, order-preserving.
+    Each slide dict: {slide (1-based), layout, title, bullets[], text, tables[[...]],
+    notes, n_images, char_count}. Used both by profiling (below) and by query.py to
+    pull a slide's real text at answer time, so retrieval stays grounded in the file."""
+    from pptx import Presentation
+    try:
+        from pptx.enum.shapes import MSO_SHAPE_TYPE
+        PICTURE = MSO_SHAPE_TYPE.PICTURE
+    except Exception:                       # keep working if the enum import shifts
+        PICTURE = 13
+    prs = Presentation(path)
+    slides = []
+    for idx, slide in enumerate(prs.slides, start=1):
+        try:
+            title = slide.shapes.title.text.strip() if slide.shapes.title else None
+        except Exception:
+            title = None
+        bullets, tables, n_images = [], [], 0
+        for shape in slide.shapes:
+            try:
+                if shape.shape_type == PICTURE:
+                    n_images += 1
+            except Exception:
+                pass
+            if getattr(shape, "has_table", False):
+                rows = [[(c.text or "").strip() for c in r.cells] for r in shape.table.rows]
+                tables.append(rows)
+                for r in rows:                       # table text is slide text too
+                    line = " | ".join(x for x in r if x)
+                    if line:
+                        bullets.append(line)
+                continue
+            if getattr(shape, "has_text_frame", False):
+                for p in shape.text_frame.paragraphs:
+                    line = "".join(run.text for run in p.runs).strip() or (p.text or "").strip()
+                    if line:
+                        bullets.append(line)
+        # de-dupe the title line if it also came through as the first bullet
+        if title and bullets and bullets[0].strip() == title.strip():
+            body = bullets[1:]
+        else:
+            body = bullets
+        notes = ""
+        try:
+            if slide.has_notes_slide:
+                notes = (slide.notes_slide.notes_text_frame.text or "").strip()
+        except Exception:
+            notes = ""
+        text = "\n".join(body)               # body only; the title is carried separately
+        try:
+            layout = slide.slide_layout.name
+        except Exception:
+            layout = None
+        slides.append({
+            "slide": idx,
+            "layout": layout,
+            "title": title,
+            "bullets": body,
+            "text": text,
+            "tables": tables,
+            "notes": notes,
+            "n_images": n_images,
+            "char_count": len(text),
+        })
+    return slides
+
+
 # ---------- profiling ----------
 def profile_sheet(name, grid, max_rows=SAMPLE_ROWS):
     # trim fully-empty trailing rows
@@ -200,6 +277,79 @@ def profile_sheet(name, grid, max_rows=SAMPLE_ROWS):
     }
 
 
+# ---------- presentation entity hints (deterministic; Claude curates into entities[]) ----------
+# Common non-entity words that survive capitalization (slide starts, section labels).
+_ENTITY_STOP = {
+    "the", "a", "an", "and", "or", "of", "for", "to", "in", "on", "with", "by", "at", "as",
+    "our", "we", "us", "you", "your", "this", "that", "these", "those", "it", "is", "are",
+    "agenda", "overview", "summary", "introduction", "conclusion", "appendix", "contents",
+    "slide", "page", "title", "note", "notes", "figure", "table", "source", "confidential",
+    "draft", "final", "yes", "no", "tbd", "na", "n/a", "q1", "q2", "q3", "q4",
+}
+_ENTITY_RE = re.compile(r"\b([A-Z][A-Za-z0-9&.\-]*(?:\s+[A-Z][A-Za-z0-9&.\-]*)*)\b")
+
+
+def entity_hints(slides, top=40):
+    """Frequency-ranked capitalized phrases and the slides they appear on. A HINT for
+    Claude — deterministic, domain-blind, never authoritative. Claude decides which are
+    real entities, normalizes them, and writes the 'why'."""
+    hits = {}            # lower -> {"name": display, "count": n, "slides": set}
+    for s in slides:
+        # scan line-by-line so a phrase never spans a line/newline; title once
+        lines = [s.get("title") or ""] + (s.get("bullets") or []) + [s.get("notes") or ""]
+        for line in lines:
+          for m in _ENTITY_RE.finditer(line):
+            phrase = m.group(1).strip(" .-&")
+            if not phrase:
+                continue
+            words = phrase.split()
+            # drop single short/stopword tokens; keep multi-word or ALLCAPS acronyms
+            low = phrase.lower()
+            single = len(words) == 1
+            if single and (low in _ENTITY_STOP or (len(phrase) < 3) or
+                           (not phrase.isupper() and len(phrase) < 4)):
+                continue
+            if all(w.lower() in _ENTITY_STOP for w in words):
+                continue
+            rec = hits.setdefault(low, {"name": phrase, "count": 0, "slides": set()})
+            rec["count"] += 1
+            rec["slides"].add(s["slide"])
+    ranked = sorted(hits.values(), key=lambda r: (-r["count"], -len(r["slides"]), r["name"].lower()))
+    return [{"name": r["name"], "count": r["count"], "slides": sorted(r["slides"])}
+            for r in ranked[:top]]
+
+
+def profile_pptx(path, max_rows=SAMPLE_ROWS):
+    """Deck-level profile: the collective raw material Claude needs to author a deck card
+    (collective summary + per-slide point + curated entities). Slides are the grain."""
+    slides = read_pptx(path)
+    total_chars = sum(s["char_count"] for s in slides)
+    slim = []
+    for s in slides:
+        slim.append({
+            "slide": s["slide"],
+            "layout": s["layout"],
+            "title": s["title"],
+            "bullets": s["bullets"],
+            "n_tables": len(s["tables"]),
+            "tables": s["tables"][:2],          # first couple, for shape; full text is in bullets
+            "has_notes": bool(s["notes"]),
+            "notes": s["notes"],
+            "n_images": s["n_images"],
+            "char_count": s["char_count"],
+        })
+    return {
+        "file": path,
+        "kind": "presentation",
+        "n_slides": len(slides),
+        "total_chars": total_chars,
+        "empty_slides": [s["slide"] for s in slides if s["char_count"] == 0 and s["n_images"] == 0],
+        "slides": slim,
+        "entity_hints": entity_hints(slides),
+        "warnings": (["no extractable text (image-only deck?)"] if total_chars == 0 else []),
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("file")
@@ -209,12 +359,25 @@ def main():
     args = ap.parse_args()
     path = args.file
     ext = Path(path).suffix.lower()
+
+    # ----- presentations: deck profile (slides are the grain, not sheets) -----
+    if ext in (".pptx", ".pptm"):
+        out = profile_pptx(path, max_rows=args.rows)
+        text = json.dumps(out, indent=2, default=str)
+        if args.json:
+            Path(args.json).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.json).write_text(text)
+            print(f"Wrote {args.json}  ({out['n_slides']} slides)")
+        else:
+            print(text)
+        return
+
     if ext in (".xlsx", ".xlsm"):
         sheets = read_xlsx(path)
     elif ext in (".csv", ".tsv"):
         sheets = read_csv(path)
     else:
-        print(f"Unsupported for now: {ext} (xlsx/csv supported; docx/pptx = best-effort TODO)", file=sys.stderr)
+        print(f"Unsupported: {ext} (spreadsheets: xlsx/xlsm/csv/tsv; presentations: pptx/pptm)", file=sys.stderr)
         sys.exit(2)
 
     profiles = []

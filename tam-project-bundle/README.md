@@ -4,11 +4,13 @@ A portable "ask-the-corpus" system for EXL insurance competitive intelligence. I
 Claude answer free-text questions over a set of internal insurance spreadsheets —
 **grounded, cited to file/sheet/row, and dated** — without embedding cell contents.
 
-Instead of RAG over rows, each spreadsheet sheet gets a compact **schema card** (a summary,
-the questions it can answer, typed columns, example rows, and an as-of date). To answer a
-question, Claude scans the small card index, picks the relevant table(s), pulls exact rows
-with a deterministic query script, and composes a cited, dated answer. New files are added by
-the same procedure — no per-file coding.
+Instead of RAG over rows, each source gets a compact **schema card**. A spreadsheet sheet gets
+a table card (a summary, the questions it can answer, typed columns, example rows, an as-of
+date); a **presentation** (.pptx) gets a deck card (a collective summary, a one-line point per
+slide so a single slide is retrievable, and an entities list with why each was mentioned). To
+answer a question, Claude scans the small card index, picks the relevant source(s), pulls exact
+rows (tables) or slides (decks) with a deterministic query script, and composes a cited, dated
+answer. New files — spreadsheets or decks — are added by the same procedure, no per-file coding.
 
 ## Folder map
 
@@ -22,8 +24,10 @@ tam-project-bundle/
 │
 ├─ code/tam/                 The engine (deterministic Python, no domain knowledge).
 │   ├─ tam_root.py           Locates the bundle root via the .tam-root sentinel.
-│   ├─ dump.py               Profiles any .xlsx/.csv (headers, types, samples, anomalies).
-│   ├─ query.py              Header-aware cited query: filter/join/group/sort + provenance.
+│   ├─ dump.py               Profiles .xlsx/.csv (headers, types, samples) OR .pptx (per-slide
+│   │                        text, tables, notes, entity hints).
+│   ├─ query.py              Cited query: table rows (filter/join/group/sort) OR deck slides
+│   │                        (by number/entity/text) + provenance.
 │   ├─ normalize.py          Entity-name normalization over the alias map.
 │   ├─ link.py               Detects joins between tables by value overlap.
 │   ├─ build_index.py        Rebuilds produced_data/cards/index.json.

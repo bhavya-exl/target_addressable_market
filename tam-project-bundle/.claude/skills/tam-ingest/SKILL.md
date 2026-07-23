@@ -1,19 +1,27 @@
 ---
 name: tam-ingest
-description: Ingest a new spreadsheet into the corpus so it becomes queryable. Use when someone adds an .xlsx/.xlsm/.csv file and wants it usable for questions — "ingest this file", "add this data", "profile this workbook". Claude runs a profiler over the file and authors a schema card per table (summary, use-cases, typed columns, real examples, what it can't answer, vintage), then registers it in the card index. The procedure is identical for every file.
+description: Ingest a new file into the corpus so it becomes queryable. Use when someone adds a spreadsheet (.xlsx/.xlsm/.csv) OR a presentation (.pptx/.pptm) and wants it usable for questions — "ingest this file", "add this data", "profile this workbook", "add this deck". Claude detects the file type, runs the profiler, and authors schema cards — one card per table for a spreadsheet (summary, use-cases, typed columns, real examples, what it can't answer, vintage), or one deck card for a presentation (collective summary, a per-slide point so a single slide is retrievable, and an entities list with why each was mentioned) — then registers it in the card index.
 ---
 
-# tam-ingest — turn any spreadsheet into queryable, cited, dated data
+# tam-ingest — turn any file into queryable, cited, dated corpus
 
-**You know nothing about this file except that it is a spreadsheet.** Do not assume any
+**You know almost nothing about the file except its type.** Do not assume any
 industry, company, product, or subject matter. Everything you write in a card MUST be
-derivable from the file itself — its structure and its cell values. Never import outside
+derivable from the file itself — its structure and its content. Never import outside
 knowledge about "what this file probably is." The whole point is that this same procedure
 works on a file no one has seen before.
 
-The point is NOT "read every row" (any tool can dump rows). The point is that when a
-relevant question comes later, `tam-ask` can tell *which* table holds the answer and pull
-*exactly* the right rows — cited and dated. The card is what makes that possible.
+The point is NOT "read everything" (any tool can dump content). The point is that when a
+relevant question comes later, `tam-ask` can tell *which* source holds the answer and pull
+*exactly* the right slice — cited and dated. The card is what makes that possible.
+
+## Detect the file type first
+- Spreadsheet — `.xlsx`, `.xlsm`, `.csv`, `.tsv` → **Track A** (one card per table).
+- Presentation — `.pptx`, `.pptm` → **Track B** (one deck card; slides are the grain).
+
+The profiler (`dump.py`) auto-detects the type and emits the right profile shape; you
+choose which authoring track to follow from the extension. Everything else — aliasing,
+vintage, normalizing entities, indexing, self-verify — is shared.
 
 ## Locating the package
 Paths below are relative to the package root — the folder containing `.tam-root` (the working
@@ -29,61 +37,126 @@ people ingest close together the next rebuild self-heals. (`python3 code/tam/syn
 is an optional health check that just confirms the copy resolves and is writable.)
 
 ## Tools (repo-relative)
-- Profiler:      `python3 code/tam/dump.py "<file>" --json produced_data/cards/_profiles/<alias>.profile.json`
-- Card template: `code/tam/templates/card.template.json`  (structure to fill; content comes from the file)
-- Normalizer:    `python3 code/tam/normalize.py --scan ... | --append ...`
-- Index builder: `python3 code/tam/build_index.py`
-- Link detector: `python3 code/tam/link.py`   (finds joins across tables by value overlap — no domain knowledge)
+- Profiler:       `python3 code/tam/dump.py "<file>" --json produced_data/cards/_profiles/<alias>.profile.json`
+- Card templates: `code/tam/templates/card.template.json` (table) · `code/tam/templates/deck.template.json` (deck)
+- Normalizer:     `python3 code/tam/normalize.py --scan ... | --append ...`
+- Index builder:  `python3 code/tam/build_index.py`
+- Link detector:  `python3 code/tam/link.py`   (finds joins across TABLES by value overlap — no domain knowledge)
 - Query (self-test): `python3 code/tam/query.py --spec <spec.json>`
+- Dependencies: spreadsheets need `openpyxl`/`pandas`; presentations need `python-pptx`
+  (`pip install python-pptx`). Install on demand if a profile/query import fails.
 
-## Procedure (same for every file)
+## Shared steps (both tracks)
 
-1. **Profile** the file with `dump.py`. You get, per sheet: detected `header_row` (not
-   assumed to be row 1), `two_row_header`, columns (inferred type, role hint, null %,
-   distinct, sample values), and `sample_rows` with **real source row numbers**, plus
-   anomaly flags (empty scaffold, near-duplicate column set).
+1. **Assign a file alias** — a short handle carrying no meaning. Use the `F` series for
+   spreadsheets (`F9`, `F10`, …) and the `P` series for presentations (`P1`, `P2`, …), so the
+   source type is obvious at a glance. Check existing aliases in `produced_data/cards/` first.
 
-2. **Assign a file alias** (a short handle like `F6`) — just an identifier, carries no meaning.
+2. **Profile** the file with `dump.py --json produced_data/cards/_profiles/<alias>.profile.json`.
 
 3. **Infer the vintage (`as_of`)** strictly from evidence in the file:
    - dates in the **filename** (e.g. `...Jun 2021...`, `20200803`, `Sep 2025`),
-   - dates in **sheet names / column headers** (e.g. a column literally named `... - 2/21`),
-   - date **values** in the data.
+   - dates in **sheet/slide titles, headers, or footers**,
+   - date **values** in the content.
    Use the most specific reliable one. **If you find no date, set `as_of: null`**, add
-   `"vintage_unknown"` to `warnings`, and note that the data owner should confirm the
-   as-of date. Never invent a date. (This is what lets every answer be dated and lets the
-   system flag stale data for refresh.)
+   `"vintage_unknown"` to `warnings`, and note that the data owner should confirm the as-of
+   date. Never invent a date. (This is what lets every answer be dated and flags stale data.)
 
-4. **Author one card per data table** → `produced_data/cards/<alias>.<slug>.json`
-   (`slug` = sheet name lowercased, non-alphanumeric runs → single underscore).
-   Fill the template using ONLY the file:
-   - `grain`: one clause describing what one row represents (infer from the entity-like column + row shape).
-   - `summary`: 2–3 plain sentences on what the columns collectively represent and what they let you answer. Describe the data as it is; do not editorialize about things not in this table.
-   - `use_cases`: 3–6 questions the columns can answer, phrased naturally (lookup, ranking/aggregation, filter/segment). These are what the router matches on.
-   - `entity_key_col`: the column that best identifies each row (a high-cardinality name/id column at the grain), or null.
-   - `columns`: every meaningful column, with corrected `type` (use the samples: large plain numbers under a money-suggesting header → `currency_usd`; a `%`-bearing column → `percent`; etc.) and `role` (`entity_key|dimension|measure|attribute|meta`). Terse `note` only when non-obvious. Leave `joins` empty — the link detector fills them.
-   - `examples`: pick **2–3 rows structurally** — one fully-populated row and one sparse/edge row — copied from the profile `sample_rows` (keep `_source_row`). Never pick rows by their topic or content.
-   - `not_answerable`: 1–3 questions the table cannot answer, each with the reason (a missing column, no time series, an all-empty field). Derive these from the columns that are absent or empty.
-   - carry `header_row`, `two_row_header`, `duplicate_of`, and `warnings` from the profile.
+4. **Normalize entities:** run new entity names through `normalize.py --scan`. For names not
+   yet mapped, `--append` a variant→canonical row so future joins/filters/mentions resolve to
+   one account. (Track A: the `entity_key_col` values. Track B: the entity names you author.)
 
-5. **Non-data sheets** (nav/home/reference/empty scaffold; profile `role != "data"` or near-zero
-   rows): write a minimal stub card with `"role": "non_data"` and a one-line reason. Still set `as_of`.
+5. **Register:** run `build_index.py` (folds every card into `index.json`). For spreadsheets
+   also run `link.py` first (adds `joins` between tables whose entity columns share values),
+   then rebuild. Presentations have no columns to join, so `link.py` skips them.
 
-6. **Duplicates:** if the profiler flags two sheets with the same column set, keep the one with
-   more populated rows/columns as canonical and set `duplicate_of` on the other (generic rule —
-   based on completeness, not on what the sheet is about).
+---
 
-7. **Normalize entities:** scan the `entity_key_col` values with `normalize.py --scan`. For new
-   entities not yet mapped, `--append` a variant→canonical row so future joins/filters resolve.
+## Track A — spreadsheets (one card per table)
 
-8. **Link & register:** run `link.py` (adds `joins` between tables whose entity columns share
-   values — pure overlap, no assumptions), then `build_index.py` (folds cards + joins into `index.json`).
+The profile gives you, per sheet: detected `header_row` (not assumed row 1), `two_row_header`,
+columns (inferred type, role hint, null %, distinct, sample values), and `sample_rows` with
+**real source row numbers**, plus anomaly flags (empty scaffold, near-duplicate column set).
 
-9. **Self-verify** each data card: for every `use_case`, confirm `query.py` returns non-empty,
-   plausible rows against real columns. If a fair question fails, enrich the card's summary/
-   use_cases (add the missing concept) and retry — do not fix it by dumping rows.
+A1. **Author one card per data table** → `produced_data/cards/<alias>.<slug>.json`
+    (`slug` = sheet name lowercased, non-alphanumeric runs → single underscore).
+    Use `card.template.json`, filled using ONLY the file:
+    - `grain`: one clause describing what one row represents.
+    - `summary`: 2–3 plain sentences on what the columns collectively represent and answer.
+    - `use_cases`: 3–6 questions the columns can answer, phrased naturally (lookup,
+      ranking/aggregation, filter/segment). These are what the router matches on.
+    - `entity_key_col`: the column that best identifies each row, or null.
+    - `columns`: every meaningful column with corrected `type` (use the samples: large plain
+      numbers under a money header → `currency_usd`; a `%` column → `percent`; etc.) and `role`
+      (`entity_key|dimension|measure|attribute|meta`). Terse `note` only when non-obvious.
+      Leave `joins` empty — the link detector fills them.
+    - `examples`: pick **2–3 rows structurally** — one fully-populated, one sparse/edge — copied
+      from the profile `sample_rows` (keep `_source_row`). Never pick rows by their content.
+    - `not_answerable`: 1–3 questions the table cannot answer, each with the reason (a missing
+      column, no time series, an all-empty field).
+    - carry `header_row`, `two_row_header`, `duplicate_of`, and `warnings` from the profile.
+
+A2. **Non-data sheets** (nav/home/reference/empty scaffold; profile `role != "data"` or
+    near-zero rows): write a minimal stub card with `"role": "non_data"` and a one-line reason.
+    Still set `as_of`.
+
+A3. **Duplicates:** if the profiler flags two sheets with the same column set, keep the one
+    with more populated rows/columns as canonical and set `duplicate_of` on the other.
+
+A4. **Self-verify** each data card: for every `use_case`, confirm `query.py` returns non-empty,
+    plausible rows against real columns. If a fair question fails, enrich the card's summary/
+    use_cases (add the missing concept) and retry — do not fix it by dumping rows.
+
+---
+
+## Track B — presentations (one deck card; slides are the grain)
+
+A deck can't be sliced with SQL, so it gets a different card. The profile gives you, per
+**slide** (1-based `slide` number = the provenance unit): `title`, `bullets` (every text line,
+including table cells), `n_tables`/`tables`, `notes` (speaker notes), `n_images`, `char_count`
+— plus `entity_hints`: a deterministic, frequency-ranked list of capitalized phrases and the
+slides they appear on. **Hints are raw material, not answers** — you decide which are real
+entities, normalize them, and write the reason each matters.
+
+Author **one deck card** → `produced_data/cards/<alias>.deck.json` using
+`deck.template.json`, filled using ONLY the slides:
+
+B1. **`summary` — the collective read.** 3–6 plain sentences: what the whole deck is, its
+    purpose / narrative arc, and what it collectively covers. This is the file-level summary a
+    reader gets "after a read." Describe the deck as it is; don't editorialize beyond the slides.
+
+B2. **`slides[]` — one point per slide.** For every slide, one sentence in `point` capturing
+    what that slide contains or asserts (`title` = its heading or null). Keep it faithful and
+    specific enough that "which slide covers X?" resolves to the right `slide` number — this is
+    what makes a single slide individually retrievable. Set `has_table`/`has_notes` from the
+    profile. Cover **every** slide, in order.
+
+B3. **`entities[]` — who/what and why.** Curate the real entities mentioned (companies,
+    people, products/solutions, places, metrics). Skip section labels and generic words the
+    hints will surface. For each: `name` (normalized via `normalize.py`), `type`, `slides` (the
+    slide numbers it appears on), and `why` — a short line on why it appears in THIS deck / its
+    role in the narrative. This is the deck's mention-index.
+
+B4. **`use_cases`:** 3–6 questions this deck is the right source for — e.g. "what does the deck
+    say about <topic>?", "which slide covers <topic>?", "who/what is mentioned and why?". These
+    are what the router matches on.
+
+B5. **`not_answerable`:** 1–3 things the deck can't answer (no numbers behind a claim, a topic
+    absent, an image-only slide with no extractable text), each with the reason.
+
+B6. **Self-verify** the deck card with the query.py deck spec:
+    - by slide: `{"deck_id":"<alias>.deck","slides":[N],"fields":["title","text"]}` returns that
+      slide's real text.
+    - by entity: `{"deck_id":"<alias>.deck","entity":"<a name you authored>"}` returns the
+      slides you listed for it (non-empty).
+    - by text: `{"deck_id":"<alias>.deck","contains":"<a term on a slide>"}` finds it.
+    If a fair retrieval misses, fix the slide `point` / entity `slides` so it resolves — the
+    card must agree with the file.
+
+---
 
 ## Determinism expectation
-Re-ingesting the same file must produce a stable card — same grain, columns, `entity_key_col`,
-and use-case intent. The profiler is fully deterministic; keep authored text faithful to the
-columns so two runs agree.
+Re-ingesting the same file must produce a stable card. The profiler is fully deterministic
+(same sheets/columns/samples for a spreadsheet; same slides/text/entity_hints for a deck);
+keep authored text faithful to the source so two runs agree — same grain/columns/entity_key
+for a table, same per-slide points and entity set for a deck.

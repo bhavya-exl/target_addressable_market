@@ -75,9 +75,11 @@ def main():
             continue
         joins = sorted({j for col in c.get("columns", []) for j in col.get("joins", []) or []})
         src = c.get("source", {}) or {}
+        kind = c.get("kind", "table")       # "table" (spreadsheet) | "presentation"
         entries.append({
             "table_id": c.get("table_id", p.stem),
             "title": c.get("title"),
+            "kind": kind,
             "role": c.get("role", "data"),
             "grain": c.get("grain"),
             "file_alias": src.get("file_alias"),
@@ -89,16 +91,23 @@ def main():
             "joins": joins,
             "duplicate_of": c.get("duplicate_of"),
             "row_count": c.get("row_count"),
+            # presentations: how many slides, and the entities the deck mentions (for routing)
+            "n_slides": src.get("n_slides") if kind == "presentation" else None,
+            "entities": [e.get("name") for e in c.get("entities", [])] if kind == "presentation" else None,
         })
-    # data tables first, then stubs; stable by id
-    entries.sort(key=lambda e: (e["role"] != "data", e["table_id"]))
+    # queryable content first (data tables + presentations), then non-data stubs; stable by id
+    rank = {"data": 0, "presentation": 0}
+    entries.sort(key=lambda e: (rank.get(e["role"], 2), e["table_id"]))
     out = {
         "corpus": "EXL insurance TAM",
         "n_tables": len(entries),
         "n_data_tables": sum(1 for e in entries if e["role"] == "data"),
-        "note": "Routing index. Pick the minimal set of tables by matching a question to "
-                "summary/use_cases; prefer canonical over duplicate_of; then load the full "
-                "card(s) from produced_data/cards/<table_id>.json.",
+        "n_presentations": sum(1 for e in entries if e["kind"] == "presentation"),
+        "note": "Routing index over spreadsheet TABLES and presentation DECKS. Match a "
+                "question to summary/use_cases; prefer canonical over duplicate_of; then load "
+                "the full card from produced_data/cards/<table_id>.json. Tables are queried by "
+                "row (query.py table spec); decks are queried by slide (query.py deck spec, "
+                "deck_id) and every slide is individually retrievable/citable.",
         "tables": entries,
     }
     _write_atomic(CARDS / "index.json", json.dumps(out, indent=2, default=str))

@@ -2,11 +2,13 @@
   "corpus": "EXL insurance TAM",
   "n_tables": 52,
   "n_data_tables": 44,
-  "note": "Routing index. Pick the minimal set of tables by matching a question to summary/use_cases; prefer canonical over duplicate_of; then load the full card(s) from produced_data/cards/<table_id>.json.",
+  "n_presentations": 0,
+  "note": "Routing index over spreadsheet TABLES and presentation DECKS. Match a question to summary/use_cases; prefer canonical over duplicate_of; then load the full card from produced_data/cards/<table_id>.json. Tables are queried by row (query.py table spec); decks are queried by slide (query.py deck spec, deck_id) and every slide is individually retrievable/citable.",
   "tables": [
     {
       "table_id": "F1.build_buy_partner_analysis",
       "title": "Build/Buy/Partner analysis of solution components and suppliers",
+      "kind": "table",
       "role": "data",
       "grain": "one row per solution component evaluated for build/buy/partner",
       "file_alias": "F1",
@@ -29,11 +31,14 @@
         "F1.partnerships_and_alliances.otonomo"
       ],
       "duplicate_of": null,
-      "row_count": 122
+      "row_count": 122,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.buyer_priorities",
       "title": "Buyer priorities and solution mapping by insurer",
+      "kind": "table",
       "role": "data",
       "grain": "one row per (insurer, buyer-priority / solution-mapping) entry",
       "file_alias": "F1",
@@ -59,11 +64,14 @@
         "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
-      "row_count": 35
+      "row_count": 35,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.capability_gap_assessment",
       "title": "Capability gap assessment by solution component (Build/Buy/Partner)",
+      "kind": "table",
       "role": "data",
       "grain": "one row per solution component within a solution area",
       "file_alias": "F1",
@@ -83,11 +91,14 @@
         "F1.capability_gap_assessment_ver2.Solution Components"
       ],
       "duplicate_of": null,
-      "row_count": 52
+      "row_count": 52,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.capability_gap_assessment_2",
       "title": "Capability Gap Assessment 2",
+      "kind": "table",
       "role": "data",
       "grain": "one row per solution component within a solution area; solution-level fields (#, Area, Solutions, Challenges, Benchmarks, Business Outcomes) populated only on each block's lead row",
       "file_alias": "F1",
@@ -107,11 +118,14 @@
         "F1.capability_gap_assessment_ver2.Solution Components"
       ],
       "duplicate_of": null,
-      "row_count": 52
+      "row_count": 52,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.capability_gap_assessment_ver2",
       "title": "Capability Gap Assessment -Ver2",
+      "kind": "table",
       "role": "data",
       "grain": "one row per solution component within a solution area; solution-level fields (#, Area, Solutions, Challenges, Benchmarks, Business Outcomes) populated only on each block's lead row",
       "file_alias": "F1",
@@ -131,11 +145,14 @@
         "F1.capability_gap_assessment_2.Solution Components"
       ],
       "duplicate_of": null,
-      "row_count": 52
+      "row_count": 52,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.client_prioritization_framework",
       "title": "Client Prioritization Framework",
+      "kind": "table",
       "role": "data",
       "grain": "one row per client-prioritization criterion (parameter) with its option buckets",
       "file_alias": "F1",
@@ -150,11 +167,14 @@
       "entity_key_col": "Parameter",
       "joins": [],
       "duplicate_of": null,
-      "row_count": 12
+      "row_count": 12,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.collated_collaterals_list",
       "title": "Collated marketing collateral list with links and authors",
+      "kind": "table",
       "role": "data",
       "grain": "one row per marketing collateral asset",
       "file_alias": "F1",
@@ -170,11 +190,14 @@
       "entity_key_col": "Topic",
       "joins": [],
       "duplicate_of": null,
-      "row_count": 42
+      "row_count": 42,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.competitor_analysis",
       "title": "Competitor footprint at insurer accounts",
+      "kind": "table",
       "role": "data",
       "grain": "one row per (insurer account, service provider, process) engagement",
       "file_alias": "F1",
@@ -201,11 +224,14 @@
         "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
-      "row_count": 71
+      "row_count": 71,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.consolidated_solutions",
       "title": "Consolidated Solutions",
+      "kind": "table",
       "role": "data",
       "grain": "one row within a solution block; each solution offering (in 'Offering') spans several stacked rows that list its modules and its EXL capability-area ratings, with solution-level fields populated only on the block's lead row",
       "file_alias": "F1",
@@ -224,11 +250,14 @@
         "F1.p_c_solutions_list.Offering"
       ],
       "duplicate_of": null,
-      "row_count": 41
+      "row_count": 41,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.go_to_market_plan",
       "title": "Go-to-market strategy narrative and critical success factors",
+      "kind": "table",
       "role": "data",
       "grain": "one row per strategy statement / critical-success-factor bullet",
       "file_alias": "F1",
@@ -243,11 +272,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": 47
+      "row_count": 47,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.insuretch_anlaysis_roopak",
       "title": "Insuretch Anlaysis - Roopak",
+      "kind": "table",
       "role": "data",
       "grain": "one row per value-chain sub-function, describing capability gaps and the kind/need for a partner plus candidate partner companies",
       "file_alias": "F1",
@@ -264,11 +296,14 @@
         "F1.white_spaces_experience.Value Chain"
       ],
       "duplicate_of": null,
-      "row_count": 9
+      "row_count": 9,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.insuretch_landscape",
       "title": "InsureTech Landscape",
+      "kind": "table",
       "role": "data",
       "grain": "one row per insurtech company assessed",
       "file_alias": "F1",
@@ -287,11 +322,14 @@
         "F1.partnership_landscape.Providers"
       ],
       "duplicate_of": null,
-      "row_count": 81
+      "row_count": 81,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.p_c_solutions_list",
       "title": "P&C Solutions List",
+      "kind": "table",
       "role": "data",
       "grain": "one row within a solution block; each solution offering (in 'Offering') spans several stacked rows listing its modules and EXL capability-area ratings, with solution-level fields populated only on the block's lead row",
       "file_alias": "F1",
@@ -309,11 +347,14 @@
         "F1.consolidated_solutions.Offering"
       ],
       "duplicate_of": "F1.consolidated_solutions",
-      "row_count": 41
+      "row_count": 41,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.partnership_landscape",
       "title": "Partnership Landscape",
+      "kind": "table",
       "role": "data",
       "grain": "one row per partner/provider organization assessed",
       "file_alias": "F1",
@@ -333,11 +374,14 @@
         "F1.partnerships_and_alliances.otonomo"
       ],
       "duplicate_of": null,
-      "row_count": 62
+      "row_count": 62,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.partnerships_and_alliances",
       "title": "Partner and alliance landscape with capability and rating",
+      "kind": "table",
       "role": "data",
       "grain": "one row per partner/alliance candidate",
       "file_alias": "F1",
@@ -355,11 +399,14 @@
         "F1.partnership_landscape.Providers"
       ],
       "duplicate_of": null,
-      "row_count": 56
+      "row_count": 56,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.sheet3",
       "title": "Client account profiles with executive contacts and financials",
+      "kind": "table",
       "role": "data",
       "grain": "one row per client account (company)",
       "file_alias": "F1",
@@ -385,11 +432,14 @@
         "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
-      "row_count": 14
+      "row_count": 14,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.top_clients_shortlist",
       "title": "Prioritized shortlist of top client accounts",
+      "kind": "table",
       "role": "data",
       "grain": "one row per shortlisted client account (company)",
       "file_alias": "F1",
@@ -416,11 +466,14 @@
         "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
-      "row_count": 27
+      "row_count": 27,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.top_insurers_and_brokers",
       "title": "Top insurers and brokers ranked by net written premium",
+      "kind": "table",
       "role": "data",
       "grain": "one row per insurer/broker company (group)",
       "file_alias": "F1",
@@ -447,11 +500,14 @@
         "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
-      "row_count": 224
+      "row_count": 224,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.white_spaces_experience",
       "title": "White Spaces - Experience",
+      "kind": "table",
       "role": "data",
       "grain": "one row per insurance value-chain function/stage",
       "file_alias": "F1",
@@ -467,11 +523,14 @@
         "F1.insuretch_anlaysis_roopak.Unnamed: 2"
       ],
       "duplicate_of": null,
-      "row_count": 20
+      "row_count": 20,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F2.captives_in_india",
       "title": "Captives in India",
+      "kind": "table",
       "role": "data",
       "grain": "one row per company operating a captive / shared-services center in India",
       "file_alias": "F2",
@@ -491,11 +550,14 @@
         "F1.buyer_priorities.Travelers Group"
       ],
       "duplicate_of": null,
-      "row_count": 7
+      "row_count": 7,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F2.captives_in_the_philippines",
       "title": "Captives in the Philippines",
+      "kind": "table",
       "role": "data",
       "grain": "one row per company operating a captive / shared-services center in the Philippines",
       "file_alias": "F2",
@@ -513,11 +575,14 @@
       "entity_key_col": "Company Name",
       "joins": [],
       "duplicate_of": null,
-      "row_count": 7
+      "row_count": 7,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F3.commercial",
       "title": "Commercial",
+      "kind": "table",
       "role": "data",
       "grain": "one row per business function / process area within Commercial lines",
       "file_alias": "F3",
@@ -534,11 +599,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": 7
+      "row_count": 7,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F3.personal_lines",
       "title": "Personal Lines",
+      "kind": "table",
       "role": "data",
       "grain": "one row per business function / process area within Personal Lines",
       "file_alias": "F3",
@@ -555,11 +623,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": 7
+      "row_count": 7,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F4.competitor_wise",
       "title": "Competitor wise \u2014 Competitor Capabilities by Value-Chain Segment",
+      "kind": "table",
       "role": "data",
       "grain": "one row per competitor company and value-chain segment (a company expands into several segment rows)",
       "file_alias": "F4",
@@ -575,11 +646,14 @@
       "entity_key_col": "Company Name",
       "joins": [],
       "duplicate_of": null,
-      "row_count": 46
+      "row_count": 46,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F4.l_a_clientwise",
       "title": "L&A Clientwise \u2014 Competitors Serving L&A Insurance Clients",
+      "kind": "table",
       "role": "data",
       "grain": "one row per competitor engaged at a given L&A insurance client (client-to-competitor pairing)",
       "file_alias": "F4",
@@ -607,11 +681,14 @@
         "F8.top_10_client_by_revenue.Top 10 Accounts"
       ],
       "duplicate_of": null,
-      "row_count": 59
+      "row_count": 59,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F4.p_c_clientwise",
       "title": "P&C Clientwise \u2014 Competitors Serving P&C Insurance Clients",
+      "kind": "table",
       "role": "data",
       "grain": "one row per competitor engaged at a given P&C insurance client (client-to-competitor pairing)",
       "file_alias": "F4",
@@ -638,11 +715,14 @@
         "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
-      "row_count": 52
+      "row_count": 52,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F5.competitor_analysis",
       "title": "Competitor Analysis",
+      "kind": "table",
       "role": "data",
       "grain": "one row per outsourced service/process line served by a third-party service provider at a named group (company), with process-area flags and an account-pursuit status",
       "file_alias": "F5",
@@ -670,11 +750,14 @@
         "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
-      "row_count": 71
+      "row_count": 71,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F6.2_data_collection",
       "title": "P&C Insurance Directory \u2014 Data Collection",
+      "kind": "table",
       "role": "data",
       "grain": "one row per client process/task delivered by EXL \u2014 a Function (L1) > Function (L2) > Process (L3) > Task at a specific EXL delivery location \u2014 with its staffing, volumes, SLAs, pricing, and transformation notes",
       "file_alias": "F6",
@@ -702,11 +785,14 @@
         "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
-      "row_count": 811
+      "row_count": 811,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F6.claims_data",
       "title": "Claims Data \u2014 Claim FTEs by Client and Delivery Geography",
+      "kind": "table",
       "role": "data",
       "grain": "one row per client, with claims-handling headcount (Claim FTEs) split across EXL delivery geographies",
       "file_alias": "F6",
@@ -732,11 +818,14 @@
         "F6.p_c_transactional_data.Row Labels"
       ],
       "duplicate_of": null,
-      "row_count": 45
+      "row_count": 45,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F6.p_c_transactional_data",
       "title": "P&C Transactional Data \u2014 Staff & Volume by Client/Function (Pivot)",
+      "kind": "table",
       "role": "data",
       "grain": "one row per pivot label \u2014 a client, or a function/sub-function nested under a client \u2014 with summed Total Staff and Average Monthly Volume",
       "file_alias": "F6",
@@ -762,11 +851,14 @@
         "F6.claims_data.Client Name"
       ],
       "duplicate_of": null,
-      "row_count": 185
+      "row_count": 185,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F6.pivot_table",
       "title": "Function/Sub-function by Business Line (Pivot)",
+      "kind": "table",
       "role": "data",
       "grain": "one row per function or sub-function (Row Labels), with a summed numeric measure split across business lines",
       "file_alias": "F6",
@@ -781,11 +873,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": 22
+      "row_count": 22,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F6.sheet1",
       "title": "Function/Sub-function by Delivery Country (Pivot)",
+      "kind": "table",
       "role": "data",
       "grain": "one row per function or sub-function (Row Labels), with a summed numeric measure split across EXL delivery countries",
       "file_alias": "F6",
@@ -800,11 +895,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": 21
+      "row_count": 21,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.actuarial",
       "title": "Actuarial \u2014 EXL Actuarial & Risk Modelling Engagements",
+      "kind": "table",
       "role": "data",
       "grain": "one row per actuarial/risk-modelling process EXL delivers for an L&A client",
       "file_alias": "F8",
@@ -830,11 +928,14 @@
         "F8.retirement.Client Name"
       ],
       "duplicate_of": null,
-      "row_count": 21
+      "row_count": 21,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.annuity_processes",
       "title": "Annuity Processes \u2014 EXL L&A Delivery Process Inventory",
+      "kind": "table",
       "role": "data",
       "grain": "one row per delivery process EXL runs for an L&A client in this line of business (client \u00d7 named process)",
       "file_alias": "F8",
@@ -863,11 +964,14 @@
         "F8.top_10_client_by_revenue.Top 10 Accounts"
       ],
       "duplicate_of": null,
-      "row_count": 100
+      "row_count": 100,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.client_names",
       "title": "Client Names \u2014 EXL L&A Client Master List",
+      "kind": "table",
       "role": "data",
       "grain": "one row per EXL L&A client name",
       "file_alias": "F8",
@@ -893,11 +997,14 @@
         "F8.top_10_client_by_revenue.Top 10 Accounts"
       ],
       "duplicate_of": null,
-      "row_count": 26
+      "row_count": 26,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.drop_downs",
       "title": "Drop Downs \u2014 Process Category Pick-Lists (Annuities)",
+      "kind": "table",
       "role": "data",
       "grain": "one row per pick-list value; each column is a Level-1 process category (Annuities) whose cells enumerate its Level-2/sub-process options",
       "file_alias": "F8",
@@ -912,11 +1019,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": 50
+      "row_count": 50,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.group",
       "title": "Group \u2014 EXL L&A Delivery Process Inventory",
+      "kind": "table",
       "role": "data",
       "grain": "one row per delivery process EXL runs for an L&A client in this line of business (client \u00d7 named process)",
       "file_alias": "F8",
@@ -945,11 +1055,14 @@
         "F8.top_10_client_by_revenue.Top 10 Accounts"
       ],
       "duplicate_of": null,
-      "row_count": 195
+      "row_count": 195,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.individual_life_processes",
       "title": "Individual Life Processes \u2014 EXL L&A Delivery Process Inventory",
+      "kind": "table",
       "role": "data",
       "grain": "one row per delivery process EXL runs for an L&A client in this line of business (client \u00d7 named process)",
       "file_alias": "F8",
@@ -978,11 +1091,14 @@
         "F8.top_10_client_by_revenue.Top 10 Accounts"
       ],
       "duplicate_of": null,
-      "row_count": 181
+      "row_count": 181,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.owners",
       "title": "Owners \u2014 L&A Process Owners by Delivery Geography",
+      "kind": "table",
       "role": "data",
       "grain": "one row per L&A client, listing the process owner(s) in each delivery geography (India, US, Philippines, South Africa)",
       "file_alias": "F8",
@@ -1009,11 +1125,14 @@
         "F8.top_10_client_by_revenue.Top 10 Accounts"
       ],
       "duplicate_of": null,
-      "row_count": 54
+      "row_count": 54,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.product_merge",
       "title": "Product Merge \u2014 Client \u00d7 Product Coverage",
+      "kind": "table",
       "role": "data",
       "grain": "one row per client-product pairing (a product a client offers, tagged by L&A Type)",
       "file_alias": "F8",
@@ -1040,11 +1159,14 @@
         "F8.top_10_client_by_revenue.Top 10 Accounts"
       ],
       "duplicate_of": null,
-      "row_count": 341
+      "row_count": 341,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.quantifiable_merge",
       "title": "Quantifiable Merge \u2014 Consolidated L&A Process Inventory (All Lines)",
+      "kind": "table",
       "role": "data",
       "grain": "one row per delivery process EXL runs for an L&A client, across all L&A lines, tagged by L&A Type",
       "file_alias": "F8",
@@ -1072,11 +1194,14 @@
         "F8.top_10_client_by_revenue.Top 10 Accounts"
       ],
       "duplicate_of": null,
-      "row_count": 530
+      "row_count": 530,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.retirement",
       "title": "Retirement \u2014 EXL L&A Delivery Process Inventory",
+      "kind": "table",
       "role": "data",
       "grain": "one row per delivery process EXL runs for an L&A client in this line of business (client \u00d7 named process)",
       "file_alias": "F8",
@@ -1105,11 +1230,14 @@
         "F8.top_10_client_by_revenue.Top 10 Accounts"
       ],
       "duplicate_of": null,
-      "row_count": 38
+      "row_count": 38,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.sheet3",
       "title": "Sheet3 \u2014 L&A Process Taxonomy (Level 1/2/3)",
+      "kind": "table",
       "role": "data",
       "grain": "one row per Level-3 process, with its parent Level-1 and Level-2 categories",
       "file_alias": "F8",
@@ -1124,11 +1252,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": 78
+      "row_count": 78,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.top_10_client_by_revenue",
       "title": "Top 10 Client by Revenue \u2014 EXL L&A Accounts (2025)",
+      "kind": "table",
       "role": "data",
       "grain": "one row per top-10 EXL L&A account, with 2025 revenue",
       "file_alias": "F8",
@@ -1154,11 +1285,14 @@
         "F8.retirement.Client Name"
       ],
       "duplicate_of": null,
-      "row_count": 10
+      "row_count": 10,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.dashboard",
       "title": "Dashboard (empty scaffold)",
+      "kind": "table",
       "role": "non_data",
       "grain": null,
       "file_alias": "F1",
@@ -1169,11 +1303,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": 0
+      "row_count": 0,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.home",
       "title": "Home / cover page",
+      "kind": "table",
       "role": "non_data",
       "grain": null,
       "file_alias": "F1",
@@ -1184,11 +1321,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": 1
+      "row_count": 1,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.reference_tab_do_not_delete",
       "title": "Reference Tab - Do not Delete",
+      "kind": "table",
       "role": "non_data",
       "grain": "not a queryable data table",
       "file_alias": "F1",
@@ -1199,11 +1339,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": null
+      "row_count": null,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F1.solution_evaluation_criteria",
       "title": "Solution Evaluation Criteria",
+      "kind": "table",
       "role": "non_data",
       "grain": "not a queryable data table",
       "file_alias": "F1",
@@ -1214,11 +1357,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": null
+      "row_count": null,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F6.1_general_instructions",
       "title": "1. General Instructions",
+      "kind": "table",
       "role": "non_data",
       "grain": null,
       "file_alias": "F6",
@@ -1229,11 +1375,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": null
+      "row_count": null,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F6.dropdown_list",
       "title": "Dropdown List",
+      "kind": "table",
       "role": "non_data",
       "grain": null,
       "file_alias": "F6",
@@ -1244,11 +1393,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": null
+      "row_count": null,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F6.sheet2",
       "title": "Sheet2",
+      "kind": "table",
       "role": "non_data",
       "grain": null,
       "file_alias": "F6",
@@ -1259,11 +1411,14 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": null
+      "row_count": null,
+      "n_slides": null,
+      "entities": null
     },
     {
       "table_id": "F8.pivot",
       "title": "Pivot \u2014 derived summary (non-data)",
+      "kind": "table",
       "role": "non_data",
       "grain": "n/a \u2014 pivot/summary layout",
       "file_alias": "F8",
@@ -1274,7 +1429,9 @@
       "entity_key_col": null,
       "joins": [],
       "duplicate_of": null,
-      "row_count": 20
+      "row_count": 20,
+      "n_slides": null,
+      "entities": null
     }
   ]
 }

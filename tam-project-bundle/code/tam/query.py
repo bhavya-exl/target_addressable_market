@@ -9,7 +9,7 @@ filter -> join -> group/aggregate -> sort -> limit, and return rows WITH:
   - as_of: the table vintage, so every answer can be dated
   - staleness: months old vs. today, + a refresh nudge when stale
 
-QUERY SPEC:
+TABLE QUERY SPEC (spreadsheets):
 {
   "table_id": "F1.top_insurers_and_brokers",
   "select":   ["Company/ Group", "2020-Rev Budget"],        // omit = all columns
@@ -23,6 +23,17 @@ QUERY SPEC:
 }
 ops: == != > < >= <= in nin contains icontains notnull isnull
 
+DECK QUERY SPEC (presentations) — grounded slide retrieval, provenance = slide number:
+{
+  "deck_id":  "P1.deck",
+  "slides":   [3, 5],                 // specific slide numbers (optional)
+  "entity":   "Travelers",            // slides where this entity appears, per the card (optional)
+  "contains": "premium audit",        // case-insensitive text search over slide text+notes (optional)
+  "fields":   ["title", "text", "notes", "tables"],   // default: title + text
+  "limit":    10
+}
+(no filter given -> returns every slide; a slide's real text is re-read from the file.)
+
 Usage:
   python3 code/tam/query.py --spec spec.json          # or pipe spec JSON on stdin
   python3 code/tam/query.py --today 2026-07           # override "now" for staleness
@@ -33,6 +44,7 @@ from datetime import datetime
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import normalize as N
+import dump
 
 from tam_root import resolve_root
 REPO = resolve_root()
@@ -215,6 +227,79 @@ def run(spec, today):
     }
 
 
+def run_deck(spec, today):
+    """Grounded slide retrieval for a presentation card. Re-reads the real .pptx (so
+    returned text is faithful to the file, not the card's paraphrase), filters slides by
+    number / entity / text, and returns them with slide-number provenance + as_of."""
+    card = load_card(spec["deck_id"])
+    src = card["source"]
+    path = REPO / src["file"] if not os.path.isabs(src["file"]) else Path(src["file"])
+    slides = dump.read_pptx(str(path))
+    by_num = {s["slide"]: s for s in slides}
+
+    # entity -> the slides the card says it appears on (authored, normalizable)
+    entity_slides = None
+    if spec.get("entity"):
+        want, _, _ = N.canonical(spec["entity"])
+        want_l = str(want).strip().lower()
+        entity_slides = set()
+        for e in card.get("entities", []):
+            nm, _, _ = N.canonical(e.get("name", ""))
+            if str(nm).strip().lower() == want_l or want_l in str(e.get("name", "")).strip().lower():
+                entity_slides.update(e.get("slides", []))
+
+    contains = (spec.get("contains") or "").strip().lower()
+    wanted_nums = spec.get("slides")
+
+    picked = []
+    for s in slides:
+        if wanted_nums and s["slide"] not in wanted_nums:
+            continue
+        if entity_slides is not None and s["slide"] not in entity_slides:
+            continue
+        if contains:
+            hay = "\n".join([s.get("title") or "", s.get("text") or "", s.get("notes") or ""]).lower()
+            if contains not in hay:
+                continue
+        picked.append(s)
+
+    fields = spec.get("fields") or ["title", "text"]
+    alias = src.get("file_alias")
+    out_slides = []
+    for s in picked:
+        row = {"slide": s["slide"], "_provenance": f'{alias}/slide {s["slide"]}'}
+        for f in fields:
+            if f == "tables":
+                row["tables"] = s["tables"]
+            elif f in s:
+                row[f] = s[f]
+        out_slides.append(row)
+
+    if spec.get("limit"):
+        out_slides = out_slides[: int(spec["limit"])]
+
+    as_of = src.get("as_of")
+    return {
+        "deck_id": spec["deck_id"],
+        "kind": "presentation",
+        "source": {"file": src["file"], "n_slides": src.get("n_slides", len(slides))},
+        "as_of": [as_of] if as_of else [],
+        "staleness": staleness(as_of, today),
+        "n_slides_returned": len(out_slides),
+        "citation": f'{alias}/deck',
+        "provenance_slides": [s["slide"] for s in picked][: int(spec["limit"])] if spec.get("limit")
+                             else [s["slide"] for s in picked],
+        "slides": out_slides,
+    }
+
+
+def dispatch(spec, today):
+    """Route by spec shape: a presentation card is queried by slide, a table by rows."""
+    if "deck_id" in spec:
+        return run_deck(spec, today)
+    return run(spec, today)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--spec", help="path to spec JSON (default: read stdin)")
@@ -224,7 +309,7 @@ def main():
     spec = json.loads(spec_text)
     ty, tm = args.today.split("-")
     today = (int(ty), int(tm))
-    print(json.dumps(run(spec, today), indent=2, default=str))
+    print(json.dumps(dispatch(spec, today), indent=2, default=str))
 
 
 if __name__ == "__main__":

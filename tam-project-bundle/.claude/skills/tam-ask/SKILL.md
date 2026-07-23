@@ -5,9 +5,10 @@ description: Answer any free-text question about EXL's insurance market corpus �
 
 # tam-ask — grounded, cited Q&A over the TAM corpus
 
-You (Claude) are the engine. The corpus is described by compact **schema cards**; a
-deterministic **query script** is your hands for pulling exact, cited rows. Never
-answer corpus questions from memory — route, query, then compose.
+You (Claude) are the engine. The corpus is described by compact **schema cards** — over
+spreadsheet **tables** and presentation **decks** — and a deterministic **query script** is
+your hands for pulling exact, cited content. Never answer corpus questions from memory —
+route, query, then compose.
 
 ## Locating the package
 Paths below are relative to the package root — the folder containing `.tam-root`. In a repo
@@ -24,12 +25,13 @@ that's the working directory. If a command fails because you're not at the root,
 ## Answering workflow
 
 1. **Read the index.** Load `produced_data/cards/index.json`. Each entry has `table_id`,
-   `summary`, `use_cases`, `entity_key_col`, `as_of`, `joins`, `duplicate_of`.
+   `kind` (`table` | `presentation`), `summary`, `use_cases`, `entity_key_col`, `as_of`,
+   `joins`, `duplicate_of`; deck entries also carry `n_slides` and `entities`.
 2. **Classify** the question: `lookup` | `calc` (rank/aggregate) | `reason` (synthesize across
-   tables) | `unanswerable-from-corpus`.
-3. **Select the minimal set of tables** whose `summary`/`use_cases` match. Prefer the
-   canonical table over any `duplicate_of`. Name 1–2 tables and why (for the citation trail).
-4. **Load the full card(s)** for the selected tables — real column names, types, examples.
+   sources) | `unanswerable-from-corpus`.
+3. **Select the minimal set of sources** whose `summary`/`use_cases` match — tables and/or
+   decks. Prefer the canonical table over any `duplicate_of`. Name 1–2 and why (citation trail).
+4. **Load the full card(s)** — real columns/examples (tables), or slide points + entities (decks).
 5. **Normalize any company/entity name** in the question:
    `python3 code/tam/normalize.py --scan "TRV"` → `Travelers Group`. Use the canonical form.
 6. **Emit a QUERY SPEC** (JSON) against real columns and run it:
@@ -42,8 +44,18 @@ that's the working directory. If a command fails because you're not at the root,
    Spec ops: `== != > < >= <= in nin contains icontains notnull isnull`; plus
    `group_by`, `aggregate:[{col,fn,as}]`, `sort`, `limit`, `normalize:[cols]`,
    `join:{table_id,left_on,right_on,select}`. See a card's `use_cases` for hints.
-7. **Sanity-check** the result (row count, plausibility). If empty/implausible, re-route
-   (maybe the wrong table) or downgrade to `reason`.
+
+   **For a deck** (`kind: presentation`), emit a DECK SPEC with `deck_id` instead — it
+   re-reads the real slides and returns their text with slide-number provenance:
+   ```
+   echo '{"deck_id":"P1.deck","entity":"Travelers","fields":["title","text","notes"]}' \
+        | python3 code/tam/query.py
+   ```
+   Deck keys: `slides:[N]` (specific slide numbers), `entity` (slides mentioning it, per the
+   card — normalized), `contains` (case-insensitive text search), `fields`, `limit`. Use the
+   card's `slides[].point` to pick which slide(s) to pull, and `entities[]` for who/why.
+7. **Sanity-check** the result (row/slide count, plausibility). If empty/implausible, re-route
+   (maybe the wrong source) or downgrade to `reason`.
 8. **Compose the answer** under the output contract below.
 
 ## Output contract (non-negotiable)
@@ -52,8 +64,10 @@ that's the working directory. If a command fails because you're not at the root,
   *"As of **Aug 2020** (F1)…"*. When the result's `staleness.stale` is true, append the
   `staleness.note` (a nudge to refresh). If you combined tables of different vintages, state
   the range and name the oldest.
-- **Cite every fact.** Trace to `file_alias / sheet / row` using the result's `citation` and
-  `provenance_rows` (e.g. `F5/Competitor Analysis/R8`). No citation → don't state it.
+- **Cite every fact.** For a table, trace to `file_alias / sheet / row` using the result's
+  `citation` and `provenance_rows` (e.g. `F5/Competitor Analysis/R8`). For a deck, trace to
+  `file_alias / slide N` using `provenance_slides` (e.g. `P1/slide 4`). No citation → don't
+  state it.
 - **Normalize names** so "TRV"/"Travelers Companies Inc." read as one account.
 - **Use the vocabulary the data itself uses** — the entity names, product/solution names,
   and terms found in the cards and cells. Don't import outside jargon; don't assume a domain.

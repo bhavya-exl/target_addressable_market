@@ -1,0 +1,40 @@
+{
+  "table_id": "<file_alias>.image                   // stable id, one card per image, e.g. I1.image",
+  "kind": "image",
+  "role": "image",
+  "title": "<human title — what the image is (from its content / filename)>",
+  "source": {
+    "file": "<repo-relative path to the source image>",
+    "file_alias": "<I1..In or new alias>",
+    "width": 0,
+    "height": 0,
+    "as_of": "<image vintage — ALWAYS set; dates every answer built on the image>",
+    "as_of_basis": "<stated | inferred | unknown — how the vintage was determined>",
+    "captured_date": "<optional: capture time from EXIF/metadata, if present>"
+  },
+  "summary": "<3-6 plain sentences: what the image shows and what it is FOR. Written after a DIRECT visual read of the image, not just OCR. Derivable only from the image.>",
+  "transcript": "<the text visible in the image, verbatim-ish (OCR cross-checked by a visual read). This is the grounded artifact query.py returns. For a chart, transcribe axis labels, series, and any printed values.>",
+  "use_cases": [
+    "<a real question this image is the right source for>",
+    "<another — 'what does the chart show for X', 'who/what is depicted', 'what value does it give for Y'>"
+  ],
+  "entities": [
+    {
+      "name": "<canonical entity name (normalize company/person names via aliases.csv)>",
+      "type": "company|person|product|solution|place|metric|other",
+      "why": "<short: why this entity appears in the image / its role>"
+    }
+  ],
+  "content_dates": [
+    {
+      "value": "<a date the image's data refers to, e.g. '2024' or 'Q3 2025'>",
+      "basis": "<stated (printed on the image / in metadata) | inferred (from context)>",
+      "note": "<what datapoint this date attaches to, e.g. 'x-axis 2020-2024' or 'footer as-of'>"
+    }
+  ],
+  "not_answerable": [
+    { "q": "<a plausible question this image CANNOT answer>", "reason": "<what is absent / illegible>" }
+  ],
+  "duplicate_of": null,
+  "warnings": ["<no-OCR-engine | low-legibility | image-only-no-text | vintage_unknown | ...>"]
+}

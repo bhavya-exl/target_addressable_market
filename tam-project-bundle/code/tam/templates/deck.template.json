@@ -7,7 +7,8 @@
     "file": "<repo-relative path to the source .pptx>",
     "file_alias": "<P1..Pn or new alias>",
     "n_slides": 0,
-    "as_of": "<vintage, e.g. 'Sep 2025' — ALWAYS set; this dates every answer built on the deck>",
+    "as_of": "<deck vintage, e.g. 'Sep 2025' — ALWAYS set; dates every answer built on the deck>",
+    "as_of_basis": "<stated | inferred | unknown — how the deck vintage was determined>",
     "captured_date": "<optional: when the content was collected, if different from as_of>"
   },
   "summary": "<the COLLECTIVE summary: 3-6 plain sentences on what the whole deck is, its purpose/narrative arc, and what it collectively covers. Derivable ONLY from the slides.>",
@@ -20,6 +21,8 @@
       "slide": 1,
       "title": "<slide heading, or null>",
       "point": "<ONE sentence: what this slide contains / asserts. This is what lets a single slide be retrieved.>",
+      "as_of": "<the date THIS slide's datapoints refer to (may differ from the deck vintage); null if none>",
+      "as_of_basis": "<stated (a date on the slide) | inferred (from context) | inherited (deck vintage) | unknown>",
       "has_table": false,
       "has_notes": false
     }

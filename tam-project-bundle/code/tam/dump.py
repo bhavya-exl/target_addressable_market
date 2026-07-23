@@ -14,8 +14,17 @@ Spreadsheets (.xlsx/.xlsm/.csv/.tsv) — one profile per sheet:
 Presentations (.pptx/.pptm) — one profile per DECK (slides are the grain):
   - per slide: title, text lines/bullets, any tables, speaker notes, image count,
     with the real 1-based SLIDE NUMBER (for provenance — a slide is retrievable)
+  - per slide: date_candidates (dates found ON the slide) for per-datapoint temporality
   - deterministic entity_hints (frequency-ranked capitalized phrases + the slides
     they appear on) — hints Claude curates into the card's entities, never gospel
+
+Images (.png/.jpg/.jpeg/.webp/.tif/.bmp/.gif) — one profile per IMAGE (the file is the unit):
+  - dimensions/mode/format, OCR'd text (if a tesseract engine is available),
+    metadata dates (EXIF / PNG text chunks), and date candidates from OCR/filename/metadata
+  - Claude authors the card from this PLUS a direct visual read of the image
+
+Every profile surfaces temporality (date_candidates / meta_dates) so each datapoint can be
+dated and marked stated (literally in the source) vs inferred.
 
 Usage:
   python3 code/tam/dump.py "<file>" [--sheet NAME] [--rows N] [--json OUT]
@@ -26,6 +35,38 @@ from datetime import datetime, date
 
 SAMPLE_ROWS = 6
 HEADER_SCAN = 15          # how many top rows to consider as a possible header
+IMAGE_EXT = (".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff", ".bmp", ".gif")
+
+
+# ---------- temporality: deterministic date-candidate scanner (shared) ----------
+# Finds date-like strings so Claude can assign a date to each datapoint and mark it
+# stated (literally in the source) vs inferred. Domain-blind; Claude curates.
+_MONTHS_RE = r"(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|" \
+             r"aug(?:ust)?|sep(?:t)?(?:ember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)"
+_DATE_PATTERNS = [
+    re.compile(r"\b\d{4}-\d{2}-\d{2}\b"),                                  # 2025-09-01
+    re.compile(r"\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b"),                      # 9/1/25, 01-09-2025
+    re.compile(rf"\b{_MONTHS_RE}\.?\s*'?\d{{2,4}}\b", re.I),               # Sep 2025, Sept'21
+    re.compile(rf"\b\d{{1,2}}\s+{_MONTHS_RE}\.?\s*'?\d{{2,4}}\b", re.I),   # 3 Aug 2020
+    re.compile(r"\b(?:FY|CY|Q[1-4])\s*['\-]?\s*(?:FY)?\s*\d{2,4}\b", re.I),# FY26, Q3 2025
+    re.compile(r"\b\d{4}\s*Q[1-4]\b", re.I),                              # 2025 Q3
+    re.compile(r"\b(?:19|20)\d{2}\b"),                                     # bare year 2020
+]
+
+
+def find_dates(*texts):
+    """Return unique date-like strings found across the given texts, in first-seen order."""
+    seen, out = set(), []
+    for t in texts:
+        if not t:
+            continue
+        for pat in _DATE_PATTERNS:
+            for m in pat.finditer(str(t)):
+                v = m.group(0).strip()
+                key = v.lower()
+                if key not in seen:
+                    seen.add(key); out.append(v)
+    return out
 
 
 # ---------- type inference ----------
@@ -319,6 +360,70 @@ def entity_hints(slides, top=40):
             for r in ranked[:top]]
 
 
+# ---------- image reader / profiler (OCR + metadata) ----------
+_EXIF_DATE_TAGS = {306: "DateTime", 36867: "DateTimeOriginal", 36868: "DateTimeDigitized"}
+
+
+def read_image(path):
+    """Extract deterministic material from a raster image: dimensions, embedded
+    metadata dates (EXIF / PNG text chunks), and OCR'd text if a tesseract engine is
+    available. Metadata dates are STATED temporality; OCR'd dates are content dates that
+    may be stated (a label on the image) — Claude decides. Vision-level understanding is
+    left to Claude reading the image directly (see the tam-ingest image track)."""
+    from PIL import Image
+    info = {"file": path, "kind": "image", "ocr_available": False, "ocr_text": None,
+            "meta_dates": [], "warnings": []}
+    try:
+        img = Image.open(path)
+    except Exception as e:
+        info["warnings"].append(f"could not open image: {e}")
+        return info
+    info["width"], info["height"] = img.size
+    info["mode"], info["format"] = img.mode, img.format
+
+    # EXIF dates (JPEG/TIFF) — stated capture time in the file's metadata
+    try:
+        exif = img.getexif()
+        for tag, name in _EXIF_DATE_TAGS.items():
+            v = exif.get(tag)
+            if v:
+                info["meta_dates"].append({"source": f"exif:{name}", "value": str(v).strip()})
+    except Exception:
+        pass
+    # PNG text chunks (e.g. 'Creation Time', 'date') — stated in the file's metadata
+    try:
+        for k, v in (getattr(img, "text", {}) or {}).items():
+            if any(d in k.lower() for d in ("date", "time", "created")):
+                info["meta_dates"].append({"source": f"png:{k}", "value": str(v).strip()})
+    except Exception:
+        pass
+
+    # OCR (deterministic best-effort; engine optional)
+    try:
+        import pytesseract
+        info["ocr_text"] = (pytesseract.image_to_string(img) or "").strip() or None
+        info["ocr_available"] = True
+    except Exception as e:
+        info["warnings"].append(f"OCR engine unavailable ({e.__class__.__name__}); "
+                                "author the transcript/summary by reading the image directly")
+    return info
+
+
+def profile_image(path):
+    """Image profile: metadata + OCR text + date candidates. Slides/rows have a natural
+    provenance unit; an image is one unit (the file). Claude authors an image card from
+    this PLUS a direct visual read of the image."""
+    info = read_image(path)
+    ocr = info.get("ocr_text") or ""
+    meta_date_vals = [d["value"] for d in info.get("meta_dates", [])]
+    info["content_date_candidates"] = find_dates(ocr)                 # dates OCR'd from the image
+    info["filename_date_candidates"] = find_dates(Path(path).name)    # a date in the filename
+    info["meta_date_candidates"] = find_dates(*meta_date_vals)         # dates from file metadata
+    if not ocr and info.get("ocr_available"):
+        info["warnings"].append("OCR produced no text (photo/diagram?); rely on a direct visual read")
+    return info
+
+
 def profile_pptx(path, max_rows=SAMPLE_ROWS):
     """Deck-level profile: the collective raw material Claude needs to author a deck card
     (collective summary + per-slide point + curated entities). Slides are the grain."""
@@ -326,6 +431,8 @@ def profile_pptx(path, max_rows=SAMPLE_ROWS):
     total_chars = sum(s["char_count"] for s in slides)
     slim = []
     for s in slides:
+        # temporality: dates literally on/in this slide (a stated date for its datapoints)
+        dates = find_dates(s["title"], s["text"], s["notes"])
         slim.append({
             "slide": s["slide"],
             "layout": s["layout"],
@@ -337,6 +444,7 @@ def profile_pptx(path, max_rows=SAMPLE_ROWS):
             "notes": s["notes"],
             "n_images": s["n_images"],
             "char_count": s["char_count"],
+            "date_candidates": dates,           # dates found ON this slide (stated); [] -> infer/inherit
         })
     return {
         "file": path,
@@ -344,6 +452,7 @@ def profile_pptx(path, max_rows=SAMPLE_ROWS):
         "n_slides": len(slides),
         "total_chars": total_chars,
         "empty_slides": [s["slide"] for s in slides if s["char_count"] == 0 and s["n_images"] == 0],
+        "filename_date_candidates": find_dates(Path(path).name),   # a deck-level stated date
         "slides": slim,
         "entity_hints": entity_hints(slides),
         "warnings": (["no extractable text (image-only deck?)"] if total_chars == 0 else []),
@@ -372,12 +481,26 @@ def main():
             print(text)
         return
 
+    # ----- images: OCR + metadata profile (the file is one unit) -----
+    if ext in IMAGE_EXT:
+        out = profile_image(path)
+        text = json.dumps(out, indent=2, default=str)
+        if args.json:
+            Path(args.json).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.json).write_text(text)
+            print(f"Wrote {args.json}  (image {out.get('width')}x{out.get('height')}, "
+                  f"ocr={'yes' if out.get('ocr_text') else 'no'})")
+        else:
+            print(text)
+        return
+
     if ext in (".xlsx", ".xlsm"):
         sheets = read_xlsx(path)
     elif ext in (".csv", ".tsv"):
         sheets = read_csv(path)
     else:
-        print(f"Unsupported: {ext} (spreadsheets: xlsx/xlsm/csv/tsv; presentations: pptx/pptm)", file=sys.stderr)
+        print(f"Unsupported: {ext} (spreadsheets: xlsx/xlsm/csv/tsv; presentations: pptx/pptm; "
+              f"images: {'/'.join(e[1:] for e in IMAGE_EXT)})", file=sys.stderr)
         sys.exit(2)
 
     profiles = []

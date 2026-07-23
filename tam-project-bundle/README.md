@@ -7,10 +7,13 @@ Claude answer free-text questions over a set of internal insurance spreadsheets 
 Instead of RAG over rows, each source gets a compact **schema card**. A spreadsheet sheet gets
 a table card (a summary, the questions it can answer, typed columns, example rows, an as-of
 date); a **presentation** (.pptx) gets a deck card (a collective summary, a one-line point per
-slide so a single slide is retrievable, and an entities list with why each was mentioned). To
-answer a question, Claude scans the small card index, picks the relevant source(s), pulls exact
-rows (tables) or slides (decks) with a deterministic query script, and composes a cited, dated
-answer. New files — spreadsheets or decks — are added by the same procedure, no per-file coding.
+slide so a single slide is retrievable, and an entities list with why each was mentioned); an
+**image** (.png/.jpg) gets an image card (an OCR + visual-read transcript, a summary, and
+entities). Every card carries **temporality** — an as-of date plus whether it is *stated* in
+the source or *inferred*, down to each slide/datapoint. To answer a question, Claude scans the
+small card index, picks the relevant source(s), pulls exact rows (tables), slides (decks), or
+the transcript (images) with a deterministic query script, and composes a cited, dated answer.
+New files — spreadsheets, decks, or images — are added by the same procedure, no per-file coding.
 
 ## Folder map
 
@@ -24,10 +27,11 @@ tam-project-bundle/
 │
 ├─ code/tam/                 The engine (deterministic Python, no domain knowledge).
 │   ├─ tam_root.py           Locates the bundle root via the .tam-root sentinel.
-│   ├─ dump.py               Profiles .xlsx/.csv (headers, types, samples) OR .pptx (per-slide
-│   │                        text, tables, notes, entity hints).
-│   ├─ query.py              Cited query: table rows (filter/join/group/sort) OR deck slides
-│   │                        (by number/entity/text) + provenance.
+│   ├─ dump.py               Profiles .xlsx/.csv (headers, types, samples), .pptx (per-slide
+│   │                        text, tables, notes, entity + date hints), or .png/.jpg (OCR text,
+│   │                        metadata dates).
+│   ├─ query.py              Cited query: table rows (filter/join/group/sort), deck slides
+│   │                        (by number/entity/text), or image transcript + provenance & dates.
 │   ├─ normalize.py          Entity-name normalization over the alias map.
 │   ├─ link.py               Detects joins between tables by value overlap.
 │   ├─ build_index.py        Rebuilds produced_data/cards/index.json.

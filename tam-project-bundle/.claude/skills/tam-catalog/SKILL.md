@@ -13,8 +13,9 @@ by opening the spreadsheets themselves.
 
 ## Sources to read
 - Data catalog: `produced_data/cards/index.json` — one entry per source with `table_id`,
-  `title`, `kind` (`table` | `presentation`), `summary`, `file_alias`, `source_file`, `as_of`,
-  `row_count`, `grain`, `role`; deck entries also carry `n_slides`.
+  `title`, `kind` (`table` | `presentation` | `image`), `summary`, `file_alias`, `source_file`,
+  `as_of`, `as_of_basis` (stated/inferred/unknown), `row_count`, `grain`, `role`; deck entries
+  also carry `n_slides`. The header has `n_data_tables`, `n_presentations`, `n_images`.
 - Skills catalog: `produced_data/skills_catalog.json` — `name` + `description` per skill.
   (Rebuild these with `python3 code/tam/build_index.py` and
   `python3 code/tam/build_skill_index.py` if they look out of date.)
@@ -23,13 +24,14 @@ by opening the spreadsheets themselves.
 
 **Default ("what's in here?" / "what can I ask about?")** — a grouped inventory:
 1. Read `index.json`. Group entries by `source_file` / `file_alias` (each file is one document).
-2. For each document, give: the file name, its `as_of` (vintage), what it holds (how many
-   tables, or — for a deck — how many slides via `n_slides`), and a one-line sense of what it
-   covers (synthesized from titles/summaries).
+2. For each document, give: the file name, its `as_of` (vintage) — noting when `as_of_basis`
+   is `inferred`/`unknown` so people know the date is soft — what it holds (how many tables,
+   a deck's `n_slides`, or an image), and a one-line sense of what it covers (from
+   titles/summaries).
 3. Under each document, list its entries as `table_id — title` (one line each). A deck shows as
-   a single `<alias>.deck` entry. Keep it scannable.
-4. End with: the total (files, tables, decks), the newest and oldest `as_of`, and a pointer —
-   "ask tam-ask a question, or tam-report for a chart."
+   a single `<alias>.deck` entry; an image as `<alias>.image`. Keep it scannable.
+4. End with: the total (files, tables, decks, images), the newest and oldest `as_of`, and a
+   pointer — "ask tam-ask a question, or tam-report for a chart."
 
 **Focused asks** — answer from the same catalog, no data access:
 - "What's in the L&A playbook / F8?" → list only that file's tables + summaries.

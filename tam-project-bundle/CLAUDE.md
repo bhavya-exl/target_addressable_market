@@ -14,10 +14,10 @@ sees the available skills and how to add/update them:
    > `.claude/skills/` and rebuild the catalog. To make it usable in the Claude app it must
    > also be uploaded or org-provisioned under Customize → Skills — see docs/ADDING_SKILLS.md."
 2. **What data is here.** Read `produced_data/cards/index.json`; give a one-liner
-   (N tables + N presentation decks across N documents; newest & oldest vintage). Offer the
+   (N tables + N decks + N images across N documents; newest & oldest vintage). Offer the
    full breakdown via the `tam-catalog` skill.
-3. **Offer next steps:** ask a question (`tam-ask`), build a report (`tam-report`), add data or
-   a deck (`tam-ingest`), or add/update a skill.
+3. **Offer next steps:** ask a question (`tam-ask`), build a report (`tam-report`), add a
+   spreadsheet / deck / image (`tam-ingest`), or add/update a skill.
 
 Keep the panel tight (a few lines). Show it once at the start of a session, not on every turn.
 If the user opened with a specific request, show the panel briefly, then do the request.

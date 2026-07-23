@@ -32,7 +32,17 @@ DECK QUERY SPEC (presentations) — grounded slide retrieval, provenance = slide
   "fields":   ["title", "text", "notes", "tables"],   // default: title + text
   "limit":    10
 }
-(no filter given -> returns every slide; a slide's real text is re-read from the file.)
+(no filter given -> returns every slide; a slide's real text is re-read from the file.
+ each returned slide also carries its as_of / as_of_basis — per-datapoint temporality.)
+
+IMAGE QUERY SPEC (png/jpg/…) — grounded transcript retrieval, provenance = the file:
+{
+  "image_id":  "I1.image",
+  "contains":  "premium",             // optional: only return if transcript contains this
+  "fields":    ["summary", "transcript", "entities", "content_dates"]   // default: summary+transcript
+}
+(the transcript is the OCR/visual read captured at ingest; content_dates carry each dated
+ datapoint the image asserts, marked stated vs inferred.)
 
 Usage:
   python3 code/tam/query.py --spec spec.json          # or pipe spec JSON on stdin
@@ -263,16 +273,25 @@ def run_deck(spec, today):
                 continue
         picked.append(s)
 
+    # per-slide temporality authored on the card (date of each slide's datapoints + basis)
+    card_meta = {s.get("slide"): s for s in card.get("slides", [])}
+
     fields = spec.get("fields") or ["title", "text"]
     alias = src.get("file_alias")
     out_slides = []
     for s in picked:
+        meta = card_meta.get(s["slide"], {})
         row = {"slide": s["slide"], "_provenance": f'{alias}/slide {s["slide"]}'}
         for f in fields:
             if f == "tables":
                 row["tables"] = s["tables"]
-            elif f in s:
+            elif f in s:                      # file-extracted field (real slide text)
                 row[f] = s[f]
+            elif f in meta:                   # card-authored field (e.g. the slide's point)
+                row[f] = meta[f]
+        # surface this slide's own date so each datapoint is dated, not just the deck
+        row["as_of"] = meta.get("as_of", src.get("as_of"))
+        row["as_of_basis"] = meta.get("as_of_basis", "inherited")
         out_slides.append(row)
 
     if spec.get("limit"):
@@ -284,6 +303,7 @@ def run_deck(spec, today):
         "kind": "presentation",
         "source": {"file": src["file"], "n_slides": src.get("n_slides", len(slides))},
         "as_of": [as_of] if as_of else [],
+        "as_of_basis": src.get("as_of_basis"),        # how the deck vintage was set (stated/inferred)
         "staleness": staleness(as_of, today),
         "n_slides_returned": len(out_slides),
         "citation": f'{alias}/deck',
@@ -293,10 +313,54 @@ def run_deck(spec, today):
     }
 
 
+def run_image(spec, today):
+    """Grounded retrieval for an image card: returns the transcript captured at ingest
+    (OCR + visual read), the summary, entities, and temporality (as_of + basis +
+    content_dates), cited to the file. The image is one unit — no sub-selection beyond an
+    optional `contains` presence check on the transcript."""
+    card = load_card(spec["image_id"])
+    src = card["source"]
+    alias = src.get("file_alias")
+    transcript = card.get("transcript") or ""
+
+    contains = (spec.get("contains") or "").strip().lower()
+    matched = (contains in (transcript + "\n" + (card.get("summary") or "")).lower()) if contains else True
+
+    fields = spec.get("fields") or ["summary", "transcript"]
+    payload = {}
+    for f in fields:
+        if f in ("summary", "transcript"):
+            payload[f] = card.get(f)
+        elif f == "entities":
+            payload["entities"] = card.get("entities", [])
+        elif f == "content_dates":
+            payload["content_dates"] = card.get("content_dates", [])
+        elif f in card:
+            payload[f] = card[f]
+
+    as_of = src.get("as_of")
+    return {
+        "image_id": spec["image_id"],
+        "kind": "image",
+        "source": {"file": src["file"], "width": src.get("width"), "height": src.get("height")},
+        "as_of": [as_of] if as_of else [],
+        "as_of_basis": src.get("as_of_basis"),
+        "staleness": staleness(as_of, today),
+        "matched": matched,
+        "citation": f"{alias}/image",
+        "provenance": f"{alias}/{Path(src['file']).name}",
+        # every dated datapoint the image asserts, each marked stated vs inferred
+        "content_dates": card.get("content_dates", []),
+        "data": payload if matched else {},
+    }
+
+
 def dispatch(spec, today):
-    """Route by spec shape: a presentation card is queried by slide, a table by rows."""
+    """Route by spec shape: a deck is queried by slide, an image by transcript, a table by rows."""
     if "deck_id" in spec:
         return run_deck(spec, today)
+    if "image_id" in spec:
+        return run_image(spec, today)
     return run(spec, today)
 
 

@@ -7,6 +7,7 @@
     "sheet": "<exact sheet name>",
     "header_row": 0,
     "as_of": "<vintage, e.g. 'Aug 2020' — ALWAYS set; this dates every answer built on the table>",
+    "as_of_basis": "<stated | inferred | unknown — how the vintage was determined (a date in the file vs deduced)>",
     "captured_date": "<optional: when the data was collected, if different from as_of>"
   },
   "grain": "one row per <entity>",

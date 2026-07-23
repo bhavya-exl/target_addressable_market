@@ -75,7 +75,8 @@ def main():
             continue
         joins = sorted({j for col in c.get("columns", []) for j in col.get("joins", []) or []})
         src = c.get("source", {}) or {}
-        kind = c.get("kind", "table")       # "table" (spreadsheet) | "presentation"
+        kind = c.get("kind", "table")       # "table" (spreadsheet) | "presentation" | "image"
+        has_entities = kind in ("presentation", "image")
         entries.append({
             "table_id": c.get("table_id", p.stem),
             "title": c.get("title"),
@@ -85,29 +86,31 @@ def main():
             "file_alias": src.get("file_alias"),
             "source_file": Path(src.get("file", "")).name or None,
             "as_of": src.get("as_of"),
+            "as_of_basis": src.get("as_of_basis"),      # stated | inferred | unknown (temporality)
             "summary": c.get("summary"),
             "use_cases": c.get("use_cases", []),
             "entity_key_col": c.get("entity_key_col"),
             "joins": joins,
             "duplicate_of": c.get("duplicate_of"),
             "row_count": c.get("row_count"),
-            # presentations: how many slides, and the entities the deck mentions (for routing)
+            # presentations: how many slides; presentations & images: the entities mentioned (routing)
             "n_slides": src.get("n_slides") if kind == "presentation" else None,
-            "entities": [e.get("name") for e in c.get("entities", [])] if kind == "presentation" else None,
+            "entities": [e.get("name") for e in c.get("entities", [])] if has_entities else None,
         })
-    # queryable content first (data tables + presentations), then non-data stubs; stable by id
-    rank = {"data": 0, "presentation": 0}
+    # queryable content first (tables + decks + images), then non-data stubs; stable by id
+    rank = {"data": 0, "presentation": 0, "image": 0}
     entries.sort(key=lambda e: (rank.get(e["role"], 2), e["table_id"]))
     out = {
         "corpus": "EXL insurance TAM",
         "n_tables": len(entries),
         "n_data_tables": sum(1 for e in entries if e["role"] == "data"),
         "n_presentations": sum(1 for e in entries if e["kind"] == "presentation"),
-        "note": "Routing index over spreadsheet TABLES and presentation DECKS. Match a "
-                "question to summary/use_cases; prefer canonical over duplicate_of; then load "
-                "the full card from produced_data/cards/<table_id>.json. Tables are queried by "
-                "row (query.py table spec); decks are queried by slide (query.py deck spec, "
-                "deck_id) and every slide is individually retrievable/citable.",
+        "n_images": sum(1 for e in entries if e["kind"] == "image"),
+        "note": "Routing index over spreadsheet TABLES, presentation DECKS, and IMAGES. Match a "
+                "question to summary/use_cases; prefer canonical over duplicate_of; then load the "
+                "full card from produced_data/cards/<table_id>.json. Tables are queried by row "
+                "(table spec); decks by slide (deck_id) — every slide individually citable; images "
+                "by transcript (image_id). Each entry carries as_of + as_of_basis (temporality).",
         "tables": entries,
     }
     _write_atomic(CARDS / "index.json", json.dumps(out, indent=2, default=str))

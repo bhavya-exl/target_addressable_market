@@ -1,0 +1,795 @@
+{
+  "table_id": "F8.retirement",
+  "title": "Retirement \u2014 EXL L&A Delivery Process Inventory",
+  "source": {
+    "file": "input_data/corpus/L&A Playbook 2025.xlsx",
+    "file_alias": "F8",
+    "sheet": "Retirement",
+    "header_row": 2,
+    "as_of": "2025",
+    "captured_date": null
+  },
+  "grain": "one row per delivery process EXL runs for an L&A client in this line of business (client \u00d7 named process)",
+  "row_count": 38,
+  "summary": "Operational inventory of the Retirement processes EXL delivers for its Life & Annuity clients. Each row is one client process with its standardized process taxonomy (Level 1/2/3), the product lines it covers (Defined Benefits, Defined Contributions, Pension, 401k...), staffing (FTEs, headcount), delivery geography, SLAs (quality, TAT, AHT), volumes, pricing model, automation/digital solutions deployed, and the responsible SME/manager. It lets a rep see exactly what EXL already does for a named L&A client and how that work is staffed, priced, and automated.",
+  "use_cases": [
+    "Which processes does EXL run for a given L&A client in Retirement?",
+    "What is the headcount / FTE footprint on a client's processes?",
+    "Which products or sub-lines does a client's process cover?",
+    "Which EXL digital solutions (Exelia, Xtrakto, NerveHub, Customer 360) are deployed at a client?",
+    "What delivery locations and countries support a client's processes?",
+    "What is the pricing model and SLA profile for a client's processes?"
+  ],
+  "entity_key_col": "Client Name",
+  "columns": [
+    {
+      "name": "Client Name",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F4.l_a_clientwise.Client Name",
+        "F8.actuarial.Client Name",
+        "F8.annuity_processes.Client Name",
+        "F8.client_names.Client Name",
+        "F8.group.Client Name",
+        "F8.individual_life_processes.Client Name",
+        "F8.owners.Client",
+        "F8.product_merge.Client Name",
+        "F8.quantifiable_merge.Client Name",
+        "F8.top_10_client_by_revenue.Top 10 Accounts"
+      ]
+    },
+    {
+      "name": "Pseudo Name",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "code name used in place of the real client"
+    },
+    {
+      "name": "Masked Name",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "anonymized client descriptor (e.g. 'Fortune 500 US Insurance Company')"
+    },
+    {
+      "name": "Process Name - Level 1 (Standard Name)",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Process Name - Level 2 (Standard Name)",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Process Name - Level 3 (Standard Name)",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 5,
+      "joins": []
+    },
+    {
+      "name": "Process Name (Client Terminology)",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [],
+      "note": "the client's own name for the process; best row-level process identifier"
+    },
+    {
+      "name": "Defined Benefits",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 21,
+      "joins": []
+    },
+    {
+      "name": "Defined Contributions",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 3,
+      "joins": []
+    },
+    {
+      "name": "Pension",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 24,
+      "joins": []
+    },
+    {
+      "name": "401k",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 3,
+      "joins": []
+    },
+    {
+      "name": "Process Description",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 5,
+      "joins": []
+    },
+    {
+      "name": "Supplier",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Input",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "High Level Process Steps",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Output",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 3,
+      "joins": []
+    },
+    {
+      "name": "Customer",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Sub Activities (if any)",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Open Book",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Closed Book",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Open book Split %",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Closed book Split %",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Back office FTEs",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 21,
+      "joins": []
+    },
+    {
+      "name": "Voice FTEs",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 63,
+      "joins": []
+    },
+    {
+      "name": "Overall Headcount",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": [],
+      "note": "total FTEs on the process (back office + voice)"
+    },
+    {
+      "name": "Process Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Licenses / Certification Required",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "If Yes, then which Licenses/ Certifications",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "TPA",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Platform Deployed",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Process Complexity",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Go Live Date",
+      "type": "date",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "date the process went live at EXL"
+    },
+    {
+      "name": "Pre-Process Training",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 5,
+      "joins": []
+    },
+    {
+      "name": "Process Training",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 5,
+      "joins": []
+    },
+    {
+      "name": "Ramp",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 5,
+      "joins": []
+    },
+    {
+      "name": "No. of Bots",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Bot 1/Point Automation 1",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Bot 1/Point Automation 2",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "No. of Embedded Analytics Solutions",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Analytics 1",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Analytics 2",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Solution 1",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Solution 2",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Cloud Deployment?",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Digital Solutions deployed - Exelia/Xtrakto/Nervehub/Customer 360/Claims etc.",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "which EXL digital products, if any, are deployed on the process"
+    },
+    {
+      "name": "Technology / Systems /Platform used",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Client Geography",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Delivery Location for Back Office",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 29,
+      "joins": []
+    },
+    {
+      "name": "Delivery Location for Voice",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 71,
+      "joins": []
+    },
+    {
+      "name": "Country",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Quality",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "CSAT",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "AHT",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Hold Time",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "After Call Work",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Abandonment Rate",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Avg. Speed to Answer",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Talk Time",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Others",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Annual Transaction Volume",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 34,
+      "joins": [],
+      "note": "stored as text; may contain non-numeric values like 'NA'"
+    },
+    {
+      "name": "Annual Policy Count",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 39,
+      "joins": []
+    },
+    {
+      "name": "Annual call volume",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 26,
+      "joins": []
+    },
+    {
+      "name": "Seasonal Fluctuations (Yes/No)",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "If Yes, Volume Fluctuations %",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Pricing Model",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "commercial model e.g. TBP (transaction-based pricing), FTE, Time and material"
+    },
+    {
+      "name": "Estimated TBP/Per Policy Rate (if applicable)",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Estimated FTE rate for processes in TBP/Per policy",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 5,
+      "joins": []
+    },
+    {
+      "name": "Billable Hours (Annual)",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 3,
+      "joins": []
+    },
+    {
+      "name": "SME Name",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Process Owner",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 50,
+      "joins": []
+    },
+    {
+      "name": "Active Status",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Comments",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 84,
+      "joins": []
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 3,
+      "Client Name": "Empower",
+      "Pseudo Name": "Marshal",
+      "Masked Name": "US Top 3 retirement & Wealth management company",
+      "Process Name - Level 1 (Standard Name)": "Contact Center (Retirement)",
+      "Process Name - Level 2 (Standard Name)": "Customer Calls",
+      "Process Name - Level 3 (Standard Name)": "Participants Services",
+      "Process Name (Client Terminology)": "Participants Services",
+      "Defined Benefits": "x",
+      "Defined Contributions": "x",
+      "Pension": null,
+      "401k": "x",
+      "Process Description": null,
+      "Supplier": "NA",
+      "Input": "NA",
+      "High Level Process Steps": "NA",
+      "Output": "NA",
+      "Customer": "NA",
+      "Sub Activities (if any)": "NA",
+      "Open Book": "No",
+      "Closed Book": "Yes",
+      "Open book Split %": "0",
+      "Closed book Split %": "1",
+      "Back office FTEs": null,
+      "Voice FTEs": "185",
+      "Overall Headcount": "222",
+      "Process Type": "Voice",
+      "Licenses / Certification Required": "No",
+      "If Yes, then which Licenses/ Certifications": "No Specific Domain Exp",
+      "TPA": "No",
+      "Platform Deployed": "NA",
+      "Process Complexity": "L3",
+      "Go Live Date": "Q3, 2022",
+      "Pre-Process Training": null,
+      "Process Training": null,
+      "Ramp": null,
+      "No. of Bots": "0",
+      "Bot 1/Point Automation 1": "NA",
+      "Bot 1/Point Automation 2": "NA",
+      "No. of Embedded Analytics Solutions": "NA",
+      "Analytics 1": "NA",
+      "Analytics 2": "NA",
+      "Solution 1": "NA",
+      "Solution 2": "NA",
+      "Cloud Deployment?": "NA",
+      "Digital Solutions deployed - Exelia/Xtrakto/Nervehub/Customer 360/Claims etc.": "Ai Coach",
+      "Technology / Systems /Platform used": "AWS",
+      "Client Geography": "North America",
+      "Delivery Location for Back Office": null,
+      "Delivery Location for Voice": "Cebu",
+      "Country": "Philippines",
+      "Quality": "0.85",
+      "CSAT": "0.86",
+      "AHT": "7:15 minutes",
+      "Hold Time": "NA",
+      "After Call Work": "NA",
+      "Abandonment Rate": "NA",
+      "Avg. Speed to Answer": "NA",
+      "Talk Time": "NA",
+      "Others": "NA",
+      "Annual Transaction Volume": null,
+      "Annual Policy Count": null,
+      "Annual call volume": "160K",
+      "Seasonal Fluctuations (Yes/No)": "Yes",
+      "If Yes, Volume Fluctuations %": "Don\u2019t know",
+      "Pricing Model": "FTE",
+      "Estimated TBP/Per Policy Rate (if applicable)": "33600",
+      "Estimated FTE rate for processes in TBP/Per policy": "NA",
+      "Billable Hours (Annual)": "1950",
+      "SME Name": "Hins Arulananthem",
+      "Process Owner": "Hins Arulananthem",
+      "Active Status": "Inactive",
+      "Comments": null
+    },
+    {
+      "_source_row": 4,
+      "Client Name": "Empower",
+      "Pseudo Name": "Marshal",
+      "Masked Name": "US Top 3 retirement & Wealth management company",
+      "Process Name - Level 1 (Standard Name)": "Contact Center (Retirement)",
+      "Process Name - Level 2 (Standard Name)": "Customer Calls",
+      "Process Name - Level 3 (Standard Name)": "Retail sales group",
+      "Process Name (Client Terminology)": "Retail sales group",
+      "Defined Benefits": "x",
+      "Defined Contributions": "X",
+      "Pension": "x",
+      "401k": null,
+      "Process Description": null,
+      "Supplier": "NA",
+      "Input": "NA",
+      "High Level Process Steps": "NA",
+      "Output": "NA",
+      "Customer": "NA",
+      "Sub Activities (if any)": "NA",
+      "Open Book": "No",
+      "Closed Book": "Yes",
+      "Open book Split %": "0",
+      "Closed book Split %": "1",
+      "Back office FTEs": null,
+      "Voice FTEs": "20",
+      "Overall Headcount": "24",
+      "Process Type": "Voice",
+      "Licenses / Certification Required": "No",
+      "If Yes, then which Licenses/ Certifications": "No Specific Domain Exp",
+      "TPA": "No",
+      "Platform Deployed": "NA",
+      "Process Complexity": "L2",
+      "Go Live Date": "Q1, 2023",
+      "Pre-Process Training": null,
+      "Process Training": null,
+      "Ramp": null,
+      "No. of Bots": "0",
+      "Bot 1/Point Automation 1": "NA",
+      "Bot 1/Point Automation 2": "NA",
+      "No. of Embedded Analytics Solutions": "NA",
+      "Analytics 1": "NA",
+      "Analytics 2": "NA",
+      "Solution 1": "NA",
+      "Solution 2": "NA",
+      "Cloud Deployment?": "NA",
+      "Digital Solutions deployed - Exelia/Xtrakto/Nervehub/Customer 360/Claims etc.": "Ai Coach",
+      "Technology / Systems /Platform used": "AWS",
+      "Client Geography": "North America",
+      "Delivery Location for Back Office": null,
+      "Delivery Location for Voice": "Manila",
+      "Country": "Philippines",
+      "Quality": "85%  (Under baselinng)",
+      "CSAT": "85%(Under baselinng)",
+      "AHT": "13  minutes (Under baselinng)",
+      "Hold Time": "NA",
+      "After Call Work": "NA",
+      "Abandonment Rate": "NA",
+      "Avg. Speed to Answer": "NA",
+      "Talk Time": "NA",
+      "Others": "NA",
+      "Annual Transaction Volume": null,
+      "Annual Policy Count": null,
+      "Annual call volume": "100K",
+      "Seasonal Fluctuations (Yes/No)": "Yes",
+      "If Yes, Volume Fluctuations %": "Don\u2019t know",
+      "Pricing Model": "FTE",
+      "Estimated TBP/Per Policy Rate (if applicable)": "33600",
+      "Estimated FTE rate for processes in TBP/Per policy": "NA",
+      "Billable Hours (Annual)": "1950",
+      "SME Name": "Hins Arulananthem",
+      "Process Owner": "Hins Arulananthem",
+      "Active Status": "Inactive",
+      "Comments": "Baseling exercise in progress. Also the volumes fluctuate heavily"
+    },
+    {
+      "_source_row": 5,
+      "Client Name": "Prudential",
+      "Pseudo Name": "Citrix",
+      "Masked Name": "Fortune 100 US Life Insurance Company",
+      "Process Name - Level 1 (Standard Name)": "Contact Center (Retirement)",
+      "Process Name - Level 2 (Standard Name)": "Customer Calls",
+      "Process Name - Level 3 (Standard Name)": "Loan payment processing/Premium Accounting",
+      "Process Name (Client Terminology)": "Retirement Services",
+      "Defined Benefits": "X",
+      "Defined Contributions": "X",
+      "Pension": "X",
+      "401k": "X",
+      "Process Description": "Scope of work is providing assistance to participants or retirees regarding their retirement related concerns, loan modeling, contribution rate, account maintenance, loan payment inquiries, disbursement requests, 401K, 403B, 457and tax information",
+      "Supplier": "Participants",
+      "Input": "Calls and Correspondence from Participants;",
+      "High Level Process Steps": "a) Distribution Eligibility, DOT, In Service Withdrawal Inquiries via phone call from participants either terminated or actively working under their employer who wants to withdraw their money lump sum or process a rollover\nb) Distribution  Emails - Eligibility Email inquiries via phone call from participants either terminated or actively working under their employer who wants to withdraw their money lump sum or process a rollover\nc) Loan Eligibility, Payoff and Default (previously completed) Inquiries via phone call if they are able to process a loan, inquiries on loanable amount available, processing a loan payoff, and loan default\nd) Distribution  Emails - Status Check Email inquiries received from participants who wants to know the status of their loan or withdrawal check\ne) Lost Check Affidavit The contact center can process a Lost Check Affidavit to stop and reissue a new check if the participant has not yet received their check after the TAT\nf) Status Check & Other Queries Phone inquiries received from participants who wants to know the status of their loan or withdrawal check\ng) Allocation Calls- Allocations increase, contribution rate change, rollover contributions Inquiries or requests received over the phone where participants would like to update their contribution and change their allocations",
+      "Output": "Withdrawals/ loan payments (EFT's made), Rollovers, check issuance,",
+      "Customer": "Participants; POA",
+      "Sub Activities (if any)": "Loan transactions, payment, account maintenance, web assistance, withdrawal transactions, tax information",
+      "Open Book": "Yes",
+      "Closed Book": "No",
+      "Open book Split %": "1",
+      "Closed book Split %": "0",
+      "Back office FTEs": null,
+      "Voice FTEs": "15",
+      "Overall Headcount": "18",
+      "Process Type": "Voice",
+      "Licenses / Certification Required": "No",
+      "If Yes, then which Licenses/ Certifications": "No Specific Domain Exp",
+      "TPA": "NA",
+      "Platform Deployed": "NA",
+      "Process Complexity": "L2",
+      "Go Live Date": "2014-10-01 00:00:00",
+      "Pre-Process Training": "2 weeks",
+      "Process Training": "7  weeks",
+      "Ramp": "6 weeks",
+      "No. of Bots": "0",
+      "Bot 1/Point Automation 1": "NA",
+      "Bot 1/Point Automation 2": "NA",
+      "No. of Embedded Analytics Solutions": "NA",
+      "Analytics 1": "NA",
+      "Analytics 2": "NA",
+      "Solution 1": "NA",
+      "Solution 2": "NA",
+      "Cloud Deployment?": "NA",
+      "Digital Solutions deployed - Exelia/Xtrakto/Nervehub/Customer 360/Claims etc.": "Notesmaker  Tool ; Repeat Rate Reduction",
+      "Technology / Systems /Platform used": "Citrix/VDI",
+      "Client Geography": "North America",
+      "Delivery Location for Back Office": null,
+      "Delivery Location for Voice": "Cebu",
+      "Country": "Philippines",
+      "Quality": "0.95",
+      "CSAT": "NA",
+      "AHT": "8:15 FSS\n8:00 PRT",
+      "Hold Time": "NA",
+      "After Call Work": "NA",
+      "Abandonment Rate": "0.02",
+      "Avg. Speed to Answer": "20 seconds",
+      "Talk Time": "NA",
+      "Others": "Service Level 80% in 20 seconds - FSS ; 70% in 45 seconds - PRT",
+      "Annual Transaction Volume": null,
+      "Annual Policy Count": null,
+      "Annual call volume": "820640",
+      "Seasonal Fluctuations (Yes/No)": "Yes - Jan to Mar",
+      "If Yes, Volume Fluctuations %": "10%-20%",
+      "Pricing Model": "TBP",
+      "Estimated TBP/Per Policy Rate (if applicable)": "3.28",
+      "Estimated FTE rate for processes in TBP/Per policy": "16.57",
+      "Billable Hours (Annual)": "1950",
+      "SME Name": "John Andipen\nRicardo Pahamotang",
+      "Process Owner": "Nephtali Punayan",
+      "Active Status": "Active",
+      "Comments": null
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What revenue does EXL earn from this client?",
+      "reason": "no revenue/contract-value column; only headcount, pricing model and rates are present (see F8.top_10_client_by_revenue for revenue)"
+    },
+    {
+      "q": "How has this client's process volume changed year over year?",
+      "reason": "single as-of snapshot; no time series"
+    },
+    {
+      "q": "Which competitors serve this client?",
+      "reason": "no competitor column in this table"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "wide table (~70+ columns)",
+    "free-text operational fields (SLAs, volumes) often stored as text with 'NA' placeholders"
+  ]
+}

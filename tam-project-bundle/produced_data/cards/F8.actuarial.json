@@ -1,0 +1,304 @@
+{
+  "table_id": "F8.actuarial",
+  "title": "Actuarial \u2014 EXL Actuarial & Risk Modelling Engagements",
+  "source": {
+    "file": "input_data/corpus/L&A Playbook 2025.xlsx",
+    "file_alias": "F8",
+    "sheet": "Actuarial",
+    "header_row": 2,
+    "as_of": "2025",
+    "captured_date": null
+  },
+  "grain": "one row per actuarial/risk-modelling process EXL delivers for an L&A client",
+  "row_count": 21,
+  "summary": "Inventory of EXL's actuarial and risk-modelling engagements for L&A clients. Each row is an actuarial process (valuation, reporting, projection, modelling) with headcount, go-live date, delivery location, technology used (e.g. GGY Axis), pricing model and process owner. Narrower and more specialized than the operational process sheets.",
+  "use_cases": [
+    "Which clients does EXL provide actuarial / risk-modelling services to?",
+    "What actuarial capabilities (valuation, reporting, projection, modelling) are delivered for a client?",
+    "What headcount supports actuarial work at a client?",
+    "Which actuarial platforms/tools (e.g. GGY Axis) are used?"
+  ],
+  "entity_key_col": "Client Name",
+  "columns": [
+    {
+      "name": "Client Name",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F4.l_a_clientwise.Client Name",
+        "F8.annuity_processes.Client Name",
+        "F8.client_names.Client Name",
+        "F8.group.Client Name",
+        "F8.individual_life_processes.Client Name",
+        "F8.owners.Client",
+        "F8.product_merge.Client Name",
+        "F8.quantifiable_merge.Client Name",
+        "F8.retirement.Client Name"
+      ]
+    },
+    {
+      "name": "Pseudo Name",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Masked Name",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Process Name - Level 1 (Standard Name)",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Valuation",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 43,
+      "joins": [],
+      "note": "'X' marks the client uses this actuarial capability; blank otherwise"
+    },
+    {
+      "name": "Reporting",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 76,
+      "joins": [],
+      "note": "'X' flag"
+    },
+    {
+      "name": "Projection",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 90,
+      "joins": [],
+      "note": "'X' flag"
+    },
+    {
+      "name": "Modelling",
+      "type": "bool",
+      "role": "dimension",
+      "null_pct": 57,
+      "joins": [],
+      "note": "'X' flag"
+    },
+    {
+      "name": "Process Description",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Headcount",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": [],
+      "note": "FTEs on the actuarial engagement"
+    },
+    {
+      "name": "Go Live Date",
+      "type": "date",
+      "role": "dimension",
+      "null_pct": 71,
+      "joins": []
+    },
+    {
+      "name": "Open Book",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 95,
+      "joins": []
+    },
+    {
+      "name": "Closed Book",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": []
+    },
+    {
+      "name": "Open book Split %",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": []
+    },
+    {
+      "name": "Closed book Split %",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": []
+    },
+    {
+      "name": "Pre-Process Training",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 90,
+      "joins": []
+    },
+    {
+      "name": "Process Training",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 90,
+      "joins": []
+    },
+    {
+      "name": "Ramp",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 90,
+      "joins": []
+    },
+    {
+      "name": "No. of Embedded Analytics Solutions",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Cloud Deployment?",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Technology / Systems /Platform used",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Client Geography",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Delivery Location",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Pricing Model",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Process Owner",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Comments",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": []
+    },
+    {
+      "name": "Country",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 3,
+      "Client Name": "Global Atlantic",
+      "Pseudo Name": "Leading US Life Insurance Company",
+      "Masked Name": null,
+      "Process Name - Level 1 (Standard Name)": "Risk Modelling",
+      "Valuation": null,
+      "Reporting": null,
+      "Projection": null,
+      "Modelling": "X",
+      "Process Description": "Helping risk modelling team in actuarial modeling on AFM software and reconciliation with MG-ALFA actuarial software\n\nFixed Annuity, \nFixed Indexed Annuity",
+      "Headcount": "3",
+      "Go Live Date": "2023-07-15 00:00:00",
+      "Open Book": null,
+      "Closed Book": null,
+      "Open book Split %": null,
+      "Closed book Split %": null,
+      "Pre-Process Training": "2 Weeks",
+      "Process Training": "2 Weeks",
+      "Ramp": "4Weeks",
+      "No. of Embedded Analytics Solutions": "None",
+      "Cloud Deployment?": "No",
+      "Technology / Systems /Platform used": "Client platforms through VDI",
+      "Client Geography": "US",
+      "Delivery Location": "India",
+      "Pricing Model": "FTE",
+      "Process Owner": "Neha Deewan",
+      "Comments": null,
+      "Country": "India"
+    },
+    {
+      "_source_row": 4,
+      "Client Name": "Lincoln Financial Group",
+      "Pseudo Name": "Leading US Insurance and Investment Management Company",
+      "Masked Name": null,
+      "Process Name - Level 1 (Standard Name)": "Actuarial",
+      "Valuation": "X",
+      "Reporting": "X",
+      "Projection": "X",
+      "Modelling": null,
+      "Process Description": "Helping client in monthly, quarterly, semi-annual and annual reporting of actaurial processes. This involves regulatory reporting as well.\n\nValidation - Products Type:\nVariable Universal Life\nEmployee Benefits\nWhole Life Excess Credit\nFixed Annuity\n\nReporting - ETL Processes\nData Scrubbing\nModel Runs\nAnalysis of movement\nGenerate reports\n\nProjection - Cashflow Projections\nReserves Calculations",
+      "Headcount": "11",
+      "Go Live Date": "2/14/2024",
+      "Open Book": null,
+      "Closed Book": null,
+      "Open book Split %": null,
+      "Closed book Split %": null,
+      "Pre-Process Training": null,
+      "Process Training": null,
+      "Ramp": null,
+      "No. of Embedded Analytics Solutions": "None",
+      "Cloud Deployment?": "No",
+      "Technology / Systems /Platform used": "Client platforms through VDI",
+      "Client Geography": "US",
+      "Delivery Location": "India",
+      "Pricing Model": "FTE",
+      "Process Owner": "Pankaj Jaitly",
+      "Comments": null,
+      "Country": "India"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Detailed SLA/AHT metrics for actuarial work",
+      "reason": "actuarial sheet omits the operational SLA columns present in the process sheets"
+    },
+    {
+      "q": "Revenue from actuarial engagements",
+      "reason": "no revenue column"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "several trailing columns (Closed Book, Comments) are entirely empty"
+  ]
+}

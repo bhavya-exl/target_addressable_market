@@ -1,0 +1,91 @@
+{
+  "table_id": "F6.p_c_transactional_data",
+  "title": "P&C Transactional Data — Staff & Volume by Client/Function (Pivot)",
+  "source": {
+    "file": "input_data/corpus/PC Insurance Directory - Sep 2025_Final (2).xlsx",
+    "file_alias": "F6",
+    "sheet": "P&C Transactional Data",
+    "header_row": 3,
+    "as_of": "Sep 2025",
+    "captured_date": null
+  },
+  "grain": "one row per pivot label — a client, or a function/sub-function nested under a client — with summed Total Staff and Average Monthly Volume",
+  "row_count": 185,
+  "summary": "A hierarchical pivot summarizing the Data Collection sheet. Row Labels interleave client names with the functions and sub-functions beneath each client, and each row carries the summed Total Staff and summed Average Monthly Volume for that label. It is a quick roll-up of staffing and throughput by client and by function.",
+  "use_cases": [
+    "What is a client's total staff and monthly transaction volume? (lookup)",
+    "Which clients have the highest total staff or volume? (ranking)",
+    "How is a client's staff/volume distributed across functions and sub-functions? (segment)",
+    "Total staff or volume aggregated across all clients (aggregation)"
+  ],
+  "entity_key_col": "Row Labels",
+  "columns": [
+    {
+      "name": "Row Labels",
+      "type": "string",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.2_data_collection.Client",
+        "F6.claims_data.Client Name"
+      ],
+      "note": "mixed hierarchy: client names at the top level, function/sub-function names indented beneath"
+    },
+    {
+      "name": "Sum of Total Staff",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": [],
+      "note": "summed total staff for the label"
+    },
+    {
+      "name": "Sum of Average Monthly Volume",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 1,
+      "joins": [],
+      "note": "summed average monthly transaction volume for the label"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 4,
+      "Row Labels": "AIG",
+      "Sum of Total Staff": "4",
+      "Sum of Average Monthly Volume": "0"
+    },
+    {
+      "_source_row": 7,
+      "Row Labels": "Allstate",
+      "Sum of Total Staff": "513",
+      "Sum of Average Monthly Volume": "192246.2857142857"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What is the pricing or revenue per client?",
+      "reason": "the pivot summarizes only Total Staff and Average Monthly Volume; no pricing/financial measure is included"
+    },
+    {
+      "q": "What are the task-level descriptions or SLAs?",
+      "reason": "this is an aggregated roll-up; task/SLA detail lives in the 2. Data Collection sheet"
+    },
+    {
+      "q": "How does staff/volume trend over time?",
+      "reason": "single Sep-2025 snapshot with no time dimension"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "Row Labels mixes two grain levels (clients and their functions/sub-functions); rows are not a single flat entity list",
+    "Sum of Total Staff repeats each client's total on the client row and again across its function rows (hierarchical subtotals)"
+  ]
+}

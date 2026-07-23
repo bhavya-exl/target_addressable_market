@@ -1,0 +1,27 @@
+{
+  "corpus": "EXL insurance TAM",
+  "n_skills": 4,
+  "note": "Available skills in this bundle. Before creating a new skill, check here for one that already covers the need; extend it instead of duplicating. Rebuild with: python3 code/tam/build_skill_index.py",
+  "skills": [
+    {
+      "name": "tam-ask",
+      "description": "Answer any free-text question about EXL's insurance market corpus — carriers, competitors, EXL clients/revenue, engagements, captives, solutions, white-space — grounded in the source spreadsheets and always cited and dated. Use when someone asks about a specific company (\"what's our involvement with Travelers?\"), asks to rank/aggregate/compare (\"top 10 EXL clients by revenue\", \"who competes with us at Allstate\"), or asks anything the corpus data could answer. Claude is the engine: it routes over schema cards, pulls exact rows via a query script, and composes a source-cited, as-of-dated answer.",
+      "path": ".claude/skills/tam-ask/SKILL.md"
+    },
+    {
+      "name": "tam-catalog",
+      "description": "Show what is IN this corpus — which source documents and data tables exist, what each one covers, how current it is, and what skills are available — so people know what they can ask before diving in. Use when someone asks \"what data do we have\", \"what's in here\", \"what can I ask about\", \"what documents/files/tables exist\", \"what's in the L&A playbook\", \"what covers competitors\", or wants an overview/orientation. This skill only DESCRIBES what's present; it does not answer business questions or pull data rows (hand those to tam-ask / tam-report).",
+      "path": ".claude/skills/tam-catalog/SKILL.md"
+    },
+    {
+      "name": "tam-ingest",
+      "description": "Ingest a new spreadsheet into the corpus so it becomes queryable. Use when someone adds an .xlsx/.xlsm/.csv file and wants it usable for questions — \"ingest this file\", \"add this data\", \"profile this workbook\". Claude runs a profiler over the file and authors a schema card per table (summary, use-cases, typed columns, real examples, what it can't answer, vintage), then registers it in the card index. The procedure is identical for every file.",
+      "path": ".claude/skills/tam-ingest/SKILL.md"
+    },
+    {
+      "name": "tam-report",
+      "description": "Produce a chart, dashboard, or written report from the EXL insurance corpus — \"chart the top 10 EXL clients by revenue\", \"build a one-page brief on Travelers\", \"visualize competitor footprint across our accounts\". Claude is the engine: it pulls grounded datasets via the query script, then builds the visual/report with its native abilities — every figure traced to a source and stamped with the data's as-of date.",
+      "path": ".claude/skills/tam-report/SKILL.md"
+    }
+  ]
+}

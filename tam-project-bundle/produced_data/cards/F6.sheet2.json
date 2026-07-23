@@ -1,0 +1,19 @@
+{
+  "table_id": "F6.sheet2",
+  "title": "Sheet2",
+  "role": "non_data",
+  "source": {
+    "file": "input_data/corpus/PC Insurance Directory - Sep 2025_Final (2).xlsx",
+    "file_alias": "F6",
+    "sheet": "Sheet2",
+    "header_row": 3,
+    "as_of": "Sep 2025",
+    "captured_date": null
+  },
+  "summary": "Small scratch note: three rows under a single 'Missing Data' column listing client/geography entries flagged as missing (e.g. 'Hollard (Philippines)', 'AMIG (Philippines)', 'AA Insurance (India)'). The two leading columns are empty. Near-zero rows; a working note, not a data table.",
+  "duplicate_of": null,
+  "warnings": [
+    "two-row header band",
+    "non-data: 3-row scratch note of missing-data flags"
+  ]
+}

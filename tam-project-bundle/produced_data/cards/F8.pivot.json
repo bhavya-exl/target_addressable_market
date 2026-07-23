@@ -1,0 +1,165 @@
+{
+  "table_id": "F8.pivot",
+  "title": "Pivot — derived summary (non-data)",
+  "source": {
+    "file": "input_data/corpus/L&A Playbook 2025.xlsx",
+    "file_alias": "F8",
+    "sheet": "Pivot",
+    "header_row": 14,
+    "as_of": "2025",
+    "captured_date": null
+  },
+  "grain": "n/a — pivot/summary layout",
+  "row_count": 20,
+  "role": "non_data",
+  "summary": "A pivot/summary scratch area (headers mangled: client names and counts interleaved across columns). Derived from the process inventories rather than a source table; not reliably queryable. Use the underlying process sheets (e.g. F8.quantifiable_merge) for client process counts.",
+  "use_cases": [],
+  "entity_key_col": null,
+  "columns": [
+    {
+      "name": "KnightHead",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 72,
+      "joins": []
+    },
+    {
+      "name": "6",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 72,
+      "joins": []
+    },
+    {
+      "name": "col2",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": []
+    },
+    {
+      "name": "Colonial Life",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 72,
+      "joins": []
+    },
+    {
+      "name": "53",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 72,
+      "joins": []
+    },
+    {
+      "name": "col5",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 68,
+      "joins": []
+    },
+    {
+      "name": "CNO Financial",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 56,
+      "joins": []
+    },
+    {
+      "name": "360",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 56,
+      "joins": []
+    },
+    {
+      "name": "col8",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": []
+    },
+    {
+      "name": "Empower",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 92,
+      "joins": []
+    },
+    {
+      "name": "246",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 92,
+      "joins": []
+    },
+    {
+      "name": "col11",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 100,
+      "joins": []
+    },
+    {
+      "name": "The Standard",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 96,
+      "joins": []
+    },
+    {
+      "name": "8",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 96,
+      "joins": []
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 15,
+      "KnightHead": "Lincoln Financial Group",
+      "6": "47",
+      "col2": null,
+      "Colonial Life": "Equitable",
+      "53": "100.41",
+      "col5": null,
+      "CNO Financial": "Kemper",
+      "360": "98",
+      "col8": null,
+      "Empower": "The Standard",
+      "246": "175",
+      "col11": null,
+      "The Standard": "Grand Total",
+      "8": "57"
+    },
+    {
+      "_source_row": 16,
+      "KnightHead": "Primerica",
+      "6": "13",
+      "col2": null,
+      "Colonial Life": "RSL",
+      "53": "27",
+      "col5": null,
+      "CNO Financial": "Lincoln Financial Group",
+      "360": "202",
+      "col8": null,
+      "Empower": "Grand Total",
+      "246": "1351",
+      "col11": null,
+      "The Standard": null,
+      "8": null
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Anything requiring clean column semantics",
+      "reason": "pivot layout with mangled/duplicated headers; derived, not source data"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "non_data: derived pivot summary",
+    "mangled/duplicated headers (client names used as column headers)"
+  ]
+}

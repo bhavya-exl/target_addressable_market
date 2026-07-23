@@ -1,0 +1,114 @@
+{
+  "table_id": "F8.drop_downs",
+  "title": "Drop Downs — Process Category Pick-Lists (Annuities)",
+  "source": {
+    "file": "input_data/corpus/L&A Playbook 2025.xlsx",
+    "file_alias": "F8",
+    "sheet": "Drop Downs",
+    "header_row": 4,
+    "as_of": "2025",
+    "captured_date": null
+  },
+  "grain": "one row per pick-list value; each column is a Level-1 process category (Annuities) whose cells enumerate its Level-2/sub-process options",
+  "row_count": 50,
+  "summary": "Reference pick-lists that feed the workbook's data-validation dropdowns. Each column header is a Level-1 Annuities process area (Actuarial/Product Development, Marketing and Agency Management, New Business & Underwriting, Policy Administration, Claims Management, Mailroom, Contact Center) and the cells below list the allowed Level-2/sub-process values for that area. A taxonomy/enumeration source, not transactional data.",
+  "use_cases": [
+    "What sub-processes belong to a given Annuities process area?",
+    "What are the valid Level-2 process options for Claims Management (Annuities)?",
+    "Enumerate the standard Annuities process categories"
+  ],
+  "entity_key_col": null,
+  "columns": [
+    {
+      "name": "Actuarial, Product Development (Annuities)",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 47,
+      "joins": []
+    },
+    {
+      "name": "Marketing and Agency Management (Annuities)",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 48,
+      "joins": []
+    },
+    {
+      "name": "New Business & Underwriting (Annuities)",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 36,
+      "joins": []
+    },
+    {
+      "name": "Policy Administration and Payments (Annuities)",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 19,
+      "joins": []
+    },
+    {
+      "name": "Claims Management (Annuities)",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 34,
+      "joins": []
+    },
+    {
+      "name": "Mailroom (Annuities)",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 60,
+      "joins": []
+    },
+    {
+      "name": "Contact Center (Annuities)",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 53,
+      "joins": []
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 5,
+      "Actuarial, Product Development (Annuities)": "Market Research",
+      "Marketing and Agency Management (Annuities)": "Market Development & Promotion",
+      "New Business & Underwriting (Annuities)": "Application pre-screening / completeness review",
+      "Policy Administration and Payments (Annuities)": "Customer Service",
+      "Claims Management (Annuities)": "Claims Intake",
+      "Mailroom (Annuities)": "Receipt: Paper, Email, Fax",
+      "Contact Center (Annuities)": "Marketing, Sales & Agency Management"
+    },
+    {
+      "_source_row": 6,
+      "Actuarial, Product Development (Annuities)": "Product Design",
+      "Marketing and Agency Management (Annuities)": "Agent/Agency Setup",
+      "New Business & Underwriting (Annuities)": "New Policy Data Entry / Set-up",
+      "Policy Administration and Payments (Annuities)": "Support Services",
+      "Claims Management (Annuities)": "First Notice of Claim (FNOC)",
+      "Mailroom (Annuities)": "Scan",
+      "Contact Center (Annuities)": "New Business & Underwriting"
+    },
+    {
+      "_source_row": 7,
+      "Actuarial, Product Development (Annuities)": "Actuarial Process",
+      "Marketing and Agency Management (Annuities)": "Agent Licensing and Appointment",
+      "New Business & Underwriting (Annuities)": "Transfer of Assets",
+      "Policy Administration and Payments (Annuities)": "Reassignment & Commissions",
+      "Claims Management (Annuities)": "NIGO Management",
+      "Mailroom (Annuities)": "Index",
+      "Contact Center (Annuities)": "Policy Servicing & Billing"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Which clients or headcount use each process",
+      "reason": "this is a validation pick-list, no client or measure data"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "column headers are process categories, not attributes of a shared entity; ragged columns of differing length"
+  ]
+}

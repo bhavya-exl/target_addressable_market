@@ -1,0 +1,89 @@
+{
+  "table_id": "F8.product_merge",
+  "title": "Product Merge \u2014 Client \u00d7 Product Coverage",
+  "source": {
+    "file": "input_data/corpus/L&A Playbook 2025.xlsx",
+    "file_alias": "F8",
+    "sheet": "Product Merge",
+    "header_row": 1,
+    "as_of": "2025",
+    "captured_date": null
+  },
+  "grain": "one row per client-product pairing (a product a client offers, tagged by L&A Type)",
+  "row_count": 341,
+  "summary": "Long-format mapping of which insurance products each L&A client offers, tagged by L&A Type (Individual Life, Annuities, Group, Retirement). Each row is one client-product pair. Lets you see a client's product mix or find all clients offering a given product.",
+  "use_cases": [
+    "Which products does a given L&A client offer?",
+    "Which clients offer a specific product (e.g. Universal Life)?",
+    "What products fall under a given L&A Type?",
+    "Compare product breadth across clients"
+  ],
+  "entity_key_col": "Client Name",
+  "columns": [
+    {
+      "name": "L&A Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Client Name",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F4.l_a_clientwise.Client Name",
+        "F8.actuarial.Client Name",
+        "F8.annuity_processes.Client Name",
+        "F8.client_names.Client Name",
+        "F8.group.Client Name",
+        "F8.individual_life_processes.Client Name",
+        "F8.owners.Client",
+        "F8.quantifiable_merge.Client Name",
+        "F8.retirement.Client Name",
+        "F8.top_10_client_by_revenue.Top 10 Accounts"
+      ]
+    },
+    {
+      "name": "Product",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": [],
+      "note": "specific insurance product (e.g. Term Life, Whole Life, 401k); ~41 distinct values"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 2,
+      "L&A Type": "Individual Life",
+      "Client Name": "AFLAC",
+      "Product": "Term Life"
+    },
+    {
+      "_source_row": 3,
+      "L&A Type": "Individual Life",
+      "Client Name": "AFLAC",
+      "Product": "Whole Life"
+    },
+    {
+      "_source_row": 4,
+      "L&A Type": "Individual Life",
+      "Client Name": "AFLAC",
+      "Product": "Universal Life"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Volumes, revenue or headcount by product",
+      "reason": "this table records only the client-product mapping, no measures"
+    },
+    {
+      "q": "Which processes support each product",
+      "reason": "process detail lives in the process sheets, not here"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": []
+}

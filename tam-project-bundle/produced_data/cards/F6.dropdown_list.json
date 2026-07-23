@@ -1,0 +1,18 @@
+{
+  "table_id": "F6.dropdown_list",
+  "title": "Dropdown List",
+  "role": "non_data",
+  "source": {
+    "file": "input_data/corpus/PC Insurance Directory - Sep 2025_Final (2).xlsx",
+    "file_alias": "F6",
+    "sheet": "Dropdown List",
+    "header_row": 1,
+    "as_of": "Sep 2025",
+    "captured_date": null
+  },
+  "summary": "Reference lookup backing the template's drop-down validation. Each column is an independent option list (Functions and the sub-process options under Claims, Underwriting, Sales & Service, Legal Support, etc.). Columns are parallel pick-lists, not fields of a shared row entity, so it is not a row-grain data table.",
+  "duplicate_of": null,
+  "warnings": [
+    "non-data: reference / drop-down option lists, not row-grain records"
+  ]
+}

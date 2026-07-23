@@ -1,0 +1,530 @@
+{
+  "table_id": "F6.2_data_collection",
+  "title": "P&C Insurance Directory — Data Collection",
+  "source": {
+    "file": "input_data/corpus/PC Insurance Directory - Sep 2025_Final (2).xlsx",
+    "file_alias": "F6",
+    "sheet": "2. Data Collection",
+    "header_row": 1,
+    "as_of": "Sep 2025",
+    "captured_date": null
+  },
+  "grain": "one row per client process/task delivered by EXL — a Function (L1) > Function (L2) > Process (L3) > Task at a specific EXL delivery location — with its staffing, volumes, SLAs, pricing, and transformation notes",
+  "row_count": 811,
+  "summary": "The main operational inventory of the workbook: each row is a discrete process or task that EXL runs for a named insurance client at a given delivery location. Columns capture the client and its geography, the EXL delivery site/country and process manager, a four-level process taxonomy (Function L1/L2, Process L3, Task) with a free-text description, business line / line-of-business, staffing counts (billable FTEs, SME/QA/trainer, supervisors, buffer roster, total staff), volumes and handling time, SLAs and quality methodology, pain points, and implemented/planned digital solutions with their expected benefits. It answers who EXL serves, what work is done where, how it is staffed and priced, and what transformation is underway.",
+  "use_cases": [
+    "What processes or tasks does EXL run for a given client (e.g. Nationwide)?",
+    "Total Staff or Billable FTEs by client, function, or EXL delivery location (aggregation/ranking)",
+    "Which delivery countries/sites handle Claims vs Underwriting vs Sales & Service work? (segment/filter)",
+    "What is the pricing model and annual rate for a client's processes?",
+    "Which processes have digital solutions implemented or planned, and what benefits are expected? (filter)",
+    "Average monthly volume, AHT, and SLAs for a specific process or task (lookup)"
+  ],
+  "entity_key_col": "Client",
+  "columns": [
+    {
+      "name": "Client",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 8,
+      "joins": [
+        "F1.buyer_priorities.Travelers Group",
+        "F1.competitor_analysis.GROUP NAME",
+        "F1.sheet3.Client",
+        "F1.top_clients_shortlist.Client",
+        "F1.top_insurers_and_brokers.Company/ Group",
+        "F4.p_c_clientwise.Client Name",
+        "F5.competitor_analysis.GROUP NAME",
+        "F6.claims_data.Client Name",
+        "F6.p_c_transactional_data.Row Labels"
+      ],
+      "note": "insurance carrier EXL serves; normalizable account name"
+    },
+    {
+      "name": "Client Description",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": [],
+      "note": "short descriptor category, e.g. 'Fortune 500 & Large US Insurance carrier'"
+    },
+    {
+      "name": "Client Geography",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "EXL Delivery Location",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": [],
+      "note": "EXL delivery site, e.g. Manila PHP, Noida India"
+    },
+    {
+      "name": "Country",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "auto-populated delivery country"
+    },
+    {
+      "name": "EXL Process Manager",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Relationship Tenure (years)",
+      "type": "float",
+      "role": "attribute",
+      "null_pct": 8,
+      "joins": [],
+      "note": "stored as text; mixed forms like '1 year', '5', '2.9'"
+    },
+    {
+      "name": "Current Status",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": [],
+      "note": "Active / Inactive"
+    },
+    {
+      "name": "Function (L1)",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Function (L2)",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Process Name (L3)",
+      "type": "string",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Task Name",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Process Description/ High-level steps",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Business Lines",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": [],
+      "note": "Personal / Commercial / Specialty / combinations / London Market"
+    },
+    {
+      "name": "LOB / Product Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "LOB Breakup",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Market Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Work Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": [],
+      "note": "Voice / Back Office / Blended etc."
+    },
+    {
+      "name": "Complexity Level",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Pre-Process Training Duration (weeks)",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 8,
+      "joins": [],
+      "note": "stored as text; occasional units ('1 weeks')"
+    },
+    {
+      "name": "Process Training Duration (weeks)",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 8,
+      "joins": [],
+      "note": "stored as text"
+    },
+    {
+      "name": "Ramp Duration (weeks)",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 8,
+      "joins": [],
+      "note": "stored as text"
+    },
+    {
+      "name": "Pricing Model",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": [],
+      "note": "Transaction Based / FTE Based / Outcome Based / Others"
+    },
+    {
+      "name": "Pricing Currency",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": [],
+      "note": "USD / GBP / AUD etc."
+    },
+    {
+      "name": "Annual Rate",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 8,
+      "joins": [],
+      "note": "rate in Pricing Currency (not normalized to USD); stored as text"
+    },
+    {
+      "name": "Billable FTEs",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 8,
+      "joins": [],
+      "note": "stored as text"
+    },
+    {
+      "name": "SME + QA + Trainer",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 8,
+      "joins": [],
+      "note": "stored as text"
+    },
+    {
+      "name": "Supervisor",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 8,
+      "joins": [],
+      "note": "stored as text"
+    },
+    {
+      "name": "Roster HC (Only Buffer Resources)",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 8,
+      "joins": [],
+      "note": "stored as text"
+    },
+    {
+      "name": "Total Staff",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 8,
+      "joins": [],
+      "note": "stored as text"
+    },
+    {
+      "name": "Roster %",
+      "type": "percent",
+      "role": "measure",
+      "null_pct": 8,
+      "joins": [],
+      "note": "fraction (e.g. 0.4054)"
+    },
+    {
+      "name": "Average Monthly Volume",
+      "type": "int",
+      "role": "measure",
+      "null_pct": 11,
+      "joins": [],
+      "note": "transaction volume; stored as text"
+    },
+    {
+      "name": "Avergae Monthly Volume by LOB",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": [],
+      "note": "header misspelled in source; mixed values incl. NA"
+    },
+    {
+      "name": "Peak Volume Months",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Process AHT (Minutes)",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 9,
+      "joins": [],
+      "note": "average handling time; stored as text"
+    },
+    {
+      "name": "Timeliness SLA",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Quality SLA",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Quality Methodology",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": [],
+      "note": "DPU / DPO / Weighted DPO / Others"
+    },
+    {
+      "name": "Additional Metrics - 1",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Additional Metrics - 2",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Pain Points",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Key Customer / Business Outcomes Impacted",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Implemented Digital Solutions (if any)",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Summary of Implemented Solution",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Expected/ Derived Benefits",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Planned/Ongoing Digital Solutions (if any)",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Summary of Planned Solutions",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Expected Benefits",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Any client led innovation / transformation",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Suppliers",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Input Format",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Standardization level of Inputs",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": [],
+      "note": "Structured / Semi-Structured / Unstructured / NA"
+    },
+    {
+      "name": "% split of Input types",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 10,
+      "joins": []
+    },
+    {
+      "name": "Output Format",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Customers",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 14,
+      "joins": []
+    },
+    {
+      "name": "Client Applications / Admin Systems",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 11,
+      "joins": [],
+      "note": "free-text list of client systems used for the process"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 2,
+      "Client": "Free Text",
+      "Client Description": "Free Text",
+      "Client Geography": "Drop Down",
+      "EXL Delivery Location": "Drop Down",
+      "Country": "Autopopulated Field",
+      "EXL Process Manager": "Free Text",
+      "Relationship Tenure (years)": "Free Text",
+      "Current Status": "Drop Down",
+      "Function (L1)": "Drop Down",
+      "Function (L2)": "Drop Down",
+      "Process Name (L3)": "Drop Down",
+      "Task Name": "Free Text",
+      "Pricing Model": "Drop Down",
+      "Annual Rate": "Free Text",
+      "Total Staff": "Free Text"
+    },
+    {
+      "_source_row": 3,
+      "Client": "Nationwide",
+      "Client Description": "Fortune 500 & Large US Insurance carrier",
+      "Client Geography": "North America",
+      "EXL Delivery Location": "Manila, PHP",
+      "Country": "Philippines",
+      "EXL Process Manager": "Chona Mae Catimbang",
+      "Relationship Tenure (years)": "1 year",
+      "Current Status": "Active",
+      "Function (L1)": "Claims",
+      "Function (L2)": "Initiation",
+      "Process Name (L3)": "First Notice of Loss Calls",
+      "Task Name": "PL FNOL Auto",
+      "Process Description/ High-level steps": "Receive first notice of loss calls for auto collisions, accidents and any type of loss related to automobile/vehicle\nReceive calls from policyholders on FNOL inquiries and existing claims\nReceive calls for large loss greater than 10,000 USD",
+      "Business Lines": "Personal",
+      "LOB / Product Type": "Auto",
+      "Work Type": "Voice",
+      "Complexity Level": "L3",
+      "Pricing Model": "Transaction Based",
+      "Pricing Currency": "USD",
+      "Annual Rate": "4372",
+      "Billable FTEs": "30",
+      "Total Staff": "74",
+      "Roster %": "0.40540540540540543",
+      "Process AHT (Minutes)": "574",
+      "Quality SLA": "CSM 95% Handling 85%\nCSM 90%",
+      "Quality Methodology": "DPU – Defect Per Unit",
+      "Pain Points": "Quality methodology",
+      "Suppliers": "Onshore clients",
+      "Input Format": "FNOL, Inquiry",
+      "Standardization level of Inputs": "Unstructured",
+      "Output Format": "Multiple",
+      "Customers": "Policyholders, agent, 3rd party",
+      "Client Applications / Admin Systems": "Claims Center"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What is EXL's revenue in USD from each client?",
+      "reason": "Annual Rate is expressed in varying Pricing Currency (USD/GBP/AUD) and is a per-unit/FTE rate, not consolidated revenue; there is no USD-normalized revenue column"
+    },
+    {
+      "q": "How has staffing or volume changed over time?",
+      "reason": "the table is a single Sep-2025 snapshot with no date/period columns or time series"
+    },
+    {
+      "q": "What is the client's total written premium or policy count?",
+      "reason": "no premium or policy-count columns exist; volumes here are process transaction volumes handled by EXL"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "spreadsheet row 2 is a field-type descriptor band (Free Text / Drop Down / Autopopulated Field), not a real client record, and is returned as the first data row by query",
+    "many numeric fields (Total Staff, Billable FTEs, Annual Rate, durations, AHT, volumes, Roster %) are stored as text and occasionally carry units or notes",
+    "column header 'Avergae Monthly Volume by LOB' is misspelled in the source"
+  ]
+}

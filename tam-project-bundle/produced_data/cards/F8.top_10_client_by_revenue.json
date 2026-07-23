@@ -1,0 +1,83 @@
+{
+  "table_id": "F8.top_10_client_by_revenue",
+  "title": "Top 10 Client by Revenue \u2014 EXL L&A Accounts (2025)",
+  "source": {
+    "file": "input_data/corpus/L&A Playbook 2025.xlsx",
+    "file_alias": "F8",
+    "sheet": "Top 10 Client by Revenue",
+    "header_row": 1,
+    "as_of": "2025",
+    "captured_date": null
+  },
+  "grain": "one row per top-10 EXL L&A account, with 2025 revenue",
+  "row_count": 10,
+  "summary": "Ranked list of EXL's top 10 Life & Annuity accounts by 2025 revenue, with the revenue amount in USD. The single authoritative source in this workbook for L&A account revenue and ranking.",
+  "use_cases": [
+    "Who are EXL's largest L&A clients by revenue?",
+    "What is 2025 revenue for a specific top L&A account?",
+    "Rank / total revenue across the top L&A accounts",
+    "Is a given client in EXL's top 10 L&A accounts?"
+  ],
+  "entity_key_col": "Top 10 Accounts",
+  "columns": [
+    {
+      "name": "Top 10 Accounts",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F4.l_a_clientwise.Client Name",
+        "F8.annuity_processes.Client Name",
+        "F8.client_names.Client Name",
+        "F8.group.Client Name",
+        "F8.individual_life_processes.Client Name",
+        "F8.owners.Client",
+        "F8.product_merge.Client Name",
+        "F8.quantifiable_merge.Client Name",
+        "F8.retirement.Client Name"
+      ],
+      "note": "account name; note some use full legal names (e.g. 'Prudential Insurance') that may differ from short names elsewhere in the workbook"
+    },
+    {
+      "name": "Revenue 2025",
+      "type": "currency_usd",
+      "role": "measure",
+      "null_pct": 0,
+      "joins": [],
+      "note": "2025 revenue in USD, stored as formatted currency text"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 2,
+      "Top 10 Accounts": "Prudential Insurance",
+      "Revenue 2025": "$76,945,404"
+    },
+    {
+      "_source_row": 3,
+      "Top 10 Accounts": "Transamerica",
+      "Revenue 2025": "$47,800,911"
+    },
+    {
+      "_source_row": 4,
+      "Top 10 Accounts": "Unum Group",
+      "Revenue 2025": "$42,434,529"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Revenue for clients outside the top 10",
+      "reason": "only the top 10 accounts are listed"
+    },
+    {
+      "q": "Revenue by line of business or process",
+      "reason": "revenue is given only at total account level"
+    },
+    {
+      "q": "Prior-year or trend revenue",
+      "reason": "only a single 2025 figure per account"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": []
+}

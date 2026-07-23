@@ -1,0 +1,747 @@
+{
+  "table_id": "F8.quantifiable_merge",
+  "title": "Quantifiable Merge \u2014 Consolidated L&A Process Inventory (All Lines)",
+  "source": {
+    "file": "input_data/corpus/L&A Playbook 2025.xlsx",
+    "file_alias": "F8",
+    "sheet": "Quantifiable Merge",
+    "header_row": 1,
+    "as_of": "2025",
+    "captured_date": null
+  },
+  "grain": "one row per delivery process EXL runs for an L&A client, across all L&A lines, tagged by L&A Type",
+  "row_count": 530,
+  "summary": "Consolidated, all-lines version of the per-line process inventories (Individual Life, Annuities, Group, Retirement) merged into one table and tagged with an 'L&A Type' column. Each row is one client process with staffing, delivery geography, SLAs, volumes, pricing and automation detail, plus an 'EXL Experience' (Existing/New) flag. This is the single best table for cross-line questions like total process counts or headcount across all L&A work for a client.",
+  "use_cases": [
+    "How many processes does EXL run for a client across ALL L&A lines?",
+    "What is total EXL headcount for a client across Individual Life, Annuities, Group and Retirement?",
+    "Which L&A lines (types) does EXL serve for a given client?",
+    "Filter processes by L&A Type across all clients (e.g. all Annuities processes)",
+    "Which processes are flagged as New vs Existing EXL experience?"
+  ],
+  "entity_key_col": "Client Name",
+  "columns": [
+    {
+      "name": "L&A Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": [],
+      "note": "line-of-business tag: Individual Life, Annuities, Group, Retirement (the merge key that distinguishes the source line)"
+    },
+    {
+      "name": "Client Name",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F4.l_a_clientwise.Client Name",
+        "F8.actuarial.Client Name",
+        "F8.annuity_processes.Client Name",
+        "F8.client_names.Client Name",
+        "F8.group.Client Name",
+        "F8.individual_life_processes.Client Name",
+        "F8.owners.Client",
+        "F8.product_merge.Client Name",
+        "F8.retirement.Client Name",
+        "F8.top_10_client_by_revenue.Top 10 Accounts"
+      ]
+    },
+    {
+      "name": "Pseudo Name",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Masked Name",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Process Name - Level 1 (Standard Name)",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Process Name - Level 2 (Standard Name)",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 4,
+      "joins": []
+    },
+    {
+      "name": "Process Name - Level 3 (Standard Name)",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 7,
+      "joins": []
+    },
+    {
+      "name": "Process Name (Client Terminology)",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 4,
+      "joins": []
+    },
+    {
+      "name": "Term Life",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 69,
+      "joins": []
+    },
+    {
+      "name": "Term with Cash value",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 75,
+      "joins": []
+    },
+    {
+      "name": "Whole Life",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 70,
+      "joins": []
+    },
+    {
+      "name": "Interest Sensitive Whole Life (ISWL)",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 80,
+      "joins": []
+    },
+    {
+      "name": "Universal Life",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 72,
+      "joins": []
+    },
+    {
+      "name": "Indexed Universal Life",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 82,
+      "joins": []
+    },
+    {
+      "name": "Variable Universal Life",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 82,
+      "joins": []
+    },
+    {
+      "name": "Final Expense",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 94,
+      "joins": []
+    },
+    {
+      "name": "Life Disability Claims",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 96,
+      "joins": []
+    },
+    {
+      "name": "Process Description",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 1,
+      "joins": []
+    },
+    {
+      "name": "Supplier",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 4,
+      "joins": []
+    },
+    {
+      "name": "Input",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 4,
+      "joins": []
+    },
+    {
+      "name": "High Level Process Steps",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 4,
+      "joins": []
+    },
+    {
+      "name": "Output",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 5,
+      "joins": []
+    },
+    {
+      "name": "Customer",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 6,
+      "joins": []
+    },
+    {
+      "name": "Sub Activities (if any)",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 15,
+      "joins": []
+    },
+    {
+      "name": "Open Book",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Closed Book",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 69,
+      "joins": []
+    },
+    {
+      "name": "Open book Split %",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 67,
+      "joins": []
+    },
+    {
+      "name": "Closed book Split %",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 71,
+      "joins": []
+    },
+    {
+      "name": "Back office FTEs",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 18,
+      "joins": []
+    },
+    {
+      "name": "Voice FTEs",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 60,
+      "joins": []
+    },
+    {
+      "name": "Overall Headcount",
+      "type": "float",
+      "role": "measure",
+      "null_pct": 3,
+      "joins": [],
+      "note": "total FTEs on the process"
+    },
+    {
+      "name": "Process Type",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Licenses / Certification Required",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 4,
+      "joins": []
+    },
+    {
+      "name": "Which Licenses/ Certifications",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 7,
+      "joins": []
+    },
+    {
+      "name": "TPA",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 7,
+      "joins": []
+    },
+    {
+      "name": "Platform Deployed",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 7,
+      "joins": []
+    },
+    {
+      "name": "Process Complexity",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 5,
+      "joins": []
+    },
+    {
+      "name": "Go Live Date",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 3,
+      "joins": [],
+      "note": "stored as text/serial in this merged sheet (e.g. Excel serial '42198'); needs conversion"
+    },
+    {
+      "name": "Pre-Process Training",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 9,
+      "joins": []
+    },
+    {
+      "name": "Process Training",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 9,
+      "joins": []
+    },
+    {
+      "name": "Ramp",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 9,
+      "joins": []
+    },
+    {
+      "name": "No. of Bots",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 6,
+      "joins": []
+    },
+    {
+      "name": "Bot 1/Point Automation 1",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 6,
+      "joins": []
+    },
+    {
+      "name": "Bot 1/Point Automation 2",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 6,
+      "joins": []
+    },
+    {
+      "name": "No. of Embedded Analytics Solutions",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 2,
+      "joins": []
+    },
+    {
+      "name": "Analytics 1",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Analytics 2",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Solution 1",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Solution 2",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Cloud Deployment?",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 4,
+      "joins": []
+    },
+    {
+      "name": "Digital Solutions deployed - Exelia/Xtrakto/Nervehub/Customer 360/Claims etc.",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "Technology / Systems /Platform used",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 4,
+      "joins": []
+    },
+    {
+      "name": "Client Geography",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 1,
+      "joins": []
+    },
+    {
+      "name": "Delivery Location for Back Office",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 17,
+      "joins": []
+    },
+    {
+      "name": "Country",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Delivery Location for Voice",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 68,
+      "joins": []
+    },
+    {
+      "name": "Quality",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 5,
+      "joins": []
+    },
+    {
+      "name": "TAT",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 8,
+      "joins": []
+    },
+    {
+      "name": "AHT",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 6,
+      "joins": []
+    },
+    {
+      "name": "Hold Time",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 6,
+      "joins": []
+    },
+    {
+      "name": "After Call Work",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 6,
+      "joins": []
+    },
+    {
+      "name": "Abandonment Rate",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 6,
+      "joins": []
+    },
+    {
+      "name": "Avg. Speed to Answer",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 6,
+      "joins": []
+    },
+    {
+      "name": "Talk Time",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 6,
+      "joins": []
+    },
+    {
+      "name": "Others",
+      "type": "freetext",
+      "role": "attribute",
+      "null_pct": 7,
+      "joins": []
+    },
+    {
+      "name": "Annual Transaction Volume",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 13,
+      "joins": []
+    },
+    {
+      "name": "Annual Policy Count",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 34,
+      "joins": []
+    },
+    {
+      "name": "Annual Call Volume",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 43,
+      "joins": []
+    },
+    {
+      "name": "Seasonal Fluctuations (Yes/No)",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 7,
+      "joins": []
+    },
+    {
+      "name": "If Yes, Volume Fluctuations %",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 14,
+      "joins": []
+    },
+    {
+      "name": "Pricing Model",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 1,
+      "joins": []
+    },
+    {
+      "name": "Estimated rate for processes in TBP/Per policy",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 18,
+      "joins": []
+    },
+    {
+      "name": "SME Name",
+      "type": "name_person",
+      "role": "attribute",
+      "null_pct": 6,
+      "joins": []
+    },
+    {
+      "name": "Process Manager",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Comments",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 95,
+      "joins": []
+    },
+    {
+      "name": "EXL Experience",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 38,
+      "joins": [],
+      "note": "Existing vs New flag for the engagement; ~38% null"
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 2,
+      "L&A Type": "Individual Life",
+      "Client Name": "AFLAC",
+      "Pseudo Name": "Continental",
+      "Masked Name": "Fortune 500 US Insurance Company",
+      "Process Name - Level 1 (Standard Name)": "Policy Administration and billing (Life)",
+      "Process Name - Level 2 (Standard Name)": "Customer Service and Correspondence",
+      "Process Name - Level 3 (Standard Name)": "Ownership, Name, POA, Beneficiary,",
+      "Process Name (Client Terminology)": "Policy Admin-Direct Business",
+      "Term Life": "x",
+      "Term with Cash value": null,
+      "Whole Life": "x",
+      "Interest Sensitive Whole Life (ISWL)": null,
+      "Universal Life": "x",
+      "Indexed Universal Life": null,
+      "Variable Universal Life": null,
+      "Final Expense": null,
+      "Life Disability Claims": null,
+      "Process Description": "Policy Maintenance handles customer queries related to the maintenance of the customer/s policy accounts with Aflac. This process is responsible for processing and resolving customer requests ranging from updating personal details, issuing policy documents or schedules, policy cancellations, Billing transfers, adding family members to policy, removing family members or primary policy holder swap, reinstating /Reactivating policies and applying waiver of premiums",
+      "Supplier": "(S)Mail Room/Scanning Dept./Inter dept.",
+      "Input": "(I) Images/System generated txn",
+      "High Level Process Steps": "Validation, rule based input in client admin system",
+      "Output": "(O)Correspondence/Payment check",
+      "Customer": "(C) Policy holder/Inter deptt",
+      "Sub Activities (if any)": "NA",
+      "Open Book": "Open",
+      "Closed Book": null,
+      "Open book Split %": null,
+      "Closed book Split %": null,
+      "Back office FTEs": "26",
+      "Voice FTEs": null,
+      "Overall Headcount": "38",
+      "Process Type": "Back Office",
+      "Licenses / Certification Required": "No",
+      "Which Licenses/ Certifications": "No Specific Domain Exp",
+      "TPA": "No",
+      "Platform Deployed": "NA",
+      "Process Complexity": "L3",
+      "Go Live Date": "42198",
+      "Pre-Process Training": "1",
+      "Process Training": "5",
+      "Ramp": "10",
+      "No. of Bots": "0",
+      "Bot 1/Point Automation 1": "NA",
+      "Bot 1/Point Automation 2": "NA",
+      "No. of Embedded Analytics Solutions": "NA",
+      "Analytics 1": "NA",
+      "Analytics 2": "NA",
+      "Solution 1": "Reduction in Handoffs from 8% to 5%",
+      "Solution 2": "NA",
+      "Cloud Deployment?": "NA",
+      "Digital Solutions deployed - Exelia/Xtrakto/Nervehub/Customer 360/Claims etc.": "NA",
+      "Technology / Systems /Platform used": "PSW - PHS,Blue zone, Document Direct, Client central, MS outlook, Teams, APAY, Business Objects, Filenet, LGS, EXL support Sharepoint, P&C",
+      "Client Geography": "North America",
+      "Delivery Location for Back Office": "Noida",
+      "Country": "India",
+      "Delivery Location for Voice": null,
+      "Quality": "0.98",
+      "TAT": "STA 9 days >=90%; STA 5 days >=75%;Average STA 7 days & Quality (98%)",
+      "AHT": "6",
+      "Hold Time": "NA",
+      "After Call Work": "NA",
+      "Abandonment Rate": "NA",
+      "Avg. Speed to Answer": "NA",
+      "Talk Time": "NA",
+      "Others": "NA",
+      "Annual Transaction Volume": "450000",
+      "Annual Policy Count": "NA",
+      "Annual Call Volume": "NA",
+      "Seasonal Fluctuations (Yes/No)": "Yes",
+      "If Yes, Volume Fluctuations %": "0.15",
+      "Pricing Model": "TBP",
+      "Estimated rate for processes in TBP/Per policy": "1.185",
+      "SME Name": "Nitin Som",
+      "Process Manager": "Munish Kumar Barmy",
+      "Comments": null,
+      "EXL Experience": null
+    },
+    {
+      "_source_row": 4,
+      "L&A Type": "Individual Life",
+      "Client Name": "AFLAC",
+      "Pseudo Name": "Continental",
+      "Masked Name": "Fortune 500 US Insurance Company",
+      "Process Name - Level 1 (Standard Name)": "Claims Management (Life)",
+      "Process Name - Level 2 (Standard Name)": "Claims Intake",
+      "Process Name - Level 3 (Standard Name)": "Indexing",
+      "Process Name (Client Terminology)": "Individual Indexing",
+      "Term Life": null,
+      "Term with Cash value": "x",
+      "Whole Life": "x",
+      "Interest Sensitive Whole Life (ISWL)": "x",
+      "Universal Life": "x",
+      "Indexed Universal Life": "x",
+      "Variable Universal Life": "x",
+      "Final Expense": null,
+      "Life Disability Claims": null,
+      "Process Description": "The process involves indexing the scanned claims related documents received from customers or agents through mail or fax and routing of claims to respective line of business i.e. regular, wellness and dental. The team then completes the indexed card in respective line of business through Datacap application. Timely indexing ensures that the work item is created as soon as the request is received at Aflac",
+      "Supplier": "Policy Holder\nAgent\nProvider",
+      "Input": "Claim paperwork, Medical Documents, HIPPA, EFT & Other claim related documents",
+      "High Level Process Steps": "Review paperwork, Identify policy Holder, Claim history review, LOBs confirmation,  HIPPA review",
+      "Output": "Claim paperwork referrred to correct LOBs for correct Claimants",
+      "Customer": "Policy Holder, Claimant & Aflac",
+      "Sub Activities (if any)": "NA",
+      "Open Book": "Open",
+      "Closed Book": null,
+      "Open book Split %": null,
+      "Closed book Split %": null,
+      "Back office FTEs": "36",
+      "Voice FTEs": null,
+      "Overall Headcount": "47",
+      "Process Type": "Back Office",
+      "Licenses / Certification Required": "No",
+      "Which Licenses/ Certifications": "No Specific Domain Exp",
+      "TPA": "No",
+      "Platform Deployed": "NA",
+      "Process Complexity": "L2",
+      "Go Live Date": "44896",
+      "Pre-Process Training": "1",
+      "Process Training": "4",
+      "Ramp": "4",
+      "No. of Bots": "NA",
+      "Bot 1/Point Automation 1": "MS Access based tool - \"Production tracker\"",
+      "Bot 1/Point Automation 2": "NA",
+      "No. of Embedded Analytics Solutions": "NA",
+      "Analytics 1": "Volume Forecasting Tool",
+      "Analytics 2": "NA",
+      "Solution 1": "NA",
+      "Solution 2": "NA",
+      "Cloud Deployment?": "NA",
+      "Digital Solutions deployed - Exelia/Xtrakto/Nervehub/Customer 360/Claims etc.": "NA",
+      "Technology / Systems /Platform used": "Pega, DataCap,TPX, Client Central, C360",
+      "Client Geography": "North America",
+      "Delivery Location for Back Office": "Noida",
+      "Country": "India",
+      "Delivery Location for Voice": null,
+      "Quality": "0.98",
+      "TAT": "Same Day and 2 days",
+      "AHT": "2.07",
+      "Hold Time": "NA",
+      "After Call Work": "NA",
+      "Abandonment Rate": "NA",
+      "Avg. Speed to Answer": "NA",
+      "Talk Time": "NA",
+      "Others": "NA",
+      "Annual Transaction Volume": "89888",
+      "Annual Policy Count": "NA",
+      "Annual Call Volume": "NA",
+      "Seasonal Fluctuations (Yes/No)": "Yes",
+      "If Yes, Volume Fluctuations %": "10% -15%",
+      "Pricing Model": "FTE",
+      "Estimated rate for processes in TBP/Per policy": null,
+      "SME Name": "Pushpendra Singh",
+      "Process Manager": "Amit Mahure",
+      "Comments": null,
+      "EXL Experience": null
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "What is EXL's revenue per process?",
+      "reason": "no revenue column; only pricing model and rates"
+    },
+    {
+      "q": "Trend of headcount over time",
+      "reason": "single snapshot, no time series"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": [
+    "superset/merge of the four per-line process sheets \u2014 rows overlap conceptually with F8.annuity_processes, F8.group, F8.individual_life_processes, F8.retirement",
+    "Go Live Date stored as Excel serial text"
+  ]
+}

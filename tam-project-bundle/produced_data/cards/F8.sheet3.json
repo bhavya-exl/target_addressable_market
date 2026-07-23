@@ -1,0 +1,72 @@
+{
+  "table_id": "F8.sheet3",
+  "title": "Sheet3 — L&A Process Taxonomy (Level 1/2/3)",
+  "source": {
+    "file": "input_data/corpus/L&A Playbook 2025.xlsx",
+    "file_alias": "F8",
+    "sheet": "Sheet3",
+    "header_row": 1,
+    "as_of": "2025",
+    "captured_date": null
+  },
+  "grain": "one row per Level-3 process, with its parent Level-1 and Level-2 categories",
+  "row_count": 78,
+  "summary": "The standardized three-level process taxonomy (Level 1 → Level 2 → Level 3) used to classify L&A delivery work. Each row is a Level-3 process rolled up to its Level-2 and Level-1 parents. Reference table for the process hierarchy that the process sheets tag against.",
+  "use_cases": [
+    "What is the standard L&A process taxonomy?",
+    "Which Level-3 processes roll up to a given Level-1 category (e.g. Product Development)?",
+    "What are the Level-2 sub-categories under a Level-1 area?"
+  ],
+  "entity_key_col": null,
+  "columns": [
+    {
+      "name": "Level 1",
+      "type": "enum",
+      "role": "dimension",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Level 2",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    },
+    {
+      "name": "Level 3",
+      "type": "string",
+      "role": "attribute",
+      "null_pct": 0,
+      "joins": []
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 2,
+      "Level 1": "Product Development",
+      "Level 2": "Pricing and Actuarial",
+      "Level 3": "Pricing Support"
+    },
+    {
+      "_source_row": 3,
+      "Level 1": "Product Development",
+      "Level 2": "Pricing and Actuarial",
+      "Level 3": "Actuarial Support"
+    },
+    {
+      "_source_row": 4,
+      "Level 1": "Product Development",
+      "Level 2": "Pricing and Actuarial",
+      "Level 3": "Modelling"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Which clients or headcount are associated with each process",
+      "reason": "this is a pure taxonomy/reference table with no client or measure columns"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": []
+}

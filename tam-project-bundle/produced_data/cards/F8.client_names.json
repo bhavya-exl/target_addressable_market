@@ -1,0 +1,63 @@
+{
+  "table_id": "F8.client_names",
+  "title": "Client Names \u2014 EXL L&A Client Master List",
+  "source": {
+    "file": "input_data/corpus/L&A Playbook 2025.xlsx",
+    "file_alias": "F8",
+    "sheet": "Client Names",
+    "header_row": 1,
+    "as_of": "2025",
+    "captured_date": null
+  },
+  "grain": "one row per EXL L&A client name",
+  "row_count": 26,
+  "summary": "Master reference list of the 26 L&A client names used throughout the workbook. Useful as the canonical roster of EXL's L&A clients and for validating/joining client names across the other sheets.",
+  "use_cases": [
+    "Which companies are EXL's L&A clients?",
+    "How many L&A clients does EXL have?",
+    "Is a given company an EXL L&A client?"
+  ],
+  "entity_key_col": "Client Name",
+  "columns": [
+    {
+      "name": "Client Name",
+      "type": "name_company",
+      "role": "entity_key",
+      "null_pct": 0,
+      "joins": [
+        "F4.l_a_clientwise.Client Name",
+        "F8.actuarial.Client Name",
+        "F8.annuity_processes.Client Name",
+        "F8.group.Client Name",
+        "F8.individual_life_processes.Client Name",
+        "F8.owners.Client",
+        "F8.product_merge.Client Name",
+        "F8.quantifiable_merge.Client Name",
+        "F8.retirement.Client Name",
+        "F8.top_10_client_by_revenue.Top 10 Accounts"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "_source_row": 2,
+      "Client Name": "AFLAC"
+    },
+    {
+      "_source_row": 3,
+      "Client Name": "The Standard"
+    },
+    {
+      "_source_row": 4,
+      "Client Name": "CNO Financial"
+    }
+  ],
+  "not_answerable": [
+    {
+      "q": "Revenue, products or processes for each client",
+      "reason": "this is a name-only reference list; see the process, product and revenue sheets"
+    }
+  ],
+  "duplicate_of": null,
+  "warnings": []
+}

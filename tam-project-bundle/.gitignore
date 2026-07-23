@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Regenerable profiler output (rebuilt by tam-ingest / dump.py)
+produced_data/cards/_profiles/
+
+# Generated report artifacts (rebuilt by tam-report)
+produced_data/reports/
+
+# Build output
+dist/
+
+# Ingest coordination lock (see code/tam/sync_check.py)
+produced_data/.write_probe
+
+# OneDrive / SharePoint sync conflict artifacts
+*-conflicted copy*
+*_conflict*
+*[Cc]onflicted*
